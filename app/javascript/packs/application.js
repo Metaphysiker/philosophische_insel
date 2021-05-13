@@ -9,6 +9,7 @@ import "channels"
 import "bootstrap"
 import "jquery"
 import "@fortawesome/fontawesome-free/css/all"
+import "packs/animate_css"
 
 Rails.start()
 ActiveStorage.start()

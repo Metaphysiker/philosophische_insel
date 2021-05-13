@@ -32,6 +32,11 @@
               </p>
           </div>
 
+          <div class="chat-argument-field chat-section-field animate__animated animate__bounceIn text-center">
+            <%= raw sanitizing(ChatMessage.find(1).content) if ChatMessage.find(1).present? %>
+          </div>
+
+
       </div>
 
 

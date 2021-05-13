@@ -1,3 +1,6 @@
+<%= tinymce_assets %>
+<%= tinymce %>
+
 <%= form_with(model: chat_message) do |form| %>
   <% if chat_message.errors.any? %>
     <div id="error_explanation">
@@ -13,7 +16,8 @@
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%#= form.text_area :content %>
+    <%= form.text_area :content, :class => "tinymce", :rows => 20 %>
   </div>
 
   <div class="actions">

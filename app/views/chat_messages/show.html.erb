@@ -2,7 +2,7 @@
 
 <p>
   <strong>Content:</strong>
-  <%= @chat_message.content %>
+  <%= raw sanitizing(@chat_message.content) %>
 </p>
 
 <%= link_to 'Edit', edit_chat_message_path(@chat_message) %> |
