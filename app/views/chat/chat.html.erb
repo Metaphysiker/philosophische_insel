@@ -1,0 +1,58 @@
+<main role="main" class="">
+  <div class="fluid-container chat-bg mb-3">
+
+    <div style="overflow-x: hidden;">
+      <div class="chat-top">
+
+      </div>
+    </div>
+
+    <div class="text-center">
+      <%#= image_tag @account.portrait_name, class: "bg-white rounded-circle border-white chat-top-image mt-n6", height: "125" %>
+    </div>
+
+    <div class="container">
+
+      <div id="chat-field">
+        <div class="chat-argument-field axiforma chat-section-field animate__animated animate__bounceIn text-center">
+            <h1>Hallo!</h1>
+            <p>
+              Ich möchte dir ein Video zeigen <br /> und dir eine Frage stellen.
+            </p>
+            <br />
+            <p class="bigger">
+                Ist das okay?
+            </p>
+        </div>
+
+          <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center axiforma">
+              <p class="bigger">
+                Ja, zeig mir das Video
+              </p>
+          </div>
+
+      </div>
+
+
+
+
+      <%#= link_to option.content, debate_a_vegan_load_slide_path(option), remote: true, method: :post, class: "debate-button" %>
+
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer fixed-bottom">
+  <div class="container">
+    <div class="float-right mb-5 menu-button">
+      <button type="button" class="btn btn-light scale-1-25" style="border-radius:100%;" data-toggle="modal" data-target="#statusModal">
+        <div class="m-2">
+          <i class="fas fa-bars fa-lg"></i>
+        </div>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<%#= render 'vegan_chat/menu' %>
