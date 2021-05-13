@@ -162,10 +162,14 @@
 }
 
 .chat-section-field {
-  @extend .pt-3 !optional;
+  @extend .pt-1 !optional;
   @extend .pb-1 !optional;
   @extend .mx-4 !optional;
   @extend .my-4 !optional;
+}
+
+.no-underline {
+  text-decoration: none !important;
 }
 
 body {

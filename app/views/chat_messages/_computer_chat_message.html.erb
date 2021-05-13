@@ -1,0 +1,21 @@
+<div class="chat-section-field">
+  <div class="row">
+      <div class="col-11 d-flex align-items-end">
+        <%#= image_tag @account.portrait_name, class: "rounded-circle border-white white-border-for-rounded-circle bg-white mr-3", width: "50" %>
+        <%= image_tag "portrait_mann.png", class: "rounded-circle border-white white-border-for-rounded-circle bg-white mr-3", width: "50" %>
+
+        <div class="chat-argument-field <%= dom_id(chat_message) %>">
+          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          <%= raw sanitizing(chat_message.content) unless chat_message.blank? %>
+          <% if false #is_current_user_admin? %>
+            <div class="text-center m-2">
+              <hr />
+              <%= link_to 'Eintrag bearbeiten', edit_chat_message_path(chat_message), class: "btn btn-primary m-2" %>
+              <%= link_to 'Eintrag löschen', chat_message_path(chat_message), method: :delete, data: {confirm: 'Bist du sicher?'}, class: "btn btn-danger m-2" %>
+              <%= link_to 'Neuer Eintrag', new_chat_message_path, class: "btn btn-light m-2" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  </div>
+</div>

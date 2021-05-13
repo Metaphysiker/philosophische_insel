@@ -4,6 +4,9 @@
   <strong>Content:</strong>
   <%= raw sanitizing(@chat_message.content) %>
 </p>
+<p>
+  <%= render 'chat_messages/computer_chat_message', chat_message: @chat_message %>
+</p>
 
 <%= link_to 'Edit', edit_chat_message_path(@chat_message) %> |
 <%= link_to 'Back', chat_messages_path %>

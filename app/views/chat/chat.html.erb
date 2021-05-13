@@ -15,7 +15,7 @@
     <div class="container">
 
       <div id="chat-field">
-        <div class="chat-argument-field chat-section-field animate__animated animate__bounceIn text-center">
+        <div class="chat-argument-field chat-section-field text-center animate__animated animate__bounceIn">
             <h1>Hallo!</h1>
             <p>
               Ich möchte dir ein Video zeigen <br /> und dir eine Frage stellen.
@@ -26,16 +26,16 @@
             </p>
         </div>
 
-        
-          <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center axiforma">
-              <p class="bigger">
+        <%= link_to chat_select_option_path(ChatMessage.first.id) do %>
+          <div class="no-underline chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center axiforma">
+              <p class="bigger no-underline">
                 Ja, zeig mir das Video
               </p>
           </div>
+        <% end %>
 
-          <div class="chat-argument-field chat-section-field animate__animated animate__bounceIn text-center">
-            <%= raw sanitizing(ChatMessage.find(1).content) if ChatMessage.find(1).present? %>
-          </div>
+          <%= render 'chat_messages/computer_chat_message', chat_message: ChatMessage.last %>
+
 
       </div>
 
