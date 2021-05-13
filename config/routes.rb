@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :chat_messages
   get 'chat/chat'
   root 'static_pages#welcome'
   get 'static_pages/welcome'
