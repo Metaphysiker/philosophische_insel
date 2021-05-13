@@ -1,0 +1,46 @@
+body {
+  //background-color: $base-color;
+	//font-family: Nunito;
+  //font-family: "Axiforma Medium", Verdana, sans-serif;
+    font-family: 'Montserrat', sans-serif;
+  //font-family: Verdana, sans-serif;
+  //font-family: Calibri;
+}
+
+$main-colors: (
+  a-color: #554732,
+  b-color: #f2ede8,
+  c-color: #ec7d22,
+  d-color: #9a76a3,
+  e-color: #9a7e59,
+  f-color: #5fa778,
+  g-color: #B4C760,
+  h-color: #27945E,
+);
+
+@mixin color-modifiers {
+  @each $name, $hex in $main-colors {
+
+    &-#{$name} {
+      background-color: $hex !important;
+      color: white;
+      @extend .p-1;
+    }
+
+    //&-#{$name}:hover {
+    //  transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    //  background-color: lighten($hex, 5%) !important;
+    //}
+
+    // &-#{$name}:hover {
+    //  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    //  transform: translate3d(0, 0, 0);
+    //  backface-visibility: hidden;
+    //  perspective: 1000px;
+    // }
+  }
+}
+
+.bg {
+  @include color-modifiers;
+}
