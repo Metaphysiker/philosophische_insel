@@ -172,6 +172,9 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -225,6 +228,7 @@ DEPENDENCIES
   sanitize
   sass-rails (>= 6)
   selenium-webdriver
+  simple_form
   spring
   tinymce-rails
   tzinfo-data

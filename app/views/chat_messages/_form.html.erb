@@ -1,26 +1,22 @@
 <%= tinymce_assets %>
 <%= tinymce %>
 
-<%= form_with(model: chat_message) do |form| %>
-  <% if chat_message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(chat_message.errors.count, "error") %> prohibited this chat_message from being saved:</h2>
+<%= simple_form_for(chat_message) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-      <ul>
-        <% chat_message.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :content %>
-    <%#= form.text_area :content %>
-    <%= form.text_area :content, :class => "tinymce", :rows => 20 %>
+  <div class="form-inputs">
+    <%= f.input :chatter, as: :select, collection: ChatMessage.chatter_options, input_html: {class: 'chosen-select', :data => {:placeholder => "Option auswählen"}, multiple: false} %>
+    <%= f.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>
+
+<script>
+  $( document ).ready(function() {
+    $(".chosen-select").chosen({width: "100%"});
+  });
+</script>

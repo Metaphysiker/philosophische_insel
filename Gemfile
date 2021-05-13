@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+gem 'simple_form'
 gem 'sanitize'
 gem 'tinymce-rails'
 gem 'ancestry'

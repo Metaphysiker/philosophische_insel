@@ -9,6 +9,8 @@ import "channels"
 import "bootstrap"
 import "jquery"
 import "@fortawesome/fontawesome-free/css/all"
+import "chosen-js/chosen.css"
+import "chosen-js/chosen.jquery.min.js"
 import "packs/animate_css"
 
 Rails.start()
