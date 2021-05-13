@@ -35,30 +35,24 @@
           <div class="chat-argument-field chat-section-field animate__animated animate__bounceIn text-center">
             <%= raw sanitizing(ChatMessage.find(1).content) if ChatMessage.find(1).present? %>
           </div>
-
-
+          
       </div>
-
-
 
 
       <%#= link_to option.content, debate_a_vegan_load_slide_path(option), remote: true, method: :post, class: "debate-button" %>
 
+      <div class="float-end mb-5 menu-button">
+        <button type="button" class="btn btn-light scale-1-30" style="border-radius:100%;" data-toggle="modal" data-target="#statusModal">
+          <div class="m-2">
+            <i class="fas fa-bars fa-lg"></i>
+          </div>
+        </button>
+      </div>
     </div>
 
   </div>
 </main>
 
-<footer class="footer fixed-bottom">
-  <div class="container">
-    <div class="float-right mb-5 menu-button">
-      <button type="button" class="btn btn-light scale-1-25" style="border-radius:100%;" data-toggle="modal" data-target="#statusModal">
-        <div class="m-2">
-          <i class="fas fa-bars fa-lg"></i>
-        </div>
-      </button>
-    </div>
-  </div>
-</footer>
+
 
 <%#= render 'vegan_chat/menu' %>
