@@ -1,3 +1,7 @@
+html {
+  //font-size: 14px;
+}
+
 body {
   //background-color: $base-color;
 	//font-family: Nunito;
@@ -18,13 +22,14 @@ $main-colors: (
   h-color: #27945E,
 );
 
-@mixin color-modifiers {
+@mixin background-color-modifiers {
   @each $name, $hex in $main-colors {
 
     &-#{$name} {
       background-color: $hex !important;
       color: white;
-      @extend .p-1;
+      @extend .p-2 !optional;
+      //@extend .my-2 !optional;
     }
 
     //&-#{$name}:hover {
@@ -41,6 +46,28 @@ $main-colors: (
   }
 }
 
+@mixin text-color-modifiers {
+  @each $name, $hex in $main-colors {
+
+    &-#{$name} {
+      color: $hex !important;
+      //@extend .my-2 !optional;
+    }
+  }
+}
+
 .bg {
-  @include color-modifiers;
+  @include background-color-modifiers;
+}
+
+.text {
+  @include text-color-modifiers;
+}
+
+.article {
+
+  h1 {
+    @extend .text-h-color !optional;
+    text-transform: uppercase;
+  }
 }
