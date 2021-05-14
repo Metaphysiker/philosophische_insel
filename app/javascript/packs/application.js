@@ -12,6 +12,7 @@ import "@fortawesome/fontawesome-free/css/all"
 import "chosen-js/chosen.css"
 import "chosen-js/chosen.jquery.min.js"
 import "packs/animate_css"
+import "animate.css/animate.css"
 
 Rails.start()
 ActiveStorage.start()

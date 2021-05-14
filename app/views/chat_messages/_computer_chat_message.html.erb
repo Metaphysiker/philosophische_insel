@@ -1,13 +1,13 @@
 <div class="chat-section-field">
   <div class="row">
       <div class="col-12 d-flex align-items-end">
-        <%#= image_tag @account.portrait_name, class: "rounded-circle border-white white-border-for-rounded-circle bg-white mr-3", width: "50" %>
-        <%#= image_tag "portrait_mann.png", class: "rounded-circle border-white white-border-for-rounded-circle bg-white mr-3", width: "50px", height: "50px" %>
         <div style="padding-right: 0.5rem;">
           <%= image_tag "portrait_mann.png", class: "rounded-circle border-white white-border-for-rounded-circle bg-white", width: "50px", height: "50px" %>
         </div>
         <div class="chat-argument-field <%= dom_id(chat_message) %>">
-          <%= raw sanitizing(chat_message.content) unless chat_message.blank? %>
+          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          <%#= raw sanitizing(chat_message.content) unless chat_message.blank? %>
+
           <% if false #is_current_user_admin? %>
             <div class="text-center m-2">
               <hr />
@@ -20,3 +20,16 @@
       </div>
   </div>
 </div>
+
+<script>
+  var chat_message_content = "<%= raw sanitizing(chat_message.content) unless chat_message.blank? %>";
+  var id_of_chat_message = ".<%= dom_id(chat_message) %>";
+  var chatter = "<%= chat_message.chatter %>";
+
+  $( document ).ready(function() {
+    setTimeout(function(){
+      CHAT.animateCSS(id_of_chat_message, 'fadeIn');
+       $( id_of_chat_message ).html( chat_message_content );
+     }, 1200);
+  });
+</script>
