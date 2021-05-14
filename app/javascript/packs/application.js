@@ -12,7 +12,7 @@ import "@fortawesome/fontawesome-free/css/all"
 import "chosen-js/chosen.css"
 import "chosen-js/chosen.jquery.min.js"
 import "packs/chat"
-import "animate.css/animate.compat.css"
+import "animate.css/animate.min.css"
 
 Rails.start()
 ActiveStorage.start()
