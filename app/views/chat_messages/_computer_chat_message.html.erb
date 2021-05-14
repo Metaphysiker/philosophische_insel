@@ -1,7 +1,7 @@
 <div class="chat-section-field">
   <div class="row">
       <div class="col-12 d-flex align-items-end">
-        <div style="padding-right: 0.5rem;">
+        <div class="animate__animated animate__bounce" style="padding-right: 0.5rem;">
           <%= image_tag "portrait_mann.png", class: "rounded-circle border-white white-border-for-rounded-circle bg-white", width: "50px", height: "50px" %>
         </div>
         <div class="chat-argument-field <%= dom_id(chat_message) %>">
@@ -22,9 +22,8 @@
 </div>
 
 <script>
-  var chat_message_content = "<%= raw sanitizing(chat_message.content) unless chat_message.blank? %>";
+  var chat_message_content = $("<%= escape_javascript( render "chat_messages/chat_message_content", chat_message: chat_message ) %>")
   var id_of_chat_message = ".<%= dom_id(chat_message) %>";
-  var chatter = "<%= chat_message.chatter %>";
 
   $( document ).ready(function() {
     setTimeout(function(){
