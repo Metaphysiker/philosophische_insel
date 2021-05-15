@@ -1,0 +1,7 @@
+<%= link_to get_next_chat_message_path(chat_message.children.first), remote: true, class: "no-underline" do %>
+  <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center">
+      <p class="bigger">
+        <%= render "chat_messages/chat_message_content", chat_message: chat_message %>
+      </p>
+  </div>
+<% end %>

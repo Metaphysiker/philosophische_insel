@@ -8,7 +8,7 @@
           <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
           <%#= raw sanitizing(chat_message.content) unless chat_message.blank? %>
 
-          <% if false #is_current_user_admin? %>
+          <% if true #is_current_user_admin? %>
             <div class="text-center m-2">
               <hr />
               <%= link_to 'Eintrag bearbeiten', edit_chat_message_path(chat_message), class: "btn btn-primary m-2" %>
@@ -29,6 +29,6 @@
     setTimeout(function(){
       CHAT.animateCSS(id_of_chat_message, 'fadeIn');
        $( id_of_chat_message ).html( chat_message_content );
-     }, Chat.loading_time_for_chat_message);
+     }, CHAT.loading_time_for_chat_message);
   });
 </script>

@@ -16,20 +16,19 @@
 
       <div id="chat-field">
         <div class="chat-argument-field chat-section-field text-center animate__animated animate__bounceIn">
-            <h1>Hallo!</h1>
+            <h1>Hey!</h1>
             <p>
-              Ich möchte dir ein Video zeigen <br /> und dir eine Frage stellen.
+              Ich will dich zu einer veganen Lebensweise überzeugen.
             </p>
-            <br />
             <p class="bigger">
-                Ist das okay?
+                Bist du bereit?
             </p>
         </div>
 
-        <%= link_to chat_select_option_path(ChatMessage.first.id), remote: true, class: "no-underline" do %>
+        <%= link_to get_next_chat_message_path(4), remote: true, class: "no-underline" do %>
           <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center">
               <p class="bigger">
-                Ja, zeig mir das Video
+                Wenn's sein muss...
               </p>
           </div>
         <% end %>

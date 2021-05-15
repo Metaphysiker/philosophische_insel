@@ -1,3 +1,4 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -6,7 +7,11 @@
 </p>
 <p>
   <%= render 'chat_messages/computer_chat_message', chat_message: @chat_message %>
+  <%= render 'chat_messages/user_chat_message', chat_message: @chat_message %>
+  <%= render 'chat_messages/chat_button', chat_message: @chat_message %>
+
 </p>
 
 <%= link_to 'Edit', edit_chat_message_path(@chat_message) %> |
 <%= link_to 'Back', chat_messages_path %>
+</div>

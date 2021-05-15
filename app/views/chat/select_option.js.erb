@@ -1,5 +1,0 @@
-var field_id_name = "#chat-field";
-
-content = $("<%= escape_javascript( render "chat_messages/#{@chat_message.chatter}_chat_message", chat_message: @chat_message) %>")
-
-$(field_id_name).append(content);
