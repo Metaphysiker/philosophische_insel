@@ -4,8 +4,8 @@ content = $("<%= escape_javascript( render "chat_messages/#{@chat_message.chatte
 
 $(field_id_name).append(content);
 
-if ( <%= (@chat_message.children.empty?).to_s %> == false) {
-  if ("<%= (@chat_message.children.first.chatter).to_s %>" == "user" ) {
+if ( "<%= (@chat_message.children.empty?).to_s %>" == "false") {
+  if ("<%= (@chat_message.children.first.try(:chatter)).to_s %>" == "user" ) {
     setTimeout(function(){
       $.ajax({
         url: "<%= get_next_chat_button_path(@chat_message.children.first) %>",
@@ -16,7 +16,7 @@ if ( <%= (@chat_message.children.empty?).to_s %> == false) {
       });
    }, CHAT.loading_time_for_chat_message * 2);
 
- } else if (<%= (@chat_message.children.first.chatter).to_s %> == "computer") {
+ } else if ("<%= (@chat_message.children.first.try(:chatter)).to_s %>" == "computer") {
 
     setTimeout(function(){
       $.ajax({
