@@ -1,8 +1,36 @@
 
-<%= link_to get_next_chat_message_path(chat_message.children.first), remote: true, class: "no-underline" do %>
-  <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center">
+  <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center chat_button_message_id_<%= chat_message.id %>">
       <p class="bigger">
         <%= render "chat_messages/chat_message_content", chat_message: chat_message %>
       </p>
   </div>
-<% end %>
+
+
+<script>
+
+  $( document ).ready(function() {
+
+    $( ".chat_button_message_id_<%= chat_message.id %>" ).click(function() {
+
+      var ids_of_children = "<%= chat_message.parent.children.pluck(:id) %>";
+
+      $.each(JSON.parse(ids_of_children), function(index, value){
+        $( ".chat_button_message_id_" + value ).fadeOut( "slow", function() {
+          // Animation complete.
+        });
+      });
+
+
+      setTimeout(function(){
+        $.ajax({
+          url: "<%= get_next_chat_message_path(chat_message) %>",
+          method: 'GET',
+          headers: {
+            'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+          }
+        });
+      }, 100);
+    });
+
+  });
+</script>

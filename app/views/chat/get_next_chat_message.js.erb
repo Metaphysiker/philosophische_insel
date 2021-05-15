@@ -14,7 +14,7 @@ if ( "<%= (@chat_message.children.empty?).to_s %>" == "false") {
           'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
         }
       });
-   }, CHAT.loading_time_for_chat_message * 2);
+   }, CHAT.loading_time_for_chat_message);
 
  } else if ("<%= (@chat_message.children.first.try(:chatter)).to_s %>" == "computer") {
 
