@@ -8,6 +8,8 @@
   <div class="form-inputs">
     <%= f.input :chatter, as: :select, collection: ChatMessage.chatter_options, input_html: {class: 'chosen-select', :data => {:placeholder => "Option auswählen"}, multiple: false} %>
     <br />
+    <%= f.input :parent_id, as: :select, collection: ChatMessage.all, input_html: {class: 'chosen-select', :data => {:placeholder => "Option auswählen"}, multiple: false} %>
+    <br />
     <%= f.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
   </div>
 
