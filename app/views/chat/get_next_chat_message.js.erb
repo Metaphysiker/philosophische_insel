@@ -4,17 +4,27 @@ content = $("<%= escape_javascript( render "chat_messages/#{@chat_message.chatte
 
 $(field_id_name).append(content);
 
+$('html, body').animate({
+    scrollTop: $(".chat-section-field").last().offset().top
+}, 1000);
+
 if ( "<%= (@chat_message.children.empty?).to_s %>" == "false") {
   if ("<%= (@chat_message.children.first.try(:chatter)).to_s %>" == "user" ) {
-    setTimeout(function(){
-      $.ajax({
-        url: "<%= get_next_chat_button_path(@chat_message.children.first) %>",
-        method: 'GET',
-        headers: {
-          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-        }
-      });
-   }, CHAT.loading_time_for_chat_message);
+
+    var ids_of_children = "<%= @chat_message.children.empty? ? [] : @chat_message.children.pluck(:id) %>";
+    console.log(ids_of_children);
+    $.each(JSON.parse(ids_of_children), function(index, value){
+        setTimeout(function(){
+          $.ajax({
+            url: "<%= get_next_chat_button_path %>" + "/" + value,
+            method: 'GET',
+            headers: {
+              'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+            }
+          });
+       }, 3 * CHAT.loading_time_for_chat_message);
+    });
+
 
  } else if ("<%= (@chat_message.children.first.try(:chatter)).to_s %>" == "computer") {
 
@@ -26,7 +36,7 @@ if ( "<%= (@chat_message.children.empty?).to_s %>" == "false") {
           'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
         }
       });
-   }, CHAT.loading_time_for_chat_message * 2);
+   }, 3 * CHAT.loading_time_for_chat_message);
   }
 
 }

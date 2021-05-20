@@ -60,7 +60,7 @@ window.CHAT = (function() {
             //$(element).empty();
           });
         },
-        loading_time_for_chat_message: 1800,
+        loading_time_for_chat_message: 1200,
         animateCSS: function(element, animation) {
           animateCSS(element, animation)
         }

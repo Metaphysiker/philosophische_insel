@@ -1,8 +1,6 @@
 
-  <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center chat_button_message_id_<%= chat_message.id %>">
-      <p class="bigger">
+  <div class="chat-text chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center chat_button_message_id_<%= chat_message.id %>">
         <%= render "chat_messages/chat_message_content", chat_message: chat_message %>
-      </p>
   </div>
 
 
@@ -12,14 +10,19 @@
 
     $( ".chat_button_message_id_<%= chat_message.id %>" ).click(function() {
 
-      var ids_of_children = "<%= chat_message.parent.children.pluck(:id) %>";
+      var ids_of_children = "<%= chat_message.parent.blank? ? [] : chat_message.parent.children.pluck(:id) %>";
 
       $.each(JSON.parse(ids_of_children), function(index, value){
-        $( ".chat_button_message_id_" + value ).fadeOut( "slow", function() {
+        //$( ".chat_button_message_id_" + value ).fadeOut( "slow", function() {
           // Animation complete.
-        });
+        //});
+        var current_element = ".chat_button_message_id_" + value;
+        setTimeout(function(){
+          ANIMATECSS(current_element, 'bounceOut').then((message) => {
+            $(current_element).remove();
+          });
+        }, 0 + (100 * index));
       });
-
 
       setTimeout(function(){
         $.ajax({
@@ -29,7 +32,7 @@
             'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
           }
         });
-      }, 100);
+      }, 1000);
     });
 
   });

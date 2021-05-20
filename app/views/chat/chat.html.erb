@@ -15,22 +15,24 @@
     <div class="container">
 
       <div id="chat-field">
-        <div class="chat-argument-field chat-section-field text-center animate__animated animate__bounceIn">
-            <h1>Hey!</h1>
-            <p>
-              Ich will dich zu einer veganen Lebensweise überzeugen.
-            </p>
-            <p class="bigger">
-                Bist du bereit?
-            </p>
-        </div>
-
-        <%= link_to get_next_chat_message_path(4), remote: true, class: "no-underline" do %>
-          <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center">
+        <% if false %>
+          <div class="chat-argument-field chat-section-field text-center animate__animated animate__bounceIn">
+              <h1>Hey!</h1>
+              <p>
+                Ich will dich zu einer veganen Lebensweise überzeugen.
+              </p>
               <p class="bigger">
-                Wenn's sein muss...
+                  Bist du bereit?
               </p>
           </div>
+
+          <%= link_to get_next_chat_message_path(4), remote: true, class: "no-underline" do %>
+            <div class="chat-option-field chat-section-field animate__animated animate__bounceIn animate__delay-1s text-center">
+                <p class="bigger">
+                  Wenn's sein muss...
+                </p>
+            </div>
+          <% end %>
         <% end %>
 
           <%#= render 'chat_messages/computer_chat_message', chat_message: ChatMessage.last %>
@@ -56,3 +58,15 @@
 
 
 <%#= render 'vegan_chat/menu' %>
+
+<script>
+  $( document ).ready(function() {
+      $.ajax({
+        url: "<%= get_next_chat_message_path(ChatMessage.find(10)) %>",
+        method: 'GET',
+        headers: {
+          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+        }
+      });
+    });
+</script>

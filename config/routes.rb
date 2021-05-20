@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :chat_messages
   get 'chat', to: 'chat#chat', as: "chat"
   root 'static_pages#welcome'

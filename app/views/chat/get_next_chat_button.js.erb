@@ -3,3 +3,7 @@ var field_id_name = "#chat-field";
 content = $("<%= escape_javascript( render "chat_messages/chat_button", chat_message: @chat_message) %>")
 
 $(field_id_name).append(content);
+
+$('html, body').animate({
+    scrollTop: $(".chat-section-field").last().offset().top
+}, 1000);

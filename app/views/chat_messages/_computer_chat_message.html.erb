@@ -4,13 +4,12 @@
         <div class="" style="padding-right: 0.5rem;">
           <%= image_tag "portrait_frau.png", class: "rounded-circle border-white white-border-for-rounded-circle bg-white", width: "50px", height: "50px" %>
         </div>
-        <div class="chat-argument-field <%= dom_id(chat_message) %>">
+        <div class="chat-text chat-argument-field <%= dom_id(chat_message) %>">
           <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
           <%#= raw sanitizing(chat_message.content) unless chat_message.blank? %>
-
         </div>
       </div>
-      <% if false #is_current_user_admin? %>
+      <% if user_signed_in? #is_current_user_admin? %>
         <div class="text-center m-2">
           <hr />
           <%= link_to 'Eintrag bearbeiten', edit_chat_message_path(chat_message), class: "btn btn-primary m-2" %>

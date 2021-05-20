@@ -14,7 +14,8 @@
   </head>
   <body>
     <%= render "layouts/navigation" %>
+    <%= render "layouts/flash_messages" if flash %>
     <%= yield %>
-    <%#= render "layouts/footer" %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

@@ -1,0 +1,38 @@
+<footer class="footer a-color">
+  <div class="container-fluid a-color">
+    <div class="row">
+      <div class="col-sm-12 col-md-4 pt-5">
+        <p class="spaced-letters">
+          <strong><%= "Kontakt".upcase %></strong>
+        </p>
+        <p class="border-right">
+          <b>Kennsch Ethik?</b><br />
+          Sandro Räss <br />
+          <u><%= mail_to "s.raess@me.com", "s.raess@me.com", class: " text-underline" %></u><br />
+        </p>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="spaced-letters pt-5">
+          <strong><%= "Newsletter".upcase %></strong>
+        </p>
+        <div id="new_newsletter" class="">
+
+        </div>
+      </div>
+
+
+      <div class="col-sm-12 col-md-4">
+        <p class="spaced-letters pt-5">
+          <strong><%= "Meta".upcase %></strong>
+        </p>
+        <p class="">
+          <% if user_signed_in? %>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "" %>
+          <% else %>
+            <%= link_to 'Login', new_user_session_path, class: "" %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,3 +1,32 @@
+.chat-text {
+  //font-size: 1.2rem;
+  //font: SemiBold 15px/20px Axiforma;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+
+  p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  h1 {
+    @extend .text-center !optional;
+    color: #33C1A7;
+    font-weight: bold;
+    @extend .font-weight-bolder !optional;
+    @extend .mt-2 !optional;
+  }
+
+  h2 {
+    @extend .text-center !optional;
+    color: #33C1A7;
+    font-weight: bold;
+    @extend .font-weight-bolder !optional;
+    @extend .mt-2 !optional;
+  }
+}
+
+
 .chat-field {
 
 }
@@ -91,26 +120,10 @@
     //@extend .mx-auto !optional;
   //  @extend .mx-4 !optional;
     background: #354E44;
-
-    h1 {
-      @extend .text-center !optional;
-      color: #33C1A7;
-      font-size: 28px;
-      @extend .font-weight-bolder !optional;
-    }
-
-    p {
-      @extend .font-weight-bold !optional;
-      //text-align: center;
-      font-size: 16px;
-      //font: SemiBold 15px/20px Axiforma;
-      letter-spacing: 0px;
-      color: #FFFFFF;
-      @extend .mb-0 !optional;
-    }
+    line-height: 2;
 
     .bigger {
-      font-size: 22px;
+      //font-size: 22px;
     }
 }
 
@@ -126,25 +139,26 @@
   @extend .py-3 !optional;
 
   background: white;
+  cursor: pointer;
 
   &:hover {
     background-color: darken(white, 10%);
     text-decoration: none !important;
-    transform: scale(1.10) !important; /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    transform: scale(1.05) !important; /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 
   }
 
   p {
     @extend .font-weight-bold !optional;
     //text-align: center;
-    font-size: 16px;
+    //font-size: 16px;
     //font: SemiBold 15px/20px Axiforma;
     color: #354E44;
     @extend .mb-0 !optional;
   }
 
   .bigger {
-    font-size: 22px;
+    //font-size: 22px;
   }
 }
 
