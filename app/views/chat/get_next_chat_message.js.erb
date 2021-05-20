@@ -22,7 +22,7 @@ if ( "<%= (@chat_message.children.empty?).to_s %>" == "false") {
               'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
             }
           });
-       }, 3 * CHAT.loading_time_for_chat_message);
+       }, 2 * CHAT.loading_time_for_chat_message);
     });
 
 
