@@ -10,6 +10,10 @@
     <br />
     <%= f.input :parent_id, as: :select, collection: ChatMessage.all.map { |n| [strip_tags(n.content), n.id]}, input_html: {class: 'chosen-select', :data => {:placeholder => "Option auswählen"}, multiple: false} %>
     <br />
+    <%= f.input :loading_time %>
+    <br />
+    <%= f.input :get_next_time %>
+    <br />
     <%= f.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
   </div>
 

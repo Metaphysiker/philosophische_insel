@@ -21,7 +21,7 @@
           ANIMATECSS(current_element, 'bounceOut').then((message) => {
             $(current_element).remove();
           });
-        }, 0 + (100 * index));
+        }, 0 + (300 * index));
       });
 
       setTimeout(function(){
@@ -32,7 +32,7 @@
             'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
           }
         });
-      }, 1000);
+      }, ids_of_children.length * 300);
     });
 
   });
