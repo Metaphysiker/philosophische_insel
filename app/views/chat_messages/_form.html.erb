@@ -8,7 +8,7 @@
   <div class="form-inputs">
     <%= f.input :chatter, as: :select, collection: ChatMessage.chatter_options, input_html: {class: 'chosen-select', :data => {:placeholder => "Option auswählen"}, multiple: false} %>
     <br />
-    <%= f.input :parent_id, as: :select, collection: ChatMessage.all.map { |n| [strip_tags(n.content), n.id]}, input_html: {class: 'chosen-select', :data => {:placeholder => "Option auswählen"}, multiple: false} %>
+    <%= f.input :parent_id, as: :select, collection: ChatMessage.all.map { |n| ["#{n.id} - #{strip_tags(n.content)}", n.id]}, input_html: {class: 'chosen-select', :data => {:placeholder => "Option auswählen"}, multiple: false} %>
     <br />
     <%= f.input :loading_time %>
     <br />
