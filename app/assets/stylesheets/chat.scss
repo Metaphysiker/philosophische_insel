@@ -111,6 +111,14 @@
   //background: green;
 }
 
+.chat-bg-computer {
+  background: #354E44;
+}
+
+.chat-bg-user {
+  background: gray;
+}
+
 .chat-argument-field {
     @extend .rounded !optional;
     //@extend .p-1 !optional;
@@ -120,7 +128,8 @@
     @extend .py-2 !optional;
     //@extend .mx-auto !optional;
   //  @extend .mx-4 !optional;
-    background: #354E44;
+    //background: #354E44;
+    //background: red;
     line-height: 2;
 
     .bigger {

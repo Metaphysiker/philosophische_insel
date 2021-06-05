@@ -7,3 +7,36 @@ $(field_id_name).append(content);
 $('html, body').animate({
     scrollTop: $(".chat-section-field").last().offset().top
 }, 500);
+
+if ( "<%= (@chat_message.children.empty?).to_s %>" == "false") {
+  if ("<%= (@chat_message.children.first.try(:chatter)).to_s %>" == "user" ) {
+
+    var ids_of_children = "<%= @chat_message.children.empty? ? [] : @chat_message.children.pluck(:id) %>";
+    console.log(ids_of_children);
+    $.each(JSON.parse(ids_of_children), function(index, value){
+        setTimeout(function(){
+          $.ajax({
+            url: "<%= get_next_chat_button_path %>" + "/" + value,
+            method: 'GET',
+            headers: {
+              'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+            }
+          });
+       }, <%= raw @chat_message.get_next_time %>);
+    });
+
+
+ } else if ("<%= (@chat_message.children.first.try(:chatter)).to_s %>" == "computer") {
+
+    setTimeout(function(){
+      $.ajax({
+        url: "<%= get_next_chat_message_path(@chat_message.children.first) %>",
+        method: 'GET',
+        headers: {
+          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+        }
+      });
+   }, <%= raw @chat_message.get_next_time %>);
+  }
+
+}
