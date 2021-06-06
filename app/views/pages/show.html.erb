@@ -1,0 +1,11 @@
+<div class="container">
+<h1><%= @page.title %></h1>
+<p>
+  <%= @page.description %>
+</p>
+<%= raw @page.content_rendered %>
+
+</div>
+
+<%= link_to 'Edit', edit_page_path(@page) %> |
+<%= link_to 'Back', pages_path %>
