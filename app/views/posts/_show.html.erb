@@ -1,0 +1,28 @@
+<% if post.cover.attached? %>
+  <section class="bg-b-color text-center">
+          <%= image_tag(post.cover, class: "img-fluid rounded") %>
+  </section>
+<% end %>
+
+
+<div class="container">
+
+
+
+  <h3 class="text-h-color spaced-letters font-weight-light text-uppercase"><%= post.title %></h3>
+  <p class="font-weight-bold text-muted pt-3">
+    <%= post.description %>
+  </p>
+  <p>
+    <div style="font-size: large;">
+      <%= raw sanitizing(post.content) %>
+    </div>
+  </p>
+  <% if current_user && current_user.admin? %>
+    <div class="text-center m-2">
+      <hr />
+      <%= link_to 'Eintrag bearbeiten', edit_post_path(post), class: "btn btn-primary m-2" %>
+      <%= link_to 'Eintrag löschen', post_path(post), method: :delete, data: {confirm: 'Bist du sicher?'}, class: "btn btn-danger m-2" %>
+    </div>
+  <% end %>
+</div>
