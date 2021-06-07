@@ -14,11 +14,14 @@ import "chosen-js/chosen.jquery.min.js"
 import "packs/chat"
 import "packs/animate_css"
 import "animate.css/animate.min.css"
-//import "codemirror/lib/codemirror.js"
-//import "codemirror/mode/markdown/markdown.js"
+import CodeMirror from 'codemirror/lib/codemirror.js'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/mode/markdown/markdown.js'
+import 'codemirror/theme/solarized.css'
 
 Rails.start()
 ActiveStorage.start()
 
 window.jQuery = $;
 window.$ = $;
+window.CodeMirror = CodeMirror;

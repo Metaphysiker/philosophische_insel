@@ -1,4 +1,6 @@
+<%#= javascript_pack_tag 'codemirror' %>
 
+<div class="container">
 <%= simple_form_for(@page) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -6,27 +8,28 @@
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.text_area :text, id: "markdown_text_area", value: @page.content %>
+    <br />
+    <p>
+      <%= f.text_area :content, id: "markdown_text_area", value: @page.content %>
+    </p>
 
-    <%= f.input :content %>
+    <%#= f.input :content %>
   </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
 <% end %>
+</div>
 
 <script type="text/javascript">
 
     $( document ).ready(function() {
       var myCodeMirror1 = CodeMirror.fromTextArea(document.getElementById("markdown_text_area"), {
-        theme: "default",
+        theme: "solarized dark",
         mode: 'markdown',
-        border: '1px solid #eee',
-        setsize: '100%'
+        lineNumbers: true,
       });
-
-      myCodeMirror1.setSize("100%", "100%");
 
     });
   </script>
