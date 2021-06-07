@@ -18,6 +18,8 @@ import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/markdown/markdown.js'
 import 'codemirror/theme/solarized.css'
+import "@fortawesome/fontawesome-free/css/all"
+
 
 Rails.start()
 ActiveStorage.start()

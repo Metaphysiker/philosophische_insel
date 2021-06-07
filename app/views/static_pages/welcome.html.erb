@@ -28,9 +28,7 @@
           <p class="spaced-letters text-light">
             <hr align="left" width="10%" class="bg-light">
           </p>
-          <p class="card-text text-light"><strong><%= application_name %></strong> ist ein Portal für Philosophie und Ethik.</p>
-          <p class="card-text text-light">Hier findest du <strong>Inhalte, Spiele und Werkzeuge</strong>, die Philosophie und Ethik vermitteln.</p>
-          <p class="card-text text-light">Diese Webseite wird von <strong>Sandro Räss</strong> verwaltet.</p>
+          <p class="card-text text-light">Auf <strong><%= application_name %></strong> findest du Inhalte, Spiele und Werkzeuge, die Philosophie und Ethik vermitteln.</p>
         </div>
       </div>
       <%#= image_tag("pig_cute.png", class: "img-fluid mt-n3") %>
@@ -43,9 +41,9 @@
         <div class="align-self-end">
           <div class="col-12">
               <%#= render "posts/card.html.erb", post: Post.last if Post.last.present? %>
-              <%# spotlight_post = Post.where(slug: "was-ist-tierethik").first %>
-              <%# spotlight_post = Post.last unless spotlight_post.present? %>
-              <%#= render "posts/card.html.erb", post: spotlight_post if spotlight_post.present? %>
+              <% spotlight_post = Post.where(slug: "was-ist-tierethik").first %>
+              <% spotlight_post = Post.last unless spotlight_post.present? %>
+              <%= render "posts/card.html.erb", post: spotlight_post if spotlight_post.present? %>
           </div>
         </div>
       </div>

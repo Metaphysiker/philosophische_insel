@@ -72,6 +72,29 @@ $main-colors: (
   }
 }
 
+@mixin btn-color-modifiers {
+  @each $name, $hex in $main-colors {
+
+    &-#{$name} {
+      color: #ffffff;
+      background-color: $hex !important;
+      //@extend .my-2 !optional;
+    }
+
+    &:hover,&:focus,&:active {
+      //background-color: darken($hex, 20%) !important;
+      color: #ffffff;
+      //color: red;
+      filter: brightness(0.85);
+    }
+
+    .badge {
+      color: $hex;
+      background-color: #ffffff;
+    }
+  }
+}
+
 .mt-n6 {
   margin-top: -4.3rem !important;
 }
@@ -86,6 +109,10 @@ $main-colors: (
 
 .text {
   @include text-color-modifiers;
+}
+
+.btn {
+  @include btn-color-modifiers;
 }
 
 .article {
