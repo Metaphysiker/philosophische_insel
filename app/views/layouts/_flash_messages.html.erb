@@ -1,3 +1,4 @@
+<% unless flash.empty? %>
 <div class="container mt-2">
 <% flash.each do |type, msg| %>
   <div class="alert <%= bootstrap_class_for(type) %> alert-dismissible fade show" role="alert">
@@ -6,3 +7,4 @@
   </div>
 <% end %>
 </div>
+<% end %>

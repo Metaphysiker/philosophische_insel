@@ -3,7 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
-
+gem "aws-sdk-s3", require: false
+gem 'friendly_id', '~> 5.4.0'
 gem 'redcarpet'
 gem 'devise'
 gem 'simple_form'

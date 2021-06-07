@@ -1,57 +1,64 @@
-<div class="container">
-  <main>
-    <div class="card article">
-      <div class="card">
-        <img src="https://via.placeholder.com/150x100" class="card-img-top">
-        <div class="card-body">
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+<% url_cover = image_url("pigs.jpg") %>
+
+
+  <section class="d-none d-lg-block page-cover-bg b-color" style="background-image: url('<%= url_cover %>'); height: 500px;">
+      <div class="container d-flex align-items-start justify-content-center h-100 pt-2">
+
+          <%#= image_tag("logo_stinah_ws_vektor.png", class: "img-fluid mb-4 rounded overlay-darker", style: "height: 180px;") %>
+
+      </div>
+  </section>
+
+  <section class="d-sm-block d-lg-none page-cover-bg b-color" style="background-image: url('<%= url_cover %>'); height: 500px; background-position: left center !important;">
+      <div class="container d-flex align-items-start justify-content-center h-100 pt-2">
+
+          <%#= image_tag("logo_stinah_ws_vektor.png", class: "img-fluid mb-4 rounded overlay-darker", style: "height: 180px;") %>
+
+      </div>
+  </section>
+
+
+
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <div class="card text-white bg-a-color mb-7 mt-n6 pb-5 p-2 pb-5 rounded-0">
+        <div class="card-body fs-5">
+          <h1 class="m-0 spaced-letters text-light fs-5"> <strong>Herzlich Willkommen</strong></h1>
+          <p class="spaced-letters text-light">
+            <hr align="left" width="10%" class="bg-light">
+          </p>
+          <p class="card-text text-light"><strong><%= application_name %></strong> ist ein Portal für Philosophie und Ethik.</p>
+          <p class="card-text text-light">Hier findest du <strong>Inhalte, Spiele und Werkzeuge</strong>, die Philosophie und Ethik vermitteln.</p>
+          <p class="card-text text-light">Diese Webseite wird von <strong>Sandro Räss</strong> verwaltet.</p>
+        </div>
+      </div>
+      <%#= image_tag("pig_cute.png", class: "img-fluid mt-n3") %>
+    </div>
+
+    <div class="col-md-8 col-sm-12 d-flex ">
+      <div class="row">
+      <div class="col-12 mb-5">
+      </div>
+        <div class="align-self-end">
+          <div class="col-12">
+              <%#= render "posts/card.html.erb", post: Post.last if Post.last.present? %>
+              <%# spotlight_post = Post.where(slug: "was-ist-tierethik").first %>
+              <%# spotlight_post = Post.last unless spotlight_post.present? %>
+              <%#= render "posts/card.html.erb", post: spotlight_post if spotlight_post.present? %>
+          </div>
         </div>
       </div>
     </div>
-  </main>
-
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100 border-0">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a short card.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
   </div>
 </div>
-</div>
 
-<script>
-  $( document ).ready(function() {
-      console.log( "ready!" );
-  });
-</script>
+  <%#= render "events/newest_events_list" %>
+
+  <%#= render "event_calendar/event_calendar", events: Event.incoming.published.first(5) %>
+  <%#= render partial: "events/horizontal_card", collection: Event.incoming.published.order(:created_at).first(5), as: :event %>
+  <%#= render "posts/latest_posts" %>
+  <%#= render "shared/patenschaft" %>
+  <%#= render "posts/cards_in_group_of_3", posts: Post.last(3) %>
+  <%#= render "shared/info_cards_in_group_of_3" %>
+  <%#= render "event_calendar/action_map", events: Event.incoming.published.first(10) %>

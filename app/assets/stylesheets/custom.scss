@@ -10,6 +10,10 @@ body {
   //font-family: Verdana, sans-serif;
   //font-family: Calibri;
 }
+.page-cover-bg{
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
 $main-colors: (
   a-color: #554732,
@@ -39,7 +43,7 @@ $main-colors: (
 
     &-#{$name} {
       background-color: $hex !important;
-      color: white;
+      //color: white;
       @extend .p-2 !optional;
       //@extend .my-2 !optional;
     }
