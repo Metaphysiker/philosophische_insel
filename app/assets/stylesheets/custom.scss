@@ -79,13 +79,10 @@ $main-colors: (
       color: #ffffff;
       background-color: $hex !important;
       //@extend .my-2 !optional;
-    }
-
-    &:hover,&:focus,&:active {
-      //background-color: darken($hex, 20%) !important;
-      color: #ffffff;
-      //color: red;
-      filter: brightness(0.85);
+      &:hover{
+        color: #ffffff;
+        filter: brightness(1.1);
+      }
     }
 
     .badge {
