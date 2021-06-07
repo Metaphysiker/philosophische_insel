@@ -95,3 +95,11 @@ $main-colors: (
     text-transform: uppercase;
   }
 }
+
+.nav-link {
+  @extend .text-h-color !optional;
+
+  &:hover {
+    filter: brightness(0.3);
+  }
+}
