@@ -15,6 +15,14 @@ import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
 
 //css
+
+import "animate.css/animate.min.css"
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/solarized.css'
+import "@fortawesome/fontawesome-free/css/all.css"
+import "chosen-js/chosen.css"
+
+
 //import "animate.css/animate.min.css"
 //import 'codemirror/lib/codemirror.css'
 //import 'codemirror/theme/solarized.css'
