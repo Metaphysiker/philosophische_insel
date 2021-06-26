@@ -20,6 +20,7 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/solarized.css'
 import "@fortawesome/fontawesome-free/css/all.css"
 import "chosen-js/chosen.css"
+import "chosen-js/chosen-sprite.png"
 
 
 //import "animate.css/animate.min.css"
