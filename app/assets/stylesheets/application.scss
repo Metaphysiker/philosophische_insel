@@ -3,3 +3,8 @@
 @import "chat";
 @import "ellipsis-loader";
 @import "@fortawesome/fontawesome-free/css/all";
+@import 'codemirror/lib/codemirror.css';
+@import 'codemirror/mode/markdown/markdown.js';
+@import 'codemirror/theme/solarized.css';
+@import "@fortawesome/fontawesome-free/css/all";
+@import "chosen-js/chosen.css";
