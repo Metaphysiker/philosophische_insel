@@ -13,13 +13,13 @@ import "packs/chat"
 import "packs/animate_css"
 import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
-import "@fortawesome/fontawesome-free/css/all"
+//import "@fortawesome/fontawesome-free/css/all"
 
 //css
 import "animate.css/animate.min.css"
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/solarized.css'
-import "@fortawesome/fontawesome-free/css/all.css"
+//import "@fortawesome/fontawesome-free/css/all.css"
 import "chosen-js/chosen.css"
 import "chosen-js/chosen-sprite.png"
 
