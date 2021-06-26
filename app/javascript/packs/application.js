@@ -13,6 +13,7 @@ import "packs/chat"
 import "packs/animate_css"
 import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
+import "@fortawesome/fontawesome-free/css/all"
 
 //css
 import "animate.css/animate.min.css"
