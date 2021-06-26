@@ -15,7 +15,6 @@ import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
 
 //css
-
 import "animate.css/animate.min.css"
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/solarized.css'
