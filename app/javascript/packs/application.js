@@ -14,7 +14,7 @@ import "packs/animate_css"
 import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
 //import "@fortawesome/fontawesome-free/css/all"
-import * as d3 from "d3"
+//import * as d3 from "d3/dist/d3.js"
 
 //css
 import "animate.css/animate.min.css"
@@ -39,3 +39,4 @@ ActiveStorage.start()
 window.jQuery = $;
 window.$ = $;
 window.CodeMirror = CodeMirror;
+//window.d3 = d3
