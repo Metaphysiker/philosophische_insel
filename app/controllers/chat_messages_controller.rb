@@ -56,6 +56,19 @@ class ChatMessagesController < ApplicationController
     end
   end
 
+  def visual
+
+    if params[:id].present?
+      @chat_message = ChatMessage.find(params[:id])
+      if @chat_message.has_parent?
+        @chat_message = @chat_message.parent
+      end
+    else
+      @chat_message = ChatMessage.find_by_starting_point("vegan")
+    end
+    render layout: "application_chat"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chat_message

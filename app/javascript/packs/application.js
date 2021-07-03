@@ -14,6 +14,7 @@ import "packs/animate_css"
 import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
 //import "@fortawesome/fontawesome-free/css/all"
+import * as d3 from "d3"
 
 //css
 import "animate.css/animate.min.css"
