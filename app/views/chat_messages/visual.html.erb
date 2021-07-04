@@ -163,13 +163,17 @@ function update(source) {
 								${d.name}
 						</p>
 				</div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          Launch static backdrop modal
-        </button>
-				<div class="border toggle_modal text-center bg-light rounded" id_of_message=${d.id_of_message}>
-						<p>
-								Kommentieren
-						</p>
+				<div class="">
+					<p>
+					  <button class="btn btn-primary ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseElement-${d.id}" aria-expanded="false" aria-controls="collapseElement-${d.id}">
+					    ${d.id}
+					  </button>
+					</p>
+					<div class="collapse" id="collapseElement-${d.id}">
+					  <div class="card card-body">
+							${d.id}
+					  </div>
+					</div>
 				</div>
 			`
 		}
@@ -224,6 +228,11 @@ function update(source) {
 }
 
 	$( ".click-circle" ).click(function() {
+	 var id_of_message = $( this ).attr( 'id_of_message' );
+	 window.location.href = window.location.origin + "/chat_messages_controller/visual/" + id_of_message;
+	});
+
+	$( ".click-add-message" ).click(function() {
 	 var id_of_message = $( this ).attr( 'id_of_message' );
 	 window.location.href = window.location.origin + "/chat_messages_controller/visual/" + id_of_message;
 	});
