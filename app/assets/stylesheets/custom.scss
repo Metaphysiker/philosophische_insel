@@ -78,6 +78,8 @@ $main-colors: (
     &-#{$name} {
       color: #ffffff;
       background-color: $hex !important;
+      font-size: 1.2rem;
+      font-weight: bold;
       //@extend .my-2 !optional;
       &:hover{
         color: #ffffff;
@@ -110,6 +112,11 @@ $main-colors: (
 
 .btn {
   @include btn-color-modifiers;
+}
+
+.top-section-bg {
+  height: 450px;
+  background-color: #c6c6c6;
 }
 
 .article {

@@ -1,6 +1,6 @@
 module ApplicationHelper
 
   def application_name
-    "Gerechtigkeit, kennsch?"
+    "Philosophische Insel"
   end
 end
