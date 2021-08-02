@@ -128,10 +128,21 @@ $main-colors: (
   }
 }
 
+.card:hover {
+  @extend .shadow-lg !optional;
+}
+
+.navbar-brand:hover {
+  filter: brightness(0.5);
+  transform: scale(1.05);
+}
+
 .nav-link {
-  @extend .text-h-color !optional;
+  //@extend .text-h-color !optional;
 
   &:hover {
-    filter: brightness(0.3);
+    filter: brightness(0.5);
+    transform: scale(1.09);
+    //font-size: 1.5rem;
   }
 }

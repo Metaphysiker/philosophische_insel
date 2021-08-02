@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container-fluid">
-      <%= link_to root_path, class: "navbar-brand text-h-color" do %>
+      <%= link_to root_path, class: "navbar-brand" do %>
           <%= application_name %>
       <% end %>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
         <ul class="navbar-nav">
           <% Page.all.order(:order).each do |page| %>
             <li class="nav-item">
-              <%= link_to page.title, page, class: "nav-link text-h-color" %>
+              <%= link_to page.title, page, class: "nav-link" %>
             </li>
           <% end %>
           <li class="nav-item">

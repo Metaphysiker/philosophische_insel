@@ -3,11 +3,25 @@ class Page < ApplicationRecord
   after_save :set_order
 
   def render_content
+
+    #replace vimeo with embedded video
+    #vimeo_pattern = %r|\A(?:https?:)?//(?:www\.)?player.vimeo(?:-nocookie)?\.com/|
+    vimeo_pattern = /(http|https)?:\/\/(www\.|player\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|video\/|)(\d+)(?:|\/\?)/
+    unrendered = self.content
+    vimeo_pattern.match(unrendered) {
+      |m| unrendered = unrendered.gsub(/#{m}/, embed_vimeo_video(m))
+    }
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-    rendered = markdown.render(self.content)
+    #not_rendered = self.content.gsub(vimeo_pattern, "VIDEO_EMBED_HERE!")
+    rendered = markdown.render(unrendered)
+
     self.update_columns(content_rendered: rendered)
+
   end
 
+  def embed_vimeo_video(link)
+    "<p><iframe src=\"#{link}\" width=\"640\" height=\"640\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen></iframe></p>"
+  end
 
   has_one_attached :cover
   extend FriendlyId
