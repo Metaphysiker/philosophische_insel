@@ -6,21 +6,42 @@ class Page < ApplicationRecord
 
     #replace vimeo with embedded video
     #vimeo_pattern = %r|\A(?:https?:)?//(?:www\.)?player.vimeo(?:-nocookie)?\.com/|
-    vimeo_pattern = /(http|https)?:\/\/(www\.|player\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|video\/|)(\d+)(?:|\/\?)/
+    #vimeo_pattern = /(http|https)?:\/\/(www\.|player\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|video\/|)(\d+)(?:|\/\?)/
+
+    vimeo_pattern = /(http|https)?:\/\/player\.vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|video\/|)(\d+)(?:|\/\?)/
+    youtube_pattern = /(http|https)?:\/\/(www\.|player\.)?youtube\.com\/embed\/([^ ]*)/
+
     unrendered = self.content
+
     vimeo_pattern.match(unrendered) {
       |m| unrendered = unrendered.gsub(/#{m}/, embed_vimeo_video(m))
     }
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-    #not_rendered = self.content.gsub(vimeo_pattern, "VIDEO_EMBED_HERE!")
-    rendered = markdown.render(unrendered)
 
+    youtube_pattern.match(unrendered) {
+      |m| unrendered = unrendered.gsub(/#{m}/, embed_vimeo_video(m))
+    }
+
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+    rendered = markdown.render(unrendered)
     self.update_columns(content_rendered: rendered)
 
   end
 
+
   def embed_vimeo_video(link)
-    "<p><iframe src=\"#{link}\" width=\"640\" height=\"640\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen></iframe></p>"
+    "<p>
+      <div class=\"ratio ratio-16x9\">
+        <iframe src=\"#{link}\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen></iframe>
+      </div>
+    </p>"
+  end
+
+  def embed_youtube_video(link)
+    "<p>
+      <div class=\"ratio ratio-16x9\">
+        <iframe src=\"#{link}\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>
+      </div>
+    </p>"
   end
 
   has_one_attached :cover
