@@ -13,8 +13,9 @@
     <%= javascript_pack_tag 'application' %>
     <%= favicon_link_tag asset_path('philosophische-insel-logo-mit-hintergrund.svg') %>
   </head>
-  <body>
+  <body class="d-flex flex-column h-100">
     <%= render "layouts/navigation" %>
+    <%= render "layouts/top_section" %>
     <%= render "layouts/flash_messages" if flash %>
     <%= yield %>
     <%= render "layouts/footer" %>

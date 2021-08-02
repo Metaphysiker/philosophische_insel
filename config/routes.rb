@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root 'static_pages#welcome'
   get 'static_pages/welcome'
 
+  get 'sandro-raess', to: 'static_pages#about', as: "about"
+
   get 'chat/get_next_chat_message(/:id)', to: 'chat#get_next_chat_message', as: 'get_next_chat_message'
   get 'chat/get_next_chat_button(/:id)', to: 'chat#get_next_chat_button', as: 'get_next_chat_button'
   get 'chat_messages_controller/visual(/:id)', to: 'chat_messages#visual', as: "chat_messages_visual"

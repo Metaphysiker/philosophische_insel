@@ -1,0 +1,66 @@
+
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-md-5 col-sm-12">
+      <div class="card text-white bg-a-color mb-7 mt-n6 pb-5 p-2 pb-5 rounded-0">
+        <div class="card-body fs-5">
+          <h1 class="m-0 spaced-letters text-light fs-5"> <strong>Sandro Räss</strong></h1>
+          <p class="spaced-letters text-light">
+            <hr align="left" width="10%" class="bg-light">
+          </p>
+          <div class="d-grid gap-1">
+          <p class="card-text text-light">Ich bin ein Philosoph, Frontend-Entwickler und Aktivist.</p>
+          <p class="card-text text-light">
+            Als Philosoph beschäftige ich mit Fragen der Gerechtigkeit, des guten Lebens und der richtigen Argumentation.
+          </p>
+          <%= link_to "Schau dir meine Beiträge an", root_path, class: "btn btn-f-color mb-3" %>
+          <hr align="left" width="10%" class="bg-light">
+          <p class="card-text text-light">Als Frontend-Entwickler erstelle ich Web-Applikationen mit Ruby-on-Rails und Angular.</p>
+          <%= link_to "Schau dir meine Projekte an", root_path, class: "btn btn-f-color mb-3" %>
+          <hr align="left" width="10%" class="bg-light">
+
+          <p class="card-text text-light">Als Aktivist überzeuge ich Menschen zu einer veganen Lebensweise.</p>
+          <%= link_to "Warum vegan?", root_path, class: "btn btn-f-color mb-3" %>
+            <%#= link_to "Mein Aktivismus", root_path, class: "btn btn-f-color" %>
+          </div>
+
+        </div>
+      </div>
+      <%#= image_tag("pig_cute.png", class: "img-fluid mt-n3") %>
+    </div>
+
+    <div class="col-md-7 col-sm-12">
+      <div class="card text-white mt-n6 rounded-0">
+        <%= image_tag("raess-sandro-standing1.jpg", class: "card-img-top rounded-0") %>
+        <div class="card-body fs-5">
+          <h1 class="m-0 spaced-letters text-light fs-5">
+            <strong>Willkommen zur philosophischen Insel</strong></h1>
+          <p class="spaced-letters text-light">
+            <hr align="left" width="10%" class="bg-light">
+          </p>
+          <p class="card-text text-light">Hier findest du Inhalte, Spiele und Werkzeuge, die Philosophie und Ethik vermitteln.</p>
+          <div class="d-grid gap-4">
+            <%= link_to "Chatte mit einen veganen Computer", chat_path, class: "btn btn-f-color" %>
+            <%= link_to "Besuche den Online-Lernkurs zu Tierethik", root_path, class: "btn btn-f-color" %>
+            <%= link_to "Warum braucht es Philosophie?", root_path, class: "btn btn-f-color" %>
+          </div>
+
+        </div>
+      </div>
+      <%#= image_tag("pig_cute.png", class: "img-fluid mt-n3") %>
+    </div>
+
+    <div class="col-md-8 mb-7 mt-n7 pb-5 p-2 pb-5">
+      <div class="row">
+      <div class="col-12 mb-5">
+      </div>
+        <div class="align-self-end">
+          <div class="col-12">
+            <%= image_tag("raess-sandro-standing1.jpg", class: "img-fluid") %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
