@@ -39,7 +39,7 @@ class Page < ApplicationRecord
   def embed_youtube_video(link)
     "<p>
       <div class=\"ratio ratio-16x9\">
-        <iframe src=\"#{link}\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>
+        <iframe src=\"#{link}\" title=\"YouTube video player\" frameborder=\"0\" allow=\"autoplay; picture-in-picture\" allowfullscreen></iframe>
       </div>
     </p>"
   end
