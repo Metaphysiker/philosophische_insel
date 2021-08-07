@@ -69,7 +69,7 @@ $main-colors: (
 
     &-#{$name} {
 
-      color: invert($hex);
+      color: $white;
       //color: #ffffff;
       background-color: $hex !important;
       font-size: 1.2rem;
