@@ -10,41 +10,32 @@
           <p class="card-text">Hier findest du Inhalte, Spiele und Werkzeuge, die Philosophie und Ethik vermitteln.</p>
           <div class="d-grid gap-4">
             <%= link_to "Chatte mit einen veganen Computer", chat_path, class: "btn btn-f-color" %>
-            <%= link_to "Besuche den Online-Lernkurs zu Ethik", root_path, class: "btn btn-f-color" %>
-            <%= link_to "Warum braucht es Philosophie?", root_path, class: "btn btn-f-color" %>
+            <%= link_to "Besuche den Online-Lernkurs zu Ethik", "https://www.lernkurs.philosophie.ch/", class: "btn btn-f-color" %>
+            <%= link_to "Über mich", about_path, class: "btn btn-f-color" %>
           </div>
-
         </div>
       </div>
-      <%#= image_tag("pig_cute.png", class: "img-fluid mt-n3") %>
     </div>
 
     <div class="col-sm-12 col-md-6 col-lg-7">
       <div class="col-12 mb-5">
       </div>
-        <div class="">
-          <div class="col-12">
-              <%#= render "posts/card.html.erb", post: Post.last if Post.last.present? %>
-              <%# spotlight_post = Post.where(slug: "was-ist-tierethik").first %>
-              <%# spotlight_post = Post.last unless spotlight_post.present? %>
-              <%#= render "posts/card.html.erb", post: spotlight_post if spotlight_post.present? %>
-              <div class="card mb-2 h-100 rounded-0 border-0">
-                <%= image_tag "chat-preview1.png", class: "card-img-top border border-1" %>
-                <% if false %>
-                  <%= image_tag post.cover, class: "card-img-top" %>
-                <% end %>
+        <div class="align-self-end">
 
-                <div class="card-body d-flex flex-column bg-b-color">
-                  <h5 class="card-title spaced-letters">Chatte mit einem veganen Computer</h5>
-                  <p class="card-text text-dark">
-                    Wie sollen wir mit Tieren umgehen?
-                  </p>
+          <div class="card mb-2 h-100 rounded-0 border-0">
+            <%= image_tag "chat-preview1.png", class: "card-img-top border border-1" %>
 
-                  <a href="<%= chat_path %>" class="btn btn-f-color" style="margin-top: auto;">Chatten <i class="fas fa-chevron-right"></i></a>
+            <div class="card-body bg-b-color">
+              <h5 class="card-title spaced-letters">Chatte mit einem veganen Computer</h5>
+              <p class="card-text text-dark">
+                Wie sollen wir mit Tieren umgehen?
+              </p>
 
-                </div>
-              </div>
+              <a href="<%= chat_path %>" class="btn btn-f-color" style="margin-top: auto;">Chatten <i class="fas fa-chevron-right"></i></a>
+
+            </div>
           </div>
+
         </div>
     </div>
   </div>

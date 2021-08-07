@@ -1,3 +1,30 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.static_pages {
+
+  h1 {
+    @extend .m-0 !optional;
+    @extend .spaced-letters !optional;
+    @extend .fs-5 !optional;
+  }
+
+  .card {
+    @extend .bg-b-color !optional;
+    @extend .mb-7 !optional;
+    @extend .mt-n6 !optional;
+    @extend .pb-5 !optional;
+    @extend .p-2 !optional;
+    @extend .pb-5 !optional;
+    @extend .rounded-0 !optional;
+    @extend .border-0 !optional;
+
+    .p {
+      @extend .card-text !optional;
+    }
+  }
+
+
+
+}
