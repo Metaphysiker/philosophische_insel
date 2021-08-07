@@ -15,6 +15,9 @@ body {
   background-repeat: no-repeat;
 }
 
+$white: #ffffff;
+$black: #000000;
+
 $main-colors: (
   a-color: #554732,
   b-color: #f2ede8,
@@ -26,17 +29,6 @@ $main-colors: (
   h-color: #27945E,
 );
 
-@for $i from 1 through 50 {
-  .thick-borders-#{$i}{
-    border-width: #{$i}px !important;
-  }
-
-  .scale-1-#{$i}:hover {
-    transform: scale(1 + ($i / 100)); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-    //background-color: green !important;
-  }
-
-}
 
 @mixin background-color-modifiers {
   @each $name, $hex in $main-colors {
@@ -76,7 +68,9 @@ $main-colors: (
   @each $name, $hex in $main-colors {
 
     &-#{$name} {
-      color: #ffffff;
+
+      color: invert($hex);
+      //color: #ffffff;
       background-color: $hex !important;
       font-size: 1.2rem;
       font-weight: bold;
@@ -93,6 +87,18 @@ $main-colors: (
       background-color: #ffffff;
     }
   }
+}
+
+@for $i from 1 through 50 {
+  .thick-borders-#{$i}{
+    border-width: #{$i}px !important;
+  }
+
+  .scale-1-#{$i}:hover {
+    transform: scale(1 + ($i / 100)); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    //background-color: green !important;
+  }
+
 }
 
 .mt-n6 {
@@ -145,4 +151,16 @@ $main-colors: (
     transform: scale(1.09);
     //font-size: 1.5rem;
   }
+}
+
+// functions
+
+@function invert($color, $amount: 100%) {
+
+}
+
+@function invertx($color) {
+  //$inverse: change-color($color, $hue: hue($color) + 180);
+
+  @return invert($color);
 }

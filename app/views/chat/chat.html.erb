@@ -84,7 +84,7 @@
 <script>
   $( document ).ready(function() {
       $.ajax({
-        url: "<%= get_next_chat_message_path(ChatMessage.find_by_starting_point("vegan")) %>",
+        url: "<%= get_next_chat_message_path(ChatMessage.find_by_starting_point("slavery")) %>",
         method: 'GET',
         headers: {
           'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
