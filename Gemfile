@@ -11,6 +11,8 @@ gem 'simple_form'
 gem 'sanitize'
 gem 'tinymce-rails'
 gem 'ancestry'
+gem "passenger", require: "phusion_passenger/rack_handler"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 # Use postgresql as the database for Active Record
