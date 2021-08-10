@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   after_action :track_action
 
   protected

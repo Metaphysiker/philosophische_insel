@@ -7,6 +7,7 @@ gem 'ahoy_matey'
 gem "chartkick"
 gem 'groupdate'
 gem 'maxminddb'
+gem "pundit"
 
 gem "aws-sdk-s3", require: false
 gem 'friendly_id', '~> 5.4.0'
