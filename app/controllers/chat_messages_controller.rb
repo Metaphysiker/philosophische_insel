@@ -1,5 +1,6 @@
 class ChatMessagesController < ApplicationController
   before_action :set_chat_message, only: %i[ show edit update destroy ]
+  after_action :verify_authorized
 
   # GET /chat_messages or /chat_messages.json
   def index

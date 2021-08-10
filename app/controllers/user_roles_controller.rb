@@ -1,6 +1,7 @@
 class UserRolesController < ApplicationController
   before_action :set_user_role, only: %i[ show edit update destroy ]
-
+  after_action :verify_authorized
+  
   # GET /user_roles or /user_roles.json
   def index
     @user_roles = UserRole.all
