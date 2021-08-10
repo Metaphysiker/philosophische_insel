@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>
+    Visits
+  </h1>
+  <br>
+    Total: <%= Ahoy::Visit.all.count %>
+  <br>
+  <%= geo_chart Ahoy::Visit.group(:country).count %>
+  <br>
+  <%= bar_chart Ahoy::Visit.group(:country).count %>
+  <br>
+  <%= bar_chart Ahoy::Visit.group(:region).count %>
+  <br>
+  <%= line_chart Ahoy::Visit.group_by_month(:started_at).count %>
+
+</div>

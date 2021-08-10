@@ -3,6 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
+gem 'ahoy_matey'
+gem "chartkick"
+gem 'groupdate'
+gem 'maxminddb'
+
 gem "aws-sdk-s3", require: false
 gem 'friendly_id', '~> 5.4.0'
 gem 'redcarpet'

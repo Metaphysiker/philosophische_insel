@@ -8,4 +8,8 @@ class StaticPagesController < ApplicationController
 
   def essays
   end
+
+  def visits
+    
+  end
 end
