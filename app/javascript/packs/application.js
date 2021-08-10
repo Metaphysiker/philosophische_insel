@@ -24,7 +24,8 @@ import 'codemirror/theme/solarized.css'
 import "chosen-js/chosen.css"
 import "chosen-js/chosen-sprite.png"
 
-import "chartkick/chart.js"
+//import "chartkick/chart.js"
+import "chartkick/highcharts"
 
 //import "animate.css/animate.min.css"
 //import 'codemirror/lib/codemirror.css'
