@@ -57,7 +57,7 @@ var treeData = [<%= raw @chat_message.to_node2(0).to_json %>];
 root = treeData[0];
 
 // ************** Generate the tree diagram	 *****************
-var margin = {top: 100, right: 120, bottom: 20, left: 120},
+var margin = {top: 50, right: 120, bottom: 20, left: 120},
 	width = 4000 - margin.right - margin.left,
 	height = 4000 - margin.top - margin.bottom;
 
@@ -173,7 +173,16 @@ function update(source) {
 						<p>
 								${d.name}
 						</p>
+						<p>
+							${d.chatter}
+						</p>
 				</div>
+				<div class="bg-light p-1 rounded">
+					<p>
+						<a class="btn btn-primary mr-1" href="/chat_messages/${d.id_of_message}/edit" role="button">Bearbeiten</a>
+						<a class="btn btn-primary mr-1" href="/chat_messages/new?parent_id=${d.id_of_message}" role="button">Kind hinzufügen</a>
+					</p>
+					</div>
 				<div class="">
 					<p>
 					  <button class="btn btn-primary ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseElement-${d.id}" aria-expanded="false" aria-controls="collapseElement-${d.id}">

@@ -4,24 +4,33 @@ class ChatMessagesController < ApplicationController
 
   # GET /chat_messages or /chat_messages.json
   def index
+    authorize ChatMessage
     @chat_messages = ChatMessage.all
   end
 
   # GET /chat_messages/1 or /chat_messages/1.json
   def show
+    authorize ChatMessage
   end
 
   # GET /chat_messages/new
   def new
+    authorize ChatMessage
     @chat_message = ChatMessage.new
+
+    if params[:parent_id].present?
+      @chat_message.parent_id = params[:parent_id]
+    end
   end
 
   # GET /chat_messages/1/edit
   def edit
+    authorize ChatMessage
   end
 
   # POST /chat_messages or /chat_messages.json
   def create
+    authorize ChatMessage
     @chat_message = ChatMessage.new(chat_message_params)
 
     respond_to do |format|
@@ -37,6 +46,7 @@ class ChatMessagesController < ApplicationController
 
   # PATCH/PUT /chat_messages/1 or /chat_messages/1.json
   def update
+    authorize ChatMessage
     respond_to do |format|
       if @chat_message.update(chat_message_params)
         format.html { redirect_to @chat_message, notice: "Chat message was successfully updated." }
@@ -50,6 +60,7 @@ class ChatMessagesController < ApplicationController
 
   # DELETE /chat_messages/1 or /chat_messages/1.json
   def destroy
+    authorize ChatMessage
     @chat_message.destroy
     respond_to do |format|
       format.html { redirect_to chat_messages_url, notice: "Chat message was successfully destroyed." }
@@ -58,7 +69,7 @@ class ChatMessagesController < ApplicationController
   end
 
   def visual
-
+    authorize ChatMessage
     if params[:id].present?
       @chat_message = ChatMessage.find(params[:id])
       if @chat_message.has_parent?

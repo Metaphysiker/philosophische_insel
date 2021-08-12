@@ -1,19 +1,19 @@
 class PagePolicy < ApplicationPolicy
 
   def new?
-    @user.admin?
+    is_user_admin?(@user)
   end
 
   def update?
-    @user.admin?
+    is_user_admin?(@user)
   end
 
   def edit?
-    @user.admin?
+    is_user_admin?(@user)
   end
 
   def destroy?
-    @user.admin?
+    is_user_admin?(@user)
   end
 
   class Scope < Scope

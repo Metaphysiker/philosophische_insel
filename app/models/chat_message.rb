@@ -7,8 +7,10 @@ class ChatMessage < ApplicationRecord
 
   def to_node2(n)
     if n > 6
-      last_node = { "name" => ActionController::Base.helpers.strip_tags(self.content.to_s),
+      last_node = {
+            "name" => ActionController::Base.helpers.strip_tags(self.content.to_s),
             "id_of_message" => self.id,
+            "chatter" =>self.chatter
           }
       return last_node
     end
@@ -22,6 +24,7 @@ class ChatMessage < ApplicationRecord
 
     { "name" => ActionController::Base.helpers.strip_tags(self.content.to_s),
       "id_of_message" => self.id,
+      "chatter" =>self.chatter,
       "children" => children
       #{}"children"   => self.children.map { |c| c.to_node }
     }

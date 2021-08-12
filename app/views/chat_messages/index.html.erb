@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Chat Messages</h1>
-
+<p>
+  <%= link_to "Visual", chat_messages_visual_path(ChatMessage.first) %>
+</p>
 <table>
   <thead>
     <tr>
