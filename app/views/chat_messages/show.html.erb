@@ -6,6 +6,9 @@
   <%= raw sanitizing(@chat_message.content) %>
 </p>
 <p>
+  <%= link_to "Visual", chat_messages_visual_path(@chat_message) %>
+</p>
+<p>
   <%= render 'chat_messages/computer_chat_message', chat_message: @chat_message %>
   <%= render 'chat_messages/user_chat_message', chat_message: @chat_message %>
   <%= render 'chat_messages/chat_button', chat_message: @chat_message %>

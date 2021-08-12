@@ -177,24 +177,12 @@ function update(source) {
 							${d.chatter}
 						</p>
 				</div>
-				<div class="bg-light p-1 rounded">
-					<p>
-						<a class="btn btn-primary mr-1" href="/chat_messages/${d.id_of_message}/edit" role="button">Bearbeiten</a>
-						<a class="btn btn-primary mr-1" href="/chat_messages/new?parent_id=${d.id_of_message}" role="button">Kind hinzufügen</a>
-					</p>
-					</div>
 				<div class="">
 					<p>
-					  <button class="btn btn-primary ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseElement-${d.id}" aria-expanded="false" aria-controls="collapseElement-${d.id}">
-					    ${d.id}
-					  </button>
+						<a class="btn btn-primary mr-1" href="/chat_messages/${d.id_of_message}/edit" role="button">Bearbeiten</a>
+						<a class="btn btn-success mr-1" href="/chat_messages/new?parent_id=${d.id_of_message}" role="button">Kind hinzufügen</a>
 					</p>
-					<div class="collapse" id="collapseElement-${d.id}">
-					  <div class="card card-body">
-							${d.id}
-					  </div>
 					</div>
-				</div>
 			`
 		}
 

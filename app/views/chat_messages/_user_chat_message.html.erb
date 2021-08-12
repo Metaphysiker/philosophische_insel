@@ -19,7 +19,7 @@
       <hr />
       <%= link_to 'Eintrag bearbeiten', edit_chat_message_path(chat_message), class: "btn btn-primary m-2" %>
       <%= link_to 'Eintrag löschen', chat_message_path(chat_message), method: :delete, data: {confirm: 'Bist du sicher?'}, class: "btn btn-danger m-2" %>
-      <%= link_to 'Neuer Eintrag', new_chat_message_path, class: "btn btn-light m-2" %>
+      <%= link_to 'Neuer Eintrag', new_chat_message_path(parent_id: chat_message.id), class: "btn btn-light m-2" %>
     </div>
   <% end %>
 </div>

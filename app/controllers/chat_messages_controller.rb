@@ -20,6 +20,7 @@ class ChatMessagesController < ApplicationController
 
     if params[:parent_id].present?
       @chat_message.parent_id = params[:parent_id]
+      @chat_message.chatter = ChatMessage.find(params[:parent_id]).chatter
     end
   end
 
