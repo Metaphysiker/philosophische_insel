@@ -11,6 +11,6 @@ class StaticPagesController < ApplicationController
   end
 
   def visits
-
+    authorize :static_pages
   end
 end
