@@ -64,11 +64,55 @@
 	function drawTree(container, data){
 
 		width = $("#main-bootstrap-container").width();
+		height = $(window).height();
 		margin = ({top: 20, right: 120, bottom: 10, left: width/2});
 		dy = 50;
 		dx = 100;
 		tree = d3.tree().nodeSize([dx, dy]);
 		diagonal = d3.linkHorizontal().x(d => d.x).y(d => d.y);
+
+		var linker = function(d) {
+		  var y0 = d.source.y;
+		  var x0 = d.source.x;
+		  var x1 = d.target.x;
+		  var y1 = d.target.y;
+		  var k = 20;
+
+			console.log(y1-y0);
+
+		  var path = d3.path()
+		  path.moveTo(x0,y0)
+			path.lineTo(x1,y0 + (y1-y0)/2);
+			//path.lineTo(x1-k,y0-k)
+			//path.lineTo(x0+40,y0+0)
+			//path.moveTo(0,0);
+		 	//path.bezierCurveTo(y1-k,x0,y0,x1,y1-k,x1);
+		  path.lineTo(x1,y1);
+
+		  return path.toString();
+		}
+
+		function drawspecial(origin, target) {
+			//var path1 = d3.path();
+			console.log(origin);
+		  //path1.moveTo(origin.x, origin.y); // move current point to ⟨10,10⟩
+		 	//path1.lineTo(origin.x + 1, origin.y + 1); // draw straight line to ⟨100,10⟩
+
+			var path1 = d3.path();
+			path1.moveTo(0, 0);
+
+			// Making line to x:0 and y:100
+			path1.lineTo(0, 100);
+
+			// Closing the path
+			path1.closePath();
+			d3.select(".path1").attr("d",path1).style("stroke", "black");
+		  // etc.
+		  //return context; // not mandatory, but will make it easier to chain operations
+		}
+
+		//bezier = d3.bezierCurveTo().x(d => d.x).y(d => d.y);
+		//bezier = d3.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x, y)
 
 
 		const root = d3.hierarchy(data);
@@ -93,9 +137,9 @@
 
   const gLink = svg.append("g")
       .attr("fill", "none")
-      .attr("stroke", "#555")
+      .attr("stroke", "red")
       .attr("stroke-opacity", 0.4)
-      .attr("stroke-width", 1.5);
+      .attr("stroke-width", 2.5);
 
   const gNode = svg.append("g")
       .attr("cursor", "pointer")
@@ -116,7 +160,7 @@
       if (node.x > right.x) right = node;
     });
 
-    const height = 500;
+    //const height = 500;
 
     const transition = svg.transition()
         .duration(duration)
@@ -129,7 +173,7 @@
 
     // Enter any new nodes at the parent's previous position.
     const nodeEnter = node.enter().append("g")
-        .attr("transform", d => `translate(${source.y0},${source.x0})`)
+        .attr("transform", d => `translate(${source.x0},${source.y0})`)
         .attr("fill-opacity", 0)
         .attr("stroke-opacity", 0)
         .on("click", (event, d) => {
@@ -160,7 +204,7 @@
 
     // Transition exiting nodes to the parent's new position.
     const nodeExit = node.exit().transition(transition).remove()
-        .attr("transform", d => `translate(${source.y},${source.x})`)
+        .attr("transform", d => `translate(${source.x},${source.y})`)
         .attr("fill-opacity", 0)
         .attr("stroke-opacity", 0);
 
@@ -170,21 +214,15 @@
 
     // Enter any new links at the parent's previous position.
     const linkEnter = link.enter().append("path")
-        .attr("d", d => {
-          const o = {x: source.x0, y: source.y0};
-          return diagonal({source: o, target: o});
-        });
+				.attr("d", linker);
 
     // Transition links to their new position.
     link.merge(linkEnter).transition(transition)
-        .attr("d", diagonal);
+        				.attr("d", linker);
 
     // Transition exiting nodes to the parent's new position.
     link.exit().transition(transition).remove()
-        .attr("d", d => {
-          const o = {x: source.x, y: source.y};
-          return diagonal({source: o, target: o});
-        });
+				.attr("d", linker);
 
     // Stash the old positions for transition.
     root.eachBefore(d => {
