@@ -59,10 +59,12 @@
 
 	function drawTree(container, data){
 
-		margin = ({top: 500, right: 500, bottom: 500, left: 500});
-		dy = 200;
-		dx = 100;
-		//tree = d3.tree().nodeSize([dx, dy])
+		const chartWidth = 400;
+		const chartHeight = 400;
+
+		margin = ({top: 20, right: 20, bottom: 20, left: 20});
+		dy = 10;
+		dx = 10;
 		tree = d3.tree().nodeSize([dx, dy])
 		diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x)
 
@@ -92,8 +94,8 @@
 
 	  // First and only difference, instead of creating SVG, we are appending it to container
 	   const svg = d3.select(container).append('svg')
-	      .attr('width', 500 + margin.right + margin.left)
-	      .attr('height', 500 + margin.top + margin.bottom)
+	      .attr('width', newWidth + margin.right + margin.left)
+	      .attr('height', newHeight + margin.top + margin.bottom)
 
 				const root = d3.hierarchy(data);
 
