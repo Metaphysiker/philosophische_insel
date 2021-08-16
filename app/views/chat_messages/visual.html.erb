@@ -1,4 +1,4 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 
 <style>
 
@@ -52,235 +52,165 @@
 </div>
 
 <script>
-var treeData = [<%= raw @chat_message.to_node2(0).to_json %>];
 
-root = treeData[0];
+	const data = [8, 18, 7, 10, 19, 20, 10, 10, 6, 19, 17, 18, 23, 23, 13, 12, 15, 6, 9, 8];
 
-// ************** Generate the tree diagram	 *****************
-var margin = {top: 50, right: 120, bottom: 20, left: 120},
-	width = 4000 - margin.right - margin.left,
-	height = 4000 - margin.top - margin.bottom;
+	var treeData = [<%= raw @chat_message.to_node2(0).to_json %>];
 
-//var width = $(window).width() * 4 - margin.right - margin.left;
-//	var height = $(window).height() * 4 - margin.top - margin.bottom;
-
-// compute the new width
-var levelWidth = [1];
-var childCount = function(level, n) {
-
-	if(n.children && n.children.length > 0) {
-		if(levelWidth.length <= level + 1) levelWidth.push(0);
-
-		levelWidth[level+1] += n.children.length;
-		n.children.forEach(function(d) {
-			childCount(level + 1, d);
-		});
-	}
-};
-childCount(0, root);
-var newWidth = d3.max(levelWidth) * 700; // 20 pixels per line
-//tree = tree.size([newHeight, width]);
-//console.log(levelWidth);
-var newHeight = levelWidth.length * 200 //
-
-width = newWidth;
-height = newHeight;
-
-var i = 0;
-
-var tree = d3.layout.tree()
-	.size([width, height]);
-
-var diagonal = d3.svg.diagonal()
-	.projection(function(d) { return [d.x, d.y]; });
-
-  var line = d3.svg.line()
-      .x(function(d) {
-          return d.x; // because tree is horizontal
-      })
-      .y(function(d) {
-          return d.y; // because tree is horizontal
-      });
-
-var svg = d3.select("#diagram").append("svg")
-	.attr("width", width + margin.right + margin.left)
-	.attr("height", height + margin.top + margin.bottom)
-  .append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-update(root);
-
-function update(source) {
-
-  // Compute the new tree layout.
-  var nodes = tree.nodes(root).reverse(),
-	  links = tree.links(nodes);
-
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) {
-      //d.y = d.depth * 100;
-      d.x = d.x * 1;
-      d.y = d.depth * 180;
-                });
-
-  // Declare the nodes…
-  var node = svg.selectAll("g.node")
-	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
-
-  // Enter the nodes.
-  var nodeEnter = node.enter().append("g")
-	  .attr("class", "node")
-	  .attr("transform", function(d) {
-		  return "translate(" + d.x + "," + d.y + ")"; });
-
-  nodeEnter.append("circle")
-	  .attr("r", 1)
-		//.attr("class", "click-circle")
-		.attr("id_of_message", function(d) { return d.id_of_message})
-	  .style("fill", "#fff");
-
-		nodeEnter.append("svg:defs").append("svg:marker")
-    .attr("id", "triangle")
-    .attr("refX", 6)
-    .attr("refY", 6)
-    .attr("markerWidth", 30)
-    .attr("markerHeight", 30)
-    .attr("orient", "auto")
-    .append("path")
-    .attr("d", "M 0 0 12 6 0 12 3 6")
-    .style("fill", "black");
-
-		/*nodeEnter.append("div")
-			.attr("class", "click-circle")
-			.style("opacity", 1)
-			.html("<b>Hey!</b>")*/
-
-
-		nodeEnter.append("foreignObject")
-		.attr("y", function(d) {
-			return d.children || d._children ? -0 : 0; })
-		.attr("x", function(d){
-			return -150;
-		})
-		//.attr("dy", ".35em")
-    .attr("width", 300)
-    .attr("height", 200)
-  	.append("xhtml:div")
-		.html(function(d) {
-			return `
-				<div class="border click-circle text-center bg-light p-1 mb-1 rounded" id_of_message=${d.id_of_message}>
-						<p>
-								${d.name}
-						</p>
-						<p>
-							${d.chatter}
-						</p>
-				</div>
-				<div class="">
-					<p>
-						<a class="btn btn-primary mr-1" href="/chat_messages/${d.id_of_message}/edit" role="button">Bearbeiten</a>
-						<a class="btn btn-success mr-1" href="/chat_messages/new?parent_id=${d.id_of_message}" role="button">Kind hinzufügen</a>
-					</p>
-					</div>
-			`
+	var newData = {
+		name: "Kant",
+		children: [
+		{
+			name: "Moses",
+			children: []
+		},
+		{
+			name: "Freja",
+			children: []
 		}
+		]
+	}
 
-		)
+	drawChart('#diagram', newData)
 
+	function drawChart(container, data){
 
+		const chartWidth = 400;
+		const chartHeight = 400;
 
-		/*
-		.append('div')
-		.attr("id_of_message", function(d) { return d.id_of_message})
-		.attr('class', "border click-circle text-center bg-light p-1 rounded")
-		.append('p')
-		.text(function(d) { return d.name; })
-		.append('div')
-		.attr("id_of_message", function(d) { return d.id_of_message})
-		.attr('class', "border toggle_modal text-center bg-light p-1 rounded")
-		.text("Kommentieren");
-    //.html(function(d) { return "<div class=\"border click-circle text-center bg-light p-1 rounded\" id_of_message=\"" + d.id_of_message + "\"><b>" + d.name + "</div></b>"; });
-		*/
+		width = 300;
 
-
-/*
-		nodeEnter.append("foreignObject")
-		.attr("y", function(d) {
-			return d.children || d._children ? 50 : 100; })
-		.attr("x", function(d){
-			return -1;
-		})
-		//.attr("dy", ".35em")
-    .attr("width", 300)
-    .attr("height", 200)
-  	.append("xhtml:div")
-		.append('div')
-		.attr('class', "border toggle_modal text-center bg-light p-1 rounded");
-
-		*/
+		margin = ({top: 10, right: 120, bottom: 10, left: 40});
+		dy = 150;
+		dx = 20;
+		tree = d3.tree().nodeSize([dx, dy])
+		diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x)
 
 
-  // Declare the links…
-  var link = svg.selectAll("path.link")
-	  .data(links, function(d) { return d.target.id; });
+	  // First and only difference, instead of creating SVG, we are appending it to container
+	   const svg = d3.select(container).append('svg')
+	      .attr('width',chartWidth)
+	      .attr('height',chartHeight)
 
-  // Enter the links.
-  link.enter().insert("path", "g")
-	  .attr("class", "link")
-    .attr("d", function(d) {
-                return line([d.source, d.target]);
-            });
-	  //.attr("d", diagonal);
+				const root = d3.hierarchy(data);
 
-}
+				console.log(root);
 
-	$( ".click-circle" ).click(function() {
-	 var id_of_message = $( this ).attr( 'id_of_message' );
-	 window.location.href = window.location.origin + "/chat_messages_controller/visual/" + id_of_message;
-	});
+				root.x0 = dy / 2;
+				root.y0 = 0;
+				root.descendants().forEach((d, i) => {
+					d.id = i;
+					d._children = d.children;
+					if (d.depth && d.data.name.length !== 7) d.children = null;
+				});
 
-	$( ".click-add-message" ).click(function() {
-	 var id_of_message = $( this ).attr( 'id_of_message' );
-	 window.location.href = window.location.origin + "/chat_messages_controller/visual/" + id_of_message;
-	});
+				const gLink = svg.append("g")
+						.attr("fill", "none")
+						.attr("stroke", "#555")
+						.attr("stroke-opacity", 0.4)
+						.attr("stroke-width", 1.5);
 
-	$(".click-circle").hover(function(){
-	  //$(this).css("background-color", "yellow !important");
-		$( this ).removeClass( "bg-light" );
-		$( this ).addClass( "bg-primary" );
-	  }, function(){
-	  //$(this).css("fill", "white");
-		$( this ).addClass( "bg-light" );
-		$( this ).removeClass( "bg-primary" );
-	});
+				const gNode = svg.append("g")
+						.attr("cursor", "pointer")
+						.attr("pointer-events", "all");
 
-	$(".toggle_modal").hover(function(){
-		//$(this).css("background-color", "yellow !important");
-		$( this ).removeClass( "bg-light" );
-		$( this ).addClass( "bg-primary" );
-		}, function(){
-		//$(this).css("fill", "white");
-		$( this ).addClass( "bg-light" );
-		$( this ).removeClass( "bg-primary" );
-	});
+				function update(source) {
+					const duration = d3.event && d3.event.altKey ? 2500 : 250;
+					const nodes = root.descendants().reverse();
+					const links = root.links();
+
+					// Compute the new tree layout.
+					tree(root);
+
+					let left = root;
+					let right = root;
+					root.eachBefore(node => {
+						if (node.x < left.x) left = node;
+						if (node.x > right.x) right = node;
+					});
+
+					const height = right.x - left.x + margin.top + margin.bottom;
+
+					const transition = svg.transition()
+							.duration(duration)
+							.attr("viewBox", [-margin.left, left.x - margin.top, width, height])
+							.tween("resize", window.ResizeObserver ? null : () => () => svg.dispatch("toggle"));
+
+					// Update the nodes…
+					const node = gNode.selectAll("g")
+						.data(nodes, d => d.id);
+
+					// Enter any new nodes at the parent's previous position.
+					const nodeEnter = node.enter().append("g")
+							.attr("transform", d => `translate(${source.y0},${source.x0})`)
+							.attr("fill-opacity", 0)
+							.attr("stroke-opacity", 0)
+							.on("click", (event, d) => {
+								d.children = d.children ? null : d._children;
+								update(d);
+							});
+
+					nodeEnter.append("circle")
+							.attr("r", 2.5)
+							.attr("fill", d => d._children ? "#555" : "#999")
+							.attr("stroke-width", 10);
+
+					nodeEnter.append("text")
+							.attr("dy", "0.31em")
+							.attr("x", d => d._children ? -6 : 6)
+							.attr("text-anchor", d => d._children ? "end" : "start")
+							.text(d => d.data.name)
+						.clone(true).lower()
+							.attr("stroke-linejoin", "round")
+							.attr("stroke-width", 3)
+							.attr("stroke", "white");
+
+					// Transition nodes to their new position.
+					const nodeUpdate = node.merge(nodeEnter).transition(transition)
+							.attr("transform", d => `translate(${d.y},${d.x})`)
+							.attr("fill-opacity", 1)
+							.attr("stroke-opacity", 1);
+
+					// Transition exiting nodes to the parent's new position.
+					const nodeExit = node.exit().transition(transition).remove()
+							.attr("transform", d => `translate(${source.y},${source.x})`)
+							.attr("fill-opacity", 0)
+							.attr("stroke-opacity", 0);
+
+					// Update the links…
+					const link = gLink.selectAll("path")
+						.data(links, d => d.target.id);
+
+					// Enter any new links at the parent's previous position.
+					const linkEnter = link.enter().append("path")
+							.attr("d", d => {
+								const o = {x: source.x0, y: source.y0};
+								return diagonal({source: o, target: o});
+							});
+
+					// Transition links to their new position.
+					link.merge(linkEnter).transition(transition)
+							.attr("d", diagonal);
+
+					// Transition exiting nodes to the parent's new position.
+					link.exit().transition(transition).remove()
+							.attr("d", d => {
+								const o = {x: source.x, y: source.y};
+								return diagonal({source: o, target: o});
+							});
+
+					// Stash the old positions for transition.
+					root.eachBefore(d => {
+						d.x0 = d.x;
+						d.y0 = d.y;
+					});
+				}
+
+				update(root);
+
+				return svg.node();
 
 
-		$('html').scrollLeft(width/2 - 450);
-
-		$( ".toggle_modal" ).click(function() {
-			var id_of_message = $( this ).attr( 'id_of_message' );
-
-				$.ajax({
-					url: "/comments/comment_function/" + id_of_message + ".js",
-					method: 'GET'
-				}).done(function(response) {
-				//$("#overview_modal-body").replaceWith(response);
-				$("#overview_modal-body").empty().append(response);
-			})
-
-			$('#overview_modal').modal('toggle')
-		});
-
+	}
 
 </script>
