@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays]
+  after_action :verify_authorized, except: %i[welcome about essays stinah]
   def welcome
   end
 
@@ -12,5 +12,9 @@ class StaticPagesController < ApplicationController
 
   def visits
     authorize :static_pages
+  end
+
+  def stinah
+
   end
 end

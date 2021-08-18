@@ -34,6 +34,8 @@ import "chartkick/highcharts"
 //import "chosen-js/chosen.css"
 //import "@fortawesome/fontawesome-free/css/all"
 
+import "d3/dist/d3.js"
+
 
 Rails.start()
 ActiveStorage.start()
