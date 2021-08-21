@@ -37,13 +37,19 @@ import "chartkick/highcharts"
 import "d3/dist/d3.js"
 
 
+
 Rails.start()
 ActiveStorage.start()
 
 window.jQuery = $;
 window.$ = $;
 window.CodeMirror = CodeMirror;
+
+//window.Lazy = Lazy
+
 //window.d3 = d3
+
+require("jquery-lazy/jquery.lazy.js");
 
 $.fn.isInViewport = function() {
     var elementTop = $(this).offset().top;

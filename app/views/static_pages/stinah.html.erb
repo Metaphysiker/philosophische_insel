@@ -36,6 +36,7 @@
 
 <script>
 
+
   var chart_seen = false;
 
 
@@ -61,8 +62,8 @@
 	//drawTree('#diagram', data)
 
   $( window ).resize(function() {
-    $("#diagram").empty();
-    drawTree('#diagram', data)
+  //  $("#diagram").empty();
+  //  drawTree('#diagram', data)
   });
 
 	function drawTree(container, data){
@@ -207,7 +208,7 @@
   $(window).scroll(function(){
 
      if (chart_seen == false && isIntoView($('#load_chart_if_seen'))){
-         drawTree('#diagram', data)
+        // drawTree('#diagram', data)
          chart_seen = true;
       }
   })
