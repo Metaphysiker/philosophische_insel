@@ -25,24 +25,30 @@
 </div>
 
 <div class="container text-center">
-  <div id="diagram">
+  <h2>Gegenwärtiger Stand</h2>
+  <div id="load_chart_if_seen">
+    <div id="diagram">
 
+    </div>
   </div>
+
 </div>
 
 <script>
+
+  var chart_seen = false;
 
 
 	data = [
     {
       name: "bereits erhalten",
       value: "200",
-      color: "lightgreen"
+      color: "#90EE90"
     },
     {
       name: "noch benötigt",
       value: "100",
-      color: "red"
+      color: "#FF4500"
     },
     {
       name: "total",
@@ -52,7 +58,7 @@
   ]
 
 
-	drawTree('#diagram', data)
+	//drawTree('#diagram', data)
 
   $( window ).resize(function() {
     $("#diagram").empty();
@@ -110,9 +116,9 @@
       .join("rect")
         .attr("x", x(0))
         .attr("y", (d, i) => y(i))
-        .attr("width", d => x(d.value) - x(0))
-        .attr("fill", d => d.color)
-        .attr("height", y.bandwidth());
+      //  .attr("width", d => x(d.value) - x(0))
+        .attr("height", y.bandwidth())
+        .attr("fill", "purple");
 
     svg.append("g")
         .attr("fill", "white")
@@ -146,6 +152,19 @@
 
     svg.selectAll(".label-on-y-axis tspan").attr("dx", -10);
 
+    // Animation
+  svg.selectAll("rect")
+    .transition()
+    .duration(3000)
+    //.attr("y", function(d) { return y(d.value); })
+    //.attr("width", function(d) { return height - y(d.value); })
+  //  .attr("x", x(0))
+  //  .attr("y", (d, i) => y(i))
+    .attr("width", d => x(d.value) - x(0))
+    //.attr("height", y.bandwidth())
+    .style("fill", function(d) { return d.color; })
+    .delay(function(d,i){return(i*300)})
+
     return svg.node();
 
 	}
@@ -174,7 +193,24 @@
     });
   }
 
+  function isIntoView(elem)
+{
+    var documentViewTop = $(window).scrollTop();
+    var documentViewBottom = documentViewTop + $(window).height();
 
+    var elementTop = $(elem).offset().top;
+    var elementBottom = elementTop + $(elem).height();
+
+    return ((elementBottom <= documentViewBottom) && (elementTop >= documentViewTop));
+}
+
+  $(window).scroll(function(){
+
+     if (chart_seen == false && isIntoView($('#load_chart_if_seen'))){
+         drawTree('#diagram', data)
+         chart_seen = true;
+      }
+  })
 
 
 </script>
