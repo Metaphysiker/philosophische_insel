@@ -26,20 +26,20 @@
 
 <div class="container text-center">
   <h2>Gegenwärtiger Stand</h2>
+  <div style="height: 500px;">
+    <p>
+      Block
+      </p>
+  </div>
   <div id="load_chart_if_seen">
     <div id="diagram">
-
     </div>
   </div>
 
 </div>
 
 <script>
-
-
   var chart_seen = false;
-
-
 	data = [
     {
       name: "bereits erhalten",
@@ -61,19 +61,15 @@
 
 	//drawTree('#diagram', data)
 
-  $( window ).resize(function() {
-  //  $("#diagram").empty();
-  //  drawTree('#diagram', data)
-  });
+  margin = ({top: 30, right: 0, bottom: 30, left: 50})
+  width = $( "#diagram" ).width();//500
+  barHeight = 100
+  height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom
+  fontSize = 18
+
+  $( "#diagram" ).height(height);
 
 	function drawTree(container, data){
-
-    margin = ({top: 30, right: 0, bottom: 30, left: 50})
-    width = $( "#diagram" ).width();//500
-    barHeight = 100
-    height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom
-    fontSize = 18
-
 
   x = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.value)])
@@ -194,24 +190,38 @@
     });
   }
 
-  function isIntoView(elem)
-{
-    var documentViewTop = $(window).scrollTop();
-    var documentViewBottom = documentViewTop + $(window).height();
+  function isElementInViewport(el) {
 
-    var elementTop = $(elem).offset().top;
-    var elementBottom = elementTop + $(elem).height();
-
-    return ((elementBottom <= documentViewBottom) && (elementTop >= documentViewTop));
-}
-
-  $(window).scroll(function(){
-
-     if (chart_seen == false && isIntoView($('#load_chart_if_seen'))){
-        // drawTree('#diagram', data)
-         chart_seen = true;
+      // Special bonus for those using jQuery
+      if (typeof jQuery === "function" && el instanceof jQuery) {
+          el = el[0];
       }
-  })
+
+      var rect = el.getBoundingClientRect();
+
+      return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+      );
+  }
+
+  $(window).on("load scroll",function(e){
+    // define the function here
+    if((chart_seen == false) && isElementInViewport(document.getElementById("diagram"))){
+      console.log("start animation");
+      $("#diagram").empty();
+      drawTree('#diagram', data)
+      chart_seen = true;
+    }
+  });
+
+  $( window ).resize(function() {
+    $("#diagram").empty();
+    drawTree('#diagram', data)
+  });
+
 
 
 </script>
