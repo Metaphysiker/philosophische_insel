@@ -24,13 +24,8 @@
   </div>
 </div>
 
-<div class="container text-center">
+<div class="container text-center pt-3">
   <h2>Gegenwärtiger Stand</h2>
-  <div style="height: 500px;">
-    <p>
-      Block
-      </p>
-  </div>
   <div id="load_chart_if_seen">
     <div id="diagram">
     </div>
@@ -67,88 +62,96 @@
   height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom
   fontSize = 18
 
-  $( "#diagram" ).height(height);
+  //$( "#diagram" ).height(height);
 
-	function drawTree(container, data){
+  createGrid('#diagram', data)
+  //drawTree('#diagram', data)
 
-  x = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.value)])
-      .range([margin.left, width - 70])
+  function createGrid(container, data){
+    x = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.value)])
+        .range([margin.left, width - 70])
 
-    format = x.tickFormat(10, data.format)
+      format = x.tickFormat(10, data.format)
 
-  y = d3.scaleBand()
-    .domain(d3.range(data.length))
-    .rangeRound([margin.top, height - margin.bottom])
-    .padding(0.1)
+    y = d3.scaleBand()
+      .domain(d3.range(data.length))
+      .rangeRound([margin.top, height - margin.bottom])
+      .padding(0.1)
 
-  xAxis = g => g
-      .attr("transform", `translate(0,${margin.top})`)
-      .call(d3.axisTop(x).ticks(width/(width/3)))
-      .call(g => g.select(".domain").remove())
-      .attr("font-size", fontSize);
+    xAxis = g => g
+        .attr("transform", `translate(0,${margin.top})`)
+        .call(d3.axisTop(x).ticks(width/(width/3)))
+        .call(g => g.select(".domain").remove())
+        .attr("font-size", fontSize);
 
-  yAxis = g => g
-      .attr("transform", `translate(${margin.left},0)`)
-      //.call(d3.axisLeft(y).tickFormat, "Snow")
-      //.call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
-      //.call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
-      //.call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
-      .call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
-      //.call(d3.axisLeft(y).tickFormat(function(d) {return 'yo';}))
-      //.call(wrap)
-      .attr("font-size", fontSize)
-      .attr("class", "label-on-y-axis");
-
-	const svg = d3.select(container).append('svg')
-	  .attr("viewBox", [-margin.left, -margin.top, width, height])
-    .attr("preserveAspectRatio", "xMinYMin meet")
-	  .style("font", "18px sans-serif")
-	  .style("user-select", "none");
-
-
-    svg.append("g")
-      .selectAll("rect")
-      .data(data)
-      .join("rect")
-        .attr("x", x(0))
-        .attr("y", (d, i) => y(i))
-      //  .attr("width", d => x(d.value) - x(0))
-        .attr("height", y.bandwidth())
-        .attr("fill", "purple");
-
-    svg.append("g")
-        .attr("fill", "white")
-        .attr("text-anchor", "end")
-        .attr("font-family", "sans-serif")
+    yAxis = g => g
+        .attr("transform", `translate(${margin.left},0)`)
+        //.call(d3.axisLeft(y).tickFormat, "Snow")
+        //.call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
+        //.call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
+        //.call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
+        .call(d3.axisLeft(y).tickFormat(i => data[i].name).tickSizeOuter(0))
+        //.call(d3.axisLeft(y).tickFormat(function(d) {return 'yo';}))
+        //.call(wrap)
         .attr("font-size", fontSize)
-      .selectAll("text")
-      .data(data)
-      .join("text")
-        .attr("x", d => x(d.value))
-        .attr("y", (d, i) => y(i) + y.bandwidth() / 2)
-        .attr("dy", "0.35em")
-        .attr("dx", -4)
-        .text(d => format(d.value))
-      .call(text => text.filter(d => x(d.value) - x(0) < 20) // short bars
-        .attr("dx", +4)
-        .attr("fill", "black")
-        .attr("text-anchor", "start"));
+        .attr("class", "label-on-y-axis");
 
-    svg.append("g")
-        .call(xAxis);
+    const svg = d3.select(container).append('svg')
+      .attr("viewBox", [-margin.left, -margin.top, width, height])
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .style("font", "18px sans-serif")
+      .style("user-select", "none");
 
-    svg.append("g")
-        .call(yAxis);
 
-    //svg.selectAll('text').each(insertLinebreaks);
+      svg.append("g")
+        .selectAll("rect")
+        .data(data)
+        .join("rect")
+          .attr("x", x(0))
+          .attr("y", (d, i) => y(i))
+        //  .attr("width", d => x(d.value) - x(0))
+          .attr("height", y.bandwidth())
+          .attr("fill", "purple");
 
-    //make labels wrap
-    svg.selectAll(".label-on-y-axis .tick text")
-      .call(wrap, 100);
+      svg.append("g")
+          .attr("fill", "white")
+          .attr("text-anchor", "end")
+          .attr("font-family", "sans-serif")
+          .attr("font-size", fontSize)
+        .selectAll("text")
+        .data(data)
+        .join("text")
+          .attr("x", d => x(d.value))
+          .attr("y", (d, i) => y(i) + y.bandwidth() / 2)
+          .attr("dy", "0.35em")
+          .attr("dx", -4)
+          .text(d => format(d.value))
+        .call(text => text.filter(d => x(d.value) - x(0) < 20) // short bars
+          .attr("dx", +4)
+          .attr("fill", "black")
+          .attr("text-anchor", "start"));
 
-    svg.selectAll(".label-on-y-axis tspan").attr("dx", -10);
+      svg.append("g")
+          .call(xAxis);
 
+      svg.append("g")
+          .call(yAxis);
+
+      //svg.selectAll('text').each(insertLinebreaks);
+
+      //make labels wrap
+      svg.selectAll(".label-on-y-axis .tick text")
+        .call(wrap, 100);
+
+      svg.selectAll(".label-on-y-axis tspan").attr("dx", -10);
+
+      return svg.node();
+  }
+
+	function animateBars(container, data){
+
+  var svg = d3.select(container).select("svg")
     // Animation
   svg.selectAll("rect")
     .transition()
@@ -200,10 +203,10 @@
       var rect = el.getBoundingClientRect();
 
       return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+        rect.bottom >= 0 &&
+        rect.right >= 0 && 
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.left <= (window.innerWidth || document.documentElement.clientWidth)
       );
   }
 
@@ -211,15 +214,15 @@
     // define the function here
     if((chart_seen == false) && isElementInViewport(document.getElementById("diagram"))){
       console.log("start animation");
-      $("#diagram").empty();
-      drawTree('#diagram', data)
+      //$("#diagram").empty();
+      animateBars('#diagram', data)
       chart_seen = true;
     }
   });
 
   $( window ).resize(function() {
-    $("#diagram").empty();
-    drawTree('#diagram', data)
+    //$("#diagram").empty();
+    animateBars('#diagram', data)
   });
 
 
