@@ -35,6 +35,7 @@
 
 <script>
   var chart_seen = false;
+
 	data = [
     {
       name: "bereits erhalten",
@@ -51,23 +52,24 @@
       value: "300",
       color: "steelblue"
     }
-  ]
+  ];
 
 
 	//drawTree('#diagram', data)
 
-  margin = ({top: 30, right: 0, bottom: 30, left: 50})
-  width = $( "#diagram" ).width();//500
-  barHeight = 100
-  height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom
-  fontSize = 18
-
   //$( "#diagram" ).height(height);
 
-  createGrid('#diagram', data)
+  createGrid('#diagram', data);
   //drawTree('#diagram', data)
 
   function createGrid(container, data){
+
+    margin = ({top: 30, right: 0, bottom: 30, left: 50})
+    width = $( "#diagram" ).width();//500
+    barHeight = 100;
+    height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom
+    fontSize = 18;
+    
     x = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.value)])
         .range([margin.left, width - 70])
@@ -151,6 +153,12 @@
 
 	function animateBars(container, data){
 
+    margin = ({top: 30, right: 0, bottom: 30, left: 50})
+    width = $( "#diagram" ).width();//500
+    barHeight = 100
+    height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom
+    fontSize = 18
+
   var svg = d3.select(container).select("svg")
     // Animation
   svg.selectAll("rect")
@@ -204,8 +212,8 @@
 
       return (
         rect.bottom >= 0 &&
-        rect.right >= 0 && 
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right >= 0 &&
+        rect.top + 200 <= (window.innerHeight || document.documentElement.clientHeight) &&
         rect.left <= (window.innerWidth || document.documentElement.clientWidth)
       );
   }
@@ -221,8 +229,9 @@
   });
 
   $( window ).resize(function() {
-    //$("#diagram").empty();
-    animateBars('#diagram', data)
+    $("#diagram").empty();
+    createGrid('#diagram', data);
+    animateBars('#diagram', data);
   });
 
 
