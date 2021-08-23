@@ -36,6 +36,8 @@
 <script>
   var chart_seen = false;
 
+  var cachedWidth = $(window).width();
+
 	data = [
     {
       name: "bereits erhalten",
@@ -69,7 +71,7 @@
     barHeight = 100;
     height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom
     fontSize = 18;
-    
+
     x = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.value)])
         .range([margin.left, width - 70])
@@ -152,6 +154,7 @@
   }
 
 	function animateBars(container, data){
+    console.log("start animation");
 
     margin = ({top: 30, right: 0, bottom: 30, left: 50})
     width = $( "#diagram" ).width();//500
@@ -221,7 +224,6 @@
   $(window).on("load scroll",function(e){
     // define the function here
     if((chart_seen == false) && isElementInViewport(document.getElementById("diagram"))){
-      console.log("start animation");
       //$("#diagram").empty();
       animateBars('#diagram', data)
       chart_seen = true;
@@ -229,9 +231,16 @@
   });
 
   $( window ).resize(function() {
-    $("#diagram").empty();
-    createGrid('#diagram', data);
-    animateBars('#diagram', data);
+
+    var newWidth = $(window).width();
+    if(newWidth !== cachedWidth){
+      console.log("resize!");
+      $("#diagram").empty();
+      createGrid('#diagram', data);
+      animateBars('#diagram', data);
+      cachedWidth = newWidth;
+    }
+
   });
 
 
