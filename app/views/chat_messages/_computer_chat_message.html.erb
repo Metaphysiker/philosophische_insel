@@ -47,7 +47,7 @@
                  });
               }, index * 300);
            });
-         }, <%= raw @chat_message.get_next_time %>);
+         }, <%= raw @chat_message.loading_time.to_i + @chat_message.get_next_time.to_i %>);
 
 
       } else if ("<%= (@chat_message.children.first.try(:chatter)).to_s %>" == "computer") {
@@ -60,7 +60,7 @@
                'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
              }
            });
-        }, <%= raw @chat_message.get_next_time %>);
+        }, <%= raw @chat_message.loading_time.to_i + @chat_message.get_next_time.to_i %>);
        }
 
      }
