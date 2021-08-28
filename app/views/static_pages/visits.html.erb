@@ -11,6 +11,9 @@
   <br>
   <%= bar_chart Ahoy::Visit.group(:region).count %>
   <br>
-  <%= line_chart Ahoy::Visit.group_by_month(:started_at).count %>
+  <%= line_chart Ahoy::Visit.where.not(user_id: 1).group_by_day(:time).count %>
+  <br />
+  <h2>Startseite</h2>
+  <%= bar_chart Ahoy::Event.where_props(action: "welcome").group_by_day(:created_at).count %>
 
 </div>
