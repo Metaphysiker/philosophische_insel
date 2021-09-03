@@ -36,7 +36,17 @@
 
 </div>
 
-<script>
+<script type="text/javascript">
+
+  var chart_seen = false;
+  var cachedWidth = $(window).width();
+  var amount_needed_total = 300;
+  var amount_already_received = 100;
+
+  $( document ).ready(function() {
+    var data = create_data_for_chart(amount_needed_total, amount_already_received);
+    createGrid('#diagram', data);
+  });
 
   window.rnw.tamaro.runWidget('.rnw-widget-container', {
     debug: false,
@@ -59,23 +69,16 @@
   });
 
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
-   console.log("amount", event.data.api.transactionInfo.amount);
    var amount_just_paid = event.data.api.transactionInfo.amount;
-
    var new_data = create_data_for_chart(amount_needed_total, amount_already_received + amount_just_paid);
    $("#diagram").empty();
    createGrid('#diagram', new_data);
    animateBars('#diagram', new_data);
-});
+  });
 
-  var chart_seen = false;
-
-  var cachedWidth = $(window).width();
-
-  var amount_needed_total = 300;
-  var amount_already_received = 100;
 
   function create_data_for_chart(amount_needed_total, amount_already_received){
+    amount_already_received = amount_already_received;
     return [
       {
         name: "bereits erhalten",
@@ -95,14 +98,15 @@
     ]
   };
 
-	var data = create_data_for_chart(amount_needed_total, amount_already_received);
+	//var data = create_data_for_chart(amount_needed_total, amount_already_received);
+  //createGrid('#diagram', data);
   //console.log(data);
 
 	//drawTree('#diagram', data)
 
   //$( "#diagram" ).height(height);
 
-  createGrid('#diagram', data);
+
   //drawTree('#diagram', data)
 
   function createGrid(container, data){
