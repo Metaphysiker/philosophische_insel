@@ -39,10 +39,14 @@
 <script>
 
   window.rnw.tamaro.runWidget('.rnw-widget-container', {
+    debug: true,
     language: 'de',
-    success_url: "https://www.philosophische-insel.ch/stinah/success",
+    showStoredCustomerSalutation: false,
+    showStoredCustomerStreetNumber: false,
+    showStoredCustomerStreet2: false,
+    countries: ["Schweiz", "Deutschland", "Österreich"],
     paymentFormPrefill: {
-      purpose: "Futter für Ellin"
+      stored_customer_country: "Schweiz"
     },
     purpose: "Futter für Ellin",
     paymentTypes: ["onetime"],
