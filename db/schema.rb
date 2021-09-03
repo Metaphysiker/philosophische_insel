@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_081748) do
+ActiveRecord::Schema.define(version: 2021_09_03_204856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,13 @@ ActiveRecord::Schema.define(version: 2021_08_10_081748) do
     t.integer "get_next_time", default: 1000
     t.string "starting_point", default: ""
     t.index ["ancestry"], name: "index_chat_messages_on_ancestry"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.decimal "amount"
+    t.string "project"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

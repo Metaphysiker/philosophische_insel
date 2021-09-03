@@ -42,6 +42,7 @@
   var cachedWidth = $(window).width();
   var amount_needed_total = 300;
   var amount_already_received = 100;
+  const project = "Futter für Ellin";
 
   $( document ).ready(function() {
     var data = create_data_for_chart(amount_needed_total, amount_already_received);
@@ -69,7 +70,18 @@
   });
 
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
-   var amount_just_paid = event.data.api.transactionInfo.amount;
+     var amount_just_paid = event.data.api.transactionInfo.amount;
+
+    $.ajax({
+      url: "<%= donations_path %>",
+      method: 'post',
+      data: { donation: { amount: amount_just_paid, project: project } },
+      headers: {
+        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+      }
+    });
+
+
    var new_data = create_data_for_chart(amount_needed_total, amount_already_received + amount_just_paid);
    $("#diagram").empty();
    createGrid('#diagram', new_data);

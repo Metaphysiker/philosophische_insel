@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :donations
   get 'chat', to: 'chat#chat', as: "chat"
   root 'static_pages#welcome'
   get 'static_pages/welcome'
