@@ -38,16 +38,17 @@
 
 <script type="text/javascript">
 
-  const donation_project_id = 1;
+  const donation_project = <%= raw DonationProject.find(1).into_json %>;
+
   var chart_seen = false;
   var cachedWidth = $(window).width();
-  var amount_needed_total = 300;
-  var amount_already_received = 100;
+  var amount_needed_total = donation_project.amount_needed_total;
+  var amount_already_received = donation_project.amount_already_received;
+  var data = create_data_for_chart(amount_needed_total, amount_already_received);
 
-  $( document ).ready(function() {
-    var data = create_data_for_chart(amount_needed_total, amount_already_received);
+
     createGrid('#diagram', data);
-  });
+
 
   window.rnw.tamaro.runWidget('.rnw-widget-container', {
     debug: false,
@@ -80,7 +81,7 @@
         {
           amount: amount_just_paid,
           transaction_id: transaction_id,
-          donation_project_id: donation_project_id
+          donation_project_id: donation_project.id
         }
       },
       headers: {

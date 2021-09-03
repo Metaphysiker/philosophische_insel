@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_222224) do
+ActiveRecord::Schema.define(version: 2021_09_03_225459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,14 +101,12 @@ ActiveRecord::Schema.define(version: 2021_09_03_222224) do
     t.string "title"
     t.text "description"
     t.decimal "amount_needed_total"
-    t.decimal "amount_already_received"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "donations", force: :cascade do |t|
     t.decimal "amount"
-    t.string "project"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "transaction_id", default: ""
