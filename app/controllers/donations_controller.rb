@@ -34,6 +34,20 @@ class DonationsController < ApplicationController
     end
   end
 
+  def create_with_ajax
+    @donation = Donation.new(donation_params)
+
+    respond_to do |format|
+      if @donation.save
+        format.html { redirect_to @donation, notice: "Donation was successfully created." }
+        format.json { render :show, status: :created, location: @donation }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @donation.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /donations/1 or /donations/1.json
   def update
     respond_to do |format|
@@ -64,6 +78,6 @@ class DonationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def donation_params
-      params.require(:donation).permit(:amount, :project, :transaction_id)
+      params.require(:donation).permit(:amount, :project, :transaction_id, :donation_project_id)
     end
 end

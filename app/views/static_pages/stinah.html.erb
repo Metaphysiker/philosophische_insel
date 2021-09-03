@@ -38,11 +38,11 @@
 
 <script type="text/javascript">
 
+  const donation_project_id = 1;
   var chart_seen = false;
   var cachedWidth = $(window).width();
   var amount_needed_total = 300;
   var amount_already_received = 100;
-  const project = "Futter für Ellin";
 
   $( document ).ready(function() {
     var data = create_data_for_chart(amount_needed_total, amount_already_received);
@@ -76,7 +76,13 @@
     $.ajax({
       url: "<%= donations_path %>",
       method: 'post',
-      data: { donation: { amount: amount_just_paid, project: project, transaction_id: transaction_id} },
+      data: { donation:
+        {
+          amount: amount_just_paid,
+          transaction_id: transaction_id,
+          donation_project_id: donation_project_id
+        }
+      },
       headers: {
         'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
       }

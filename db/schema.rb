@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_220019) do
+ActiveRecord::Schema.define(version: 2021_09_03_222224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,12 +97,23 @@ ActiveRecord::Schema.define(version: 2021_09_03_220019) do
     t.index ["ancestry"], name: "index_chat_messages_on_ancestry"
   end
 
+  create_table "donation_projects", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.decimal "amount_needed_total"
+    t.decimal "amount_already_received"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "donations", force: :cascade do |t|
     t.decimal "amount"
     t.string "project"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "transaction_id", default: ""
+    t.bigint "donation_project_id"
+    t.index ["donation_project_id"], name: "index_donations_on_donation_project_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -167,4 +178,5 @@ ActiveRecord::Schema.define(version: 2021_09_03_220019) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "donations", "donation_projects"
 end
