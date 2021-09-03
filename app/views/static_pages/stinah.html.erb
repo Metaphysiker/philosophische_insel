@@ -71,11 +71,12 @@
 
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
      var amount_just_paid = event.data.api.transactionInfo.amount;
+     var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
 
     $.ajax({
       url: "<%= donations_path %>",
       method: 'post',
-      data: { donation: { amount: amount_just_paid, project: project } },
+      data: { donation: { amount: amount_just_paid, project: project, transaction_id: transaction_id} },
       headers: {
         'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
       }
