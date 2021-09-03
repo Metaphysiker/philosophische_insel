@@ -24,38 +24,75 @@
   </div>
 </div>
 
-<div class="container text-center pt-3">
+<div class="container text-center py-3">
   <h2>Gegenwärtiger Stand</h2>
   <div id="load_chart_if_seen">
     <div id="diagram">
     </div>
+
+    <div class="rnw-widget-container"></div>
+    <script src="https://tamaro.raisenow.com/stift-16e8/latest/widget.js"></script>
   </div>
 
 </div>
 
 <script>
+
+  window.rnw.tamaro.runWidget('.rnw-widget-container', {
+    language: 'de',
+    success_url: "https://www.philosophische-insel.ch/stinah/success",
+    paymentFormPrefill: {
+      purpose: "Futter für Ellin"
+    },
+    purpose: "Futter für Ellin",
+    paymentTypes: ["onetime"],
+    amounts: [
+      {
+        "if": "paymentType() == onetime",
+        "then": [10,20,50],
+      }
+    ]
+  });
+
+  window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
+   console.log("amount", event.data.api.transactionInfo.amount);
+   var amount_just_paid = event.data.api.transactionInfo.amount;
+
+   var new_data = create_data_for_chart(amount_needed_total, amount_already_received + amount_just_paid);
+   $("#diagram").empty();
+   createGrid('#diagram', new_data);
+   animateBars('#diagram', new_data);
+});
+
   var chart_seen = false;
 
   var cachedWidth = $(window).width();
 
-	data = [
-    {
-      name: "bereits erhalten",
-      value: "200",
-      color: "#90EE90"
-    },
-    {
-      name: "noch benötigt",
-      value: "100",
-      color: "#FF4500"
-    },
-    {
-      name: "total",
-      value: "300",
-      color: "steelblue"
-    }
-  ];
+  var amount_needed_total = 300;
+  var amount_already_received = 100;
 
+  function create_data_for_chart(amount_needed_total, amount_already_received){
+    return [
+      {
+        name: "bereits erhalten",
+        value: amount_already_received,
+        color: "#90EE90"
+      },
+      {
+        name: "noch benötigt",
+        value: amount_needed_total - amount_already_received,
+        color: "#FF4500"
+      },
+      {
+        name: "total",
+        value: amount_needed_total,
+        color: "steelblue"
+      }
+    ]
+  };
+
+	var data = create_data_for_chart(amount_needed_total, amount_already_received);
+  //console.log(data);
 
 	//drawTree('#diagram', data)
 
@@ -154,7 +191,6 @@
   }
 
 	function animateBars(container, data){
-    console.log("start animation");
 
     margin = ({top: 30, right: 0, bottom: 30, left: 50})
     width = $( "#diagram" ).width();//500
@@ -167,6 +203,7 @@
   svg.selectAll("rect")
     .transition()
     .duration(3000)
+    .style("opacity", 1.0)
     //.attr("y", function(d) { return y(d.value); })
     //.attr("width", function(d) { return height - y(d.value); })
   //  .attr("x", x(0))
