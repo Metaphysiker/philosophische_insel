@@ -41,6 +41,7 @@
 
 <script type="text/javascript">
   $( document ).ready(function() {
+    console.log("ready!";)
 
   //variables and constraints
   const donation_project = <%= raw @donation_project.into_json %>;
@@ -72,6 +73,7 @@
   });
 
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
+
     console.log("custom event triggered");
      var amount_just_paid = event.data.api.transactionInfo.amount;
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
@@ -102,9 +104,6 @@
    animateBars('#diagram', data);
   });
 
-  $( document ).ready(function() {
-
-  });
 
 
 
@@ -115,7 +114,7 @@
 
 
   function create_data_for_chart(amount_needed_total, amount_already_received){
-    amount_already_received = amount_already_received;
+    //amount_already_received = amount_already_received;
     return [
       {
         name: "bereits erhalten",

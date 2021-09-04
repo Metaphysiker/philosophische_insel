@@ -58,29 +58,13 @@
   var amount_already_received = donation_project.amount_already_received;
   var data = create_data_for_chart(amount_needed_total, amount_already_received);
 
-  //raiseNow
-  window.rnw.tamaro.runWidget('.rnw-widget-container', {
-    debug: false,
-    language: 'de',
-    showStoredCustomerSalutation: false,
-    purpose: donation_project.title,
-    showStoredCustomerStreetNumber: false,
-    showStoredCustomerStreet2: false,
-    countries: ["Schweiz", "Deutschland", "Österreich"],
-    paymentFormPrefill: {
-      stored_customer_country: "Schweiz"
-    },
-    paymentTypes: ["onetime"],
-    amounts: [
-      {
-        "if": "paymentType() == onetime",
-        "then": [10,20,50],
-      }
-    ]
-  });
+
 
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
+    console.log("payment complete");
+
      var amount_just_paid = event.data.api.transactionInfo.amount;
+     console.log(amount_just_paid);
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
 
     $.ajax({
@@ -99,28 +83,66 @@
     });
 
 
-    amount_already_received = amount_already_received + amount_just_paid;
-
-   var new_data = create_data_for_chart(amount_needed_total, amount_already_received);
+   data = create_data_for_chart(amount_needed_total, amount_already_received + amount_just_paid);
    $("#diagram").empty();
-   createGrid('#diagram', new_data);
-   animateBars('#diagram', new_data);
-  });
-
-  $( document ).ready(function() {
-
+   createGrid('#diagram', data);
+   animateBars('#diagram', data);
   });
 
 
+    createGrid('#diagram', data);
+
+    //raiseNow
+    window.rnw.tamaro.runWidget('.rnw-widget-container', {
+      debug: false,
+      language: 'de',
+      showStoredCustomerSalutation: false,
+      purpose: donation_project.title,
+      showStoredCustomerStreetNumber: false,
+      showStoredCustomerStreet2: false,
+      countries: ["Schweiz", "Deutschland", "Österreich"],
+      paymentFormPrefill: {
+        stored_customer_country: "Schweiz"
+      },
+      paymentTypes: ["onetime"],
+      amounts: [
+        {
+          "if": "paymentType() == onetime",
+          "then": [10,20,50],
+        }
+      ]
+    });
 
 
-  createGrid('#diagram', data);
+    $(window).on("load scroll",function(e){
+      console.log("load and scroll animatebars");
+      // define the function here
+      if((chart_seen == false) && isElementInViewport(document.getElementById("diagram"))){
+        //$("#diagram").empty();
+        animateBars('#diagram', data)
+        chart_seen = true;
+      }
+    });
 
+    $( window ).resize(function() {
+
+      var newWidth = $(window).width();
+      if(newWidth !== cachedWidth){
+        console.log("resize!");
+        $("#diagram").empty();
+        createGrid('#diagram', data);
+        animateBars('#diagram', data);
+        cachedWidth = newWidth;
+      }
+
+    });
 
 
 
   function create_data_for_chart(amount_needed_total, amount_already_received){
-    amount_already_received = amount_already_received;
+
+    console.log(amount_already_received);
+
     var amount_still_needed = amount_needed_total - amount_already_received;
 
     if(amount_still_needed < 0){
@@ -313,28 +335,6 @@
         rect.left <= (window.innerWidth || document.documentElement.clientWidth)
       );
   }
-
-  $(window).on("load scroll",function(e){
-    // define the function here
-    if((chart_seen == false) && isElementInViewport(document.getElementById("diagram"))){
-      //$("#diagram").empty();
-      animateBars('#diagram', data)
-      chart_seen = true;
-    }
-  });
-
-  $( window ).resize(function() {
-
-    var newWidth = $(window).width();
-    if(newWidth !== cachedWidth){
-      console.log("resize!");
-      $("#diagram").empty();
-      createGrid('#diagram', data);
-      animateBars('#diagram', data);
-      cachedWidth = newWidth;
-    }
-
-  });
 
 
   });
