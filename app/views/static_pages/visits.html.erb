@@ -5,6 +5,9 @@
   <br>
     Total: <%= Ahoy::Visit.where.not(user_id: 1).count %>
   <hr>
+  City: <br>
+  <%= bar_chart Ahoy::Visit.where.not(user_id: 1).group(:city).count %>
+  <hr>
   Country: <br>
   <%= bar_chart Ahoy::Visit.where.not(user_id: 1).group(:country).count %>
   <hr>
