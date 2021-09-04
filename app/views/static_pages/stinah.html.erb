@@ -72,6 +72,7 @@
   });
 
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
+    console.log("custom event triggered");
      var amount_just_paid = event.data.api.transactionInfo.amount;
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
 
@@ -93,10 +94,12 @@
 
     amount_already_received = amount_already_received + amount_just_paid;
 
-   var new_data = create_data_for_chart(amount_needed_total, amount_already_received);
+    console.log("inside custom event: " + amount_already_received);
+
+   var data = create_data_for_chart(amount_needed_total, amount_already_received);
    $("#diagram").empty();
-   createGrid('#diagram', new_data);
-   animateBars('#diagram', new_data);
+   createGrid('#diagram', data);
+   animateBars('#diagram', data);
   });
 
   $( document ).ready(function() {
