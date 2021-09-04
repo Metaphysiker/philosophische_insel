@@ -1,12 +1,20 @@
 <div class="container-fluid text-center bg-b-color py-5">
   <h1><%= @donation_project.title %></h1>
+  <% if @donation_project.amount_needed_total <= @donation_project.amount_already_received %>
+    <h2>
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Ziel erreicht!</h4>
+        <p>Vielen Dank für Eure Spenden!</p>
+      </div>
+    </h2>
+  <% end %>
 </div>
 
 
 <div class="container text-center">
 
   <div class="row mt-3">
-    <div class="col-sm-12 col-md-6 my-auto p-3">
+    <div class="col-sm-12 col-md-6 my-auto p-2">
       <div class="rounded">
 
           <div class="border rounded p-2" style="font-size: large;">
@@ -16,7 +24,7 @@
       </div>
 
     </div>
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-6 p-2">
       <% if @donation_project.images.attached? %>
         <%= image_tag @donation_project.images.first, class: "img-fluid" %>
       <% end %>
@@ -113,15 +121,21 @@
 
   function create_data_for_chart(amount_needed_total, amount_already_received){
     amount_already_received = amount_already_received;
+    var amount_still_needed = amount_needed_total - amount_already_received;
+
+    if(amount_still_needed < 0){
+      amount_still_needed = 0;
+    }
+
     return [
       {
         name: "bereits erhalten",
         value: amount_already_received,
-        color: "#90EE90"
+        color: "#00A36C"
       },
       {
         name: "wird noch benötigt",
-        value: amount_needed_total - amount_already_received,
+        value: amount_still_needed,
         color: "#FF4500"
       },
       {
