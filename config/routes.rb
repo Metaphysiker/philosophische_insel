@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'static_pages/welcome'
 
   get 'sandro-raess', to: 'static_pages#about', as: "about"
-  get 'stinah', to: 'static_pages#stinah', as: "stinah"
+  get 'stinah/:donation_project_slug', to: 'static_pages#stinah', as: "stinah"
   get 'visits', to: 'static_pages#visits', as: "visits"
   get 'sandro-raess/essays', to: 'static_pages#essays', as: "sandro_raess_essays"
   get 'sandro-raess/projects', to: 'static_pages#projects', as: "sandro_raess_projects"

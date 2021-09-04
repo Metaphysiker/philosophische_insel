@@ -15,6 +15,10 @@ class StaticPagesController < ApplicationController
   end
 
   def stinah
-
+    if params[:donation_project_slug].present?
+      @donation_project = DonationProject.friendly.find(params[:donation_project_slug])
+    else
+      @donation_project = DonationProject.friendly.find(1)
+    end
   end
 end
