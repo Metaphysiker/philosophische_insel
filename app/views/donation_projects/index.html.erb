@@ -18,7 +18,7 @@
         <td><%= donation_project.title %></td>
         <td><%= donation_project.description %></td>
         <td><%= donation_project.amount_needed_total %></td>
-        <td><%= link_to 'Show', donation_project %></td>
+        <td><%= link_to 'Show', stinah_path(donation_project) %></td>
         <td><%= link_to 'Edit', edit_donation_project_path(donation_project) %></td>
         <td><%= link_to 'Destroy', donation_project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

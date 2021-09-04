@@ -2,6 +2,7 @@ class DonationProject < ApplicationRecord
   has_many :donations
   extend FriendlyId
   friendly_id :title, use: :slugged
+  has_many_attached :images
 
   def amount_already_received
     amount = 0.0

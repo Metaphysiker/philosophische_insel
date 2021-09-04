@@ -36,7 +36,9 @@ class DonationProjectsController < ApplicationController
 
   # PATCH/PUT /donation_projects/1 or /donation_projects/1.json
   def update
+
     respond_to do |format|
+
       if @donation_project.update(donation_project_params)
         format.html { redirect_to @donation_project, notice: "Donation project was successfully updated." }
         format.json { render :show, status: :ok, location: @donation_project }
@@ -59,11 +61,11 @@ class DonationProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_donation_project
-      @donation_project = DonationProject.find(params[:id])
+      @donation_project = DonationProject.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def donation_project_params
-      params.require(:donation_project).permit(:title, :description, :amount_needed_total, :amount_already_received)
+      params.require(:donation_project).permit(:title, :description, :amount_needed_total, :amount_already_received, images: [])
     end
 end

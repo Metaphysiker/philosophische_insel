@@ -8,34 +8,39 @@
   <div class="row mt-3">
     <div class="col-sm-12 col-md-6 my-auto p-3">
       <div class="rounded">
-        <p>
-          <%= simple_format(@donation_project.description) %>
-        </p>
+
+          <div class="border rounded p-2" style="font-size: large;">
+            <%= raw sanitizing(@donation_project.description) %>
+          </div>
+
       </div>
 
     </div>
     <div class="col-sm-12 col-md-6">
-        <%= image_tag "horse-eating.jpg", class: "img-fluid rounded" %>
+      <% if @donation_project.images.attached? %>
+        <%= image_tag @donation_project.images.first, class: "img-fluid" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center mt-3 py-3">
+  <h2><u>Gegenwärtiger Stand</u></h2>
+  <div id="load_chart_if_seen">
+    <div id="diagram">
     </div>
   </div>
 </div>
 
 <div class="container text-center py-3">
-  <h2><u>Gegenwärtiger Stand</u></h2>
-  <div id="load_chart_if_seen">
-    <div id="diagram">
-    </div>
-
-    <div class="rnw-widget-container"></div>
-    <script src="https://tamaro.raisenow.com/stift-16e8/latest/widget.js"></script>
-  </div>
-
+  <div class="rnw-widget-container"></div>
+  <script src="https://tamaro.raisenow.com/stift-16e8/latest/widget.js"></script>
 </div>
+
+
 
 <script type="text/javascript">
   $( document ).ready(function() {
-    console.log( "ready!" );
-
 
   //variables and constraints
   const donation_project = <%= raw @donation_project.into_json %>;
@@ -47,7 +52,7 @@
 
   //raiseNow
   window.rnw.tamaro.runWidget('.rnw-widget-container', {
-    debug: true,
+    debug: false,
     language: 'de',
     showStoredCustomerSalutation: false,
     purpose: donation_project.title,
