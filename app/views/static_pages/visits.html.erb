@@ -3,17 +3,19 @@
     Visits
   </h1>
   <br>
-    Total: <%= Ahoy::Visit.all.count %>
+    Total: <%= Ahoy::Visit.where.not(user_id: 1).count %>
+  <hr>
+  Country: <br>
+  <%= bar_chart Ahoy::Visit.where.not(user_id: 1).group(:country).count %>
+  <hr>
+  Region:
   <br>
-  <%= geo_chart Ahoy::Visit.group(:country).count %>
+  <%= bar_chart Ahoy::Visit.where.not(user_id: 1).group(:region).count %>
   <br>
-  <%= bar_chart Ahoy::Visit.group(:country).count %>
-  <br>
-  <%= bar_chart Ahoy::Visit.group(:region).count %>
-  <br>
-  <%= line_chart Ahoy::Visit.where.not(user_id: 1).group_by_day(:time).count %>
-  <br />
+  <h2>General</h2>
+  <%= bar_chart Ahoy::Event.where.not(user_id: 1).group_by_week(:time).count %>
+  <hr>
   <h2>Startseite</h2>
-  <%= bar_chart Ahoy::Event.where_props(action: "welcome").group_by_day(:created_at).count %>
+  <%= bar_chart Ahoy::Event.where.not(user_id: 1).where_props(action: "welcome").group_by_week(:time).count %>
 
 </div>
