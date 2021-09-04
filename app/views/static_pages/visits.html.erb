@@ -1,24 +1,27 @@
+<% visit_query = Ahoy::Visit.where.not(user_id: 1).or(Ahoy::Visit.where(user_id: nil)) %>
+<% event_query = Ahoy::Event.where.not(user_id: 1).or(Ahoy::Event.where(user_id: nil)) %>
+
 <div class="container">
   <h1>
     Visits
   </h1>
   <br>
-    Total: <%= Ahoy::Visit.where.not(user_id: 1).count %>
+    Total: <%= visit_query.count %>
   <hr>
   City: <br>
-  <%= bar_chart Ahoy::Visit.where.not(user_id: 1).group(:city).count %>
+  <%= bar_chart visit_query.group(:city).count %>
   <hr>
   Country: <br>
-  <%= bar_chart Ahoy::Visit.where.not(user_id: 1).group(:country).count %>
+  <%= bar_chart visit_query.group(:country).count %>
   <hr>
   Region:
   <br>
-  <%= bar_chart Ahoy::Visit.where.not(user_id: 1).group(:region).count %>
+  <%= bar_chart visit_query.group(:region).count %>
   <br>
   <h2>General</h2>
-  <%= bar_chart Ahoy::Event.where.not(user_id: 1).group_by_week(:time).count %>
+  <%= bar_chart event_query.group_by_week(:time).count %>
   <hr>
   <h2>Startseite</h2>
-  <%= bar_chart Ahoy::Event.where.not(user_id: 1).where_props(action: "welcome").group_by_week(:time).count %>
+  <%= bar_chart event_query.where_props(action: "welcome").group_by_week(:time).count %>
 
 </div>
