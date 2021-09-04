@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
+gem "image_processing", ">= 1.2"
+
 gem 'odf-report'
 gem 'ahoy_matey'
 gem "chartkick"
