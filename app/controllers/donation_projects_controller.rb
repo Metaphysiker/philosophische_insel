@@ -1,6 +1,6 @@
 class DonationProjectsController < ApplicationController
-  before_action :set_donation_project, only: %i[ show edit update destroy ]
-  after_action :verify_authorized, except: %i[show index]
+  before_action :set_donation_project, only: %i[ show edit update destroy bar_chart_data]
+  after_action :verify_authorized, except: %i[show index bar_chart_data]
 
   # GET /donation_projects or /donation_projects.json
   def index
@@ -10,6 +10,10 @@ class DonationProjectsController < ApplicationController
   # GET /donation_projects/1 or /donation_projects/1.json
   def show
 
+  end
+
+  def bar_chart_data
+    render json: @donation_project.bar_chart_data
   end
 
   # GET /donation_projects/new

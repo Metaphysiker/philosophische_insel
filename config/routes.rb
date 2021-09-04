@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :donation_projects
+  resources :donation_projects do
+    member do
+      get 'bar_chart_data'
+    end
+  end
   resources :donations
   get 'chat', to: 'chat#chat', as: "chat"
   root 'static_pages#welcome'

@@ -1,6 +1,6 @@
 <div class="container-fluid text-center bg-b-color py-5">
   <h1><%= @donation_project.title %></h1>
-  <% if @donation_project.goal_achieved? %>
+  <% if @donation_project.amount_needed_total <= @donation_project.amount_already_received %>
     <h2>
       <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Ziel erreicht!</h4>
@@ -54,13 +54,45 @@
   const donation_project = <%= raw @donation_project.into_json %>;
   var chart_seen = false;
   var cachedWidth = $(window).width();
-  var amount_needed_total = parseFloat(donation_project.amount_needed_total);
-  var amount_already_received = parseFloat(donation_project.amount_already_received);
+  var amount_needed_total = donation_project.amount_needed_total;
+  var amount_already_received = donation_project.amount_already_received;
   var data = create_data_for_chart(amount_needed_total, amount_already_received);
 
-  drawBarChart();
 
-    //raiseNow runWidghet
+
+  window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
+    console.log("payment complete");
+
+     var amount_just_paid = event.data.api.transactionInfo.amount;
+     console.log(amount_just_paid);
+     var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
+
+    $.ajax({
+      url: "<%= donations_path %>",
+      method: 'post',
+      data: { donation:
+        {
+          amount: amount_just_paid,
+          transaction_id: transaction_id,
+          donation_project_id: donation_project.id
+        }
+      },
+      headers: {
+        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+      }
+    });
+
+
+   data = create_data_for_chart(amount_needed_total, amount_already_received + amount_just_paid);
+   $("#diagram").empty();
+   createGrid('#diagram', data);
+   animateBars('#diagram', data);
+  });
+
+
+    createGrid('#diagram', data);
+
+    //raiseNow
     window.rnw.tamaro.runWidget('.rnw-widget-container', {
       debug: false,
       language: 'de',
@@ -81,73 +113,46 @@
       ]
     });
 
-    //raiseNow payment complete
-    window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
-      console.log("payment complete");
 
-       var amount_just_paid = event.data.api.transactionInfo.amount;
-       console.log(amount_just_paid);
-       var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
-
-      $.ajax({
-        url: "<%= donations_path %>",
-        method: 'post',
-        data: { donation:
-          {
-            amount: amount_just_paid,
-            transaction_id: transaction_id,
-            donation_project_id: donation_project.id
-          }
-        },
-        headers: {
-          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-        }
-      }).always(function( ) {
-        console.log("after creating donation")
-        drawBarChart();
-      });
-
+    $(window).on("load scroll",function(e){
+      console.log("load and scroll animatebars");
+      // define the function here
+      if((chart_seen == false) && isElementInViewport(document.getElementById("diagram"))){
+        //$("#diagram").empty();
+        animateBars('#diagram', data)
+        chart_seen = true;
+      }
     });
-
 
     $( window ).resize(function() {
+
       var newWidth = $(window).width();
       if(newWidth !== cachedWidth){
-        //console.log("resize!");
-        drawBarChart();
+        console.log("resize!");
+        $("#diagram").empty();
+        createGrid('#diagram', data);
+        animateBars('#diagram', data);
         cachedWidth = newWidth;
       }
+
     });
 
 
-
-  function drawBarChart(){
-    $.ajax({
-      url: "<%= bar_chart_data_donation_project_path %>",
-      method: 'GET',
-      headers: {
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-      }
-    }).always(function( data ) {
-      $("#diagram").empty();
-      createGrid('#diagram', data);
-      setTimeout(function(){
-          animateBars('#diagram', data)
-      }, 500);
-    });
-  }
 
   function create_data_for_chart(amount_needed_total, amount_already_received){
 
-    var amount_still_needed = parseFloat(amount_needed_total) - parseFloat(amount_already_received);
+    console.log(amount_already_received);
+
+    var amount_still_needed = amount_needed_total - amount_already_received;
+
     if(amount_still_needed < 0){
-      amount_still_needed = parseFloat(0);
+      amount_still_needed = 0;
     }
 
     return [
       {
         name: "bereits erhalten",
-        value: parseFloat(amount_already_received),
+        value: amount_already_received,
         color: "#00A36C"
       },
       {
@@ -157,11 +162,22 @@
       },
       {
         name: "total",
-        value: parseFloat(amount_needed_total),
+        value: amount_needed_total,
         color: "steelblue"
       }
     ]
   };
+
+	//var data = create_data_for_chart(amount_needed_total, amount_already_received);
+  //createGrid('#diagram', data);
+  //console.log(data);
+
+	//drawTree('#diagram', data)
+
+  //$( "#diagram" ).height(height);
+
+
+  //drawTree('#diagram', data)
 
   function createGrid(container, data){
 

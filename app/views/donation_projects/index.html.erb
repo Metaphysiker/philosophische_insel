@@ -1,31 +1,44 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Donation Projects</h1>
+<h1>Spenden-Projekte</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Amount needed total</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-3">
+  <% @donation_projects.each do |donation_project| %>
+  <div class="col">
+    <div class="card mb-3 h-100">
+      <% if donation_project.images.attached? %>
+        <%= image_tag donation_project.images.first, class: "card-img-top" %>
+      <% end %>
+      <div class="card-body">
+        <% if donation_project.goal_achieved? %>
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Ziel erreicht!</h4>
+              <p>Vielen Dank für Eure Spenden!</p>
+            </div>
+            <hr>
+        <% end %>
 
-  <tbody>
-    <% @donation_projects.each do |donation_project| %>
-      <tr>
-        <td><%= donation_project.title %></td>
-        <td><%= donation_project.description %></td>
-        <td><%= donation_project.amount_needed_total %></td>
-        <td><%= link_to 'Show', stinah_path(donation_project) %></td>
-        <td><%= link_to 'Edit', edit_donation_project_path(donation_project) %></td>
-        <td><%= link_to 'Destroy', donation_project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <h4 class="card-title"><%= donation_project.title %></h4>
+        <%= strip_tags(donation_project.description) %>
 
-<br>
+      </div>
 
-<%= link_to 'New Donation Project', new_donation_project_path %>
+      <div class="card-footer text-center bg-white border-top-0 mb-3">
+        <hr>
+          <strong>Spendenziel: </strong><%= donation_project.amount_needed_total.to_i %> CHF<br>
+          <strong>Bereits erhalten: </strong><%= donation_project.amount_already_received.to_i %> CHF<br>
+          <br>
+        <%= link_to "Jetzt spenden!", stinah_path(donation_project), class: "btn btn-primary" %>
+
+      </div>
+
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+<hr>
+  <%= link_to 'New Donation Project', new_donation_project_path %>
+<% end %>
+</div>
