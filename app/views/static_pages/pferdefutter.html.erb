@@ -31,115 +31,18 @@
   const data =  {
     "nodes": [
       {
-        "phase_id": 1,
-        "x": 2,
+        "node_id": 1,
+        "x": 0,
         "y": 0,
       },
       {
-        "phase_id": 2,
-        "x": 2,
+        "node_id": 2,
+        "x": 0,
         "y": 1,
-      },
-      {
-        "phase_id": 3,
-        "x": 1,
-        "y": 2,
-      },
-      {
-        "phase_id": 4,
-        "x": 2,
-        "y": 2,
-      },
-      {
-        "phase_id": 5,
-        "x": 3,
-        "y": 2,
-      },
-      {
-        "phase_id": 6,
-        "x": 1,
-        "y": 3,
-      },
-      {
-        "phase_id": 7,
-        "x": 1,
-        "y": 4,
-      },
-      {
-        "phase_id": 8,
-        "x": 0,
-        "y": 4,
-      },
-      {
-        "phase_id": 9,
-        "x": 0,
-        "y": 3,
-      },
-      {
-        "phase_id": 10,
-        "x": 2,
-        "y": 5,
-      },
-      {
-        "phase_id": 11,
-        "x": 3,
-        "y": 5,
-      },
-      {
-        "phase_id": 12,
-        "x": 1,
-        "y": 5,
-      },
-      {
-        "phase_id": 13,
-        "x": 1,
-        "y": 6,
-      },
-      {
-        "phase_id": 14,
-        "x": 3,
-        "y": 6,
-      },
-      {
-        "phase_id": 15,
-        "x": 1,
-        "y": 7,
-      },
-      {
-        "phase_id": 16,
-        "x": 3,
-        "y": 7,
-      },
-      {
-        "phase_id": 17,
-        "x": 1,
-        "y": 8,
-      },
-      {
-        "phase_id": 18,
-        "x": 1,
-        "y": 9,
-      },
+      }
     ],
     "links": [
-      {"source": 1, "target": 2},
-      {"source": 2, "target": 3},
-      {"source": 2, "target": 4},
-      {"source": 4, "target": 5},
-      {"source": 3, "target": 6},
-      {"source": 6, "target": 7},
-      {"source": 7, "target": 8},
-      {"source": 8, "target": 9},
-      {"source": 9, "target": 6},
-      {"source": 7, "target": 10},
-      {"source": 10, "target": 11},
-      {"source": 7, "target": 12},
-      {"source": 12, "target": 13},
-      {"source": 13, "target": 14},
-      {"source": 13, "target": 15},
-      {"source": 15, "target": 16},
-      {"source": 15, "target": 17},
-      {"source": 17, "target": 18}
+      {"source": 1, "target": 2}
     ]
   }
 
@@ -163,9 +66,9 @@
 
     const gNode = svg.append("g")
       .attr("font-family", "sans-serif")
-      .attr("transform", `translate(0,${margin.top})`);
+      .attr("transform", `translate(${width/2},${margin.top})`);
 
-      // Initialize the nodes
+      // nodes with circles
       const node = gNode.selectAll("g")
          .data(data.nodes);
          //.enter();
@@ -173,13 +76,93 @@
       .attr("transform", d => `translate(${d.x * x_distance_between_nodes},${d.y * y_distance_between_nodes})`)
       .attr("x",  d => `${d.x * x_distance_between_nodes}`)
       .attr("y",  d => `${d.y * y_distance_between_nodes}`)
+      .attr("node_id", d => d.node_id)
       .append("circle")
       .style("stroke", "gray")
-      .style("fill", "black")
+      .style("fill", "gray")
       .attr("r", 10);
+
+      //links
+      const link = gNode.append("g")
+      .attr("fill", "none")
+      .attr("stroke", "black")
+      .attr("stroke-opacity", 0.0)
+      .attr("stroke-width", 2)
+      .selectAll("path")
+        .data(data.links)
+        .join("path")
+          .attr("d", d => arrowTo({x: d3.select(`[node_id='${d.source}']`).attr("x")/1, y: d3.select(`[node_id='${d.source}']`).attr("y")/1}, {x: d3.select(`[node_id='${d.target}']`).attr("x")/1, y: d3.select(`[node_id='${d.target}']`).attr("y")/1}, 0))
+          .transition()
+          .duration(3000)
+          .style("stroke-opacity", 1.0)
+          .delay(function(d,i){return(i*200)});
 
 
       return svg.node();
 	}
+
+  function arrowTo(source, target, box_size) {
+
+     var y0 = source.y;
+     var x0 = source.x;
+     var x1 = target.x;
+     var y1 = target.y;
+
+     var padding1 = 10;
+     var padding2 = 20;
+
+     var arrow = generateArrow(x0, y0, x1, y1, 10, padding1, padding2);
+
+     return arrow.toString();
+    }
+
+    function generateArrow(x1, y1, x2, y2, flangeSize, padding1, padding2) {
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const length = Math.sqrt(dx * dx + dy * dy);
+      //Hypotenuse
+
+      let multiplier1 = padding1 / length;
+      const dx1 = dx * multiplier1;
+      const dy1 = dy * multiplier1;
+
+
+      let multiplier2 = padding2 / length;
+      const dx2 = dx * multiplier2;
+      const dy2 = dy * multiplier2;
+
+      var px = y1 - y2;
+      var py = x2 - x1;
+      let plength = Math.sqrt(px * px + py * py);
+      let pmultiplier = flangeSize / plength;
+
+      const px1 = px * pmultiplier;
+      const py1 = py * pmultiplier;
+
+      const sx = dx * pmultiplier;
+      const sy = dy * pmultiplier;
+
+      const a1 = x1 + dx1;
+      const b1 = y1 + dy1;
+      const a2 = x2 - dx2;
+      const b2 = y2 - dy2;
+
+      console.log(a1);
+      console.log(b1);
+      console.log(a2);
+      console.log(b2);
+
+      console.log("second m");
+      console.log(a2 + px1 - sx);
+      console.log(b2 + py1 - sy);
+
+      return `
+        M${a1}, ${b1}
+        L${a2}, ${b2}
+        M${a2 + px1 - sx}, ${b2 + py1 - sy}
+        L${a2}, ${b2}
+        L${a2 - px1 - sx}, ${b2 - py1 -sy}
+      `;
+    }
 
 </script>
