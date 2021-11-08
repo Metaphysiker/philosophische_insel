@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   root 'static_pages#welcome'
   get 'static_pages/welcome'
 
+  get 'static_pages/pferdefutter', as: "pferdefutter"
+
+
+
   get 'sandro-raess', to: 'static_pages#about', as: "about"
   get 'stinah/:id', to: 'donation_projects#show', as: "stinah"
   get 'visits', to: 'static_pages#visits', as: "visits"

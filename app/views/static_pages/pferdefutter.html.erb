@@ -1,4 +1,185 @@
 <div class="container">
-<h1>Pferdefutter</h1>
+  <div class="h-100 p-5 my-4 bg-light border rounded-3">
+    <h1>Pferdefutter</h1>
+    <p>
+      Manfred braucht etwas zum Mampfen!
+    </p>
+    <p>
+      300 Säcke pro Jahr
+    </p>
+    <p>
+      24 Euro pro Sack
+    </p>
+    <p>
+      25 Säcke pro Monat
+    </p>
+    <p>
+      Ich möchte eine Patenschaft für Manfred übernehmen und seine Futterkosten decken.
+    </p>
+    <p>
+      Animation pro Monat  Sack
+    </p>
+    <button class="btn btn-outline-secondary" type="button">Example button</button>
+  </div>
+  <div id="diagram">
 
+  </div>
 </div>
+
+<script>
+
+  const data =  {
+    "nodes": [
+      {
+        "phase_id": 1,
+        "x": 2,
+        "y": 0,
+      },
+      {
+        "phase_id": 2,
+        "x": 2,
+        "y": 1,
+      },
+      {
+        "phase_id": 3,
+        "x": 1,
+        "y": 2,
+      },
+      {
+        "phase_id": 4,
+        "x": 2,
+        "y": 2,
+      },
+      {
+        "phase_id": 5,
+        "x": 3,
+        "y": 2,
+      },
+      {
+        "phase_id": 6,
+        "x": 1,
+        "y": 3,
+      },
+      {
+        "phase_id": 7,
+        "x": 1,
+        "y": 4,
+      },
+      {
+        "phase_id": 8,
+        "x": 0,
+        "y": 4,
+      },
+      {
+        "phase_id": 9,
+        "x": 0,
+        "y": 3,
+      },
+      {
+        "phase_id": 10,
+        "x": 2,
+        "y": 5,
+      },
+      {
+        "phase_id": 11,
+        "x": 3,
+        "y": 5,
+      },
+      {
+        "phase_id": 12,
+        "x": 1,
+        "y": 5,
+      },
+      {
+        "phase_id": 13,
+        "x": 1,
+        "y": 6,
+      },
+      {
+        "phase_id": 14,
+        "x": 3,
+        "y": 6,
+      },
+      {
+        "phase_id": 15,
+        "x": 1,
+        "y": 7,
+      },
+      {
+        "phase_id": 16,
+        "x": 3,
+        "y": 7,
+      },
+      {
+        "phase_id": 17,
+        "x": 1,
+        "y": 8,
+      },
+      {
+        "phase_id": 18,
+        "x": 1,
+        "y": 9,
+      },
+    ],
+    "links": [
+      {"source": 1, "target": 2},
+      {"source": 2, "target": 3},
+      {"source": 2, "target": 4},
+      {"source": 4, "target": 5},
+      {"source": 3, "target": 6},
+      {"source": 6, "target": 7},
+      {"source": 7, "target": 8},
+      {"source": 8, "target": 9},
+      {"source": 9, "target": 6},
+      {"source": 7, "target": 10},
+      {"source": 10, "target": 11},
+      {"source": 7, "target": 12},
+      {"source": 12, "target": 13},
+      {"source": 13, "target": 14},
+      {"source": 13, "target": 15},
+      {"source": 15, "target": 16},
+      {"source": 15, "target": 17},
+      {"source": 17, "target": 18}
+    ]
+  }
+
+  var width = $("#diagram").width();
+  var height = 500;
+  var x_distance_between_nodes = width/4;
+  var y_distance_between_nodes = 120;
+  var margin = ({top: 20, right: 10, bottom: 10, left: 10});
+
+
+	draw('#diagram', data)
+
+	function draw(container, data){
+
+
+    const svg = d3.select(container).append('svg')
+    //.attr("viewBox", [-margin.left, -margin.top, width, height])
+      .attr("width", width)
+      .attr("height", height);
+    //.style("overflow", "scroll");
+
+    const gNode = svg.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("transform", `translate(0,${margin.top})`);
+
+      // Initialize the nodes
+      const node = gNode.selectAll("g")
+         .data(data.nodes);
+         //.enter();
+      const nodeEnter = node.enter().append("g")
+      .attr("transform", d => `translate(${d.x * x_distance_between_nodes},${d.y * y_distance_between_nodes})`)
+      .attr("x",  d => `${d.x * x_distance_between_nodes}`)
+      .attr("y",  d => `${d.y * y_distance_between_nodes}`)
+      .append("circle")
+      .style("stroke", "gray")
+      .style("fill", "black")
+      .attr("r", 10);
+
+
+      return svg.node();
+	}
+
+</script>
