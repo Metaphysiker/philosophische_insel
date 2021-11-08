@@ -37,11 +37,15 @@
     "nodes": [
       {
         "node_id": 1,
+        "month_name": "Januar",
+        "got_text": "15 erhalten",
+        "needed_text": "10 noch nötig",
         "x": 0,
         "y": 0,
       },
       {
         "node_id": 2,
+        "month_name": "Februar",
         "x": 0,
         "y": 1,
       }
@@ -54,8 +58,9 @@
   var width = $("#diagram").width();
   var height = 500;
   var x_distance_between_nodes = width/4;
-  var y_distance_between_nodes = 120;
+  var y_distance_between_nodes = 200;
   var margin = ({top: 20, right: 10, bottom: 10, left: 10});
+  var circle_radius = 15;
 
 
 	draw('#diagram', data)
@@ -81,11 +86,41 @@
       .attr("transform", d => `translate(${d.x * x_distance_between_nodes},${d.y * y_distance_between_nodes})`)
       .attr("x",  d => `${d.x * x_distance_between_nodes}`)
       .attr("y",  d => `${d.y * y_distance_between_nodes}`)
-      .attr("node_id", d => d.node_id)
+      .attr("node_id", d => d.node_id);
+
+      nodeEnter
       .append("circle")
       .style("stroke", "gray")
       .style("fill", "gray")
-      .attr("r", 10);
+      .attr("r", circle_radius);
+
+      nodeEnter
+      .append("circle")
+      .style("stroke", "gray")
+      .style("fill", "gray")
+      .attr("r", 15);
+
+          nodeEnter.append("foreignObject")
+          .attr("y", -20)
+          .attr("x", 50)
+          .attr("width", 300)
+          .attr("height", 200)
+          .append("xhtml:div")
+          .html(function(d) {
+            return `
+              <div class="rounded">
+                  <h1>
+                    ${d.month_name}
+                  </h1>
+                  <p>
+                    ${d.got_text}
+                  </p>
+                  <p>
+                    ${d.needed_text}
+                  </p>
+              </div>
+            `
+          })
 
       //links
       const link = gNode.append("g")
