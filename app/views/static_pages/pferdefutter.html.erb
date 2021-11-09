@@ -31,7 +31,69 @@
   </div>
 </div>
 
+<div class="container text-center py-3">
+  <div class="rnw-widget-container"></div>
+  <script src="https://tamaro.raisenow.com/stift-16e8/latest/widget.js"></script>
+</div>
+
 <script>
+
+  //raiseNow runWidghet
+  window.rnw.tamaro.runWidget('.rnw-widget-container', {
+    debug: false,
+    slots: {
+      profile_form_1: [{
+        component: "field",
+        type: "checkbox",
+        name: "stored_customer_company_name",
+        text: "Ich möchte einen Patenschaft übernehmen und die Futterkosten decken"
+      }]
+    },
+    language: 'de',
+    showStoredCustomerSalutation: false,
+    purpose: "Pferdefutter",
+    showStoredCustomerStreetNumber: false,
+    showStoredCustomerStreet2: false,
+    countries: ["Schweiz", "Deutschland", "Österreich"],
+    paymentFormPrefill: {
+      stored_customer_country: "Schweiz"
+    },
+    paymentTypes: ["onetime"],
+    amounts: [
+      {
+        "if": "paymentType() == onetime",
+        "then": [25,50,75],
+      }
+    ]
+  });
+
+  //raiseNow payment complete
+  window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
+    //console.log("payment complete");
+
+     var amount_just_paid = event.data.api.transactionInfo.amount;
+     //console.log(amount_just_paid);
+     var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
+
+    $.ajax({
+      url: "<%= donations_path %>",
+      method: 'post',
+      data: { donation:
+        {
+          amount: amount_just_paid,
+          transaction_id: transaction_id,
+          donation_project_id: donation_project.id
+        }
+      },
+      headers: {
+        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+      }
+    }).always(function( ) {
+      //console.log("after creating donation")
+      drawBarChart();
+    });
+
+  });
 
   const data =  {
     "nodes": [
