@@ -40,6 +40,7 @@
 
   //raiseNow runWidghet
   window.rnw.tamaro.runWidget('.rnw-widget-container', {
+    testMode: <%= Rails.env.development? %>,
     translations: {
       de: {
         patenschaft: "Ich möchte eine Patenschaft übernehmen",
