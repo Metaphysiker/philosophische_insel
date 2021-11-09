@@ -18,17 +18,17 @@ class TestController < ApplicationController
         name_of_file = params[:name_of_file]
       end
 
-      user_json = []
+      array = []
       10.times do
-        user = OpenStruct.new(
+        element = OpenStruct.new(
           email: Faker::Internet.unique.email,
           password: "password",
           password_confirmation: "password"
         )
-        user_json.push(user.to_h)
+        array.push(element.to_h)
       end
 
-      File.write("cypress/fixtures/#{name_of_file}.json", user_json.to_json)
+      File.write("cypress/fixtures/#{name_of_file}.json", array.to_json)
       head :ok
     end
 
