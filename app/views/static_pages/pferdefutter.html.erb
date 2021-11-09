@@ -40,15 +40,39 @@
 
   //raiseNow runWidghet
   window.rnw.tamaro.runWidget('.rnw-widget-container', {
+    translations: {
+      de: {
+        patenschaft: "Ich möchte eine Patenschaft übernehmen",
+        amount_descriptions: [
+        {
+          "if": "paymentType() == onetime",
+          "then": [
+            {
+              "if": "amount() == 25",
+              "then": "1 Futtersack"
+            },
+            {
+              "if": "amount() == 50",
+              "then": "2 Futtersäcke"
+            },
+            {
+              "if": "amount() == 75",
+              "then": "3 Futtersäcke"
+            }
+          ]
+        }
+        ]
+      }
+    },
     debug: false,
     slots: {
-      profile_form_1: [{
+      profile_form_end: [{
         component: "field",
         type: "checkbox",
-        name: "stored_customer_company_name",
-        text: "Ich möchte einen Patenschaft übernehmen und die Futterkosten decken"
-      }]
-    },
+        name: "patenschaft",
+        text: "patenschaft",
+      },
+    ]},
     language: 'de',
     showStoredCustomerSalutation: false,
     purpose: "Pferdefutter",
