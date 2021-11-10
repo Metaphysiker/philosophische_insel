@@ -176,9 +176,6 @@
           transaction_id: "<%= SecureRandom.hex %>",
           donation_project_id: 1
         }
-      },
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       }
     })
   });

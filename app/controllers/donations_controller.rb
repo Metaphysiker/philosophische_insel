@@ -29,10 +29,6 @@ class DonationsController < ApplicationController
   def create
     @donation = Donation.new(donation_params)
 
-    puts params[request_forgery_protection_token]
-    puts "UHAHAHA"
-    puts @donation.save!
-
     respond_to do |format|
       if @donation.save
         format.html { redirect_to @donation, notice: "Donation was successfully created." }
