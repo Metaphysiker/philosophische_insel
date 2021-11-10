@@ -114,9 +114,6 @@
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
 
     $.ajax({
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      },
       url: "<%= donations_path %>",
       method: 'post',
       data: { donation:
@@ -125,6 +122,9 @@
           transaction_id: transaction_id,
           donation_project_id: donation_project.id
         }
+      },
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       }
     }).always(function( ) {
       //console.log("after creating donation")
