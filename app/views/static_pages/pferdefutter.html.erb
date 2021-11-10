@@ -36,10 +36,15 @@
   <script src="https://tamaro.raisenow.com/stift-16e8/latest/widget.js"></script>
 </div>
 
+<div id="target">
+  Click here
+</div>
+
 <script>
 
   //variables and constants
   const donation_project = <%= raw DonationProject.find_by_title("Pferdefutter").into_json %>;
+  console.log(donation_project.id);
   var chart_seen = false;
   var cachedWidth = $(window).width();
   var amount_needed_total = parseFloat(donation_project.amount_needed_total);
@@ -101,11 +106,12 @@
 
   //raiseNow payment complete
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
-    //console.log("payment complete");
+    console.log("payment complete");
 
      var amount_just_paid = event.data.api.transactionInfo.amount;
-     //console.log(amount_just_paid);
+     console.log(amount_just_paid);
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
+     console.log(transaction_id);
 
     $.ajax({
       url: "<%= donations_path %>",
@@ -159,6 +165,23 @@
 
 
 	draw('#diagram', data);
+
+  $( "#target" ).click(function() {
+    $.ajax({
+      url: "<%= donations_path %>",
+      method: 'post',
+      data: { donation:
+        {
+          amount: 111,
+          transaction_id: "1234567",
+          donation_project_id: 1
+        }
+      },
+      headers: {
+        'X-CSRF-Token': ('[name="csrf-token"]')[0].content
+      }
+    })
+  });
 
 	function draw(container, data){
 

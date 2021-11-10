@@ -36,6 +36,8 @@ class DonationsController < ApplicationController
         format.json { render json: @donation.errors, status: :unprocessable_entity }
       end
     end
+
+    byebug
   end
 
   # PATCH/PUT /donations/1 or /donations/1.json
