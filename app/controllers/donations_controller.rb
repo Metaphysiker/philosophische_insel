@@ -27,6 +27,9 @@ class DonationsController < ApplicationController
   def create
     @donation = Donation.new(donation_params)
 
+    puts "UHAHAHA"
+    puts @donation.save!
+
     respond_to do |format|
       if @donation.save
         format.html { redirect_to @donation, notice: "Donation was successfully created." }
@@ -37,7 +40,6 @@ class DonationsController < ApplicationController
       end
     end
 
-    byebug
   end
 
   # PATCH/PUT /donations/1 or /donations/1.json

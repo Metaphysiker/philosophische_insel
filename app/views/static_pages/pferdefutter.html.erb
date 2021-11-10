@@ -124,7 +124,7 @@
         }
       },
       headers: {
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+        'X-CSRF-Token': ('[name="csrf-token"]')[0].content
       }
     }).always(function( ) {
       //console.log("after creating donation")
@@ -173,7 +173,7 @@
       data: { donation:
         {
           amount: 111,
-          transaction_id: "1234567",
+          transaction_id: "<%= SecureRandom.hex %>",
           donation_project_id: 1
         }
       },
