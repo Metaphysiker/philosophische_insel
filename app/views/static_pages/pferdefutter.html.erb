@@ -38,6 +38,13 @@
 
 <script>
 
+  //variables and constants
+  const donation_project = <%= raw DonationProject.find_by_title("Pferdefutter").into_json %>;
+  var chart_seen = false;
+  var cachedWidth = $(window).width();
+  var amount_needed_total = parseFloat(donation_project.amount_needed_total);
+  var amount_already_received = parseFloat(donation_project.amount_already_received);
+
   //raiseNow runWidghet
   window.rnw.tamaro.runWidget('.rnw-widget-container', {
     testMode: <%= Rails.env.development? %>,
@@ -115,7 +122,8 @@
       }
     }).always(function( ) {
       //console.log("after creating donation")
-      drawBarChart();
+      //drawBarChart();
+      	draw('#diagram', data);
     });
 
   });
@@ -145,12 +153,12 @@
   var width = $("#diagram").width();
   var height = 500;
   var x_distance_between_nodes = width/4;
-  var y_distance_between_nodes = 200;
+  var y_distance_between_nodes = 150;
   var margin = ({top: 20, right: 10, bottom: 10, left: 10});
   var circle_radius = 15;
 
 
-	draw('#diagram', data)
+	draw('#diagram', data);
 
 	function draw(container, data){
 
