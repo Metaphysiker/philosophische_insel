@@ -42,6 +42,8 @@
 
 <script>
 
+  console.log($('meta[name="csrf-token"]').attr('content'));
+
   //variables and constants
   const donation_project = <%= raw DonationProject.find_by_title("Pferdefutter").into_json %>;
   console.log(donation_project.id);
@@ -109,11 +111,12 @@
     console.log("payment complete");
 
      var amount_just_paid = event.data.api.transactionInfo.amount;
-     console.log(amount_just_paid);
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
-     console.log(transaction_id);
 
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       url: "<%= donations_path %>",
       method: 'post',
       data: { donation:
@@ -122,9 +125,6 @@
           transaction_id: transaction_id,
           donation_project_id: donation_project.id
         }
-      },
-      headers: {
-        'X-CSRF-Token': ('[name="csrf-token"]')[0].content
       }
     }).always(function( ) {
       //console.log("after creating donation")
@@ -172,13 +172,13 @@
       method: 'post',
       data: { donation:
         {
-          amount: 111,
+          amount: 222,
           transaction_id: "<%= SecureRandom.hex %>",
           donation_project_id: 1
         }
       },
       headers: {
-        'X-CSRF-Token': ('[name="csrf-token"]')[0].content
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       }
     })
   });

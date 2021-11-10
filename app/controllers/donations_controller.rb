@@ -2,6 +2,8 @@ class DonationsController < ApplicationController
   before_action :set_donation, only: %i[ show edit update destroy ]
   after_action :verify_authorized, except: %i[new create]
 
+  skip_before_action :verify_authenticity_token, only: %i[create]
+
   # GET /donations or /donations.json
   def index
     @donations = Donation.all
@@ -27,6 +29,7 @@ class DonationsController < ApplicationController
   def create
     @donation = Donation.new(donation_params)
 
+    puts params[request_forgery_protection_token]
     puts "UHAHAHA"
     puts @donation.save!
 
