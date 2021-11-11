@@ -116,7 +116,7 @@
         component: "field",
         type: "checkbox",
         name: "patenschaft",
-        text: "patensstatic_pages/pferdefutterchaft",
+        text: "patenschaft",
       },
     ]},
     language: 'de',
@@ -158,7 +158,8 @@
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       }
     }).always(function( ) {
-      	draw('#diagram', data);
+      $('#diagram').empty();
+      	getDataAndDraw('#diagram');
     });
 
   });
