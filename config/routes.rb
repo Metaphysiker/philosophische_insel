@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :donation_projects do
     member do
       get 'bar_chart_data'
+      get 'pferdefutter_data'
     end
   end
   resources :donations

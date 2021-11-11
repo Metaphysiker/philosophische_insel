@@ -42,15 +42,42 @@
 
 <script>
 
-  console.log($('meta[name="csrf-token"]').attr('content'));
-
   //variables and constants
   const donation_project = <%= raw DonationProject.find_by_title("Pferdefutter").into_json %>;
-  console.log(donation_project.id);
   var chart_seen = false;
   var cachedWidth = $(window).width();
   var amount_needed_total = parseFloat(donation_project.amount_needed_total);
   var amount_already_received = parseFloat(donation_project.amount_already_received);
+
+  var width = $("#diagram").width();
+  var height = 500;
+  var x_distance_between_nodes = width/4;
+  var y_distance_between_nodes = 150;
+  var margin = ({top: 20, right: 10, bottom: 10, left: 10});
+  var circle_radius = 15;
+
+  //dummy data
+  const data =  {
+    "nodes": [
+      {
+        "node_id": 1,
+        "month_name": "Januar",
+        "got_text": "15 erhalten",
+        "needed_text": "10 noch nötig",
+        "x": 0,
+        "y": 0,
+      },
+      {
+        "node_id": 2,
+        "month_name": "Februar",
+        "x": 0,
+        "y": 1,
+      }
+    ],
+    "links": [
+      {"source": 1, "target": 2}
+    ]
+  }
 
   //raiseNow runWidghet
   window.rnw.tamaro.runWidget('.rnw-widget-container', {
@@ -127,67 +154,33 @@
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       }
     }).always(function( ) {
-      //console.log("after creating donation")
-      //drawBarChart();
       	draw('#diagram', data);
     });
 
   });
 
-  const data =  {
-    "nodes": [
-      {
-        "node_id": 1,
-        "month_name": "Januar",
-        "got_text": "15 erhalten",
-        "needed_text": "10 noch nötig",
-        "x": 0,
-        "y": 0,
-      },
-      {
-        "node_id": 2,
-        "month_name": "Februar",
-        "x": 0,
-        "y": 1,
-      }
-    ],
-    "links": [
-      {"source": 1, "target": 2}
-    ]
-  }
 
-  var width = $("#diagram").width();
-  var height = 500;
-  var x_distance_between_nodes = width/4;
-  var y_distance_between_nodes = 150;
-  var margin = ({top: 20, right: 10, bottom: 10, left: 10});
-  var circle_radius = 15;
+  getDataAndDraw('#diagram');
 
-
-	draw('#diagram', data);
-
-  $( "#target" ).click(function() {
+  //functions
+  function getDataAndDraw(container){
     $.ajax({
-      url: "<%= donations_path %>",
-      method: 'post',
-      data: { donation:
-        {
-          amount: 222,
-          transaction_id: "<%= SecureRandom.hex %>",
-          donation_project_id: 1
-        }
-      }
-    })
-  });
+      url: "<%= pferdefutter_data_donation_project_path(DonationProject.find(1)) %>",
+      method: 'GET'
+    }).always(function( data ) {
+      console.log(data);
+      $(container).empty();
+      draw(container, data);
+    });
+  }
 
 	function draw(container, data){
 
+    console.log(data);
 
     const svg = d3.select(container).append('svg')
-    //.attr("viewBox", [-margin.left, -margin.top, width, height])
       .attr("width", width)
       .attr("height", height);
-    //.style("overflow", "scroll");
 
     const gNode = svg.append("g")
       .attr("font-family", "sans-serif")
@@ -301,15 +294,6 @@
       const b1 = y1 + dy1;
       const a2 = x2 - dx2;
       const b2 = y2 - dy2;
-
-      console.log(a1);
-      console.log(b1);
-      console.log(a2);
-      console.log(b2);
-
-      console.log("second m");
-      console.log(a2 + px1 - sx);
-      console.log(b2 + py1 - sy);
 
       return `
         M${a1}, ${b1}

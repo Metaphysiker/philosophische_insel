@@ -15,7 +15,7 @@ class StaticPagesController < ApplicationController
   end
 
   def pferdefutter
-
+    @donation_project = DonationProject.find(1)
   end
 
 end
