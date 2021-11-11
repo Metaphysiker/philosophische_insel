@@ -28,30 +28,36 @@ class DonationProject < ApplicationRecord
 
   def pferdefutter_data
     #calculate bags, a bag is around 25 francs
-    cost_of_a_bag = 25
+    cost_of_a_bag = 25 #francs
     bags_needed_per_month = 25
-    total_number_of_bags = (amount_already_received / cost_of_a_bag).to_i
+    total_number_of_received_bags = (amount_already_received / cost_of_a_bag).to_i
 
     # a horse needs 300 bags per year, 25 per month
-    months_done = total_number_of_bags / bags_needed_per_month
+    months_done = total_number_of_received_bags / bags_needed_per_month
 
-    if months_done <= 0
-      months_done = 1
-    end
+
+    puts "months_done: #{months_done}"
 
     nodes = []
     lines = []
 
-    (1..months_done).each do |number|
+    (1..(months_done + 1)).each do |number|
 
-      bags_available_in_this_month = total_number_of_bags - number * bags_needed_per_month
-      bags_available_in_this_month = bags_needed_per_month if bags_available_in_this_month > bags_needed_per_month
+      if total_number_of_received_bags >= (number * bags_needed_per_month)
+        bags_received_in_this_month = bags_needed_per_month
+      else
+        bags_received_in_this_month = total_number_of_received_bags - ((number - 1) * bags_needed_per_month)
+      end
+
+      #goal_in_this_
+
+      #bags_needed_in_this_month = (number * bags_needed_per_month) - (total_number_of_received_bags - ((number-1) * bags_needed_per_month)  )
 
       node = {
               node_id: number,
               month_name: I18n.t("date.month_names")[number % 12],
-              got_text: "#{bags_available_in_this_month} Futtersäcke erhalten!",
-              needed_text: "#{bags_needed_per_month - bags_available_in_this_month} noch nötig",
+              got_text: "#{bags_received_in_this_month} Futtersäcke erhalten!",
+              needed_text: "#{bags_needed_per_month - bags_received_in_this_month} noch nötig",
               x: 0,
               y: number-1,
             }

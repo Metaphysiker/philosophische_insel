@@ -2,6 +2,9 @@
   <div class="h-100 p-5 my-4 bg-light border rounded-3">
     <h1>Pferdefutter</h1>
     <p>
+      <%#= DonationProject.find_by_title("Pferdefutter").pfere %>
+    </p>
+    <p>
       Manfred braucht etwas zum Mampfen!
     </p>
     <p>
@@ -36,9 +39,6 @@
   <script src="https://tamaro.raisenow.com/stift-16e8/latest/widget.js"></script>
 </div>
 
-<div id="target">
-  Click here
-</div>
 
 <script>
 
@@ -115,7 +115,7 @@
         component: "field",
         type: "checkbox",
         name: "patenschaft",
-        text: "patenschaft",
+        text: "patensstatic_pages/pferdefutterchaft",
       },
     ]},
     language: 'de',
@@ -180,11 +180,11 @@
 
     const svg = d3.select(container).append('svg')
       .attr("width", width)
-      .attr("height", data.nodes.length * y_distance_between_nodes);
+      .attr("height", (data.nodes.length) * (y_distance_between_nodes + 100));
 
     const gNode = svg.append("g")
       .attr("font-family", "sans-serif")
-      .attr("transform", `translate(${width/5},${margin.top})`);
+      .attr("transform", `translate(${width/2},${margin.top})`);
 
       // nodes with circles
       const node = gNode.selectAll("g")
