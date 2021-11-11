@@ -57,7 +57,8 @@
   var x_distance_between_nodes = width/4;
   var y_distance_between_nodes = 150;
   var margin = ({top: 20, right: 10, bottom: 10, left: 10});
-  var circle_radius = 15;
+  var div_size = ({height: 200, width: 250});
+  var circle_radius = 10;
 
   //dummy data
   const data =  {
@@ -202,38 +203,33 @@
       .style("fill", "gray")
       .attr("r", circle_radius);
 
-      nodeEnter
-      .append("circle")
-      .style("stroke", "gray")
-      .style("fill", "gray")
-      .attr("r", 15);
-
-          nodeEnter.append("foreignObject")
-          .attr("y", -20)
-          .attr("x", 50)
-          .attr("width", 200)
-          .attr("height", 200)
-          .append("xhtml:div")
-          .html(function(d) {
-            return `
-              <div class="rounded border p-1">
-                  <h1>
-                    ${d.month_name}
-                  </h1>
-                  <p class="text-success">
-                    ${d.got_text} <i class="bi bi-check-lg"></i>
-                  </p>
-                  <p class="text-primary">
-                    ${d.needed_text}
-                  </p>
-              </div>
-            `
-          })
+      nodeEnter.append("foreignObject")
+      .attr("y", 0)
+      //.attr("x", 50)
+      .attr("x", d => (d.node_id % 2 == 0) ? -div_size.width : 0)
+      .attr("width", div_size.width)
+      .attr("height", div_size.height)
+      .append("xhtml:div")
+      .html(function(d) {
+        return `
+          <div class="p-1 bg-light border rounded-3">
+              <h2>
+                ${d.month_name}
+              </h2>
+              <p class="text-success">
+                ${d.got_text} <i class="bi bi-check-lg"></i>
+              </p>
+              <p class="text-primary">
+                ${d.needed_text}
+              </p>
+          </div>
+        `
+      })
 
       //links
       const link = gNode.append("g")
       .attr("fill", "none")
-      .attr("stroke", "black")
+      .attr("stroke", "gray")
       .attr("stroke-opacity", 0.0)
       .attr("stroke-width", 2)
       .selectAll("path")
