@@ -42,6 +42,9 @@
 
 <script>
 
+  $( document ).ready(function() {
+
+
   //variables and constants
   const donation_project = <%= raw DonationProject.find_by_title("Pferdefutter").into_json %>;
   var chart_seen = false;
@@ -50,7 +53,7 @@
   var amount_already_received = parseFloat(donation_project.amount_already_received);
 
   var width = $("#diagram").width();
-  var height = 500;
+  //var height = 500;
   var x_distance_between_nodes = width/4;
   var y_distance_between_nodes = 150;
   var margin = ({top: 20, right: 10, bottom: 10, left: 10});
@@ -177,7 +180,7 @@
 
     const svg = d3.select(container).append('svg')
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", data.nodes.length * y_distance_between_nodes);
 
     const gNode = svg.append("g")
       .attr("font-family", "sans-serif")
@@ -301,4 +304,5 @@
       `;
     }
 
+  });
 </script>
