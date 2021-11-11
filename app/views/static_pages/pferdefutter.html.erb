@@ -168,15 +168,12 @@
       url: "<%= pferdefutter_data_donation_project_path(DonationProject.find(1)) %>",
       method: 'GET'
     }).always(function( data ) {
-      console.log(data);
       $(container).empty();
       draw(container, data);
     });
   }
 
 	function draw(container, data){
-
-    console.log(data);
 
     const svg = d3.select(container).append('svg')
       .attr("width", width)

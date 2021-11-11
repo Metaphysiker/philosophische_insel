@@ -33,16 +33,17 @@ class DonationProject < ApplicationRecord
     # a horse needs 300 bags per year, 25 per month
     months_done = bags / 25
 
-    if months_done >= 0
+    if months_done <= 0
       months_done = 1
     end
 
     nodes = []
+    lines = []
 
     (1..months_done).each do |number|
       node = {
               node_id: number,
-              month_name: I18n.t("date.month_names")[1],
+              month_name: I18n.t("date.month_names")[number],
               got_text: "#{bags} erhalten",
               needed_text: "y noch nötig",
               x: 0,
@@ -50,13 +51,16 @@ class DonationProject < ApplicationRecord
             }
 
      nodes.push(node)
+
+     if number > 1
+       lines.push({"source": number-1, "target": number})
+     end
+
     end
 
     {
       nodes: nodes,
-      links: [
-        {"source": 1, "target": 2}
-      ]
+      links: lines
     }
   end
 
