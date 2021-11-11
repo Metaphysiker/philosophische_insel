@@ -184,7 +184,7 @@
 
     const gNode = svg.append("g")
       .attr("font-family", "sans-serif")
-      .attr("transform", `translate(${width/2},${margin.top})`);
+      .attr("transform", `translate(${width/5},${margin.top})`);
 
       // nodes with circles
       const node = gNode.selectAll("g")
@@ -216,7 +216,7 @@
           .append("xhtml:div")
           .html(function(d) {
             return `
-              <div class="rounded">
+              <div class="rounded border p-1">
                   <h1>
                     ${d.month_name}
                   </h1>
