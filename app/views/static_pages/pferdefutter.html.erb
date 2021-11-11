@@ -236,12 +236,12 @@
       .selectAll("path")
         .data(data.links)
         .join("path")
-          .attr("d", d => arrowTo({x: d3.select(`[node_id='${d.source}']`).attr("x")/1, y: d3.select(`[node_id='${d.source}']`).attr("y")/1}, {x: d3.select(`[node_id='${d.target}']`).attr("x")/1, y: d3.select(`[node_id='${d.target}']`).attr("y")/1}, 0))
+          .attr("d", d => d3.line()([[d3.select(`[node_id='${d.source}']`).attr("x")/1, d3.select(`[node_id='${d.source}']`).attr("y")/1], [d3.select(`[node_id='${d.target}']`).attr("x")/1, d3.select(`[node_id='${d.target}']`).attr("y")/1]]))
+          //.attr("d", d => arrowTo({x: d3.select(`[node_id='${d.source}']`).attr("x")/1, y: d3.select(`[node_id='${d.source}']`).attr("y")/1}, {x: d3.select(`[node_id='${d.target}']`).attr("x")/1, y: d3.select(`[node_id='${d.target}']`).attr("y")/1}, 0))
           .transition()
           .duration(3000)
           .style("stroke-opacity", 1.0)
           .delay(function(d,i){return(i*200)});
-
 
       return svg.node();
 	}
