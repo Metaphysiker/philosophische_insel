@@ -49,10 +49,6 @@ class DonationProject < ApplicationRecord
         bags_received_in_this_month = total_number_of_received_bags - ((number - 1) * bags_needed_per_month)
       end
 
-      #goal_in_this_
-
-      #bags_needed_in_this_month = (number * bags_needed_per_month) - (total_number_of_received_bags - ((number-1) * bags_needed_per_month)  )
-
       node = {
               node_id: number,
               month_name: I18n.t("date.month_names")[number % 12],
@@ -69,6 +65,17 @@ class DonationProject < ApplicationRecord
      end
 
     end
+
+    extra_node = {
+            node_id: nodes.length + 1,
+            month_name: "",
+            got_text: "",
+            needed_text: "",
+            x: 0,
+            y: nodes.length,
+          }
+    nodes.push(extra_node)
+    lines.push({"source": nodes.length - 1, "target": nodes.length})
 
     {
       nodes: nodes,

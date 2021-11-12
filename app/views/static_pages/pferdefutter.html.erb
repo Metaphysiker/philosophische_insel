@@ -29,6 +29,9 @@
     </p>
     <button class="btn btn-outline-secondary" type="button">Example button</button>
   </div>
+  <div class="text-center">
+    <h2>Übersicht</h2>
+  </div>
   <div id="diagram">
 
   </div>
@@ -55,9 +58,9 @@
   var width = $("#diagram").width();
   //var height = 500;
   var x_distance_between_nodes = width/4;
-  var y_distance_between_nodes = 150;
+  var y_distance_between_nodes = 200;
   var margin = ({top: 20, right: 10, bottom: 10, left: 10});
-  var div_size = ({height: 200, width: 250});
+  var div_size = ({height: y_distance_between_nodes-50, width: width/3});
   var circle_radius = 10;
 
   //dummy data
@@ -207,7 +210,7 @@
       nodeEnter.append("foreignObject")
       .attr("y", 0)
       //.attr("x", 50)
-      .attr("x", d => (d.node_id % 2 == 0) ? -div_size.width : 0)
+      .attr("x", d => (d.node_id % 2 == 0) ? -(div_size.width + 50) : 50)
       .attr("width", div_size.width)
       .attr("height", div_size.height)
       .append("xhtml:div")
@@ -218,7 +221,7 @@
                 ${d.month_name}
               </h2>
               <p class="text-success">
-                ${d.got_text} <i class="bi bi-check-lg"></i>
+                ${d.got_text} <i class="bi bi-check-lg fa-5x"></i>
               </p>
               <p class="text-primary">
                 ${d.needed_text}
