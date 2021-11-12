@@ -183,6 +183,8 @@
 
 	function draw(container, data){
 
+    console.log(data.nodes[0].html_content);
+
     const svg = d3.select(container).append('svg')
       .attr("width", width)
       .attr("height", (data.nodes.length) * (y_distance_between_nodes + 100));
@@ -214,21 +216,7 @@
       .attr("width", div_size.width)
       .attr("height", div_size.height)
       .append("xhtml:div")
-      .html(function(d) {
-        return `
-          <div class="p-1 bg-light border rounded-3">
-              <h2>
-                ${d.month_name}
-              </h2>
-              <p class="text-success">
-                ${d.got_text} <i class="bi bi-check-lg fa-5x"></i>
-              </p>
-              <p class="text-primary">
-                ${d.needed_text}
-              </p>
-          </div>
-        `
-      })
+      .html(d => d.html_content);
 
       //links
       const link = gNode.append("g")

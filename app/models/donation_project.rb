@@ -52,6 +52,7 @@ class DonationProject < ApplicationRecord
       node = {
               node_id: number,
               month_name: I18n.t("date.month_names")[number % 12],
+              html_content: html_for_successful_funded_months(I18n.t("date.month_names")[number % 12], bags_needed_per_month).html_safe,
               got_text: "#{bags_received_in_this_month} Futtersäcke erhalten!",
               needed_text: "#{bags_needed_per_month - bags_received_in_this_month} noch nötig",
               x: 0,
@@ -104,5 +105,18 @@ class DonationProject < ApplicationRecord
         color: "steelblue"
       }
     ]
+  end
+
+  def html_for_successful_funded_months(month_name, bags_needed_per_month)
+
+    str = <<-HEREDOC
+    <div class="alert alert-success" role="alert">
+    #{month_name}
+    <span class="">
+      <i class="bi bi-check-lg"></i>
+    </span>
+    </div>
+      HEREDOC
+      return str
   end
 end
