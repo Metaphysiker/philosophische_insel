@@ -52,7 +52,7 @@ class DonationProject < ApplicationRecord
       node = {
               node_id: number,
               month_name: I18n.t("date.month_names")[number % 12],
-              html_content: html_for_successful_funded_months(I18n.t("date.month_names")[number % 12], bags_needed_per_month).html_safe,
+              html_content: html_for_to_be_funded_months(I18n.t("date.month_names")[number % 12], bags_needed_per_month).html_safe,
               got_text: "#{bags_received_in_this_month} Futtersäcke erhalten!",
               needed_text: "#{bags_needed_per_month - bags_received_in_this_month} noch nötig",
               x: 0,
@@ -70,6 +70,7 @@ class DonationProject < ApplicationRecord
     extra_node = {
             node_id: nodes.length + 1,
             month_name: "",
+            html_content: "",
             got_text: "",
             needed_text: "",
             x: 0,
@@ -119,4 +120,19 @@ class DonationProject < ApplicationRecord
       HEREDOC
       return str
   end
+
+  def html_for_to_be_funded_months(month_name, bags_needed_per_month)
+
+    str = <<-HEREDOC
+<div class="card text-dark bg-light mb-3">
+  <div class="card-header">#{month_name}</div>
+  <div class="card-body">
+    <h5 class="card-title">Light card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+      HEREDOC
+      return str
+  end
+
 end
