@@ -118,7 +118,7 @@ class DonationProject < ApplicationRecord
         #{month_name}  <span class="text-success"><i class="bi bi-check-circle-fill"></i></span>
       </div>
       <div class="card-body">
-        <p class="card-text">#{bags_needed_per_month} bereits Säcke erhalten!</p>
+        <p class="card-text">#{bags_needed_per_month} Futtersäcke erhalten.</p>
         <p class="card-text"><strong>Wizard sagt Danke!</strong></p>
 
       </div>
@@ -135,8 +135,8 @@ class DonationProject < ApplicationRecord
     #{month_name} <i class="bi bi-circle"></i>
   </div>
   <div class="card-body">
-    <p class="card-text">#{bags_received} bereits Säcke erhalten.</p>
-    <p class="card-text"><strong>#{bags_needed_per_month - bags_received} werden noch benötigt</strong></p>
+    <p class="card-text">#{bags_received} Futtersäcke erhalten.</p>
+    <p class="card-text text-primary"><strong>#{bags_needed_per_month - bags_received} werden noch benötigt!</strong></p>
   </div>
 </div>
       HEREDOC
