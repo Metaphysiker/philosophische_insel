@@ -136,7 +136,7 @@ class DonationProject < ApplicationRecord
   </div>
   <div class="card-body">
     <p class="card-text">#{bags_received} Futtersäcke erhalten.</p>
-    <p class="card-text text-primary"><strong>#{bags_needed_per_month - bags_received} werden noch benötigt!</strong></p>
+    <p class="card-text text-primary"><strong>#{bags_needed_per_month - bags_received} Futtersäcke werden noch benötigt!</strong></p>
     <a class="btn btn-primary" href="#raisenow-widget" role="button">Futtersack spenden</a>
   </div>
 </div>

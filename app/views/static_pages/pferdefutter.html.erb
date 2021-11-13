@@ -29,6 +29,9 @@
     </p>
     <button class="btn btn-outline-secondary" type="button">Example button</button>
   </div>
+</div>
+
+<div class="container-fluid">
   <div class="text-center">
     <h2>Übersicht</h2>
   </div>
@@ -48,24 +51,23 @@
 
   $( document ).ready(function() {
 
-
   //variables and constants
-  const donation_project = <%= raw DonationProject.find_by_title("Pferdefutter").into_json %>;
+  const donation_project = <%= raw @donation_project.into_json %>;
   var chart_seen = false;
-  var cachedWidth = $(window).width();
+  var cachedWidth = $( window ).width();
   var amount_needed_total = parseFloat(donation_project.amount_needed_total);
   var amount_already_received = parseFloat(donation_project.amount_already_received);
 
-  var width = $("#diagram").width();
+  var width = $( window ).width();
   //var height = 500;
-  var x_distance_between_nodes = width/4;
+  var x_distance_between_nodes = width/3;
   var y_distance_between_nodes = 200;
   var color_of_main_tree = "#dee2e6";
   var stroke_width = 3;
-  var distance_from_main_tree = 50;
+  var distance_from_main_tree = 30;
   var distance_from_node_in_main_tree = 50;
   var margin = ({top: 20, right: 10, bottom: 10, left: 10});
-  var div_size = ({height: y_distance_between_nodes-50, width: width/2.7});
+  var div_size = ({height: y_distance_between_nodes, width: width/2.7});
   var circle_radius = 10;
 
   //dummy data
@@ -96,7 +98,13 @@
     testMode: <%= Rails.env.development? %>,
     translations: {
       de: {
-        patenschaft: "Ich möchte eine Patenschaft übernehmen",
+        title: "Futtersack-Spende für Wizard",
+        stored_customer_patenschaft: "Ich möchte eine Patenschaft für Wizard übernehmen und die Futterkosten decken",
+        blocks: {
+          payment_amounts_and_intervals: {
+            title: "Betrag der Spende",
+          },
+        },
         amount_descriptions: [
         {
           "if": "paymentType() == onetime",
@@ -118,13 +126,13 @@
         ]
       }
     },
-    debug: false,
+    debug: <%= Rails.env.development? %>,
     slots: {
       profile_form_end: [{
         component: "field",
         type: "checkbox",
-        name: "patenschaft",
-        text: "patenschaft",
+        name: "stored_customer_patenschaft",
+        text: "stored_customer_patenschaft",
       },
     ]},
     language: 'de',
@@ -134,7 +142,8 @@
     showStoredCustomerStreet2: false,
     countries: ["Schweiz", "Deutschland", "Österreich"],
     paymentFormPrefill: {
-      stored_customer_country: "Schweiz"
+      stored_customer_country: "Schweiz",
+      stored_customer_patenschaft: false,
     },
     paymentTypes: ["onetime"],
     amounts: [
@@ -166,7 +175,6 @@
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       }
     }).always(function( ) {
-      $('#diagram').empty();
       	getDataAndDraw('#diagram');
     });
 
@@ -175,8 +183,19 @@
 
   getDataAndDraw('#diagram');
 
+  $( window ).resize(function() {
+    var newWidth = $("#diagram").width();
+    if(newWidth !== cachedWidth){
+      console.log("resize!");
+      getDataAndDraw('#diagram');
+      cachedWidth = newWidth;
+    }
+  });
+
   //functions
   function getDataAndDraw(container){
+    $('#diagram').empty();
+
     $.ajax({
       url: "<%= pferdefutter_data_donation_project_path(DonationProject.find(1)) %>",
       method: 'GET'
@@ -188,9 +207,11 @@
 
 	function draw(container, data){
 
+    var width = cachedWidth;
+
     const svg = d3.select(container).append('svg')
       .attr("width", width)
-      .attr("height", (data.nodes.length) * (y_distance_between_nodes + 100));
+      .attr("height", (data.nodes.length) * (y_distance_between_nodes));
 
     const gNode = svg.append("g")
       .attr("font-family", "sans-serif")
