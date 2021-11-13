@@ -214,7 +214,7 @@
       //.attr("x", 50)
       .attr("x", d => (d.node_id % 2 == 0) ? -(div_size.width + 50) : 50)
       .attr("width", div_size.width)
-      .attr("height", div_size.height)
+      .attr("height", 2 * div_size.height)
       .append("xhtml:div")
       .html(d => d.html_content);
 

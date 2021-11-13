@@ -45,14 +45,16 @@ class DonationProject < ApplicationRecord
 
       if total_number_of_received_bags >= (number * bags_needed_per_month)
         bags_received_in_this_month = bags_needed_per_month
+        html_content = html_for_successful_funded_months(I18n.t("date.month_names")[number % 12], bags_needed_per_month)
       else
         bags_received_in_this_month = total_number_of_received_bags - ((number - 1) * bags_needed_per_month)
+        html_content = html_for_to_be_funded_months(I18n.t("date.month_names")[number % 12], bags_received_in_this_month, bags_needed_per_month)
       end
 
       node = {
               node_id: number,
               month_name: I18n.t("date.month_names")[number % 12],
-              html_content: html_for_to_be_funded_months(I18n.t("date.month_names")[number % 12], bags_needed_per_month).html_safe,
+              html_content: html_content,
               got_text: "#{bags_received_in_this_month} Futtersäcke erhalten!",
               needed_text: "#{bags_needed_per_month - bags_received_in_this_month} noch nötig",
               x: 0,
@@ -111,24 +113,31 @@ class DonationProject < ApplicationRecord
   def html_for_successful_funded_months(month_name, bags_needed_per_month)
 
     str = <<-HEREDOC
-    <div class="alert alert-success" role="alert">
-    #{month_name}
-    <span class="">
-      <i class="bi bi-check-lg"></i>
-    </span>
+    <div class="border border-success border-3 card text-dark bg-light mb-3">
+      <div class="card-header">
+        #{month_name} <i class="bi bi-check-lg"></i>
+      </div>
+      <div class="card-body">
+        <p class="card-text">#{bags_needed_per_month} bereits Säcke erhalten</p>
+        <p class="card-text">Wizard sagt Danke!</p>
+
+      </div>
     </div>
       HEREDOC
       return str
   end
 
-  def html_for_to_be_funded_months(month_name, bags_needed_per_month)
+  def html_for_to_be_funded_months(month_name, bags_received, bags_needed_per_month)
 
     str = <<-HEREDOC
 <div class="card text-dark bg-light mb-3">
-  <div class="card-header">#{month_name}</div>
+  <div class="card-header">
+    #{month_name}
+  </div>
   <div class="card-body">
-    <h5 class="card-title">Light card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="card-text">#{bags_received} bereits Säcke erhalten</p>
+    <p class="card-text">#{bags_needed_per_month - bags_received} werden noch benötigt</p>
+    <p class="card-text">Möchtest du einen Sack beitragen? <i class="bi bi-arrow-down"></i></p>
   </div>
 </div>
       HEREDOC
