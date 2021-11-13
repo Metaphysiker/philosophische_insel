@@ -60,7 +60,7 @@
   var x_distance_between_nodes = width/4;
   var y_distance_between_nodes = 200;
   var margin = ({top: 20, right: 10, bottom: 10, left: 10});
-  var div_size = ({height: y_distance_between_nodes-50, width: width/3});
+  var div_size = ({height: y_distance_between_nodes-50, width: width/2.7});
   var circle_radius = 10;
 
   //dummy data
@@ -183,8 +183,6 @@
 
 	function draw(container, data){
 
-    console.log(data.nodes[0].html_content);
-
     const svg = d3.select(container).append('svg')
       .attr("width", width)
       .attr("height", (data.nodes.length) * (y_distance_between_nodes + 100));
@@ -233,6 +231,25 @@
           .duration(3000)
           .style("stroke-opacity", 1.0)
           .delay(function(d,i){return(i*200)});
+
+          //links between divs and nodes
+          gNode.append("g")
+          .attr("fill", "none")
+          .attr("stroke", "gray")
+          .attr("stroke-opacity", 0.0)
+          .attr("stroke-width", 2)
+          .selectAll("path")
+            .data(data.links)
+            .join("path")
+            .attr("d", function(d) {
+              return d3.line()([[d3.select(`[node_id='${d.source}']`).attr("x")/1, d3.select(`[node_id='${d.source}']`).attr("y")/1], [d3.select(`[node_id='${d.source}']`).attr("x")/1 + 100, d3.select(`[node_id='${d.source}']`).attr("y")/1]])
+            })
+              //.attr("d", d => d3.line()([[d3.select(`[node_id='${d.source}']`).attr("x")/1, d3.select(`[node_id='${d.source}']`).attr("y")/1], [d3.select(`[node_id='${d.target}']`).attr("x")/1, d3.select(`[node_id='${d.target}']`).attr("y")/1]]))
+              //.attr("d", d => arrowTo({x: d3.select(`[node_id='${d.source}']`).attr("x")/1, y: d3.select(`[node_id='${d.source}']`).attr("y")/1}, {x: d3.select(`[node_id='${d.target}']`).attr("x")/1, y: d3.select(`[node_id='${d.target}']`).attr("y")/1}, 0))
+              .transition()
+              .duration(3000)
+              .style("stroke-opacity", 1.0)
+              .delay(function(d,i){return(i*200)});
 
       return svg.node();
 	}

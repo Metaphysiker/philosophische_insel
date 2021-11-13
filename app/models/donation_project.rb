@@ -113,13 +113,13 @@ class DonationProject < ApplicationRecord
   def html_for_successful_funded_months(month_name, bags_needed_per_month)
 
     str = <<-HEREDOC
-    <div class="border border-success border-3 card text-dark bg-light mb-3">
+    <div class="border border-3 card text-dark bg-light mb-3">
       <div class="card-header">
-        #{month_name} <i class="bi bi-check-lg"></i>
+        #{month_name}  <span class="text-success"><i class="bi bi-check-circle-fill"></i></span>
       </div>
       <div class="card-body">
-        <p class="card-text">#{bags_needed_per_month} bereits Säcke erhalten</p>
-        <p class="card-text">Wizard sagt Danke!</p>
+        <p class="card-text">#{bags_needed_per_month} bereits Säcke erhalten!</p>
+        <p class="card-text"><strong>Wizard sagt Danke!</strong></p>
 
       </div>
     </div>
@@ -132,12 +132,11 @@ class DonationProject < ApplicationRecord
     str = <<-HEREDOC
 <div class="card text-dark bg-light mb-3">
   <div class="card-header">
-    #{month_name}
+    #{month_name} <i class="bi bi-circle"></i>
   </div>
   <div class="card-body">
-    <p class="card-text">#{bags_received} bereits Säcke erhalten</p>
-    <p class="card-text">#{bags_needed_per_month - bags_received} werden noch benötigt</p>
-    <p class="card-text">Möchtest du einen Sack beitragen? <i class="bi bi-arrow-down"></i></p>
+    <p class="card-text">#{bags_received} bereits Säcke erhalten.</p>
+    <p class="card-text"><strong>#{bags_needed_per_month - bags_received} werden noch benötigt</strong></p>
   </div>
 </div>
       HEREDOC
