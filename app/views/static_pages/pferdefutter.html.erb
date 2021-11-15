@@ -42,15 +42,6 @@
 
   var width = $( window ).width();
   //var height = 500;
-  var x_distance_between_nodes = width/3;
-  var y_distance_between_nodes = 200;
-  var color_of_main_tree = "#dee2e6";
-  var stroke_width = 3;
-  var distance_from_main_tree = 30;
-  var distance_from_node_in_main_tree = 50;
-  var margin = ({top: 20, right: 10, bottom: 10, left: 10});
-  var div_size = ({height: y_distance_between_nodes, width: width/2.7});
-  var circle_radius = 10;
 
   //dummy data
   const data =  {
@@ -138,7 +129,7 @@
 
   //raiseNow payment complete
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
-    console.log("payment complete");
+    //console.log("payment complete");
 
      var amount_just_paid = event.data.api.transactionInfo.amount;
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
@@ -166,20 +157,22 @@
   getDataAndDraw('#diagram');
 
   $( window ).resize(function() {
-    var newWidth = $("#diagram").width();
+    var newWidth = $( window ).width();;
     if(newWidth !== cachedWidth){
-      console.log("resize!");
-      getDataAndDraw('#diagram');
+      //console.log("resize!");
       cachedWidth = newWidth;
+      width = newWidth;
+      getDataAndDraw('#diagram');
+
     }
   });
 
   //functions
   function getDataAndDraw(container){
-    $('#diagram').empty();
+    $(container).empty();
 
     $.ajax({
-      url: "<%= pferdefutter_data_donation_project_path(DonationProject.find(1)) %>",
+      url: "<%= pferdefutter_data_donation_project_path(@donation_project) %>",
       method: 'GET'
     }).always(function( data ) {
       $(container).empty();
@@ -189,7 +182,17 @@
 
 	function draw(container, data){
 
-    var width = cachedWidth;
+    var width = $( window ).width();
+
+    var x_distance_between_nodes = width/3;
+    var y_distance_between_nodes = 200;
+    var color_of_main_tree = "#dee2e6";
+    var stroke_width = 3;
+    var distance_from_main_tree = 30;
+    var distance_from_node_in_main_tree = 50;
+    var margin = ({top: 20, right: 10, bottom: 10, left: 10});
+    var div_size = ({height: y_distance_between_nodes, width: width/2.7});
+    var circle_radius = 10;
 
     const svg = d3.select(container).append('svg')
       .attr("width", width)

@@ -1,5 +1,5 @@
 class DonationProjectsController < ApplicationController
-  before_action :set_donation_project, only: %i[ show edit update destroy bar_chart_data]
+  before_action :set_donation_project, only: %i[ show edit update destroy bar_chart_data pferdefutter_data]
   after_action :verify_authorized, except: %i[show index bar_chart_data pferdefutter_data]
 
   # GET /donation_projects or /donation_projects.json
@@ -17,7 +17,7 @@ class DonationProjectsController < ApplicationController
   end
 
   def pferdefutter_data
-    @donation_project = DonationProject.find_by_title("Pferdefutter")
+    #@donation_project = DonationProject.find_by_title("Wizard braucht etwas zum Mampfen!")
     render json: @donation_project.pferdefutter_data
   end
 

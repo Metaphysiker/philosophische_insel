@@ -29,14 +29,11 @@ class DonationProject < ApplicationRecord
   def pferdefutter_data
     #calculate bags, a bag is around 25 francs
     cost_of_a_bag = 25 #francs
-    bags_needed_per_month = 25
+    bags_needed_per_month = 30
     total_number_of_received_bags = (amount_already_received / cost_of_a_bag).to_i
 
     # a horse needs 300 bags per year, 25 per month
     months_done = total_number_of_received_bags / bags_needed_per_month
-
-
-    puts "months_done: #{months_done}"
 
     nodes = []
     lines = []
@@ -118,7 +115,7 @@ class DonationProject < ApplicationRecord
         #{month_name}  <span class="text-success"><i class="bi bi-check-circle-fill"></i></span>
       </div>
       <div class="card-body">
-        <p class="card-text">#{bags_needed_per_month} Futtersäcke erhalten.</p>
+        <p class="card-text text-0-75em">#{bags_needed_per_month} Futtersäcke erhalten.</p>
         <p class="card-text"><strong>Wizard sagt Danke!</strong></p>
 
       </div>
@@ -135,8 +132,8 @@ class DonationProject < ApplicationRecord
     #{month_name} <i class="bi bi-circle"></i>
   </div>
   <div class="card-body">
-    <p class="card-text">#{bags_received} Futtersäcke erhalten.</p>
-    <p class="card-text text-primary"><strong>#{bags_needed_per_month - bags_received} Futtersäcke werden noch benötigt!</strong></p>
+    <p class="card-text text-0-75em">#{bags_received} Futtersäcke erhalten.</p>
+    <p class="card-text text-primary text-0-75em"><strong>#{bags_needed_per_month - bags_received} Futtersäcke werden noch benötigt!</strong></p>
     <a class="btn btn-primary" href="#raisenow-widget" role="button">Futtersack spenden</a>
   </div>
 </div>
