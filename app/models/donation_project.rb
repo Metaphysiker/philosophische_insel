@@ -26,6 +26,64 @@ class DonationProject < ApplicationRecord
     self.amount_needed_total <= self.amount_already_received
   end
 
+  def pferdefutter_data
+    #calculate bags, a bag is around 25 francs
+    cost_of_a_bag = 25 #francs
+    bags_needed_per_month = 30
+    total_number_of_received_bags = (amount_already_received / cost_of_a_bag).to_i
+
+    # a horse needs 300 bags per year, 25 per month
+    months_done = total_number_of_received_bags / bags_needed_per_month
+
+    nodes = []
+    lines = []
+
+    (1..(months_done + 1)).each do |number|
+
+      if total_number_of_received_bags >= (number * bags_needed_per_month)
+        bags_received_in_this_month = bags_needed_per_month
+        html_content = html_for_successful_funded_months(I18n.t("date.month_names")[number % 12], bags_needed_per_month)
+      else
+        bags_received_in_this_month = total_number_of_received_bags - ((number - 1) * bags_needed_per_month)
+        html_content = html_for_to_be_funded_months(I18n.t("date.month_names")[number % 12], bags_received_in_this_month, bags_needed_per_month)
+      end
+
+      node = {
+              node_id: number,
+              month_name: I18n.t("date.month_names")[number % 12],
+              html_content: html_content,
+              got_text: "#{bags_received_in_this_month} Futtersäcke erhalten!",
+              needed_text: "#{bags_needed_per_month - bags_received_in_this_month} noch nötig",
+              x: 0,
+              y: number-1,
+            }
+
+     nodes.push(node)
+
+     if number > 1
+       lines.push({"source": number-1, "target": number})
+     end
+
+    end
+
+    extra_node = {
+            node_id: nodes.length + 1,
+            month_name: "",
+            html_content: "",
+            got_text: "",
+            needed_text: "",
+            x: 0,
+            y: nodes.length,
+          }
+    nodes.push(extra_node)
+    lines.push({"source": nodes.length - 1, "target": nodes.length})
+
+    {
+      nodes: nodes,
+      links: lines
+    }
+  end
+
   def bar_chart_data
     amount_still_needed = amount_needed_total - amount_already_received
     amount_still_needed = 0 if amount_still_needed < 0
@@ -48,4 +106,39 @@ class DonationProject < ApplicationRecord
       }
     ]
   end
+
+  def html_for_successful_funded_months(month_name, bags_needed_per_month)
+
+    str = <<-HEREDOC
+    <div class="border border-3 card text-dark bg-light mb-3">
+      <div class="card-header">
+        #{month_name}  <span class="text-success"><i class="bi bi-check-circle-fill"></i></span>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-0-75em">#{bags_needed_per_month} Futtersäcke erhalten.</p>
+        <p class="card-text"><strong>Wizard sagt Danke!</strong></p>
+
+      </div>
+    </div>
+      HEREDOC
+      return str
+  end
+
+  def html_for_to_be_funded_months(month_name, bags_received, bags_needed_per_month)
+
+    str = <<-HEREDOC
+<div class="card text-dark bg-light mb-3">
+  <div class="card-header">
+    #{month_name} <i class="bi bi-circle"></i>
+  </div>
+  <div class="card-body">
+    <p class="card-text text-0-75em">#{bags_received} Futtersäcke erhalten.</p>
+    <p class="card-text text-primary text-0-75em"><strong>#{bags_needed_per_month - bags_received} Futtersäcke werden noch benötigt!</strong></p>
+    <a class="btn btn-primary" href="#raisenow-widget" role="button">Futtersack spenden</a>
+  </div>
+</div>
+      HEREDOC
+      return str
+  end
+
 end

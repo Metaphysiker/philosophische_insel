@@ -3,12 +3,17 @@ Rails.application.routes.draw do
   resources :donation_projects do
     member do
       get 'bar_chart_data'
+      get 'pferdefutter_data'
     end
   end
   resources :donations
   get 'chat', to: 'chat#chat', as: "chat"
   root 'static_pages#welcome'
   get 'static_pages/welcome'
+
+  get 'static_pages/pferdefutter', as: "pferdefutter"
+
+
 
   get 'sandro-raess', to: 'static_pages#about', as: "about"
   get 'stinah/:id', to: 'donation_projects#show', as: "stinah"
@@ -26,6 +31,11 @@ Rails.application.routes.draw do
   resources :pages
   devise_for :users
   resources :chat_messages
+
+  if Rails.env.development?
+    get 'test/generate_json_of_translation'
+    get 'test/create_donations_json_only'
+  end
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

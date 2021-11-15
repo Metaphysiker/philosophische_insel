@@ -1,10 +1,10 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter]
+
   def welcome
   end
 
   def about
-
   end
 
   def essays
@@ -12,6 +12,12 @@ class StaticPagesController < ApplicationController
 
   def visits
     authorize :static_pages
+  end
+
+  def pferdefutter
+    @donation_project = DonationProject.find_by_title("Wizard braucht etwas zum Mampfen!")
+    render layout: "application_blank"
+
   end
 
 end

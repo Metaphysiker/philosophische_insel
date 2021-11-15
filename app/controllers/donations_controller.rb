@@ -2,6 +2,8 @@ class DonationsController < ApplicationController
   before_action :set_donation, only: %i[ show edit update destroy ]
   after_action :verify_authorized, except: %i[new create]
 
+  skip_before_action :verify_authenticity_token, only: %i[create]
+
   # GET /donations or /donations.json
   def index
     @donations = Donation.all
@@ -36,6 +38,7 @@ class DonationsController < ApplicationController
         format.json { render json: @donation.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /donations/1 or /donations/1.json

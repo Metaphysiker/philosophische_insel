@@ -1,0 +1,347 @@
+<div class="container">
+  <div class="p-4 my-4 bg-light border rounded-3 text-center">
+    <h1 class="text-center">Wizard braucht etwas zum Mampfen!</h1>
+
+    <div class="col-12 offset-md-3 col-md-6 offset-lg-4 col-lg-4">
+      <%= image_tag "wizard2", class: "img-fluid rounded" %>
+      <p class="mt-2">
+        <i>Wizard</i>
+      </p>
+    </div>
+    <p>
+      Mit seinen fast 34 Jahren kann Wizard kein Heu mehr fressen. Auch diverse Heuersatz-Produkte tun es nicht mehr.
+    </p>
+    <p>
+      Was Wizard noch essen kann, ist <strong>getreidefreies Mash</strong>.
+    </p>
+    <p>
+      Leider hat Wizard noch nicht genug Patenschaften, um seine Futterkosten zu decken.
+    </p>
+    <hr />
+    <p class="lead text-center">
+      Spende Wizard einen Futtersack!
+    </p>
+    <div class="ratio ratio-16x9">
+      <%= video_tag("wizard.mp4", controls: true) %>
+    </div>
+    <p class="mt-2">
+      <i>Wizard unterwegs mt seiner Freundin</i>
+    </p>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="text-center">
+    <h2>Übersicht</h2>
+  </div>
+  <div id="diagram">
+
+  </div>
+</div>
+
+<a id="raisenow-widget"></a>
+<div class="container text-center py-3">
+  <div class="rnw-widget-container"></div>
+  <script src="https://tamaro.raisenow.com/stift-16e8/latest/widget.js"></script>
+</div>
+
+
+<script>
+
+  $( document ).ready(function() {
+
+  //variables and constants
+  const donation_project = <%= raw @donation_project.into_json %>;
+  var chart_seen = false;
+  var cachedWidth = $( window ).width();
+  var amount_needed_total = parseFloat(donation_project.amount_needed_total);
+  var amount_already_received = parseFloat(donation_project.amount_already_received);
+
+  var width = $( window ).width();
+  //var height = 500;
+
+  //dummy data
+  const data =  {
+    "nodes": [
+      {
+        "node_id": 1,
+        "month_name": "Januar",
+        "got_text": "15 erhalten",
+        "needed_text": "10 noch nötig",
+        "x": 0,
+        "y": 0,
+      },
+      {
+        "node_id": 2,
+        "month_name": "Februar",
+        "x": 0,
+        "y": 1,
+      }
+    ],
+    "links": [
+      {"source": 1, "target": 2}
+    ]
+  }
+
+  //raiseNow runWidghet
+  window.rnw.tamaro.runWidget('.rnw-widget-container', {
+    testMode: <%= Rails.env.development? %>,
+    translations: {
+      de: {
+        title: "Futtersack-Spende für Wizard",
+        stored_customer_patenschaft: "Ich möchte eine Patenschaft für Wizard übernehmen und die Futterkosten decken",
+        blocks: {
+          payment_amounts_and_intervals: {
+            title: "Betrag der Spende",
+          },
+        },
+        amount_descriptions: [
+        {
+          "if": "paymentType() == onetime",
+          "then": [
+            {
+              "if": "amount() == 25",
+              "then": "1 Futtersack"
+            },
+            {
+              "if": "amount() == 50",
+              "then": "2 Futtersäcke"
+            },
+            {
+              "if": "amount() == 75",
+              "then": "3 Futtersäcke"
+            }
+          ]
+        }
+        ]
+      }
+    },
+    debug: <%= Rails.env.development? %>,
+    slots: {
+      profile_form_end: [{
+        component: "field",
+        type: "checkbox",
+        name: "stored_customer_patenschaft",
+        text: "stored_customer_patenschaft",
+      },
+    ]},
+    language: 'de',
+    showStoredCustomerSalutation: false,
+    purpose: "Pferdefutter",
+    showStoredCustomerStreetNumber: false,
+    showStoredCustomerStreet2: false,
+    countries: ["Schweiz", "Deutschland", "Österreich"],
+    paymentFormPrefill: {
+      stored_customer_country: "Schweiz",
+      stored_customer_patenschaft: false,
+    },
+    paymentTypes: ["onetime"],
+    amounts: [
+      {
+        "if": "paymentType() == onetime",
+        "then": [25,50,75],
+      }
+    ]
+  });
+
+  //raiseNow payment complete
+  window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
+    //console.log("payment complete");
+
+     var amount_just_paid = event.data.api.transactionInfo.amount;
+     var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
+
+    $.ajax({
+      url: "<%= donations_path %>",
+      method: 'post',
+      data: { donation:
+        {
+          amount: amount_just_paid,
+          transaction_id: transaction_id,
+          donation_project_id: donation_project.id
+        }
+      },
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      }
+    }).always(function( ) {
+      	getDataAndDraw('#diagram');
+    });
+
+  });
+
+
+  getDataAndDraw('#diagram');
+
+  $( window ).resize(function() {
+    var newWidth = $( window ).width();;
+    if(newWidth !== cachedWidth){
+      //console.log("resize!");
+      cachedWidth = newWidth;
+      width = newWidth;
+      getDataAndDraw('#diagram');
+
+    }
+  });
+
+  //functions
+  function getDataAndDraw(container){
+    $(container).empty();
+
+    $.ajax({
+      url: "<%= pferdefutter_data_donation_project_path(@donation_project) %>",
+      method: 'GET'
+    }).always(function( data ) {
+      $(container).empty();
+      draw(container, data);
+    });
+  }
+
+	function draw(container, data){
+
+    var width = $( window ).width();
+
+    var x_distance_between_nodes = width/3;
+    var y_distance_between_nodes = 200;
+    var color_of_main_tree = "#dee2e6";
+    var stroke_width = 3;
+    var distance_from_main_tree = 30;
+    var distance_from_node_in_main_tree = 50;
+    var margin = ({top: 20, right: 10, bottom: 10, left: 10});
+    var div_size = ({height: y_distance_between_nodes, width: width/2.7});
+    var circle_radius = 10;
+
+    const svg = d3.select(container).append('svg')
+      .attr("width", width)
+      .attr("height", (data.nodes.length) * (y_distance_between_nodes));
+
+    const gNode = svg.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("transform", `translate(${width/2},${margin.top})`);
+
+      // nodes with circles
+      const node = gNode.selectAll("g")
+         .data(data.nodes);
+         //.enter();
+      const nodeEnter = node.enter().append("g")
+      .attr("transform", d => `translate(${d.x * x_distance_between_nodes},${d.y * y_distance_between_nodes})`)
+      .attr("x",  d => `${d.x * x_distance_between_nodes}`)
+      .attr("y",  d => `${d.y * y_distance_between_nodes}`)
+      .attr("node_id", d => d.node_id);
+
+      nodeEnter
+      .append("circle")
+      .style("stroke", color_of_main_tree)
+      .style("fill", color_of_main_tree)
+      .attr("r", circle_radius);
+
+      nodeEnter.append("foreignObject")
+      .attr("y", 0)
+      //.attr("x", 50)
+      .attr("x", d => (d.node_id % 2 == 0) ? -(div_size.width + distance_from_main_tree) : distance_from_main_tree)
+      .attr("width", div_size.width)
+      .attr("height", 2 * div_size.height)
+      .append("xhtml:div")
+      .html(d => d.html_content);
+
+      //links
+      const link = gNode.append("g")
+      .attr("fill", "none")
+      .attr("stroke", color_of_main_tree)
+      .attr("stroke-opacity", 0.0)
+      .attr("stroke-width", stroke_width)
+      .selectAll("path")
+        .data(data.links)
+        .join("path")
+          .attr("d", d => d3.line()([[d3.select(`[node_id='${d.source}']`).attr("x")/1, d3.select(`[node_id='${d.source}']`).attr("y")/1], [d3.select(`[node_id='${d.target}']`).attr("x")/1, d3.select(`[node_id='${d.target}']`).attr("y")/1]]))
+          //.attr("d", d => arrowTo({x: d3.select(`[node_id='${d.source}']`).attr("x")/1, y: d3.select(`[node_id='${d.source}']`).attr("y")/1}, {x: d3.select(`[node_id='${d.target}']`).attr("x")/1, y: d3.select(`[node_id='${d.target}']`).attr("y")/1}, 0))
+          .transition()
+          .duration(3000)
+          .style("stroke-opacity", 1.0)
+          .delay(function(d,i){return(i*200)});
+
+          //links between divs and nodes
+          gNode.append("g")
+          .attr("fill", "none")
+          .attr("stroke", color_of_main_tree)
+          .attr("stroke-opacity", 0.0)
+          .attr("stroke-width", stroke_width)
+          .selectAll("path")
+            .data(data.links)
+            .join("path")
+            .attr("d", function(d) {
+              var source = [d3.select(`[node_id='${d.source}']`).attr("x")/1, d3.select(`[node_id='${d.source}']`).attr("y")/1 + distance_from_node_in_main_tree];
+              var target = [d3.select(`[node_id='${d.source}']`).attr("x")/1 + distance_from_main_tree, d3.select(`[node_id='${d.source}']`).attr("y")/1 + distance_from_node_in_main_tree];
+              if (d.source % 2 == 0){
+                target = [d3.select(`[node_id='${d.source}']`).attr("x")/1 - distance_from_main_tree, d3.select(`[node_id='${d.source}']`).attr("y")/1 + distance_from_node_in_main_tree];
+              }
+
+              return d3.line()([source, target]);
+            })
+              //.attr("d", d => d3.line()([[d3.select(`[node_id='${d.source}']`).attr("x")/1, d3.select(`[node_id='${d.source}']`).attr("y")/1], [d3.select(`[node_id='${d.target}']`).attr("x")/1, d3.select(`[node_id='${d.target}']`).attr("y")/1]]))
+              //.attr("d", d => arrowTo({x: d3.select(`[node_id='${d.source}']`).attr("x")/1, y: d3.select(`[node_id='${d.source}']`).attr("y")/1}, {x: d3.select(`[node_id='${d.target}']`).attr("x")/1, y: d3.select(`[node_id='${d.target}']`).attr("y")/1}, 0))
+              .transition()
+              .duration(3000)
+              .style("stroke-opacity", 1.0)
+              .delay(function(d,i){return(i*200)});
+
+      return svg.node();
+	}
+
+  function arrowTo(source, target, box_size) {
+
+     var y0 = source.y;
+     var x0 = source.x;
+     var x1 = target.x;
+     var y1 = target.y;
+
+     var padding1 = 10;
+     var padding2 = 20;
+
+     var arrow = generateArrow(x0, y0, x1, y1, 10, padding1, padding2);
+
+     return arrow.toString();
+    }
+
+    function generateArrow(x1, y1, x2, y2, flangeSize, padding1, padding2) {
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const length = Math.sqrt(dx * dx + dy * dy);
+      //Hypotenuse
+
+      let multiplier1 = padding1 / length;
+      const dx1 = dx * multiplier1;
+      const dy1 = dy * multiplier1;
+
+
+      let multiplier2 = padding2 / length;
+      const dx2 = dx * multiplier2;
+      const dy2 = dy * multiplier2;
+
+      var px = y1 - y2;
+      var py = x2 - x1;
+      let plength = Math.sqrt(px * px + py * py);
+      let pmultiplier = flangeSize / plength;
+
+      const px1 = px * pmultiplier;
+      const py1 = py * pmultiplier;
+
+      const sx = dx * pmultiplier;
+      const sy = dy * pmultiplier;
+
+      const a1 = x1 + dx1;
+      const b1 = y1 + dy1;
+      const a2 = x2 - dx2;
+      const b2 = y2 - dy2;
+
+      return `
+        M${a1}, ${b1}
+        L${a2}, ${b2}
+        M${a2 + px1 - sx}, ${b2 + py1 - sy}
+        L${a2}, ${b2}
+        L${a2 - px1 - sx}, ${b2 - py1 -sy}
+      `;
+    }
+
+  });
+</script>

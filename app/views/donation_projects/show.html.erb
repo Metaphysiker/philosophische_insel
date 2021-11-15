@@ -83,10 +83,10 @@
 
     //raiseNow payment complete
     window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
-      console.log("payment complete");
+      //console.log("payment complete");
 
        var amount_just_paid = event.data.api.transactionInfo.amount;
-       console.log(amount_just_paid);
+       //console.log(amount_just_paid);
        var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
 
       $.ajax({
@@ -103,7 +103,7 @@
           'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
         }
       }).always(function( ) {
-        console.log("after creating donation")
+        //console.log("after creating donation")
         drawBarChart();
       });
 
