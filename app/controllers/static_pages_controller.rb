@@ -16,6 +16,8 @@ class StaticPagesController < ApplicationController
 
   def pferdefutter
     @donation_project = DonationProject.find_by_title("Wizard braucht etwas zum Mampfen!")
+    render layout: "application_blank"
+
   end
 
 end

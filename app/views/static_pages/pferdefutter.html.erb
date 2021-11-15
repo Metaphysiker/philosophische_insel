@@ -1,20 +1,13 @@
 <div class="container">
-  <div class="h-100 p-1 my-4 bg-light border rounded-3">
-    <h1>Wizard braucht etwas zum Mampfen!</h1>
-    <p>
-      Wizard
-    </p>
-    <figure>
-      <blockquote class="blockquote">
-        <p>A well-known quote, contained in a blockquote element.</p>
-      </blockquote>
-      <figcaption class="blockquote-footer">
-        Someone famous in <cite title="Source Title">Source Title</cite>
-      </figcaption>
-    </figure>
-    <p>
-      <%= image_tag "elephants", class: "img-fluid rounded" %>
-    </p>
+  <div class="p-4 my-4 bg-light border rounded-3 text-center">
+    <h1 class="text-center">Wizard braucht etwas zum Mampfen!</h1>
+
+    <div class="col-12 offset-md-3 col-md-6 offset-lg-4 col-lg-4">
+      <%= image_tag "wizard2", class: "img-fluid rounded" %>
+      <p class="mt-2">
+        <i>Wizard</i>
+      </p>
+    </div>
     <p>
       Mit seinen fast 34 Jahren kann Wizard kein Heu mehr fressen. Auch diverse Heuersatz-Produkte tun es nicht mehr.
     </p>
@@ -22,7 +15,17 @@
       Was Wizard noch essen kann, ist <strong>getreidefreies Mash</strong>.
     </p>
     <p>
-      <strong>Hilf uns, die Kosten für Wizards Futter zu decken!</strong>
+      Leider hat Wizard noch nicht genug Patenschaften, um seine Futterkosten zu decken.
+    </p>
+    <hr />
+    <p class="lead text-center">
+      Spende Wizard einen Futtersack!
+    </p>
+    <div class="ratio ratio-16x9">
+      <%= video_tag("wizard.mp4", controls: true) %>
+    </div>
+    <p class="mt-2">
+      <i>Wizard unterwegs mt seiner Freundin</i>
     </p>
   </div>
 </div>
