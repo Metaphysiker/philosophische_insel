@@ -5,7 +5,7 @@ ruby '3.0.0'
 
 #gem "image_processing", ">= 1.2"
 gem 'rails-i18n', '~> 6.0.0' # For 6.0.0 or higher
-
+gem 'devise-i18n'
 gem 'odf-report'
 gem 'ahoy_matey'
 gem "chartkick"

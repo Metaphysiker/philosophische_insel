@@ -35,7 +35,7 @@ describe('donations', () => {
     cy.get('#stored_customer_city-widget').clear().type("Diessenhofen");
     cy.contains("Spende sicher übermitteln").first().click();
 
-    cy.contains("Danke für die Unterstützung!");
+    cy.contains("Danke für die Unterstützung!", {timeout:10000});
 
     //cy.get('.rnw-widget-container').find('[name="stored_customer_donation_receipt"]').check();
     //cy.get('form').find('[name="emailUser"]').check()

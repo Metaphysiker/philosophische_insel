@@ -32,7 +32,7 @@
 
 <div class="container-fluid">
   <div class="text-center">
-    <h2>Übersicht</h2>
+    <h2>Übersicht für 2022</h2>
   </div>
   <div id="diagram">
 
@@ -146,28 +146,33 @@
 
   //raiseNow payment complete
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
-    //console.log("payment complete");
+    //paymentComplete
+    console.log("payment complete");
 
      var amount_just_paid = event.data.api.transactionInfo.amount;
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
+     var epayment_status = event.data.api.transactionInfo.epayment_status;
 
-    $.ajax({
-      url: "<%= donations_path %>",
-      method: 'post',
-      data: { donation:
-        {
-          amount: amount_just_paid,
-          transaction_id: transaction_id,
-          donation_project_id: donation_project.id
-        }
-      },
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      }
-    }).always(function( ) {
-      	getDataAndDraw('#diagram');
-    });
-
+     if(epayment_status === "success"){
+       $.ajax({
+         url: "<%= donations_path %>",
+         method: 'post',
+         data: { donation:
+           {
+             amount: amount_just_paid,
+             transaction_id: transaction_id,
+             donation_project_id: donation_project.id
+           }
+         },
+         headers: {
+           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+         }
+       }).always(function( ) {
+           getDataAndDraw('#diagram');
+       });
+     } else {
+       getDataAndDraw('#diagram');
+     }
   });
 
 
