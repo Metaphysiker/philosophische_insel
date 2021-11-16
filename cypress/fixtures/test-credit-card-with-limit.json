@@ -1,0 +1,7 @@
+{
+  "card_type": "MasterCard",
+  "card_number": "5404000000000001",
+  "exp_date": "12/21",
+  "cvv": "123",
+  "test_rule": "With limit"
+}
