@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum]
 
   def welcome
   end
@@ -10,15 +10,19 @@ class StaticPagesController < ApplicationController
   def essays
   end
 
+  def impressum
+
+  end
+
   def visits
     authorize :static_pages
   end
 
   def pferdefutter
 
-    set_meta_tags title: 'Wizard braucht etwas zum Mampfen!',
-              description: 'Mit seinen fast 34 Jahren kann Wizard kein Heu mehr fressen. Spende Wizard einen Futtersack!',
-              keywords: 'Wizard, Wallach, Stinah, Stiftung Tiere in Not Animal Help, Futtersack, Spende'
+    set_meta_tags title: 'Wizard braucht Seniorenfutter',
+              description: 'Mit seinen bald 34 Jahren ist Wizard auf Spezialfutter angewiesen. Magst du Futtersackpate werden?',
+              keywords: 'Wizard, Wallach, Stinah, Stiftung Tiere in Not Animal Help, Spezialfutter, Futtersack, Spende'
 
     set_meta_tags og: {
       title: :title,
