@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'stinah/wizard', to: 'static_pages#pferdefutter', as: "pferdefutter"
 
 
+  get 'impressum', to: 'static_pages#impressum', as: "impressum"
 
   get 'sandro-raess', to: 'static_pages#about', as: "about"
   get 'stinah/:id', to: 'donation_projects#show', as: "stinah"
