@@ -26,6 +26,8 @@ class StaticPagesController < ApplicationController
 
     set_meta_tags og: {
       title: :title,
+      description: :description,
+      type: "website",
       image: Rails.application.config.full_path_variable + ActionController::Base.helpers.image_url("wizard3.jpeg"),
     }
 
