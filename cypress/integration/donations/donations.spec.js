@@ -29,7 +29,7 @@ describe('donations', () => {
     cy.get('#stored_customer_lastname-widget').clear().type("Räss");
     cy.get('#stored_customer_email-widget').clear().type("s.raess@me.com");
     cy.contains("Spendenbescheinigung").first().click();
-    cy.contains("Ich möchte eine Patenschaft für Wizard übernehmen und die Futterkosten decken").first().click();
+    cy.contains("Ich möchte eine Patenschaft für Wizard übernehmen").first().click();
     cy.get('#stored_customer_street-widget').clear().type("Fohrenbühlstr. 4");
     cy.get('#stored_customer_zip_code-widget').clear().type("8253");
     cy.get('#stored_customer_city-widget').clear().type("Diessenhofen");
