@@ -26,7 +26,7 @@ class StaticPagesController < ApplicationController
 
     set_meta_tags og: {
       title: :title,
-      image: ActionController::Base.helpers.image_url("wizard2.jpeg"),
+      image: ActionController::Base.helpers.image_url("wizard3.jpeg"),
     }
 
     @donation_project = DonationProject.find_by_title("Wizard braucht etwas zum Mampfen!")
