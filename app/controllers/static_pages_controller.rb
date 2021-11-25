@@ -28,12 +28,18 @@ class StaticPagesController < ApplicationController
       title: :title,
       description: :description,
       type: "website",
-      image: Rails.application.config.full_path_variable + ActionController::Base.helpers.image_url("wizard3.jpeg"),
+      image: image_url("wizard3.jpeg"),
+      url: pferdefutter_url
     }
 
     @donation_project = DonationProject.find_by_title("Wizard braucht etwas zum Mampfen!")
     render layout: "application_blank"
 
   end
+
+  def image_url(source)
+    URI.join(root_url, ActionController::Base.helpers.image_url("wizard3.jpeg"))
+  end
+
 
 end
