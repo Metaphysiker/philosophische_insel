@@ -192,6 +192,11 @@
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
      var epayment_status = event.data.api.transactionInfo.epayment_status;
 
+     var first_name = event.data.api.transactionInfo.stored_customer_firstname;
+     var last_name = event.data.api.transactionInfo.stored_customer_lastname;
+     var email = event.data.api.transactionInfo.stored_customer_email;
+     var datatrans_status = event.data.api.transactionInfo.datatrans_status;
+
      if(epayment_status === "success"){
        $.ajax({
          url: "<%= donations_path %>",
@@ -200,7 +205,11 @@
            {
              amount: amount_just_paid,
              transaction_id: transaction_id,
-             donation_project_id: donation_project.id
+             donation_project_id: donation_project.id,
+             status: epayment_status + " - " + datatrans_status,
+             first_name: first_name,
+             last_name: last_name,
+             email: email
            }
          },
          headers: {
