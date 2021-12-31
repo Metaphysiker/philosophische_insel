@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer]
 
   def welcome
   end
@@ -41,5 +41,8 @@ class StaticPagesController < ApplicationController
     URI.join(root_url, ActionController::Base.helpers.image_url("wizard3.jpeg"))
   end
 
+  def iframer
+    render layout: "application_empty"
+  end
 
 end

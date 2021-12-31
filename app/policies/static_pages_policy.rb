@@ -4,4 +4,8 @@ class StaticPagesPolicy < ApplicationPolicy
     is_user_admin?(@user)
   end
 
+  def iframer?
+    true
+  end
+
 end

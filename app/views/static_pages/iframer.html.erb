@@ -1,0 +1,39 @@
+<div class=container>
+  <div class="">
+
+    <div class="appender row row-cols-1 row-cols-md-3 g-4">
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+  $( document ).ready(function() {
+      console.log( "ready!" );
+
+      $.ajax({
+        method: "GET",
+        url: "https://www.vegan.ch/wp-json/wp/v2/posts",
+        data: {categories: 21}
+      })
+        .done(function( data ) {
+          console.log(data);
+          for (var i = 0; i < data.length; i++) {
+            $(".appender").append(`
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">${data[i].title.rendered}</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+              `);
+          }
+        });
+
+  });
+
+</script>
