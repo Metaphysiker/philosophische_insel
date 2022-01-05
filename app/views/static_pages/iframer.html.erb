@@ -24,6 +24,7 @@
             $(".appender").append(`
             <div class="col">
               <div class="card h-100">
+                <img src="${data[i].yoast_head_json.og_image[0].url}" class="card-img-top">
                 <div class="card-body">
                   <h5 class="card-title">${data[i].title.rendered}</h5>
                   <p class="card-text">${truncate(data[i].content.rendered.replace(/(<([^>]+)>)/gi, ""), 400)}</p>
