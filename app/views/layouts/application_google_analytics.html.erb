@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= display_meta_tags site: application_name %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="bUYclo8VOwfO6-L9oPh67t8Q0kvBUm7HftioGEjGoRI" />
+    <meta name="google-signin-client_id" content="833538385040-8iqfdpp7vhe7u160g1gvp17rmjblcfbv.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/9e87a26e49.js" crossorigin="anonymous"></script>
+    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= favicon_link_tag('philosophische-insel-logo-ohne-hintergrund.png') %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%= render "layouts/navigation" %>
+    <%= render "layouts/flash_messages" if flash %>
+    <%#= render "layouts/top_section" %>
+    <%= yield %>
+    <%= render "layouts/footer" %>
+  </body>
+</html>

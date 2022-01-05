@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit]
 
   def welcome
   end
@@ -43,6 +43,10 @@ class StaticPagesController < ApplicationController
 
   def iframer
     render layout: "application_empty"
+  end
+
+  def cockpit
+    render layout: "application_google_analytics"
   end
 
 end

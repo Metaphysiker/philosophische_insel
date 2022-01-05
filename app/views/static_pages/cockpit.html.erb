@@ -1,0 +1,95 @@
+
+
+<div class="container">
+      <h1>Cockpit - vegan.ch</h1>
+      <h2><%= Date.today.beginning_of_month.strftime("%Y-%m-%d") %> - <%= Date.today.end_of_month.strftime("%Y-%m-%d") %></h2>
+      <!-- The Sign-in button. This will run `queryReports()` on success. -->
+      <p class="g-signin2" data-onsuccess="queryReports"></p>
+
+      <table class="table">
+        <thead>
+          <tr class="head_tr">
+            <th scope="col">Monat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="body_tr">
+
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<script>
+  // Replace with your view ID.
+  var VIEW_ID = "235111240";
+  var startDate = "<%= Date.today.beginning_of_month.strftime("%Y-%m-%d") %>";
+  var endDate = "<%= Date.today.end_of_month.strftime("%Y-%m-%d") %>";
+
+
+  // Query the API and print the results to the page.
+  function queryReports() {
+    gapi.client.request({
+      path: '/v4/reports:batchGet',
+      root: 'https://analyticsreporting.googleapis.com/',
+      method: 'POST',
+      body: {
+        reportRequests: [
+          {
+            viewId: VIEW_ID,
+            dateRanges: [
+              {
+                //startDate: '7daysAgo',
+                startDate: startDate,
+                endDate: endDate
+              }
+            ],
+            metrics: [
+              {
+                expression: 'ga:sessions'
+              },
+              {
+                expression: 'ga:hits'
+              },
+              {
+                expression: 'ga:users'
+              },
+              {
+                expression: 'ga:sessionDuration'
+              },
+              {
+                expression: 'ga:uniquePageviews'
+              }
+            ]
+          }
+        ]
+      }
+    }).then(displayResults, console.error.bind(console));
+  }
+
+  function displayResults(response) {
+
+    var head_row_array = response.result.reports[0].columnHeader.metricHeader.metricHeaderEntries;
+
+    for (var i = 0; i < head_row_array.length; i++) {
+        $(".head_tr").append(`
+          <th scope="col">${head_row_array[i].name}</th>
+        `);
+    }
+
+    var body_row_array = response.result.reports[0].data.rows[0].metrics[0].values;
+
+    for (var i = 0; i < body_row_array.length; i++) {
+        $(".body_tr").append(`
+          <td>${body_row_array[i]}</td>
+        `);
+    }
+
+
+    //var formattedJson = JSON.stringify(response.result, null, 2);
+    //document.getElementById('query-output').value = formattedJson;
+  }
+</script>
+
+<!-- Load the JavaScript API client and Sign-in library. -->
+<script src="https://apis.google.com/js/client:platform.js"></script>

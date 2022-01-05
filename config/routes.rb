@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'impressum', to: 'static_pages#impressum', as: "impressum"
 
   get 'iframer', to: 'static_pages#iframer', as: "iframer"
+  get 'cockpit', to: 'static_pages#cockpit', as: "cockpit"
 
   get 'sandro-raess', to: 'static_pages#about', as: "about"
   get 'stinah/:id', to: 'donation_projects#show', as: "stinah"
