@@ -9,13 +9,10 @@
       <table class="table">
         <thead>
           <tr class="head_tr">
-            <th scope="col">Monat</th>
           </tr>
         </thead>
-        <tbody>
-          <tr class="body_tr">
+        <tbody class="tbody">
 
-          </tr>
         </tbody>
       </table>
 </div>
@@ -25,7 +22,16 @@
   var VIEW_ID = "235111240";
   var startDate = "<%= Date.today.beginning_of_month.strftime("%Y-%m-%d") %>";
   var endDate = "<%= Date.today.end_of_month.strftime("%Y-%m-%d") %>";
-
+  var dateRanges = [
+              {
+                startDate: '7daysAgo',
+                endDate: 'today'
+              },
+              {
+                startDate: '14daysAgo',
+                endDate: '7daysAgo'
+              }
+            ];
 
   // Query the API and print the results to the page.
   function queryReports() {
@@ -37,13 +43,7 @@
         reportRequests: [
           {
             viewId: VIEW_ID,
-            dateRanges: [
-              {
-                //startDate: '7daysAgo',
-                startDate: startDate,
-                endDate: endDate
-              }
-            ],
+            dateRanges: dateRanges,
             metrics: [
               {
                 expression: 'ga:sessions'
@@ -77,13 +77,26 @@
         `);
     }
 
-    var body_row_array = response.result.reports[0].data.rows[0].metrics[0].values;
+    //var body_row_array = response.result.reports[0].data.rows[0].metrics[0].values;
+    var metrics = response.result.reports[0].data.rows[0].metrics;
+    console.log(metrics);
+    for (var i = 0; i < metrics.length; i++) {
+      var values = metrics[i].values;
 
-    for (var i = 0; i < body_row_array.length; i++) {
-        $(".body_tr").append(`
-          <td>${body_row_array[i]}</td>
-        `);
+      $(".tbody").append(`
+      <tr class="row-${i}">
+      </tr>
+      `);
+
+      for (var inner_i = 0; inner_i < values.length; inner_i++) {
+          $(".row-" + i).append(`
+            <td>${values[inner_i]}</td>
+          `);
+      }
+
     }
+
+
 
 
     //var formattedJson = JSON.stringify(response.result, null, 2);
