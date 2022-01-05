@@ -46,6 +46,18 @@ class StaticPagesController < ApplicationController
   end
 
   def cockpit
+    @request = {dateRanges: []}
+
+    last_day_of_month_array = (Date.new(2021, 01)..Date.today).select {|d| d.day == 1}.map {|d| d - 1}.drop(1)
+
+
+    last_day_of_month_array.each  do |last_day_of_month|
+      @request[:dateRanges].push({startDate: last_day_of_month.beginning_of_month, endDate: last_day_of_month})
+    end
+
+    #@request = @request.to_json
+
+
     render layout: "application_google_analytics"
   end
 

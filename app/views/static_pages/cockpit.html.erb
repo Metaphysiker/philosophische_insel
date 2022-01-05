@@ -4,12 +4,17 @@
       <h1>Cockpit - vegan.ch</h1>
       <h2><%= Date.today.beginning_of_month.strftime("%Y-%m-%d") %> - <%= Date.today.end_of_month.strftime("%Y-%m-%d") %></h2>
       <!-- The Sign-in button. This will run `queryReports()` on success. -->
-      <p class="g-signin2" data-onsuccess="queryReports"></p>
+      <p class="g-signin2" data-onsuccess="startQueries"></p>
 
-      <table class="table">
+      <table class="table information_table">
         <thead>
+
           <tr class="head_tr">
+                      <!--
+            <th scope="col">Monat</th>
+                      -->
           </tr>
+
         </thead>
         <tbody class="tbody">
 
@@ -22,19 +27,24 @@
   var VIEW_ID = "235111240";
   var startDate = "<%= Date.today.beginning_of_month.strftime("%Y-%m-%d") %>";
   var endDate = "<%= Date.today.end_of_month.strftime("%Y-%m-%d") %>";
-  var dateRanges = [
+  var request = <%= raw @request.to_json %>;
+  var current_step = 0;
+  var dummy_dateRanges = [
               {
-                startDate: '7daysAgo',
-                endDate: 'today'
-              },
-              {
-                startDate: '14daysAgo',
-                endDate: '7daysAgo'
+              startDate: '2020-01-01',
+                endDate: '2020-01-31'
               }
             ];
 
+
+
+
+  function startQueries() {
+     queryReports(request.dateRanges[current_step]);
+  }
+
   // Query the API and print the results to the page.
-  function queryReports() {
+  function queryReports(dateRange) {
     gapi.client.request({
       path: '/v4/reports:batchGet',
       root: 'https://analyticsreporting.googleapis.com/',
@@ -43,7 +53,7 @@
         reportRequests: [
           {
             viewId: VIEW_ID,
-            dateRanges: dateRanges,
+            dateRanges: [dateRange],
             metrics: [
               {
                 expression: 'ga:sessions'
@@ -60,7 +70,21 @@
               {
                 expression: 'ga:uniquePageviews'
               }
+            ],
+            "dimensionFilterClauses": [
+             {
+              "filters": [
+               {
+                "operator": "REGEXP",
+                "dimensionName": "ga:pagePath",
+                "expressions": [
+                 "/projekte/"
+                ]
+               }
+              ]
+             }
             ]
+
           }
         ]
       }
@@ -69,38 +93,39 @@
 
   function displayResults(response) {
 
-    var head_row_array = response.result.reports[0].columnHeader.metricHeader.metricHeaderEntries;
+    //var head_row_array = response.result.reports[0].columnHeader.metricHeader.metricHeaderEntries;
 
-    for (var i = 0; i < head_row_array.length; i++) {
-        $(".head_tr").append(`
-          <th scope="col">${head_row_array[i].name}</th>
-        `);
-    }
-
+    //for (var i = 0; i < head_row_array.length; i++) {
+    //    $(".head_tr").append(`
+    //      <th scope="col">${head_row_array[i].name}</th>
+    //    `);
+    //}
     //var body_row_array = response.result.reports[0].data.rows[0].metrics[0].values;
+
     var metrics = response.result.reports[0].data.rows[0].metrics;
-    console.log(metrics);
     for (var i = 0; i < metrics.length; i++) {
       var values = metrics[i].values;
-
       $(".tbody").append(`
-      <tr class="row-${i}">
+      <tr>
       </tr>
       `);
 
       for (var inner_i = 0; inner_i < values.length; inner_i++) {
-          $(".row-" + i).append(`
+          $(".information_table tr:last").append(`
             <td>${values[inner_i]}</td>
           `);
       }
 
     }
 
-
-
-
     //var formattedJson = JSON.stringify(response.result, null, 2);
     //document.getElementById('query-output').value = formattedJson;
+
+    current_step = current_step + 1;
+    if (current_step < request.dateRanges.length) {
+      queryReports(request.dateRanges[current_step]);
+    }
+
   }
 </script>
 
