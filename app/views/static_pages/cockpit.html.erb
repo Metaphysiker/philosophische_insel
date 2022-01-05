@@ -1,6 +1,6 @@
 <div class="container">
       <h1>Cockpit - vegan.ch</h1>
-      <h2><%= Date.today.beginning_of_month.strftime("%Y-%m-%d") %> - <%= Date.today.end_of_month.strftime("%Y-%m-%d") %></h2>
+      <h2><%= @start_date.strftime("%Y-%m-%d") %> - <%= @end_date.strftime("%Y-%m-%d") %></h2>
       <!-- The Sign-in button. This will run `queryReports()` on success. -->
       <p class="g-signin2" data-onsuccess="startQueries"></p>
 
@@ -9,11 +9,9 @@
 
           <tr class="head_tr">
             <th scope="col">Monat</th>
+            <th scope="col">Pageviews</th>
             <th scope="col">Sessions</th>
-            <th scope="col">Hits</th>
             <th scope="col">Users</th>
-            <th scope="col">Session Duration</th>
-            <th scope="col">uniquePageviews</th>
                       <!--
             <th scope="col">Monat</th>
                       -->
@@ -29,6 +27,7 @@
 <script>
   // Replace with your view ID.
   var VIEW_ID = "235111240";
+  var options = {  year: 'numeric', month: 'long' };
   var startDate = "<%= Date.today.beginning_of_month.strftime("%Y-%m-%d") %>";
   var endDate = "<%= Date.today.end_of_month.strftime("%Y-%m-%d") %>";
   var request = <%= raw @request.to_json %>;
@@ -58,19 +57,13 @@
             dateRanges: [dateRange],
             metrics: [
               {
+                expression: 'ga:uniquePageviews'
+              },
+              {
                 expression: 'ga:sessions'
               },
               {
-                expression: 'ga:hits'
-              },
-              {
                 expression: 'ga:users'
-              },
-              {
-                expression: 'ga:sessionDuration'
-              },
-              {
-                expression: 'ga:uniquePageviews'
               }
             ]
           //  "dimensionFilterClauses": [
@@ -95,13 +88,13 @@
       var metrics = response.result.reports[0].data.rows[0].metrics;
       for (var i = 0; i < metrics.length; i++) {
         var values = metrics[i].values;
-        $(".tbody").append(`
+        $(".information_table  .tbody").append(`
         <tr>
         </tr>
         `);
-
+        var date_of_current_row = new Date(dateRange.startDate);
         $(".information_table tr:last").append(`
-          <td>${dateRange.startDate} - ${dateRange.endDate}</td>
+          <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
         `);
 
         for (var inner_i = 0; inner_i < values.length; inner_i++) {
