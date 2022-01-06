@@ -62,6 +62,24 @@
 
         </tbody>
       </table>
+
+      <h2>Blogbeiträge</h2>
+      <table class="table monthly_blog_report_table">
+        <thead>
+
+          <tr class="head_tr">
+            <th scope="col">Monat</th>
+            <th scope="col">Besucher</th>
+                      <!--
+            <th scope="col">Monat</th>
+                      -->
+          </tr>
+
+        </thead>
+        <tbody class="tbody">
+
+        </tbody>
+      </table>
 </div>
 
 <script>
@@ -77,10 +95,12 @@
 
 
   function startQueries() {
-     monthly_overview_report(request.dateRanges)
-     .then(() => monthly_member_page_report(request.dateRanges))
-     .then(() => monthly_donation_page_report(request.dateRanges));
+     //monthly_overview_report(request.dateRanges)
+     //.then(() => monthly_member_page_report(request.dateRanges))
+     //.then(() => monthly_donation_page_report(request.dateRanges))
+     //.then(() => monthly_blog_report(request.dateRanges));
     // .then(monthly_member_page_report(request.dateRanges));
+    monthly_blog_report(request.dateRanges);
   }
 
   //monthly_overview_report
@@ -258,11 +278,79 @@
                         }
                         ]
                        }
-                      ]
+                     ]
                     }
                   ]
                 }
               }).then(function(response){
+                var metrics = response.result.reports[0].data.rows[0].metrics;
+                for (var i = 0; i < metrics.length; i++) {
+                  var values = metrics[i].values;
+                  $(table_name + " .tbody").append(`
+                  <tr>
+                  </tr>
+                  `);
+                  var date_of_current_row = new Date(dateRanges[main_index].startDate);
+                  $(table_name + " tr:last").append(`
+                    <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
+                  `);
+
+                  for (var inner_i = 0; inner_i < values.length; inner_i++) {
+                      $(table_name + " tr:last").append(`
+                        <td>${values[inner_i]}</td>
+                      `);
+                  }
+                }
+
+                resolve("done");
+                if(main_index + 1 >= dateRanges.length){
+                  outer_promise_resolve("this report is done");
+                  //outer_promise_reject("error");
+                }
+              }, function(error){
+                outer_promise_reject("error");
+              })
+            } // end of inner promise
+        ));
+      } // end of for loop
+    })
+  }
+
+  //monthly_blog_report
+  function monthly_blog_report(dateRanges){
+    var table_name = ".monthly_blog_report_table";
+    return new Promise(function(outer_promise_resolve, outer_promise_reject)
+    {
+      for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
+        {
+            p = p.then(() => new Promise(function(resolve, reject) {
+              gapi.client.request({
+                path: '/v4/reports:batchGet',
+                root: 'https://analyticsreporting.googleapis.com/',
+                method: 'POST',
+                body: {
+                  reportRequests: [
+                    {
+                      viewId: VIEW_ID,
+                      dateRanges: [dateRanges[main_index]],
+                      "metrics":
+                      [
+                        {"expression": "ga:users"},
+                      ],
+                      "dimensions":
+                      [
+                        {"name": "ga:pagePath"}
+                      ],
+                      "orderBys": [
+                        {"fieldName": "ga:users", "sortOrder": "DESCENDING"},
+                      ]
+
+
+                    }
+                  ]
+                }
+              }).then(function(response){
+                console.log(response.body);
                 var metrics = response.result.reports[0].data.rows[0].metrics;
                 for (var i = 0; i < metrics.length; i++) {
                   var values = metrics[i].values;
