@@ -68,8 +68,11 @@
   // Replace with your view ID.
   var VIEW_ID = "235111240";
   var options = {  year: 'numeric', month: 'long' };
+  var startDate = "<%= Date.today.beginning_of_month.strftime("%Y-%m-%d") %>";
+  var endDate = "<%= Date.today.end_of_month.strftime("%Y-%m-%d") %>";
   var request = <%= raw @request.to_json %>;
-  var dummy_dateRange =
+  var current_step = 0;
+  var dateRange =
               {
               startDate: '2021-01-01',
                 endDate: '2021-01-31'
@@ -77,71 +80,152 @@
 
 
   function startQueries() {
-     monthly_overview_report(0, request.dateRanges)
-     .then(result => console.log(result), error => console.log(error));
+     //montlyOverviewReport(request.dateRanges[current_step]);
+     //do_a_report().then(result => console.log(result));
+     //monthly_overview_reportx(request.dateRanges).then(result => console.log(result));
+     monthly_overview_report(0, request.dateRanges).then(result => console.log(result));
+  }
+
+
+
+  function do_a_report() {
+    return new Promise(function(resolve, reject) {
+
+      setTimeout(() => resolve("done"), 800);
+      setTimeout(() => reject(new Error("Whoops!")), 1000);
+    });
+  }
+
+  function monthly_overview_reportxx(iteration_step, dateRanges){
+
+    gapi.client.request({
+      path: '/v4/reports:batchGet',
+      root: 'https://analyticsreporting.googleapis.com/',
+      method: 'POST',
+      body: {
+        reportRequests: [
+          {
+            viewId: VIEW_ID,
+            dateRanges: [dateRanges[iteration_step]],
+            metrics: [
+              {
+                expression: 'ga:pageviews'
+              },
+              {
+                expression: 'ga:uniquePageviews'
+              },
+              {
+                expression: 'ga:sessions'
+              },
+              {
+                expression: 'ga:users'
+              }
+            ]
+          }
+        ]
+      }
+    }).then(function(response){
+
+      var metrics = response.result.reports[0].data.rows[0].metrics;
+      for (var i = 0; i < metrics.length; i++) {
+        var values = metrics[i].values;
+        $(".monthly_overview_table  .tbody").append(`
+        <tr>
+        </tr>
+        `);
+        var date_of_current_row = new Date(dateRanges[iteration_step].startDate);
+        $(".monthly_overview_table tr:last").append(`
+          <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
+        `);
+
+        for (var inner_i = 0; inner_i < values.length; inner_i++) {
+            $(".monthly_overview_table tr:last").append(`
+              <td>${values[inner_i]}</td>
+            `);
+        }
+      }
+
+      if(iteration_step + 1 < dateRanges.length){
+         monthly_overview_report(iteration_step + 1, dateRanges)
+      } else {
+
+      }
+
+    })
+
+
   }
 
   function monthly_overview_report(iteration_step, dateRanges){
-    return new Promise(function(outer_promise_resolve, outer_promise_reject)
-    {
+
+    return new Promise(function(outer_promise_resolve, outer_promise_reject) {
+
       for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
-        {
-            p = p.then(() => new Promise(function(resolve, reject) {
-              gapi.client.request({
-                path: '/v4/reports:batchGet',
-                root: 'https://analyticsreporting.googleapis.com/',
-                method: 'POST',
-                body: {
-                  reportRequests: [
-                    {
-                      viewId: VIEW_ID,
-                      dateRanges: [dateRanges[main_index]],
-                      metrics: [
-                        {
-                          expression: 'ga:pageviews'
-                        },
-                        {
-                          expression: 'ga:uniquePageviews'
-                        },
-                        {
-                          expression: 'ga:sessions'
-                        },
-                        {
-                          expression: 'ga:users'
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }).then(function(response){
-                var metrics = response.result.reports[0].data.rows[0].metrics;
-                for (var i = 0; i < metrics.length; i++) {
-                  var values = metrics[i].values;
-                  $(".monthly_overview_table  .tbody").append(`
-                  <tr>
-                  </tr>
-                  `);
-                  var date_of_current_row = new Date(dateRanges[main_index].startDate);
-                  $(".monthly_overview_table tr:last").append(`
-                    <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
-                  `);
+      {
+          //p = p.then(() => new Promise(resolve => setTimeout(resolve, 300))).then(() => console.log(i));
 
-                  for (var inner_i = 0; inner_i < values.length; inner_i++) {
-                      $(".monthly_overview_table tr:last").append(`
-                        <td>${values[inner_i]}</td>
-                      `);
+          p = p.then(() => new Promise(function(resolve, reject) {
+
+            gapi.client.request({
+              path: '/v4/reports:batchGet',
+              root: 'https://analyticsreporting.googleapis.com/',
+              method: 'POST',
+              body: {
+                reportRequests: [
+                  {
+                    viewId: VIEW_ID,
+                    dateRanges: [dateRanges[main_index]],
+                    metrics: [
+                      {
+                        expression: 'ga:pageviews'
+                      },
+                      {
+                        expression: 'ga:uniquePageviews'
+                      },
+                      {
+                        expression: 'ga:sessions'
+                      },
+                      {
+                        expression: 'ga:users'
+                      }
+                    ]
                   }
-                }
+                ]
+              }
+            }).then(function(response){
 
-                resolve("done");
-                if(main_index + 1 >= dateRanges.length){
-                  outer_promise_resolve("this report is done");
-                  //outer_promise_reject("error");
+
+              var metrics = response.result.reports[0].data.rows[0].metrics;
+              for (var i = 0; i < metrics.length; i++) {
+                var values = metrics[i].values;
+                $(".monthly_overview_table  .tbody").append(`
+                <tr>
+                </tr>
+                `);
+                var date_of_current_row = new Date(dateRanges[main_index].startDate);
+                $(".monthly_overview_table tr:last").append(`
+                  <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
+                `);
+
+                for (var inner_i = 0; inner_i < values.length; inner_i++) {
+                    $(".monthly_overview_table tr:last").append(`
+                      <td>${values[inner_i]}</td>
+                    `);
                 }
-              })
-            } // end of inner promise
-        ));
-      } // end of for loop
+              }
+
+              resolve("done");
+              if(main_index + 1 >= dateRanges.length){
+                outer_promise_resolve("this report is done");
+              }
+
+            })
+
+        } // end of inner promise
+
+
+      ));
+    } // end of for loop
     })
   }
 
