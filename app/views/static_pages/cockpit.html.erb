@@ -64,22 +64,10 @@
       </table>
 
       <h2>Blogbeiträge</h2>
-      <table class="table monthly_blog_report_table">
-        <thead>
+      <div class="blog_container">
 
-          <tr class="head_tr">
-            <th scope="col">Monat</th>
-            <th scope="col">Besucher</th>
-                      <!--
-            <th scope="col">Monat</th>
-                      -->
-          </tr>
+      </div>
 
-        </thead>
-        <tbody class="tbody">
-
-        </tbody>
-      </table>
 </div>
 
 <script>
@@ -350,24 +338,37 @@
                   ]
                 }
               }).then(function(response){
-                console.log(response.body);
-                var metrics = response.result.reports[0].data.rows[0].metrics;
-                for (var i = 0; i < metrics.length; i++) {
-                  var values = metrics[i].values;
-                  $(table_name + " .tbody").append(`
+
+                var table_name = "blog_table_main_index_" + main_index;
+
+                var date_of_current_row = new Date(dateRanges[main_index].startDate);
+
+                $(".blog_container").append(`
+                <h2>${date_of_current_row.toLocaleDateString('de-DE', options)}</h2>
+                <table class="table ${table_name}">
+                  <tbody class="tbody">
+
+                  </tbody>
+                </table>
+                `);
+
+
+
+                console.log(response.result.reports[0].data.rows[0]);
+                var rows = response.result.reports[0].data.rows;
+                for (var rows_index = 0; rows_index < 11; rows_index++){
+                  $("." + table_name + " .tbody").append(`
                   <tr>
+
                   </tr>
                   `);
-                  var date_of_current_row = new Date(dateRanges[main_index].startDate);
-                  $(table_name + " tr:last").append(`
-                    <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
-                  `);
 
-                  for (var inner_i = 0; inner_i < values.length; inner_i++) {
-                      $(table_name + " tr:last").append(`
-                        <td>${values[inner_i]}</td>
-                      `);
-                  }
+                  $("." + table_name + " tr:last").append(`
+                    <td>${rows[rows_index].dimensions[0]}</td>
+                    <td>
+                      ${rows[rows_index].metrics[0].values[0]}
+                    </td>
+                  `);
                 }
 
                 resolve("done");
