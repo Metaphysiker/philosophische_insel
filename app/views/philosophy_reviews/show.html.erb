@@ -1,0 +1,20 @@
+<div class="container">
+
+<p>
+  <strong>Title:</strong>
+  <%= @philosophy_review.title %>
+</p>
+
+<p>
+  <strong>Name of paper:</strong>
+  <%= @philosophy_review.name_of_paper %>
+</p>
+
+<p>
+  <strong>Abstract:</strong>
+  <%= @philosophy_review.abstract %>
+</p>
+
+<%= link_to 'Edit', edit_philosophy_review_path(@philosophy_review) %> |
+<%= link_to 'Back', philosophy_reviews_path %>
+</div>

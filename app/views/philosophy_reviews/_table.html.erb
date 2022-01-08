@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col">Title</th>
+      <th scope="col">Name of Paper</th>
+      <th scope="col">Abstract</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% philosophy_reviews.each do |review| %>
+    <tr>
+      <td><%= review.title %></td>
+      <td><%= review.name_of_paper %></td>
+      <td><%= review.abstract %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

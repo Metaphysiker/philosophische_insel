@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_061319) do
+ActiveRecord::Schema.define(version: 2022_01_08_135136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,14 @@ ActiveRecord::Schema.define(version: 2021_12_06_061319) do
     t.string "slug"
     t.integer "order"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
+  end
+
+  create_table "philosophy_reviews", force: :cascade do |t|
+    t.string "title", default: ""
+    t.string "name_of_paper", default: ""
+    t.text "abstract", default: ""
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", force: :cascade do |t|

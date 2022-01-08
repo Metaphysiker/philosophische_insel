@@ -1,0 +1,2 @@
+class PhilosophyReview < ApplicationRecord
+end

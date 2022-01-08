@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :philosophy_reviews
   resources :donation_projects do
     member do
       get 'bar_chart_data'
