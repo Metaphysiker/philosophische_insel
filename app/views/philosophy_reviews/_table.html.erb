@@ -10,7 +10,7 @@
   <tbody>
     <% philosophy_reviews.each do |review| %>
     <tr>
-      <td><%= review.title %></td>
+      <td><%= link_to review.title, review.hyperlink %></td>
       <td><%= review.name_of_paper %></td>
       <td><%= review.abstract %></td>
     </tr>

@@ -2,7 +2,12 @@
 
 <p>
   <strong>Title:</strong>
-  <%= @philosophy_review.title %>
+  <%= link_to @philosophy_review.title, @philosophy_review.hyperlink %>
+</p>
+
+<p>
+  <strong>Hyperlink:</strong>
+  <%= @philosophy_review.hyperlink %>
 </p>
 
 <p>

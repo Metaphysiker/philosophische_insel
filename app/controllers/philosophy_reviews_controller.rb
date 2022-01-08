@@ -64,6 +64,6 @@ class PhilosophyReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def philosophy_review_params
-      params.require(:philosophy_review).permit(:title, :name_of_paper, :abstract)
+      params.require(:philosophy_review).permit(:title, :name_of_paper, :abstract, :hyperlink)
     end
 end
