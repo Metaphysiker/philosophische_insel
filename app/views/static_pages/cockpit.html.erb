@@ -83,12 +83,12 @@
 
 
   function startQueries() {
-     //monthly_overview_report(request.dateRanges)
-     //.then(() => monthly_member_page_report(request.dateRanges))
-     //.then(() => monthly_donation_page_report(request.dateRanges))
-     //.then(() => monthly_blog_report(request.dateRanges));
+     monthly_overview_report(request.dateRanges)
+     .then(() => monthly_member_page_report(request.dateRanges))
+     .then(() => monthly_donation_page_report(request.dateRanges))
+     .then(() => monthly_blog_report(request.dateRanges));
     // .then(monthly_member_page_report(request.dateRanges));
-    monthly_blog_report(request.dateRanges);
+    //monthly_blog_report(request.dateRanges);
   }
 
   //monthly_overview_report
