@@ -1,0 +1,123 @@
+<div class="area_chart_cockpit">
+  <div class="text-center">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $( ".select_date_range_button" ).click(function() {
+
+    });
+
+    $( function() {
+      $( "#work_time_start_date" ).datepicker({'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+      $( "#work_time_end_date" ).datepicker({'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+    } );
+
+    var cachedWidth = $(window).width();
+
+    //AreaChart2();
+    draw_area_chart(".area_chart_cockpit");
+
+  });
+
+  function draw_area_chart(container){
+    // set the dimensions and margins of the graph
+    var margin = {top: 50, right: 50, bottom: 50, left: 50},
+      width = $(container).width() - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+    var svg = d3.select(container)
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("class", "main_g")
+      .attr("transform",`translate(${margin.left},${margin.top})`);
+
+
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv").then( function(data) {
+
+// X axis
+const x = d3.scaleBand()
+ .range([ 0, width ])
+ .domain(data.map(d => d.Country))
+ .padding(0.2);
+svg.append("g")
+ .attr("transform", `translate(0, ${height})`)
+ .call(d3.axisBottom(x))
+ .selectAll("text")
+   .attr("transform", "translate(-10,0)rotate(-45)")
+   .style("text-anchor", "end");
+
+// Add Y axis
+const y = d3.scaleLinear()
+ .domain([0, 13000])
+ .range([ height, 0]);
+svg.append("g")
+ .call(d3.axisLeft(y));
+
+// Bars
+svg.selectAll("mybar")
+ .data(data)
+ .join("rect")
+   .attr("x", d => x(d.Country))
+   .attr("y", d => y(d.Value))
+   .attr("width", x.bandwidth())
+   .attr("height", d => height - y(d.Value))
+   .attr("fill", "#69b3a2")
+
+})
+
+      var myData = [40, 10, 20, 60, 30];
+      var myData2 = [40, 10, 20, 60, 10, 70];
+      svg
+      .append("g")
+      .attr("class", "second_g")
+        .selectAll('circle')
+        .data(myData)
+        .join('circle')
+        .attr('cx', function(d, i) {
+          return i * 100;
+        })
+        .attr('cy', 10)
+        .attr('r', function(d) {
+          return 0.5 * d;
+        })
+        .style('fill', 'orange');
+
+        svg
+          .selectAll('.second_g')
+          .data(myData2)
+          .join('circle')
+          .attr('cx', function(d, i) {
+            return i * 110;
+          })
+          .attr('cy', 100)
+          .attr('r', function(d) {
+            return 0.5 * d;
+          })
+          .style('fill', 'orange');
+
+          svg
+            .selectAll('circle')
+            .data(myData2)
+            .join('circle')
+            .attr('cx', function(d, i) {
+              return i * 110;
+            })
+            .attr('cy', 200)
+            .attr('r', function(d) {
+              return 0.5 * d;
+            })
+            .style('fill', 'green');
+
+  }
+
+</script>
