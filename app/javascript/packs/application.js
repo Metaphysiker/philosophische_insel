@@ -38,6 +38,7 @@ import "chartkick/highcharts"
 //import "@fortawesome/fontawesome-free/css/all"
 
 import "d3/dist/d3.js"
+import "jquery-ui/ui/widgets/datepicker.js"
 
 
 

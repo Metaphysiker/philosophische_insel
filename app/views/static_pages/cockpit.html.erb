@@ -4,6 +4,25 @@
       <!-- The Sign-in button. This will run `queryReports()` on success. -->
       <p class="g-signin2" data-onsuccess="startQueries"></p>
 
+      <div class="card card-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="input-group mb-3">
+              <span class="input-group-text"><%= t("start_date") %></span>
+              <input type="text" id="work_time_start_date" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-3">
+              <span class="input-group-text"><%= t("end_date") %></span>
+              <input type="text" id="work_time_end_date" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary select_date_range_button"><%= t("apply_date_range") %></button>
+      </div>
+
+
       <h2>Monatliche Übersicht</h2>
       <table class="table monthly_overview_table">
         <thead>
@@ -80,6 +99,18 @@
 </div>
 
 <script>
+
+  $( function() {
+    $("#work_time_start_date").datepicker({'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+    $("#work_time_end_date").datepicker({'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+  } );
+
+  $( ".select_date_range_button" ).click(function() {
+    var work_time_start_date = $('#work_time_start_date').val();
+    var work_time_end_date = $('#work_time_end_date').val();
+    
+  });
+
   // Replace with your view ID.
   var VIEW_ID = "235111240";
   var options = {  year: 'numeric', month: 'long' };
