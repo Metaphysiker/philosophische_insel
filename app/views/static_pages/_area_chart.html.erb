@@ -22,8 +22,29 @@
 
     var cachedWidth = $(window).width();
 
+    var data = [
+      {
+        value: 100,
+        name: "Test"
+      },
+      {
+        value: 50,
+        name: "Kant"
+      },
+      {
+        value: 25,
+        name: "Platon"
+      },
+      {
+        value: 0,
+        name: "Nix"
+      }
+    ]
+    var horizontal_bar_chart = new d3Charts.HorizontalBarChart(".area_chart_cockpit", data);
+    horizontal_bar_chart.draw_chart();
+
     //AreaChart2();
-    draw_area_chart(".area_chart_cockpit");
+    //draw_area_chart(".area_chart_cockpit");
 
   });
 
