@@ -1,3 +1,5 @@
+console.log("d3_objects is starting");
+
  export function HorizontalBarChart(container_class, data) {
    this.container_class = container_class;
    this.data = data;
