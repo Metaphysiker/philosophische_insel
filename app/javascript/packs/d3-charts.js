@@ -19,7 +19,8 @@
 
      var margin = {top: 50, right: 50, bottom: 50, left: 50};
      var width = $(container_class).width() - margin.left - margin.right;
-     var height = this.data.length * 100 - margin.top - margin.bottom;
+     var height = (this.data.length * 100) + 100 - margin.top - margin.bottom;
+     //var height = 500 - margin.top - margin.bottom;
 
        // append the svg object to the body of the page
       const svg = d3.select(this.container_class)
@@ -61,7 +62,7 @@
 
           //add name above the bars
           svg.append("g")
-              .attr("fill", "#2c4959")
+              .attr("fill", "black")
               .attr("font-family", "sans-serif")
             .selectAll("text")
             .data(data)
@@ -75,7 +76,7 @@
 
           //add value inside the bars
           svg.append("g")
-              .attr("fill", "#2c4959")
+              .attr("fill", "black")
               .attr("font-family", "sans-serif")
             .selectAll("text")
             .data(data)
@@ -156,14 +157,15 @@
 
           //add value at top of the bars
           svg.append("g")
-              .attr("fill", "#2c4959")
+              .attr("fill", "black")
               .attr("font-family", "sans-serif")
               .attr("font-size", 12)
             .selectAll("text")
             .data(data)
             .join("text")
+              .style("text-anchor", "middle")
               //.attr("x", d => x(d.value))
-              .attr("x", d => x(d.name))
+              .attr("x", d => x(d.name) + (x.bandwidth()/2))
               .attr("y", d => y(d.value))
               .attr("dy", -10)
               .attr("dx", 5)

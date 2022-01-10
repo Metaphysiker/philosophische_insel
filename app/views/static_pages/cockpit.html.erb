@@ -138,8 +138,6 @@
       current_date = new Date(current_date.getFullYear(), current_date.getMonth() + 1, 1);
     }
 
-    console.log(dateRange);
-
     monthly_overview_report(dateRange)
     .then(() => monthly_member_page_report(dateRange))
     .then(() => monthly_donation_page_report(dateRange))
@@ -188,6 +186,8 @@
     return new Promise(function(outer_promise_resolve, outer_promise_reject)
     {
       var data_for_monthly_overview = [];
+
+      $(table_name + " .tbody").empty();
 
       for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
         {
@@ -263,6 +263,7 @@
     return new Promise(function(outer_promise_resolve, outer_promise_reject)
     {
 
+      $(table_name + " .tbody").empty();
       var data_for_monthly_overview = [];
 
       for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
@@ -344,6 +345,8 @@
     return new Promise(function(outer_promise_resolve, outer_promise_reject)
     {
       var data_for_monthly_overview = [];
+
+      $(table_name + " .tbody").empty();
 
       for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
         {
