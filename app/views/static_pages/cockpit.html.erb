@@ -4,22 +4,22 @@
       <!-- The Sign-in button. This will run `queryReports()` on success. -->
       <p class="g-signin2" data-onsuccess="startQueries"></p>
 
-      <div class="card card-body">
+      <div class="card card-body my-4">
         <div class="row">
           <div class="col-6">
             <div class="input-group mb-3">
-              <span class="input-group-text"><%= t("start_date") %></span>
-              <input type="text" id="work_time_start_date" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              <span class="input-group-text"><%= t("von") %></span>
+              <input type="text" id="work_time_start_date" class="form-control" placeholder="Von">
             </div>
           </div>
           <div class="col-6">
             <div class="input-group mb-3">
-              <span class="input-group-text"><%= t("end_date") %></span>
-              <input type="text" id="work_time_end_date" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              <span class="input-group-text"><%= t("bis") %></span>
+              <input type="text" id="work_time_end_date" class="form-control" placeholder="Bis">
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-primary select_date_range_button"><%= t("apply_date_range") %></button>
+        <button type="button" class="btn btn-primary select_date_range_button">Datumsbereich anwenden</button>
       </div>
 
 
@@ -101,14 +101,50 @@
 <script>
 
   $( function() {
-    $("#work_time_start_date").datepicker({'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+    $("#work_time_start_date").datepicker({ 'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+    $( "#work_time_start_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
     $("#work_time_end_date").datepicker({'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+    $( "#work_time_end_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
   } );
 
   $( ".select_date_range_button" ).click(function() {
     var work_time_start_date = $('#work_time_start_date').val();
     var work_time_end_date = $('#work_time_end_date').val();
-    
+
+    var dateRange = [];
+
+    var start_date = new Date($('#work_time_start_date').val());
+    var end_date = new Date($('#work_time_end_date').val());
+
+    var current_date = new Date(start_date.getTime());
+
+    while (current_date <= end_date) {
+
+      var last_day_of_month = new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0);
+
+      if( last_day_of_month > end_date ){
+        last_day_of_month = new Date(end_date.getTime());
+      }
+
+      dateRange.push(
+      {
+        startDate: convertDate(current_date),
+        endDate: convertDate(last_day_of_month)
+      });
+
+      //get first day of next month
+      current_date = new Date(current_date.getFullYear(), current_date.getMonth() + 1, 1);
+    }
+
+    console.log(dateRange);
+
+    monthly_overview_report(dateRange)
+    .then(() => monthly_member_page_report(dateRange))
+    .then(() => monthly_donation_page_report(dateRange))
+    .then(() => monthly_blog_report(dateRange));
+
   });
 
   // Replace with your view ID.
@@ -124,13 +160,26 @@
 
 
   function startQueries() {
-      monthly_overview_report(request.dateRanges)
-      .then(() => monthly_member_page_report(request.dateRanges))
-      .then(() => monthly_donation_page_report(request.dateRanges))
-      .then(() => monthly_blog_report(request.dateRanges));
+    //  monthly_overview_report(request.dateRanges)
+    //  .then(() => monthly_member_page_report(request.dateRanges))
+    //  .then(() => monthly_donation_page_report(request.dateRanges))
+    //  .then(() => monthly_blog_report(request.dateRanges));
 
      //.then(monthly_member_page_report(request.dateRanges));
     //monthly_blog_report(request.dateRanges);
+  }
+
+  //convert date
+
+  function convertDate(date) {
+    var yyyy = date.getFullYear().toString();
+    var mm = (date.getMonth()+1).toString();
+    var dd  = date.getDate().toString();
+
+    var mmChars = mm.split('');
+    var ddChars = dd.split('');
+
+    return yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]);
   }
 
   //monthly_overview_report
