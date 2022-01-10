@@ -11,6 +11,8 @@ import "jquery"
 import "chosen-js/chosen.jquery.min.js"
 import "packs/chat"
 import "packs/animate_css"
+import { Personyxz } from "packs/d3_objects"
+console.log(Personyxz);
 import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
 //import "@fortawesome/fontawesome-free/css/all"
@@ -44,6 +46,7 @@ ActiveStorage.start()
 window.jQuery = $;
 window.$ = $;
 window.CodeMirror = CodeMirror;
+window.Personyxz = Personyxz;
 
 //window.Lazy = Lazy
 
