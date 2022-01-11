@@ -1,6 +1,5 @@
 <div class="container">
       <h1>Cockpit - vegan.ch</h1>
-      <h2><%= @start_date.strftime("%Y-%m-%d") %> - <%= @end_date.strftime("%Y-%m-%d") %></h2>
       <!-- The Sign-in button. This will run `queryReports()` on success. -->
       <p class="g-signin2" data-onsuccess="startQueries"></p>
 
@@ -317,14 +316,16 @@
                         <td>${values[inner_i]}</td>
                       `);
                   }
-                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', options), value: values[0]});
+                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', options), value: values[0], value2: 10});
 
                 }
 
                 resolve("done");
                 if(main_index + 1 >= dateRanges.length){
-                  var horizontal_bar_chart = new d3Charts.HorizontalBarChart(".monthly_member_page_report_container", data_for_monthly_overview);
-                  horizontal_bar_chart.draw_chart();
+                  var vertical_bar_chart_grouped_two = new d3Charts.VerticalBarChartGroupedTwo(".monthly_member_page_report_container", data_for_monthly_overview);
+                  vertical_bar_chart_grouped_two.draw_chart();
+                  //var horizontal_bar_chart = new d3Charts.HorizontalBarChart(".monthly_member_page_report_container", data_for_monthly_overview);
+                  //horizontal_bar_chart.draw_chart();
 
                   outer_promise_resolve("this report is done");
                   //outer_promise_reject("error");
@@ -399,14 +400,14 @@
                         <td>${values[inner_i]}</td>
                       `);
                   }
-                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', options), value: values[0]});
+                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', options), value: values[0], value2: 10});
 
                 }
 
                 resolve("done");
                 if(main_index + 1 >= dateRanges.length){
-                  var horizontal_bar_chart = new d3Charts.HorizontalBarChart(".monthly_donation_page_report_container", data_for_monthly_overview);
-                  horizontal_bar_chart.draw_chart();
+                  var vertical_bar_chart_grouped_two = new d3Charts.VerticalBarChartGroupedTwo(".monthly_donation_page_report_container", data_for_monthly_overview);
+                  vertical_bar_chart_grouped_two.draw_chart();
 
                   outer_promise_resolve("this report is done");
                   //outer_promise_reject("error");
