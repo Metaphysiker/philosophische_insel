@@ -155,6 +155,36 @@
                 endDate: '2021-01-31'
               };
 
+  var registrationsx = [
+    {
+      month: "Jan. 21",
+      value: 38
+    },
+    {
+      month: "Feb. 21",
+      value: 22
+    },
+    {
+      month: "März 21",
+      value: 59
+    }
+  ]
+
+  var registrations = {
+    "Jan. 21": 38,
+    "Feb. 21": 22,
+    "März 21": 59,
+    "Apr. 21": 22,
+    "Mai 21": 32,
+    "Juni 21": 31,
+    "Juli 21": 15,
+    "Aug. 21": 36,
+    "Sept. 21": 29,
+    "Okt. 21": 19,
+    "Nov. 21": 24,
+    "Dez. 21": 13,
+  };
+
 
   function startQueries() {
     //  monthly_overview_report(request.dateRanges)
@@ -316,7 +346,20 @@
                         <td>${values[inner_i]}</td>
                       `);
                   }
-                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', options), value: values[0], value2: 10});
+
+                  var name = date_of_current_row.toLocaleDateString('de-DE', {  year: '2-digit', month: 'short' });
+                  var value1 = values[0];
+                  var value2 = 0;
+
+                  if(name in registrations ){
+                    value2 = registrations[name];
+                  }
+
+                  $(table_name + " tr:last").append(`
+                    <td>${value2}</td>
+                  `);
+
+                  data_for_monthly_overview.push({name: name, value: value1, value2: value2});
 
                 }
 
@@ -400,7 +443,7 @@
                         <td>${values[inner_i]}</td>
                       `);
                   }
-                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', options), value: values[0], value2: 10});
+                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', {  year: '2-digit', month: 'short' }), value: values[0], value2: 10});
 
                 }
 
