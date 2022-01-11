@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get 'iframer', to: 'static_pages#iframer', as: "iframer"
   get 'cockpit', to: 'static_pages#cockpit', as: "cockpit"
+  get 'google_sheets', to: 'static_pages#google_sheets', as: "google_sheets"
+
 
   get 'sandro-raess', to: 'static_pages#about', as: "about"
   get 'stinah/:id', to: 'donation_projects#show', as: "stinah"

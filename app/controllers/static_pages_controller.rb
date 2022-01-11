@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit google_sheets]
 
   def welcome
   end
@@ -60,6 +60,10 @@ class StaticPagesController < ApplicationController
     #@request = @request.to_json
 
     render layout: "application_google_analytics"
+  end
+
+  def google_sheets
+    render layout: "application_empty"
   end
 
 end
