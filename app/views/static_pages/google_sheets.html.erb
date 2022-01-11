@@ -100,6 +100,7 @@
    */
   function listMajors() {
     gapi.client.sheets.spreadsheets.values.get({
+      apiKey: API_KEY,
       spreadsheetId: '13R8_eqxZda-1XHy66EQKnIiRRjDGwdyBfdLNGuatRTw',
       range: 'A:B',
     }).then(function(response) {
@@ -111,8 +112,6 @@
           // Print columns A and E, which correspond to indices 0 and 4.
           appendPre(row[0] + ', ' + row[1]);
         }
-      } else {
-        appendPre('No data found.');
       }
     }, function(response) {
       appendPre('Error: ' + response.result.error.message);

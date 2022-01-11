@@ -98,6 +98,7 @@
 </div>
 
 <script>
+    var API_KEY = 'AIzaSyDFph_dQKOBKMh4N53BmkxLh3iaBltELMk';
 
   $( function() {
     $("#work_time_start_date").datepicker({ 'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
@@ -109,6 +110,19 @@
   } );
 
   $( ".select_date_range_button" ).click(function() {
+
+    $.ajax({
+      method: "GET",
+      url: "https://sheets.googleapis.com/v4/spreadsheets/13R8_eqxZda-1XHy66EQKnIiRRjDGwdyBfdLNGuatRTw/values:batchGet",
+      data: {
+        key: 'AIzaSyDFph_dQKOBKMh4N53BmkxLh3iaBltELMk',
+        ranges: 'A:B' 
+      }
+    })
+      .done(function( msg ) {
+        console.log(msg);
+      });
+
     var work_time_start_date = $('#work_time_start_date').val();
     var work_time_end_date = $('#work_time_end_date').val();
 
@@ -187,6 +201,7 @@
 
 
   function startQueries() {
+
     //  monthly_overview_report(request.dateRanges)
     //  .then(() => monthly_member_page_report(request.dateRanges))
     //  .then(() => monthly_donation_page_report(request.dateRanges))
