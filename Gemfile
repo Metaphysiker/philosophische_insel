@@ -13,6 +13,7 @@ gem 'groupdate'
 gem 'maxminddb'
 gem "pundit"
 gem 'meta-tags'
+gem 'rest-client'
 
 gem "aws-sdk-s3", require: false
 gem 'friendly_id', '~> 5.4.0'

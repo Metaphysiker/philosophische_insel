@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'api/google_sheets'
   resources :philosophy_reviews
   resources :donation_projects do
     member do

@@ -113,11 +113,7 @@
 
     $.ajax({
       method: "GET",
-      url: "https://sheets.googleapis.com/v4/spreadsheets/13R8_eqxZda-1XHy66EQKnIiRRjDGwdyBfdLNGuatRTw/values:batchGet",
-      data: {
-        key: 'AIzaSyDFph_dQKOBKMh4N53BmkxLh3iaBltELMk',
-        ranges: 'A:B' 
-      }
+      url: 'api/google_sheets',
     })
       .done(function( msg ) {
         console.log(msg);
