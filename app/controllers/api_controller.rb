@@ -3,11 +3,6 @@ class ApiController < ApplicationController
   require 'rest-client'
   def google_sheets
 
-  #  response = RestClient::Request.execute(
-  #   method: :get,
-  #   url: 'https://sheets.googleapis.com/v4/spreadsheets/13R8_eqxZda-1XHy66EQKnIiRRjDGwdyBfdLNGuatRTw/values:batchGet?key=AIzaSyDFph_dQKOBKMh4N53BmkxLh3iaBltELMk&ranges=A:B'
-  #   )
-
      response = RestClient::Request.execute(
       method: :get,
       url: 'https://sheets.googleapis.com/v4/spreadsheets/13R8_eqxZda-1XHy66EQKnIiRRjDGwdyBfdLNGuatRTw/values:batchGet',
