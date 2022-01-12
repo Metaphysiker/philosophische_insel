@@ -25,24 +25,7 @@
       </div>
 
 
-      <h2>Monatliche Übersicht</h2>
-      <table class="table monthly_overview_table">
-        <thead>
-
-          <tr class="head_tr">
-            <th scope="col">Monat</th>
-            <th scope="col">Pageviews</th>
-            <th scope="col">unique Pageviews</th>
-            <th scope="col">Sessions</th>
-            <th scope="col">Users</th>
-          </tr>
-
-        </thead>
-        <tbody class="tbody">
-
-        </tbody>
-      </table>
-      <div class="monthly_overview_svg_container">
+      <div class="monthly_review">
 
       </div>
 
@@ -163,10 +146,13 @@
       current_date = new Date(current_date.getFullYear(), current_date.getMonth() + 1, 1);
     }
 
-    monthly_overview_report(dateRange)
-    .then(() => monthly_member_page_report(dateRange))
-    .then(() => monthly_donation_page_report(dateRange))
-    .then(() => monthly_blog_report(dateRange));
+    var monthly_review = new veganCockpit.MonthlyReview("monthly_review", dateRange, "235111240");
+    monthly_review.generate_report();
+
+  //  monthly_overview_report(dateRange)
+  //  .then(() => monthly_member_page_report(dateRange))
+  //  .then(() => monthly_donation_page_report(dateRange))
+  //  .then(() => monthly_blog_report(dateRange));
 
   });
 

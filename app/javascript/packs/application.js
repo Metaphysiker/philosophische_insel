@@ -13,7 +13,7 @@ import "packs/chat"
 import "packs/animate_css"
 //import { Personyxz } from "packs/d3_objects"
 import * as d3Charts from "packs/d3-charts";
-import * as veganCockpit from "packs/vegan_cockpit";
+
 
 import CodeMirror from 'codemirror/lib/codemirror.js'
 import 'codemirror/mode/markdown/markdown.js'
@@ -51,7 +51,11 @@ window.$ = $;
 window.CodeMirror = CodeMirror;
 //window.Personyxz = Personyxz;
 window.d3Charts = d3Charts;
+
+import * as veganCockpit from "packs/vegan_cockpit";
 window.veganCockpit = veganCockpit;
+
+
 
 //window.Lazy = Lazy
 
