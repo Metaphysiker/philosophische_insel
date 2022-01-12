@@ -102,6 +102,9 @@
 
 <script>
 
+  let params = new URLSearchParams(window.location.search);
+  console.log(params.get(12));
+
   $( function() {
     $("#work_time_start_date").datepicker({ 'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
     $( "#work_time_start_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );

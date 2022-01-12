@@ -61,9 +61,7 @@
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
       listMajors();
-      console.log("list Majors");
     } else {
-      console.log("list Majors");
       authorizeButton.style.display = 'block';
       signoutButton.style.display = 'none';
     }
@@ -100,18 +98,24 @@
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
   function listMajors() {
-    console.log("list Majors");
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-      range: 'Class Data!A2:E',
+      spreadsheetId: '1_WjkByjVFeBLvvi-LDtZL1CX7g4qM-X6m9_wBECT7Sk',
+      range: 'A:B',
     }).then(function(response) {
+
+      var registrations = {};
+
       var range = response.result;
       if (range.values.length > 0) {
-        appendPre('Name, Major:');
         for (i = 0; i < range.values.length; i++) {
           var row = range.values[i];
           // Print columns A and E, which correspond to indices 0 and 4.
-          appendPre(row[0] + ', ' + row[4]);
+          appendPre(row[0] + ', ' + row[1]);
+          registrations[row[0]] = row[1];
+
+          if(i+1 <= range.values.length){
+            window.location.href = '/cockpit?' + new URLSearchParams(registrations).toString();;
+          }
         }
       } else {
         appendPre('No data found.');
@@ -121,4 +125,9 @@
     });
   }
 
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"
+  onload="this.onload=function(){};handleClientLoad()"
+  onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>
