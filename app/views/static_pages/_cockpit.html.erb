@@ -105,10 +105,22 @@
   let registrations = new URLSearchParams(window.location.search);
 
   $( function() {
-    $("#work_time_start_date").datepicker({ 'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+    $("#work_time_start_date").datepicker(
+    {
+      'language' : 'de',
+      'dateFormat' : 'dd-mm-yy',
+      firstDay: 1,
+      minDate: new Date(2021, 0, 1),
+    });
     $( "#work_time_start_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
-    $("#work_time_end_date").datepicker({'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
+    $("#work_time_end_date").datepicker(
+    {
+      'language' : 'de',
+      'dateFormat' : 'dd-mm-yy',
+      firstDay: 1,
+      maxDate: new Date(new Date().setDate(new Date().getDate()-1))
+    });
     $( "#work_time_end_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
   } );
@@ -461,7 +473,7 @@
                         <td>${values[inner_i]}</td>
                       `);
                   }
-                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', {  year: '2-digit', month: 'short' }), value: values[0], value2: 10});
+                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', {  year: '2-digit', month: 'short' }), value: values[0], value2: 0});
 
                 }
 
