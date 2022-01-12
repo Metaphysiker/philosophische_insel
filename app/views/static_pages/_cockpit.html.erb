@@ -29,6 +29,10 @@
 
       </div>
 
+      <div class="monthly_member_page_review">
+
+      </div>
+
       <%#= render "static_pages/area_chart" %>
 
       <h2>Monatliche Mitgliedseite-Übersicht</h2>
@@ -110,14 +114,6 @@
 
   $( ".select_date_range_button" ).click(function() {
 
-    $.ajax({
-      method: "GET",
-      url: 'api/google_sheets',
-    })
-      .done(function( msg ) {
-        console.log(msg);
-      });
-
     var work_time_start_date = $('#work_time_start_date').val();
     var work_time_end_date = $('#work_time_end_date').val();
 
@@ -147,7 +143,9 @@
     }
 
     var monthly_review = new veganCockpit.MonthlyReview("monthly_review", dateRange, "235111240");
-    monthly_review.generate_report();
+    var monthly_member_page_review = new veganCockpit.MonthlyMemberPageReport("monthly_member_page_review", dateRange, "235111240", new URLSearchParams(window.location.search))
+    monthly_review.generate_report()
+    .then(() => monthly_member_page_review.generate_report());
 
   //  monthly_overview_report(dateRange)
   //  .then(() => monthly_member_page_report(dateRange))
