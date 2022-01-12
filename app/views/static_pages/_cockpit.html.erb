@@ -102,8 +102,7 @@
 
 <script>
 
-  let params = new URLSearchParams(window.location.search);
-  console.log(params.get(12));
+  let registrations = new URLSearchParams(window.location.search);
 
   $( function() {
     $("#work_time_start_date").datepicker({ 'language' : 'de', 'dateFormat' : 'dd-mm-yy', firstDay: 1 });
@@ -185,7 +184,7 @@
     }
   ]
 
-  var registrations = {
+  var registrationsy = {
     "Jan. 21": 38,
     "Feb. 21": 22,
     "März 21": 59,
@@ -367,8 +366,11 @@
                   var value1 = values[0];
                   var value2 = 0;
 
-                  if(name in registrations ){
-                    value2 = registrations[name];
+                  var year_month = date_of_current_row.getFullYear() + "-" + ("0" + (date_of_current_row.getMonth() + 1)).slice(-2);
+                  let registration_get = registrations.get(year_month);
+
+                  if(registration_get){
+                    value2 = registration_get;
                   }
 
                   $(table_name + " tr:last").append(`

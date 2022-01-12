@@ -103,18 +103,27 @@
       range: 'A:B',
     }).then(function(response) {
 
-      var registrations = {};
+      var registrations_per_month = {};
 
       var range = response.result;
       if (range.values.length > 0) {
         for (i = 0; i < range.values.length; i++) {
           var row = range.values[i];
-          // Print columns A and E, which correspond to indices 0 and 4.
           appendPre(row[0] + ', ' + row[1]);
-          registrations[row[0]] = row[1];
+          //registrations[row[0]] = row[1];
+
+          row[0].split("-")
+          var year_month = row[0].split("-")[0] + "-" + row[0].split("-")[1];
+
+          //check if key exists
+          if(year_month in registrations_per_month) {
+            registrations_per_month[year_month] = registrations_per_month[year_month] + parseInt(row[1], 10);
+          } else {
+            registrations_per_month[year_month] = parseInt(row[1], 10);
+          }
 
           if(i+1 <= range.values.length){
-            window.location.href = '/cockpit?' + new URLSearchParams(registrations).toString();;
+            window.location.href = '/cockpit?' + new URLSearchParams(registrations_per_month).toString();;
           }
         }
       } else {
