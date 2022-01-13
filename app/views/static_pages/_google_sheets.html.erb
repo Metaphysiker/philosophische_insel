@@ -113,7 +113,7 @@
           //registrations[row[0]] = row[1];
 
           row[0].split("-")
-          var year_month = row[0].split("-")[0] + "-" + row[0].split("-")[1];
+          var year_month = "registration-" + row[0].split("-")[0] + "-" + row[0].split("-")[1];
 
           //check if key exists
           if(year_month in registrations_per_month) {

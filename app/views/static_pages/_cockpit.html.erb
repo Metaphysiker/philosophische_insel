@@ -33,6 +33,14 @@
 
       </div>
 
+      <div class="monthly_donation_page_review">
+
+      </div>
+
+      <div class="monthly_most_visited_pages_review">
+
+      </div>
+
       <%#= render "static_pages/area_chart" %>
 
       <h2>Monatliche Mitgliedseite-Übersicht</h2>
@@ -143,9 +151,15 @@
     }
 
     var monthly_review = new veganCockpit.MonthlyReview("monthly_review", dateRange, "235111240");
-    var monthly_member_page_review = new veganCockpit.MonthlyMemberPageReport("monthly_member_page_review", dateRange, "235111240", new URLSearchParams(window.location.search))
+    var monthly_member_page_review = new veganCockpit.MonthlyMemberPageReview("monthly_member_page_review", dateRange, "235111240", new URLSearchParams(window.location.search));
+    var monthly_donation_page_review = new veganCockpit.MonthlyDonationPageReview("monthly_donation_page_review", dateRange, "235111240", new URLSearchParams(window.location.search));
+    var monthly_most_visited_pages_review = new veganCockpit.MonthlyMostVisitedPagesReview("monthly_most_visited_pages_review", dateRange, "235111240");
+
+
     monthly_review.generate_report()
-    .then(() => monthly_member_page_review.generate_report());
+    .then(() => monthly_member_page_review.generate_report())
+    .then(() => monthly_donation_page_review.generate_report())
+    .then(() => monthly_most_visited_pages_review.generate_report());
 
   //  monthly_overview_report(dateRange)
   //  .then(() => monthly_member_page_report(dateRange))
