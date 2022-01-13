@@ -25,7 +25,6 @@
    *  On load, called to load the auth2 library and API client library.
    */
   function handleClientLoad() {
-    console.log("gooo");
     gapi.load('client:auth2', initClient);
   }
 
@@ -60,7 +59,18 @@
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
-      listMajors();
+
+      Promise.all([getRegistrations(), getDonations()]).then((values) => {
+        //console.log(values);
+        window.location.href = '/cockpit?' + values[0] + "&" + values[1];
+        //window.location.href = '/cockpit?' + values[1];
+
+
+      });
+
+      //getRegistrations().then((result) => console.log(result));
+      //getRegistrations();
+      //getDonations();
     } else {
       authorizeButton.style.display = 'block';
       signoutButton.style.display = 'none';
@@ -97,7 +107,9 @@
    * Print the names and majors of students in a sample spreadsheet:
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
-  function listMajors() {
+  function getRegistrations() {
+    return new Promise(function(resolve, reject){
+
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1_WjkByjVFeBLvvi-LDtZL1CX7g4qM-X6m9_wBECT7Sk',
       range: 'A:B',
@@ -122,16 +134,64 @@
             registrations_per_month[year_month] = parseInt(row[1], 10);
           }
 
-          if(i+1 <= range.values.length){
-            window.location.href = '/cockpit?' + new URLSearchParams(registrations_per_month).toString();;
+          if(i+1 >= range.values.length){
+            resolve(new URLSearchParams(registrations_per_month).toString());
+            //window.location.href = '/cockpit?' + new URLSearchParams(registrations_per_month).toString();
           }
         }
       } else {
         appendPre('No data found.');
+        reject("Error");
       }
     }, function(response) {
+      reject("Error");
       appendPre('Error: ' + response.result.error.message);
     });
+  })
+  }
+
+  function getDonations() {
+    return new Promise(function(resolve, reject){
+
+    gapi.client.sheets.spreadsheets.values.get({
+      spreadsheetId: '16cRJL3K3Axn2zdzL0LVBeK9IwLCz-8XcNU3d_hZTcAw',
+      range: 'A:B',
+    }).then(function(response) {
+
+      var donations_per_month = {};
+
+      var range = response.result;
+      if (range.values.length > 0) {
+        for (i = 0; i < range.values.length; i++) {
+          var row = range.values[i];
+          appendPre(row[0] + ', ' + row[1]);
+          //donations[row[0]] = row[1];
+
+          row[0].split("-")
+          var year_month = "donation-" + row[0].split("-")[0] + "-" + row[0].split("-")[1];
+
+          //check if key exists
+          if(year_month in donations_per_month) {
+            donations_per_month[year_month] = donations_per_month[year_month] + parseInt(row[1], 10);
+          } else {
+            donations_per_month[year_month] = parseInt(row[1], 10);
+          }
+
+          if(i+1 >= range.values.length){
+            resolve(new URLSearchParams(donations_per_month).toString());
+
+            //window.location.href = '/cockpit?' + new URLSearchParams(donations_per_month).toString();;
+          }
+        }
+      } else {
+        reject("error");
+        appendPre('No data found.');
+      }
+    }, function(response) {
+      reject("error");
+      appendPre('Error: ' + response.result.error.message);
+    });
+  })
   }
 
 </script>

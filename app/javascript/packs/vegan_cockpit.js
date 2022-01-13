@@ -145,7 +145,8 @@ export function MonthlyMemberPageReview(container_class, dateRanges, view_id, re
 
             <tr class="head_tr">
             <th scope="col">Monat</th>
-              <th scope="col">Users</th>
+            <th scope="col">Users</th>
+            <th scope="col">Neue Mitglieder</th>
             </tr>
 
           </thead>
@@ -223,7 +224,7 @@ export function MonthlyMemberPageReview(container_class, dateRanges, view_id, re
                     value2 = registration_get;
                   }
 
-                  $(table_name + " tr:last").append(`
+                  $("." + table_name + " tr:last").append(`
                     <td>${value2}</td>
                   `);
 
@@ -280,7 +281,8 @@ export function MonthlyDonationPageReview(container_class, dateRanges, view_id, 
 
             <tr class="head_tr">
             <th scope="col">Monat</th>
-              <th scope="col">Users</th>
+            <th scope="col">Users</th>
+            <th scope="col">Spenden</th>
             </tr>
 
           </thead>
@@ -351,14 +353,14 @@ export function MonthlyDonationPageReview(container_class, dateRanges, view_id, 
 
                   var value2 = 0;
 
-                  var year_month = date_of_current_row.getFullYear() + "-" + ("0" + (date_of_current_row.getMonth() + 1)).slice(-2);
+                  var year_month = "donation-" + date_of_current_row.getFullYear() + "-" + ("0" + (date_of_current_row.getMonth() + 1)).slice(-2);
                   let donation_get = donations.get(year_month);
 
                   if(donation_get){
                     value2 = donation_get;
                   }
 
-                  $(table_name + " tr:last").append(`
+                  $("." + table_name + " tr:last").append(`
                     <td>${value2}</td>
                   `);
 
@@ -400,7 +402,7 @@ export function MonthlyMostVisitedPagesReview(container_class, dateRanges, view_
     var dateRange = this.dateRange;
     var view_id = this.view_id;
     var date_format_options = this.date_format_options;
-    
+
     return new Promise(function(outer_promise_resolve, outer_promise_reject)
     {
       for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
