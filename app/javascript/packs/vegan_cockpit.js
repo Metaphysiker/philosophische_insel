@@ -528,7 +528,7 @@ export function MonthlySinglePageReview(container_class, dateRanges, view_id, pa
       $("." + container_class).empty();
 
       $("." + container_class).append(`
-        <h2>Monatliche Übersicht für ${page_name}</h2>
+        <h2>Monatliche Übersicht für "${page_name}"</h2>
         <table class="${table_name} table table-striped">
           <thead>
 
@@ -661,7 +661,7 @@ export function MonthlySourceForSinglePageReview(container_class, dateRanges, vi
       $("." + container_class).empty();
 
       $("." + container_class).append(`
-        <h2>Monatliche Quellen-Übersicht für ${page_name}</h2>
+        <h2>Monatliche Quellen-Übersicht für "${page_name}"</h2>
 
         <table class="${table_name} table table-striped">
           <thead>
@@ -789,7 +789,7 @@ export function SourceForSinglePageReview(container_class, dateRanges, view_id, 
       $("." + container_class).empty();
 
       $("." + container_class).append(`
-        <h2>Quellen-Übersicht für ${page_name}</h2>
+        <h2>Quellen-Übersicht für "${page_name}"</h2>
 
         <div class="${svg_container}">
 
@@ -1025,7 +1025,7 @@ export function SourceForRegexpPageReview(container_class, dateRanges, view_id, 
       $("." + container_class).empty();
 
       $("." + container_class).append(`
-        <h2>Quellen-Übersicht für alle Seiten mit ${page_name}</h2>
+        <h2>Quellen-Übersicht für alle Seiten mit "${page_name}"</h2>
 
         <div class="${svg_container}">
 
