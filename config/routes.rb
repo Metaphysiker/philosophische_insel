@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get 'iframer', to: 'static_pages#iframer', as: "iframer"
   get 'cockpit', to: 'static_pages#cockpit', as: "cockpit"
+  get 'cockpit_start', to: 'static_pages#cockpit_start', as: "cockpit_start"
   get 'google_sheets', to: 'static_pages#google_sheets', as: "google_sheets"
 
 
