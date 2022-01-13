@@ -28,27 +28,31 @@
       </div>
 
 
-      <div class="monthly_review">
+      <div class="monthly_review border rounded my-2 p-1">
 
       </div>
 
-      <div class="monthly_member_page_review">
+      <div class="monthly_member_page_review border rounded my-2 p-1">
 
       </div>
 
-      <div class="monthly_donation_page_review">
+      <div class="monthly_donation_page_review border rounded my-2 p-1">
 
       </div>
 
-      <div class="monthly_most_visited_pages_review">
+      <div class="monthly_most_visited_pages_review border rounded my-2 p-1">
 
       </div>
 
-      <div class="monthly_single_page_review">
+      <div class="monthly_single_page_review border rounded my-2 p-1">
 
       </div>
 
-      <div class="monthly_source_for_single_page_review">
+      <div class="monthly_source_for_single_page_review border rounded my-2 p-1">
+
+      </div>
+
+      <div class="source_for_single_page_review border rounded my-2 p-1">
 
       </div>
 
@@ -110,17 +114,27 @@
     var monthly_member_page_review = new veganCockpit.MonthlyMemberPageReview("monthly_member_page_review", dateRange, "235111240", new URLSearchParams(window.location.search));
     var monthly_donation_page_review = new veganCockpit.MonthlyDonationPageReview("monthly_donation_page_review", dateRange, "235111240", new URLSearchParams(window.location.search));
     var monthly_most_visited_pages_review = new veganCockpit.MonthlyMostVisitedPagesReview("monthly_most_visited_pages_review", dateRange, "235111240");
-    var monthly_single_page_review = new veganCockpit.MonthlySinglePageReview("monthly_single_page_review", dateRange, "235111240", '/blog/')
-    var monthly_source_for_single_page_review = new veganCockpit.MonthlySourceForSinglePageReview("monthly_source_for_single_page_review", dateRange, "235111240", '/blog/')
+    //var monthly_single_page_review = new veganCockpit.MonthlySinglePageReview("monthly_single_page_review", dateRange, "235111240", '/blog/')
+    //var monthly_source_for_single_page_review = new veganCockpit.MonthlySourceForSinglePageReview("monthly_source_for_single_page_review", dateRange, "235111240", '/blog/')
+    //var source_for_single_page_review = new veganCockpit.SourceForSinglePageReview("source_for_single_page_review", dateRange, "235111240", '/blog/')
 
     monthly_review.generate_report()
     .then(() => monthly_member_page_review.generate_report())
     .then(() => monthly_donation_page_review.generate_report())
     .then(() => monthly_most_visited_pages_review.generate_report())
-    .then(() => monthly_single_page_review.generate_report())
-    .then(() => monthly_source_for_single_page_review.generate_report());
+  //  .then(() => monthly_single_page_review.generate_report())
+//    .then(() => single_page_reviews(dateRange, "/blog/"));
+    .then(() => single_page_reviews(dateRange, "/"));
 
-  //  monthly_source_for_single_page_review.generate_report();
+  //  .then(() => monthly_source_for_single_page_review.generate_report());
+
+    //monthly_source_for_single_page_review.generate_report();
+    //source_for_single_page_review.generate_report();
+
+
+  //  monthly_single_page_review.generate_report()
+  //  .then(() => source_for_single_page_review.generate_report());
+
 
   });
 
@@ -170,6 +184,20 @@
     $( "#start_date" ).datepicker( "setDate", new Date(2021, 0, 1) );
     $( "#end_date" ).datepicker( "setDate", new Date(new Date().setDate(new Date().getDate()-1)) );
     $( ".select_date_range_button" ).click();
+
+  }
+
+  function single_page_reviews(dateRange, page_name){
+
+    return new Promise(function(resolve, reject)
+    {
+      var monthly_single_page_review = new veganCockpit.MonthlySinglePageReview("monthly_single_page_review", dateRange, "235111240", page_name);
+      var source_for_single_page_review = new veganCockpit.SourceForSinglePageReview("source_for_single_page_review", dateRange, "235111240", page_name);
+
+      monthly_single_page_review.generate_report()
+      .then(() => source_for_single_page_review.generate_report())
+      .then(() => resolve());
+    })
 
   }
 

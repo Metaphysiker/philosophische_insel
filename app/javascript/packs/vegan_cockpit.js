@@ -764,3 +764,106 @@ export function MonthlySourceForSinglePageReview(container_class, dateRanges, vi
     })
   }
 }
+
+export function SourceForSinglePageReview(container_class, dateRanges, view_id, page_name) {
+  this.container_class = container_class,
+  this.dateRanges = dateRanges,
+  this.view_id = view_id,
+  this.page_name = page_name,
+  this.table_name = this.container_class + "_table",
+  this.svg_container = this.container_class + "_svg_container",
+  this.date_format_options = {  year: 'numeric', month: 'long' },
+  this.generate_report = function() {
+    var container_class = this.container_class;
+    var table_name = this.table_name;
+    var svg_container = this.svg_container;
+    var dateRange = this.dateRange;
+    var view_id = this.view_id;
+    var date_format_options = this.date_format_options;
+    var page_name = this.page_name;
+
+    return new Promise(function(outer_promise_resolve, outer_promise_reject)
+    {
+      var data = [];
+
+      $("." + container_class).empty();
+
+      $("." + container_class).append(`
+        <h2>Quellen-Übersicht für ${page_name}</h2>
+
+        <div class="${svg_container}">
+
+        </div>
+        `);
+
+    //  $("." + table_name + " .tbody").empty();
+
+              gapi.client.request({
+                path: '/v4/reports:batchGet',
+                root: 'https://analyticsreporting.googleapis.com/',
+                method: 'POST',
+                body: {
+                  reportRequests: [
+                    {
+                      viewId: VIEW_ID,
+                      dateRanges: [{startDate: dateRanges[0].startDate, endDate: dateRanges[dateRanges.length -1].endDate }],
+                      dimensions: [
+                        {
+                          name: "ga:source"
+                        }
+                      ],
+                      metrics: [
+                        {
+                          expression: 'ga:users'
+                        }
+                      ],
+                      "dimensionFilterClauses": [
+                       {
+                        "filters": [
+                        {
+                         "operator": "EXACT",
+                         "dimensionName": "ga:pagePath",
+                         "expressions": [
+                           page_name
+                          ]
+                        }
+                        ]
+                       }
+                     ],
+                     "orderBys": [
+                       {"fieldName": "ga:users", "sortOrder": "DESCENDING"},
+                     ]
+                    }
+                  ]
+                }
+              }).then(function(response){
+                var data_of_sources = [];
+                var rows = response.result.reports[0].data.rows;
+
+                for (var i = 0; i < 15; i++) {
+                  var result_hash = {
+                    name: rows[i].dimensions[0],
+                    value: rows[i].metrics[0].values[0]
+                  };
+                  data_of_sources.push(result_hash);
+                }
+
+                $("." + container_class).append(`
+                  <div class="${container_class + "_" + "svg_container"}">
+
+                  </div>
+                  `);
+
+                  var horizontal_bar_chart = new d3Charts.HorizontalBarChart("." + container_class + "_" + "svg_container", data_of_sources);
+                  horizontal_bar_chart.draw_chart();
+
+                outer_promise_resolve("done");
+
+              }, function(error){
+                outer_promise_reject("error");
+              })
+
+
+    })
+  }
+}
