@@ -732,7 +732,7 @@ export function MonthlySourceForSinglePageReview(container_class, dateRanges, vi
                 var data_of_sources = [];
                 var rows = response.result.reports[0].data.rows;
 
-                for (var i = 0; i < 10; i++) {
+                for (var i = 0; i < 15; i++) {
                   var result_hash = {
                     name: rows[i].dimensions[0],
                     value: rows[i].metrics[0].values[0]
