@@ -234,7 +234,7 @@
           .join("rect")
           .attr("y", d => y(d.value))
           .attr("x", d => x(d.name))
-          .attr("width", x.bandwidth()/2 - 5)
+          .attr("width", x.bandwidth()/2 - 1)
           .attr("height", d => height - y(d.value))
           .attr("fill", "#00c39b");
 
@@ -243,7 +243,7 @@
           .data(data)
           .join("rect")
           .attr("y", d => y(d.value2))
-          .attr("x", d => x(d.name) + x.bandwidth()/2 + 5)
+          .attr("x", d => x(d.name) + (x.bandwidth()/2) + 1)
           .attr("width", x.bandwidth()/2)
           .attr("height", d => height - y(d.value2))
           .attr("fill", "red");

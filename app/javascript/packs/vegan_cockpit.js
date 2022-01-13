@@ -405,6 +405,9 @@ export function MonthlyMostVisitedPagesReview(container_class, dateRanges, view_
 
     return new Promise(function(outer_promise_resolve, outer_promise_reject)
     {
+
+      $("." + container_class).empty();
+
       for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
         {
             p = p.then(() => new Promise(function(resolve, reject) {
@@ -499,10 +502,4 @@ export function MonthlyMostVisitedPagesReview(container_class, dateRanges, view_
     })
 
   }
-}
-
-//monthly_blog_report
-function monthly_blog_report(dateRanges){
-  var table_name = ".monthly_blog_report_table";
-
 }

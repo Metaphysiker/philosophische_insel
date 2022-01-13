@@ -14,13 +14,13 @@
           <div class="col-6">
             <div class="input-group mb-3">
               <span class="input-group-text"><%= t("von") %></span>
-              <input type="text" id="work_time_start_date" class="form-control" placeholder="Von">
+              <input type="text" id="start_date" class="form-control" placeholder="Von">
             </div>
           </div>
           <div class="col-6">
             <div class="input-group mb-3">
               <span class="input-group-text"><%= t("bis") %></span>
-              <input type="text" id="work_time_end_date" class="form-control" placeholder="Bis">
+              <input type="text" id="end_date" class="form-control" placeholder="Bis">
             </div>
           </div>
         </div>
@@ -48,38 +48,35 @@
 
 <script>
 
-  let registrations = new URLSearchParams(window.location.search);
-
   $( function() {
-    $("#work_time_start_date").datepicker(
+    $("#start_date").datepicker(
     {
       'language' : 'de',
       'dateFormat' : 'dd-mm-yy',
       firstDay: 1,
       minDate: new Date(2021, 0, 1),
     });
-    $( "#work_time_start_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
-    $("#work_time_end_date").datepicker(
+    $( "#start_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
+    $("#end_date").datepicker(
     {
       'language' : 'de',
       'dateFormat' : 'dd-mm-yy',
       firstDay: 1,
       maxDate: new Date(new Date().setDate(new Date().getDate()-1))
     });
-    $( "#work_time_end_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#end_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
 
   } );
 
   $( ".select_date_range_button" ).click(function() {
 
-    var work_time_start_date = $('#work_time_start_date').val();
-    var work_time_end_date = $('#work_time_end_date').val();
-
     var dateRange = [];
 
-    var start_date = new Date($('#work_time_start_date').val());
-    var end_date = new Date($('#work_time_end_date').val());
+    var start_date = new Date($('#start_date').val());
+    var end_date = new Date($('#end_date').val());
 
     var current_date = new Date(start_date.getTime());
 
@@ -111,11 +108,6 @@
     .then(() => monthly_member_page_review.generate_report())
     .then(() => monthly_donation_page_review.generate_report())
     .then(() => monthly_most_visited_pages_review.generate_report());
-
-  //  monthly_overview_report(dateRange)
-  //  .then(() => monthly_member_page_report(dateRange))
-  //  .then(() => monthly_donation_page_report(dateRange))
-  //  .then(() => monthly_blog_report(dateRange));
 
   });
 
@@ -162,14 +154,10 @@
 
 
   function startQueries() {
+    $( "#start_date" ).datepicker( "setDate", new Date(2021, 0, 1) );
+    $( "#end_date" ).datepicker( "setDate", new Date(new Date().setDate(new Date().getDate()-1)) );
+    $( ".select_date_range_button" ).click();
 
-    //  monthly_overview_report(request.dateRanges)
-    //  .then(() => monthly_member_page_report(request.dateRanges))
-    //  .then(() => monthly_donation_page_report(request.dateRanges))
-    //  .then(() => monthly_blog_report(request.dateRanges));
-
-     //.then(monthly_member_page_report(request.dateRanges));
-    //monthly_blog_report(request.dateRanges);
   }
 
   //convert date
