@@ -44,6 +44,25 @@
 
       </div>
 
+      <div class="border rounded my-2 p-1">
+        <h2>Bestimmte Seiten auswählen</h2>
+        <p>
+          Um Informationen zu bestimmten Seiten zu erhalten,
+          kann im unteren Feld der hintere Teil der Webseite angegeben werden.
+        </p>
+        <p>
+          "/" ist die Startseite.<br />
+          "/2022/01/vegane-lasagne/" ist der Blogbeitrag zu vegane Lasagne.<br />
+          "/ueber-uns/team/" ist die Über-uns-Seite.
+        </p>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon3">www.vegan.ch</span>
+          <input type="text" class="form-control" placeholder="z.B. &quot;/&quot;, &quot;/blog/&quot;, &quot;/2022/01/vegane-lasagne/&quot;" id="page_name_input" aria-describedby="basic-addon3">
+        </div>
+        <button type="button" class="btn btn-primary change_page_name_button">Bereich anwenden</button>
+
+      </div>
+
       <div class="monthly_single_page_review border rounded my-2 p-1">
 
       </div>
@@ -64,7 +83,8 @@
 
 <script>
 
-  $( function() {
+  var dateRange = [];
+
     $("#start_date").datepicker(
     {
       'language' : 'de',
@@ -85,11 +105,9 @@
     $( "#end_date" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
 
-  } );
-
   $( ".select_date_range_button" ).click(function() {
 
-    var dateRange = [];
+
 
     var start_date = new Date($('#start_date').val());
     var end_date = new Date($('#end_date').val());
@@ -130,66 +148,21 @@
 //    .then(() => single_page_reviews(dateRange, "/blog/"));
     .then(() => single_page_reviews(dateRange, "/"))
     .then(() => regexp_page_reviews(dateRange, "/"));
-
-  //  .then(() => monthly_source_for_single_page_review.generate_report());
-
-    //monthly_source_for_single_page_review.generate_report();
-    //source_for_single_page_review.generate_report();
-
-
-  //  monthly_single_page_review.generate_report()
-  //  .then(() => source_for_single_page_review.generate_report());
-
-
   });
 
-  // Replace with your view ID.
-  var VIEW_ID = "235111240";
-  var options = {  year: 'numeric', month: 'long' };
-  var short_date_format = {  year: '2-digit', month: 'short' };
-  var request = <%= raw @request.to_json %>;
-  var dummy_dateRange =
-              {
-              startDate: '2021-01-01',
-                endDate: '2021-01-31'
-              };
+  $( ".change_page_name_button" ).click(function() {
 
-  var registrationsx = [
-    {
-      month: "Jan. 21",
-      value: 38
-    },
-    {
-      month: "Feb. 21",
-      value: 22
-    },
-    {
-      month: "März 21",
-      value: 59
-    }
-  ]
+    var page_name_input = $('#page_name_input').val();
 
-  var registrationsy = {
-    "Jan. 21": 38,
-    "Feb. 21": 22,
-    "März 21": 59,
-    "Apr. 21": 22,
-    "Mai 21": 32,
-    "Juni 21": 31,
-    "Juli 21": 15,
-    "Aug. 21": 36,
-    "Sept. 21": 29,
-    "Okt. 21": 19,
-    "Nov. 21": 24,
-    "Dez. 21": 13,
-  };
+    single_page_reviews(dateRange, page_name_input)
+    .then(() => regexp_page_reviews(dateRange, page_name_input))
+  });
 
 
   function startQueries() {
     $( "#start_date" ).datepicker( "setDate", new Date(2021, 0, 1) );
     $( "#end_date" ).datepicker( "setDate", new Date(new Date().setDate(new Date().getDate()-1)) );
     $( ".select_date_range_button" ).click();
-
   }
 
   function single_page_reviews(dateRange, page_name){
@@ -232,364 +205,6 @@
 
     return yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]);
   }
-
-  //monthly_overview_report
-  function monthly_overview_report(dateRanges){
-    var table_name = ".monthly_overview_table";
-    return new Promise(function(outer_promise_resolve, outer_promise_reject)
-    {
-      var data_for_monthly_overview = [];
-
-      $(table_name + " .tbody").empty();
-
-      for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
-        {
-            p = p.then(() => new Promise(function(resolve, reject) {
-              gapi.client.request({
-                path: '/v4/reports:batchGet',
-                root: 'https://analyticsreporting.googleapis.com/',
-                method: 'POST',
-                body: {
-                  reportRequests: [
-                    {
-                      viewId: VIEW_ID,
-                      dateRanges: [dateRanges[main_index]],
-                      metrics: [
-                        {
-                          expression: 'ga:pageviews'
-                        },
-                        {
-                          expression: 'ga:uniquePageviews'
-                        },
-                        {
-                          expression: 'ga:sessions'
-                        },
-                        {
-                          expression: 'ga:users'
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }).then(function(response){
-                var metrics = response.result.reports[0].data.rows[0].metrics;
-                for (var i = 0; i < metrics.length; i++) {
-                  var values = metrics[i].values;
-                  $(table_name + " .tbody").append(`
-                  <tr>
-                  </tr>
-                  `);
-                  var date_of_current_row = new Date(dateRanges[main_index].startDate);
-                  $(table_name + " tr:last").append(`
-                    <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
-                  `);
-
-                  for (var inner_i = 0; inner_i < values.length; inner_i++) {
-                      $(table_name + " tr:last").append(`
-                        <td>${values[inner_i]}</td>
-                      `);
-                  }
-                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', {  year: '2-digit', month: 'short' }), value: values[3]});
-                }
-
-                resolve("done");
-                if(main_index + 1 >= dateRanges.length){
-
-                  var vertical_bar_chart = new d3Charts.VerticalBarChart(".monthly_overview_svg_container", data_for_monthly_overview);
-                  vertical_bar_chart.draw_chart();
-
-                  outer_promise_resolve("this report is done");
-                  //outer_promise_reject("error");
-                }
-              }, function(error){
-                outer_promise_reject("error");
-              })
-            } // end of inner promise
-        ));
-      } // end of for loop
-    })
-  }
-
-  //monthly_member_page_report
-  function monthly_member_page_report(dateRanges){
-    var table_name = ".monthly_member_page_report_table";
-    return new Promise(function(outer_promise_resolve, outer_promise_reject)
-    {
-
-      $(table_name + " .tbody").empty();
-      var data_for_monthly_overview = [];
-
-      for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
-        {
-            p = p.then(() => new Promise(function(resolve, reject) {
-              gapi.client.request({
-                path: '/v4/reports:batchGet',
-                root: 'https://analyticsreporting.googleapis.com/',
-                method: 'POST',
-                body: {
-                  reportRequests: [
-                    {
-                      viewId: VIEW_ID,
-                      dateRanges: [dateRanges[main_index]],
-                      metrics: [
-                        {
-                          expression: 'ga:users'
-                        }
-                      ],
-                      "dimensionFilterClauses": [
-                       {
-                        "filters": [
-                        {
-                         "operator": "REGEXP",
-                         "dimensionName": "ga:pagePath",
-                         "expressions": [
-                           "/mitglied-werden"
-                          ]
-                        }
-                        ]
-                       }
-                      ]
-                    }
-                  ]
-                }
-              }).then(function(response){
-                var metrics = response.result.reports[0].data.rows[0].metrics;
-                for (var i = 0; i < metrics.length; i++) {
-                  var values = metrics[i].values;
-                  $(table_name + " .tbody").append(`
-                  <tr>
-                  </tr>
-                  `);
-                  var date_of_current_row = new Date(dateRanges[main_index].startDate);
-                  $(table_name + " tr:last").append(`
-                    <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
-                  `);
-
-                  for (var inner_i = 0; inner_i < values.length; inner_i++) {
-                      $(table_name + " tr:last").append(`
-                        <td>${values[inner_i]}</td>
-                      `);
-                  }
-
-                  var name = date_of_current_row.toLocaleDateString('de-DE', {  year: '2-digit', month: 'short' });
-                  var value1 = values[0];
-                  var value2 = 0;
-
-                  var year_month = date_of_current_row.getFullYear() + "-" + ("0" + (date_of_current_row.getMonth() + 1)).slice(-2);
-                  let registration_get = registrations.get(year_month);
-
-                  if(registration_get){
-                    value2 = registration_get;
-                  }
-
-                  $(table_name + " tr:last").append(`
-                    <td>${value2}</td>
-                  `);
-
-                  data_for_monthly_overview.push({name: name, value: value1, value2: value2});
-
-                }
-
-                resolve("done");
-                if(main_index + 1 >= dateRanges.length){
-                  var vertical_bar_chart_grouped_two = new d3Charts.VerticalBarChartGroupedTwo(".monthly_member_page_report_container", data_for_monthly_overview);
-                  vertical_bar_chart_grouped_two.draw_chart();
-                  //var horizontal_bar_chart = new d3Charts.HorizontalBarChart(".monthly_member_page_report_container", data_for_monthly_overview);
-                  //horizontal_bar_chart.draw_chart();
-
-                  outer_promise_resolve("this report is done");
-                  //outer_promise_reject("error");
-                }
-              }, function(error){
-                outer_promise_reject("error");
-              })
-            } // end of inner promise
-        ));
-      } // end of for loop
-    })
-  }
-
-
-  //monthly_donation_page_report
-  function monthly_donation_page_report(dateRanges){
-    var table_name = ".monthly_donation_page_report_table";
-    return new Promise(function(outer_promise_resolve, outer_promise_reject)
-    {
-      var data_for_monthly_overview = [];
-
-      $(table_name + " .tbody").empty();
-
-      for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
-        {
-            p = p.then(() => new Promise(function(resolve, reject) {
-              gapi.client.request({
-                path: '/v4/reports:batchGet',
-                root: 'https://analyticsreporting.googleapis.com/',
-                method: 'POST',
-                body: {
-                  reportRequests: [
-                    {
-                      viewId: VIEW_ID,
-                      dateRanges: [dateRanges[main_index]],
-                      metrics: [
-                        {
-                          expression: 'ga:users'
-                        }
-                      ],
-                      "dimensionFilterClauses": [
-                       {
-                        "filters": [
-                        {
-                         "operator": "REGEXP",
-                         "dimensionName": "ga:pagePath",
-                         "expressions": [
-                           "/aktiv-werden/spenden"
-                          ]
-                        }
-                        ]
-                       }
-                     ]
-                    }
-                  ]
-                }
-              }).then(function(response){
-                var metrics = response.result.reports[0].data.rows[0].metrics;
-                for (var i = 0; i < metrics.length; i++) {
-                  var values = metrics[i].values;
-                  $(table_name + " .tbody").append(`
-                  <tr>
-                  </tr>
-                  `);
-                  var date_of_current_row = new Date(dateRanges[main_index].startDate);
-                  $(table_name + " tr:last").append(`
-                    <td>${date_of_current_row.toLocaleDateString('de-DE', options)}</td>
-                  `);
-
-                  for (var inner_i = 0; inner_i < values.length; inner_i++) {
-                      $(table_name + " tr:last").append(`
-                        <td>${values[inner_i]}</td>
-                      `);
-                  }
-                  data_for_monthly_overview.push({name: date_of_current_row.toLocaleDateString('de-DE', {  year: '2-digit', month: 'short' }), value: values[0], value2: 0});
-
-                }
-
-                resolve("done");
-                if(main_index + 1 >= dateRanges.length){
-                  var vertical_bar_chart_grouped_two = new d3Charts.VerticalBarChartGroupedTwo(".monthly_donation_page_report_container", data_for_monthly_overview);
-                  vertical_bar_chart_grouped_two.draw_chart();
-
-                  outer_promise_resolve("this report is done");
-                  //outer_promise_reject("error");
-                }
-              }, function(error){
-                outer_promise_reject("error");
-              })
-            } // end of inner promise
-        ));
-      } // end of for loop
-    })
-  }
-
-  //monthly_blog_report
-  function monthly_blog_report(dateRanges){
-    var table_name = ".monthly_blog_report_table";
-    return new Promise(function(outer_promise_resolve, outer_promise_reject)
-    {
-      for (let main_index = 0, p = Promise.resolve(); main_index < dateRanges.length; main_index++)
-        {
-            p = p.then(() => new Promise(function(resolve, reject) {
-              gapi.client.request({
-                path: '/v4/reports:batchGet',
-                root: 'https://analyticsreporting.googleapis.com/',
-                method: 'POST',
-                body: {
-                  reportRequests: [
-                    {
-                      viewId: VIEW_ID,
-                      dateRanges: [dateRanges[main_index]],
-                      "metrics":
-                      [
-                        {"expression": "ga:users"},
-                      ],
-                      "dimensions":
-                      [
-                        {"name": "ga:pagePath"}
-                      ],
-                      "orderBys": [
-                        {"fieldName": "ga:users", "sortOrder": "DESCENDING"},
-                      ]
-
-
-                    }
-                  ]
-                }
-              }).then(function(response){
-
-                var table_name = "blog_table_main_index_" + main_index;
-
-                var date_of_current_row = new Date(dateRanges[main_index].startDate);
-
-                var rows = response.result.reports[0].data.rows;
-
-                var data_for_chart = [];
-
-                for (var rows_index = 0; rows_index < 11; rows_index++){
-                  data_for_chart.push({name: rows[rows_index].dimensions[0], value: rows[rows_index].metrics[0].values[0]});
-                }
-
-
-
-
-                $(".blog_container").append(`
-                <h2>${date_of_current_row.toLocaleDateString('de-DE', options)}</h2>
-                <table class="table ${table_name}">
-                  <tbody class="tbody">
-
-                  </tbody>
-                </table>
-                `);
-
-
-                for (var rows_index = 0; rows_index < 11; rows_index++){
-                  $("." + table_name + " .tbody").append(`
-                  <tr>
-
-                  </tr>
-                  `);
-
-                  $("." + table_name + " tr:last").append(`
-                    <td>${rows[rows_index].dimensions[0]}</td>
-                    <td>
-                      ${rows[rows_index].metrics[0].values[0]}
-                    </td>
-                  `);
-                }
-
-                $(".blog_container").append(`
-                <div class="horizontal_bar_chart_name_${table_name}">
-                  Hello!
-                </div>
-                `);
-
-                var horizontal_bar_chart = new d3Charts.HorizontalBarChart(".horizontal_bar_chart_name_" + table_name, data_for_chart);
-                horizontal_bar_chart.draw_chart();
-
-
-                resolve("done");
-                if(main_index + 1 >= dateRanges.length){
-                  outer_promise_resolve("this report is done");
-                  //outer_promise_reject("error");
-                }
-              }, function(error){
-                outer_promise_reject("error");
-              })
-            } // end of inner promise
-        ));
-      } // end of for loop
-    })
-  }
-
 
 
 </script>

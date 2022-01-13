@@ -172,7 +172,7 @@ export function MonthlyMemberPageReview(container_class, dateRanges, view_id, re
                 body: {
                   reportRequests: [
                     {
-                      viewId: VIEW_ID,
+                      viewId: view_id,
                       dateRanges: [dateRanges[main_index]],
                       metrics: [
                         {
@@ -308,7 +308,7 @@ export function MonthlyDonationPageReview(container_class, dateRanges, view_id, 
                 body: {
                   reportRequests: [
                     {
-                      viewId: VIEW_ID,
+                      viewId: view_id,
                       dateRanges: [dateRanges[main_index]],
                       metrics: [
                         {
@@ -418,7 +418,7 @@ export function MonthlyMostVisitedPagesReview(container_class, dateRanges, view_
                 body: {
                   reportRequests: [
                     {
-                      viewId: VIEW_ID,
+                      viewId: view_id,
                       dateRanges: [dateRanges[main_index]],
                       "metrics":
                       [
@@ -454,7 +454,7 @@ export function MonthlyMostVisitedPagesReview(container_class, dateRanges, view_
 
 
                 $("." + container_class).append(`
-                <h2>${date_of_current_row.toLocaleDateString('de-DE', options)}</h2>
+                <h2>${date_of_current_row.toLocaleDateString('de-DE', date_format_options)}</h2>
                 <table class="table ${table_name_with_index}">
                   <tbody class="tbody">
 
@@ -563,7 +563,7 @@ export function MonthlySinglePageReview(container_class, dateRanges, view_id, pa
                 body: {
                   reportRequests: [
                     {
-                      viewId: VIEW_ID,
+                      viewId: view_id,
                       dateRanges: [dateRanges[main_index]],
                       metrics: [
                         {
@@ -597,7 +597,11 @@ export function MonthlySinglePageReview(container_class, dateRanges, view_id, pa
                 }
               }).then(function(response){
 
-                var metrics = response.result.reports[0].data.rows[0].metrics;
+                var metrics = [];
+                if(typeof response.result.reports[0].data.rows !== 'undefined'){
+                  metrics = response.result.reports[0].data.rows[0].metrics;
+                }
+
                 for (var i = 0; i < metrics.length; i++) {
                   var values = metrics[i].values;
                   $("." + table_name + " .tbody").append(`
@@ -697,7 +701,7 @@ export function MonthlySourceForSinglePageReview(container_class, dateRanges, vi
                 body: {
                   reportRequests: [
                     {
-                      viewId: VIEW_ID,
+                      viewId: view_id,
                       dateRanges: [dateRanges[main_index]],
                       dimensions: [
                         {
@@ -805,7 +809,7 @@ export function SourceForSinglePageReview(container_class, dateRanges, view_id, 
                 body: {
                   reportRequests: [
                     {
-                      viewId: VIEW_ID,
+                      viewId: view_id,
                       dateRanges: [{startDate: dateRanges[0].startDate, endDate: dateRanges[dateRanges.length -1].endDate }],
                       dimensions: [
                         {
@@ -927,7 +931,7 @@ export function MonthlyRegexpPageReview(container_class, dateRanges, view_id, pa
                 body: {
                   reportRequests: [
                     {
-                      viewId: VIEW_ID,
+                      viewId: view_id,
                       dateRanges: [dateRanges[main_index]],
                       metrics: [
                         {
@@ -961,7 +965,10 @@ export function MonthlyRegexpPageReview(container_class, dateRanges, view_id, pa
                 }
               }).then(function(response){
 
-                var metrics = response.result.reports[0].data.rows[0].metrics;
+                var metrics = [];
+                if(typeof response.result.reports[0].data.rows !== 'undefined'){
+                  metrics = response.result.reports[0].data.rows[0].metrics;
+                }
                 for (var i = 0; i < metrics.length; i++) {
                   var values = metrics[i].values;
                   $("." + table_name + " .tbody").append(`
@@ -1041,7 +1048,7 @@ export function SourceForRegexpPageReview(container_class, dateRanges, view_id, 
                 body: {
                   reportRequests: [
                     {
-                      viewId: VIEW_ID,
+                      viewId: view_id,
                       dateRanges: [{startDate: dateRanges[0].startDate, endDate: dateRanges[dateRanges.length -1].endDate }],
                       dimensions: [
                         {
