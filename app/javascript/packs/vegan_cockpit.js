@@ -275,7 +275,7 @@ export function MonthlyDonationPageReview(container_class, dateRanges, view_id, 
       $("." + container_class).empty();
 
       $("." + container_class).append(`
-        <h2>Monatliche Mitgliedseite-Übersciht</h2>
+        <h2>Monatliche Spendenseite-Übersciht</h2>
         <table class="${table_name} table table-striped">
           <thead>
 
