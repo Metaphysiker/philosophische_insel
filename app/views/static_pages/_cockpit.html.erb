@@ -44,6 +44,14 @@
 
       </div>
 
+      <div class="monthly_single_page_review">
+
+      </div>
+
+      <div class="monthly_source_for_single_page_review">
+
+      </div>
+
 </div>
 
 <script>
@@ -102,12 +110,17 @@
     var monthly_member_page_review = new veganCockpit.MonthlyMemberPageReview("monthly_member_page_review", dateRange, "235111240", new URLSearchParams(window.location.search));
     var monthly_donation_page_review = new veganCockpit.MonthlyDonationPageReview("monthly_donation_page_review", dateRange, "235111240", new URLSearchParams(window.location.search));
     var monthly_most_visited_pages_review = new veganCockpit.MonthlyMostVisitedPagesReview("monthly_most_visited_pages_review", dateRange, "235111240");
+    var monthly_single_page_review = new veganCockpit.MonthlySinglePageReview("monthly_single_page_review", dateRange, "235111240", '/blog/')
+    var monthly_source_for_single_page_review = new veganCockpit.MonthlySourceForSinglePageReview("monthly_source_for_single_page_review", dateRange, "235111240", '/blog/')
 
+//    monthly_review.generate_report()
+  //  .then(() => monthly_member_page_review.generate_report())
+  //  .then(() => monthly_donation_page_review.generate_report())
+  //  .then(() => monthly_most_visited_pages_review.generate_report())
+  //  .then(() => monthly_single_page_review.generate_report())
+  //  .then(() => monthly_source_for_single_page_review.generate_report());
 
-    monthly_review.generate_report()
-    .then(() => monthly_member_page_review.generate_report())
-    .then(() => monthly_donation_page_review.generate_report())
-    .then(() => monthly_most_visited_pages_review.generate_report());
+    monthly_source_for_single_page_review.generate_report();
 
   });
 
