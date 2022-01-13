@@ -48,11 +48,15 @@
 
       </div>
 
-      <div class="monthly_source_for_single_page_review border rounded my-2 p-1">
+      <div class="source_for_single_page_review border rounded my-2 p-1">
 
       </div>
 
-      <div class="source_for_single_page_review border rounded my-2 p-1">
+      <div class="monthly_regexp_page_review border rounded my-2 p-1">
+
+      </div>
+
+      <div class="source_for_regexp_page_review border rounded my-2 p-1">
 
       </div>
 
@@ -124,7 +128,8 @@
     .then(() => monthly_most_visited_pages_review.generate_report())
   //  .then(() => monthly_single_page_review.generate_report())
 //    .then(() => single_page_reviews(dateRange, "/blog/"));
-    .then(() => single_page_reviews(dateRange, "/"));
+    .then(() => single_page_reviews(dateRange, "/"))
+    .then(() => regexp_page_reviews(dateRange, "/"));
 
   //  .then(() => monthly_source_for_single_page_review.generate_report());
 
@@ -196,6 +201,20 @@
 
       monthly_single_page_review.generate_report()
       .then(() => source_for_single_page_review.generate_report())
+      .then(() => resolve());
+    })
+
+  }
+
+  function regexp_page_reviews(dateRange, page_name){
+
+    return new Promise(function(resolve, reject)
+    {
+      var monthly_regexp_page_review = new veganCockpit.MonthlyRegexpPageReview("monthly_regexp_page_review", dateRange, "235111240", page_name);
+      var source_for_regexp_page_review = new veganCockpit.SourceForRegexpPageReview("source_for_regexp_page_review", dateRange, "235111240", page_name);
+
+      monthly_regexp_page_review.generate_report()
+      .then(() => source_for_regexp_page_review.generate_report())
       .then(() => resolve());
     })
 
