@@ -28,7 +28,7 @@ class StaticPagesController < ApplicationController
       title: :title,
       description: :description,
       type: "website",
-      image: image_url("wizard3.jpeg"),
+      #image: image_url("wizard3.jpeg"),
       url: pferdefutter_url
     }
 
