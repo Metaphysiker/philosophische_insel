@@ -848,12 +848,12 @@ export function SourceForSinglePageReview(container_class, dateRanges, view_id, 
                 }
 
                 for (var i = 0; i < 15; i++) {
-                  var row_dimension = "nichts";
+                  var row_dimension = i;
                   if((typeof rows[i] !== "undefined") && (typeof rows[i].dimensions[0] !== "undefined")){
                     row_dimension = rows[i].dimensions[0];
                   }
 
-                  var row_value = '0';
+                  var row_value = 0;
                   if((typeof rows[i] !== "undefined") && (typeof rows[i].metrics[0].values[0] !== "undefined")){
                     row_value = rows[i].metrics[0].values[0];
                   }

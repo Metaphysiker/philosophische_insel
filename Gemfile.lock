@@ -127,6 +127,7 @@ GEM
     ffi (1.15.4)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
+    geocoder (1.7.2)
     globalid (0.5.2)
       activesupport (>= 5.0)
     groupdate (5.2.2)
@@ -313,6 +314,7 @@ DEPENDENCIES
   devise-i18n
   faker!
   friendly_id (~> 5.4.0)
+  geocoder
   groupdate
   jbuilder (~> 2.7)
   listen (~> 3.3)
