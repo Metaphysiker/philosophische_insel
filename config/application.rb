@@ -14,6 +14,8 @@ module PhilosophischeInsel
     config.i18n.default_locale = :de
     I18n.available_locales = [:de]
 
+    config.assets.js_compressor = :terser
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

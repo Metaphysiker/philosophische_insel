@@ -124,6 +124,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     errbase (0.2.1)
     erubi (1.10.0)
+    execjs (2.8.1)
     ffi (1.15.4)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -266,6 +267,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    terser (1.1.8)
+      execjs (>= 0.3.0, < 3)
     thor (1.1.0)
     tilt (2.0.10)
     tinymce-rails (5.10.1)
@@ -335,6 +338,7 @@ DEPENDENCIES
   selenium-webdriver
   simple_form
   spring
+  terser
   tinymce-rails
   tzinfo-data
   web-console (>= 4.1.0)
