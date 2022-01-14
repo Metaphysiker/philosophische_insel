@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
+gem 'uglifier', '~> 2.7', '>= 2.7.2'
 gem 'yui-compressor'
 #gem 'therubyracer'
 #gem 'execjs'
