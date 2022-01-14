@@ -842,12 +842,25 @@ export function SourceForSinglePageReview(container_class, dateRanges, view_id, 
                 }
               }).then(function(response){
                 var data_of_sources = [];
-                var rows = response.result.reports[0].data.rows;
+                var rows = [];
+                if(typeof response.result.reports[0].data.rows !== "undefined"){
+                  rows = response.result.reports[0].data.rows;
+                }
 
                 for (var i = 0; i < 15; i++) {
+                  var row_dimension = "nichts";
+                  if((typeof rows[i] !== "undefined") && (typeof rows[i].dimensions[0] !== "undefined")){
+                    row_dimension = rows[i].dimensions[0];
+                  }
+
+                  var row_value = '0';
+                  if((typeof rows[i] !== "undefined") && (typeof rows[i].metrics[0].values[0] !== "undefined")){
+                    row_value = rows[i].metrics[0].values[0];
+                  }
+
                   var result_hash = {
-                    name: rows[i].dimensions[0],
-                    value: rows[i].metrics[0].values[0]
+                    name: row_dimension,
+                    value: row_value
                   };
                   data_of_sources.push(result_hash);
                 }
