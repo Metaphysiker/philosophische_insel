@@ -124,7 +124,6 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     errbase (0.2.1)
     erubi (1.10.0)
-    execjs (2.8.1)
     ffi (1.15.4)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -141,8 +140,6 @@ GEM
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
-    libv8 (3.16.14.19)
-    libv8 (3.16.14.19-x86_64-linux)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -227,7 +224,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
-    ref (2.0.0)
     regexp_parser (2.1.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -270,11 +266,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    terser (1.1.8)
-      execjs (>= 0.3.0, < 3)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (1.1.0)
     tilt (2.0.10)
     tinymce-rails (5.10.1)
@@ -305,6 +296,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yui-compressor (0.12.0)
     zeitwerk (2.5.1)
 
 PLATFORMS
@@ -321,7 +313,6 @@ DEPENDENCIES
   chartkick
   devise
   devise-i18n
-  execjs
   faker!
   friendly_id (~> 5.4.0)
   geocoder
@@ -345,13 +336,12 @@ DEPENDENCIES
   selenium-webdriver
   simple_form
   spring
-  terser
-  therubyracer
   tinymce-rails
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
+  yui-compressor
 
 RUBY VERSION
    ruby 3.0.0p0
