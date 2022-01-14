@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
+gem 'therubyracer'
+gem 'execjs'
 gem 'terser'
 #gem "image_processing", ">= 1.2"
 gem 'rails-i18n', '~> 6.0.0' # For 6.0.0 or higher

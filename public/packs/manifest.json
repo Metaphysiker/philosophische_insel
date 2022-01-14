@@ -1,70 +1,66 @@
 {
-  "animate_css.js": "/packs/js/animate_css-848dfa3e032e2e31db70.js",
-  "animate_css.js.map": "/packs/js/animate_css-848dfa3e032e2e31db70.js.map",
-  "application.css": "/packs/css/application-a5b4bfe8.css",
-  "application.js": "/packs/js/application-176e36182aa5944f2805.js",
-  "application.js.map": "/packs/js/application-176e36182aa5944f2805.js.map",
-  "chat.js": "/packs/js/chat-1edb5ee6a62aa10fba69.js",
-  "chat.js.map": "/packs/js/chat-1edb5ee6a62aa10fba69.js.map",
-  "d3-charts.js": "/packs/js/d3-charts-f752057ebdb2fed0867d.js",
-  "d3-charts.js.map": "/packs/js/d3-charts-f752057ebdb2fed0867d.js.map",
-  "d3_objects.js": "/packs/js/d3_objects-470eb3dc3fa66b4929d9.js",
-  "d3_objects.js.map": "/packs/js/d3_objects-470eb3dc3fa66b4929d9.js.map",
+  "animate_css.js": "/packs/js/animate_css-0a1b39fba4c247f98efd.js",
+  "animate_css.js.map": "/packs/js/animate_css-0a1b39fba4c247f98efd.js.map",
+  "application.js": "/packs/js/application-808aac5702ff2f5f5c96.js",
+  "application.js.map": "/packs/js/application-808aac5702ff2f5f5c96.js.map",
+  "chat.js": "/packs/js/chat-c74c50c87c214e5453dc.js",
+  "chat.js.map": "/packs/js/chat-c74c50c87c214e5453dc.js.map",
+  "d3-charts.js": "/packs/js/d3-charts-7664a0160cca730e3faa.js",
+  "d3-charts.js.map": "/packs/js/d3-charts-7664a0160cca730e3faa.js.map",
+  "d3_objects.js": "/packs/js/d3_objects-601f2abb7cb0165f0b4b.js",
+  "d3_objects.js.map": "/packs/js/d3_objects-601f2abb7cb0165f0b4b.js.map",
   "entrypoints": {
     "animate_css": {
       "js": [
-        "/packs/js/animate_css-848dfa3e032e2e31db70.js"
+        "/packs/js/animate_css-0a1b39fba4c247f98efd.js"
       ],
       "js.map": [
-        "/packs/js/animate_css-848dfa3e032e2e31db70.js.map"
+        "/packs/js/animate_css-0a1b39fba4c247f98efd.js.map"
       ]
     },
     "application": {
-      "css": [
-        "/packs/css/application-a5b4bfe8.css"
-      ],
       "js": [
-        "/packs/js/application-176e36182aa5944f2805.js"
+        "/packs/js/application-808aac5702ff2f5f5c96.js"
       ],
       "js.map": [
-        "/packs/js/application-176e36182aa5944f2805.js.map"
+        "/packs/js/application-808aac5702ff2f5f5c96.js.map"
       ]
     },
     "chat": {
       "js": [
-        "/packs/js/chat-1edb5ee6a62aa10fba69.js"
+        "/packs/js/chat-c74c50c87c214e5453dc.js"
       ],
       "js.map": [
-        "/packs/js/chat-1edb5ee6a62aa10fba69.js.map"
+        "/packs/js/chat-c74c50c87c214e5453dc.js.map"
       ]
     },
     "d3_objects": {
       "js": [
-        "/packs/js/d3_objects-470eb3dc3fa66b4929d9.js"
+        "/packs/js/d3_objects-601f2abb7cb0165f0b4b.js"
       ],
       "js.map": [
-        "/packs/js/d3_objects-470eb3dc3fa66b4929d9.js.map"
+        "/packs/js/d3_objects-601f2abb7cb0165f0b4b.js.map"
       ]
     },
     "d3-charts": {
       "js": [
-        "/packs/js/d3-charts-f752057ebdb2fed0867d.js"
+        "/packs/js/d3-charts-7664a0160cca730e3faa.js"
       ],
       "js.map": [
-        "/packs/js/d3-charts-f752057ebdb2fed0867d.js.map"
+        "/packs/js/d3-charts-7664a0160cca730e3faa.js.map"
       ]
     },
     "vegan_cockpit": {
       "js": [
-        "/packs/js/vegan_cockpit-1c96cdd80ce768dc4343.js"
+        "/packs/js/vegan_cockpit-3ff5514fd8d2dd0a2b58.js"
       ],
       "js.map": [
-        "/packs/js/vegan_cockpit-1c96cdd80ce768dc4343.js.map"
+        "/packs/js/vegan_cockpit-3ff5514fd8d2dd0a2b58.js.map"
       ]
     }
   },
   "media/chosen-js/chosen-sprite.png": "/packs/media/chosen-js/chosen-sprite-6768c197.png",
   "media/chosen-js/chosen-sprite@2x.png": "/packs/media/chosen-js/chosen-sprite@2x-a0b7f3f1.png",
-  "vegan_cockpit.js": "/packs/js/vegan_cockpit-1c96cdd80ce768dc4343.js",
-  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-1c96cdd80ce768dc4343.js.map"
+  "vegan_cockpit.js": "/packs/js/vegan_cockpit-3ff5514fd8d2dd0a2b58.js",
+  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-3ff5514fd8d2dd0a2b58.js.map"
 }
