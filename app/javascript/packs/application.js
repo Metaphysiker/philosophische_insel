@@ -21,12 +21,12 @@ import 'codemirror/mode/markdown/markdown.js'
 //import * as d3 from "d3/dist/d3.js"
 
 //css
-import "animate.css/animate.min.css"
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/solarized.css'
+//import "animate.css/animate.min.css"
+//import 'codemirror/lib/codemirror.css'
+//import 'codemirror/theme/solarized.css'
 //import "@fortawesome/fontawesome-free/css/all.css"
-import "chosen-js/chosen.css"
-import "chosen-js/chosen-sprite.png"
+//import "chosen-js/chosen.css"
+//import "chosen-js/chosen-sprite.png"
 
 //import "chartkick/chart.js"
 import "chartkick/highcharts"
@@ -35,12 +35,12 @@ import "chartkick/highcharts"
 //import 'codemirror/lib/codemirror.css'
 //import 'codemirror/theme/solarized.css'
 //import "@fortawesome/fontawesome-free/css/all"
-//import "chosen-js/chosen.css"
+import "chosen-js/chosen.css"
 //import "@fortawesome/fontawesome-free/css/all"
 
 import "d3/dist/d3.js"
 import "jquery-ui/ui/widgets/datepicker.js"
-
+import "jquery-ui/themes/base/all.css";
 
 
 Rails.start()
