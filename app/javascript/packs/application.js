@@ -40,7 +40,7 @@ import "chosen-js/chosen.css"
 
 import "d3/dist/d3.js"
 import "jquery-ui/ui/widgets/datepicker.js"
-import "jquery-ui/themes/base/all.css";
+//import "jquery-ui/themes/base/all.css";
 
 
 Rails.start()
