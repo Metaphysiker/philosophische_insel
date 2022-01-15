@@ -1113,6 +1113,16 @@ export function SourceForRegexpPageReview(container_class, dateRanges, view_id, 
                   var horizontal_bar_chart = new d3Charts.HorizontalBarChart("." + container_class + "_" + "svg_container", data_of_sources);
                   horizontal_bar_chart.draw_chart();
 
+
+                  $("." + container_class).append(`
+                    <div class="${container_class + "_" + "svg_container_donut"}">
+
+                    </div>
+                    `);
+
+                  var donut_chart = new d3Charts.DonutChart("." + container_class + "_" + "svg_container_donut", data_of_sources);
+                  donut_chart.draw_chart();
+
                 outer_promise_resolve("done");
 
               }, function(error){
