@@ -2,8 +2,8 @@
   "animate_css.js": "/packs/js/animate_css-848dfa3e032e2e31db70.js",
   "animate_css.js.map": "/packs/js/animate_css-848dfa3e032e2e31db70.js.map",
   "application.css": "/packs/css/application-3284c827.css",
-  "application.js": "/packs/js/application-520e3bdd3b6ab1125fa8.js",
-  "application.js.map": "/packs/js/application-520e3bdd3b6ab1125fa8.js.map",
+  "application.js": "/packs/js/application-4410bfa868ddd2a3e28e.js",
+  "application.js.map": "/packs/js/application-4410bfa868ddd2a3e28e.js.map",
   "chat.js": "/packs/js/chat-1edb5ee6a62aa10fba69.js",
   "chat.js.map": "/packs/js/chat-1edb5ee6a62aa10fba69.js.map",
   "d3-charts.js": "/packs/js/d3-charts-0e7d4b4459332fb2c7bb.js",
@@ -24,10 +24,10 @@
         "/packs/css/application-3284c827.css"
       ],
       "js": [
-        "/packs/js/application-520e3bdd3b6ab1125fa8.js"
+        "/packs/js/application-4410bfa868ddd2a3e28e.js"
       ],
       "js.map": [
-        "/packs/js/application-520e3bdd3b6ab1125fa8.js.map"
+        "/packs/js/application-4410bfa868ddd2a3e28e.js.map"
       ]
     },
     "chat": {
