@@ -141,12 +141,12 @@
     //var source_for_single_page_review = new veganCockpit.SourceForSinglePageReview("source_for_single_page_review", dateRange, "235111240", '/blog/')
 
     monthly_review.generate_report()
-  //  .then(() => monthly_member_page_review.generate_report())
-  //  .then(() => monthly_donation_page_review.generate_report())
-  //  .then(() => monthly_most_visited_pages_review.generate_report())
+    .then(() => monthly_member_page_review.generate_report())
+    .then(() => monthly_donation_page_review.generate_report())
+    .then(() => monthly_most_visited_pages_review.generate_report())
   //  .then(() => monthly_single_page_review.generate_report())
 //    .then(() => single_page_reviews(dateRange, "/blog/"));
-  //  .then(() => single_page_reviews(dateRange, "/"))
+    .then(() => single_page_reviews(dateRange, "/"))
     .then(() => regexp_page_reviews(dateRange, "/"));
   });
 

@@ -1,8 +1,8 @@
 {
   "animate_css.js": "/packs/js/animate_css-0a1b39fba4c247f98efd.js",
   "animate_css.js.map": "/packs/js/animate_css-0a1b39fba4c247f98efd.js.map",
-  "application.js": "/packs/js/application-18993db6a22cd4ff11d2.js",
-  "application.js.map": "/packs/js/application-18993db6a22cd4ff11d2.js.map",
+  "application.js": "/packs/js/application-3e74865ace59728beb0a.js",
+  "application.js.map": "/packs/js/application-3e74865ace59728beb0a.js.map",
   "chat.js": "/packs/js/chat-c74c50c87c214e5453dc.js",
   "chat.js.map": "/packs/js/chat-c74c50c87c214e5453dc.js.map",
   "d3-charts.js": "/packs/js/d3-charts-0fce39977f0f921a2da9.js",
@@ -20,10 +20,10 @@
     },
     "application": {
       "js": [
-        "/packs/js/application-18993db6a22cd4ff11d2.js"
+        "/packs/js/application-3e74865ace59728beb0a.js"
       ],
       "js.map": [
-        "/packs/js/application-18993db6a22cd4ff11d2.js.map"
+        "/packs/js/application-3e74865ace59728beb0a.js.map"
       ]
     },
     "chat": {
@@ -52,15 +52,15 @@
     },
     "vegan_cockpit": {
       "js": [
-        "/packs/js/vegan_cockpit-b2d612d0e167925d8dbb.js"
+        "/packs/js/vegan_cockpit-5f4109c677c8dc9a46bd.js"
       ],
       "js.map": [
-        "/packs/js/vegan_cockpit-b2d612d0e167925d8dbb.js.map"
+        "/packs/js/vegan_cockpit-5f4109c677c8dc9a46bd.js.map"
       ]
     }
   },
   "media/chosen-js/chosen-sprite.png": "/packs/media/chosen-js/chosen-sprite-6768c197.png",
   "media/chosen-js/chosen-sprite@2x.png": "/packs/media/chosen-js/chosen-sprite@2x-a0b7f3f1.png",
-  "vegan_cockpit.js": "/packs/js/vegan_cockpit-b2d612d0e167925d8dbb.js",
-  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-b2d612d0e167925d8dbb.js.map"
+  "vegan_cockpit.js": "/packs/js/vegan_cockpit-5f4109c677c8dc9a46bd.js",
+  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-5f4109c677c8dc9a46bd.js.map"
 }
