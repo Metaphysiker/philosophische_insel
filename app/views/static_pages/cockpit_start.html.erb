@@ -134,7 +134,7 @@
 
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1_WjkByjVFeBLvvi-LDtZL1CX7g4qM-X6m9_wBECT7Sk',
-      range: 'A:B',
+      range: 'A:C',
     }).then(function(response) {
 
       var registrations_per_month = {};
@@ -143,17 +143,20 @@
       if (range.values.length > 0) {
         for (i = 0; i < range.values.length; i++) {
           var row = range.values[i];
-          appendPre(row[0] + ', ' + row[1]);
-          //registrations[row[0]] = row[1];
+          if((row[2].includes("Voller Mitgliedschaftsbeitrag")) || (row[2].includes("Reduzierter Mitgliedschaftsbeitrag"))){
+            //console.log(row[2]);
+            appendPre(row[0] + ', ' + row[1] + ', ' + row[2]);
+            //registrations[row[0]] = row[1];
 
-          row[0].split("-")
-          var year_month = "registration-" + row[0].split("-")[0] + "-" + row[0].split("-")[1];
+            row[0].split("-")
+            var year_month = "registration-" + row[0].split("-")[0] + "-" + row[0].split("-")[1];
 
-          //check if key exists
-          if(year_month in registrations_per_month) {
-            registrations_per_month[year_month] = registrations_per_month[year_month] + parseInt(row[1], 10);
-          } else {
-            registrations_per_month[year_month] = parseInt(row[1], 10);
+            //check if key exists
+            if(year_month in registrations_per_month) {
+              registrations_per_month[year_month] = registrations_per_month[year_month] + parseInt(row[1], 10);
+            } else {
+              registrations_per_month[year_month] = parseInt(row[1], 10);
+            }
           }
 
           if(i+1 >= range.values.length){
@@ -176,8 +179,8 @@
     return new Promise(function(resolve, reject){
 
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '16cRJL3K3Axn2zdzL0LVBeK9IwLCz-8XcNU3d_hZTcAw',
-      range: 'A:B',
+      spreadsheetId: '1_WjkByjVFeBLvvi-LDtZL1CX7g4qM-X6m9_wBECT7Sk',
+      range: 'A:C',
     }).then(function(response) {
 
       var donations_per_month = {};
@@ -186,22 +189,29 @@
       if (range.values.length > 0) {
         for (i = 0; i < range.values.length; i++) {
           var row = range.values[i];
-          appendPre(row[0] + ', ' + row[1]);
-          //donations[row[0]] = row[1];
 
-          row[0].split("-")
-          var year_month = "donation-" + row[0].split("-")[0] + "-" + row[0].split("-")[1];
+          if(row[2].includes("Spende")){
+            //console.log(row[2]);
+            appendPre(row[0] + ', ' + row[1] + ', ' + row[2]);
+            //registrations[row[0]] = row[1];
 
-          //check if key exists
-          if(year_month in donations_per_month) {
-            donations_per_month[year_month] = donations_per_month[year_month] + parseInt(row[1], 10);
-          } else {
-            donations_per_month[year_month] = parseInt(row[1], 10);
+            row[0].split("-")
+            var year_month = "donation-" + row[0].split("-")[0] + "-" + row[0].split("-")[1];
+
+            //check if key exists
+            if(year_month in donations_per_month) {
+              donations_per_month[year_month] = donations_per_month[year_month] + parseInt(row[1], 10);
+            } else {
+              donations_per_month[year_month] = parseInt(row[1], 10);
+            }
           }
+
+          appendPre(row[0] + ', ' + row[1] + ', ' + row[2]);
+          //donations[row[0]] = row[1];
 
           if(i+1 >= range.values.length){
             resolve(new URLSearchParams(donations_per_month).toString());
-
+            console.log(donations_per_month);
             //window.location.href = '/cockpit?' + new URLSearchParams(donations_per_month).toString();;
           }
         }
