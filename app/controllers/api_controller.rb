@@ -1,6 +1,8 @@
 
 class ApiController < ApplicationController
+  protect_from_forgery except: [:vegan_cockpit_js, :d3_charts_js]
   require 'rest-client'
+
   def google_sheets
 
      response = RestClient::Request.execute(
@@ -19,8 +21,11 @@ class ApiController < ApplicationController
   end
 
   def vegan_cockpit_js
-    #render file: Rails.root.join('app', 'assets', 'javascript', 'vegan.cockpit.js'), layout: false
-    render ''
-    #render file: '/app/assets/javascript/vegan_cockpit.js', layout: false
+    render file: "#{Rails.root}/app/javascript/packs/vegan_cockpit.js", layout: false
   end
+
+  def d3_charts_js
+    render file: "#{Rails.root}/app/javascript/packs/d3-charts.js", layout: false
+  end
+
 end
