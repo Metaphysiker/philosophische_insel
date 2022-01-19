@@ -19,7 +19,8 @@ class ApiController < ApplicationController
   end
 
   def vegan_cockpit_js
-    render file: Rails.root.join('app', 'assets', 'javascript', 'vegan.cockpit.js'), layout: false
+    #render file: Rails.root.join('app', 'assets', 'javascript', 'vegan.cockpit.js'), layout: false
+    render ''
     #render file: '/app/assets/javascript/vegan_cockpit.js', layout: false
   end
 end
