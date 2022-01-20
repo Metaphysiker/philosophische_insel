@@ -21,13 +21,15 @@ class ApiController < ApplicationController
   end
 
   def vegan_cockpit_js
-    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
+    #response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
 
     render file: "#{Rails.root}/app/javascript/packs/vegan_cockpit.js", layout: false
   end
 
   def d3_charts_js
-    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
+    #response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
 
     render file: "#{Rails.root}/app/javascript/packs/d3-charts.js", layout: false
   end
