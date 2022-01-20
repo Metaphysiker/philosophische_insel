@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :media_releases
   get 'api/google_sheets'
   get 'api/vegan_cockpit_js'
   get 'api/d3_charts_js'

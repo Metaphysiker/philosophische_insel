@@ -1,0 +1,14 @@
+<div class="container">
+  <% @media_releases.order(:date).reverse_order.each do |media_release| %>
+<div class="medien-mitteilung">
+  <%= media_release.date.strftime("%d.%m.%Y") %> - <%= "Medienmitteilungen".upcase %>
+  <h3><%= link_to media_release.title, media_release.hyperlink %></h3>
+  <p>
+    <%= media_release.content %>
+  </p>
+  <%#= link_to "Zur Medienmitteilung", media_release.hyperlink %>
+  </div>
+  <hr>
+  <br>
+  <% end %>
+</div>

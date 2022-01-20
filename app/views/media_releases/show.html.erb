@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @media_release.date %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @media_release.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @media_release.content %>
+</p>
+
+<%= link_to 'Edit', edit_media_release_path(@media_release) %> |
+<%= link_to 'Back', media_releases_path %>

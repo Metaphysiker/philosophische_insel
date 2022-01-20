@@ -1,0 +1,2 @@
+class MediaRelease < ApplicationRecord
+end
