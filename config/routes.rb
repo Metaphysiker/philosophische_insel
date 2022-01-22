@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   get 'api/google_sheets'
   get 'api/vegan_cockpit_js'
   get 'api/d3_charts_js'
-  resources :philosophy_reviews
+  resources :philosophy_reviews do
+    collection do
+      get 'iframe'
+    end
+  end
   resources :donation_projects do
     member do
       get 'bar_chart_data'

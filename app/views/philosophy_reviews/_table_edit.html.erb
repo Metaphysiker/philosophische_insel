@@ -5,6 +5,9 @@
       <th scope="col">Name of Newspaper</th>
       <th scope="col">Title</th>
       <th scope="col">Abstract</th>
+      <th scope="col">
+        Actions
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +19,11 @@
       <td class="text-center"><%= review.name_of_paper %></td>
       <td class="text-center"><%= link_to review.title, review.hyperlink %></td>
       <td><%= review.abstract %></td>
+      <td>
+        <%= link_to "edit", edit_philosophy_review_path(review) %>
+        <br />
+        <%= link_to 'delete', review, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
     </tr>
     <% end %>
   </tbody>

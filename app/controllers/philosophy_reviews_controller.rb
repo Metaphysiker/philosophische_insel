@@ -38,7 +38,7 @@ class PhilosophyReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @philosophy_review.update(philosophy_review_params)
-        format.html { redirect_to @philosophy_review, notice: "Philosophy review was successfully updated." }
+        format.html { redirect_to philosophy_reviews_url, notice: "Philosophy review was successfully destroyed." }
         format.json { render :show, status: :ok, location: @philosophy_review }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,6 +56,12 @@ class PhilosophyReviewsController < ApplicationController
     end
   end
 
+  def iframe
+    @philosophy_reviews = PhilosophyReview.all
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://www.philosophie.ch/"
+    render layout: "application_empty"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_philosophy_review
@@ -64,6 +70,6 @@ class PhilosophyReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def philosophy_review_params
-      params.require(:philosophy_review).permit(:title, :name_of_paper, :abstract, :hyperlink)
+      params.require(:philosophy_review).permit(:title, :name_of_paper, :abstract, :hyperlink, :date)
     end
 end

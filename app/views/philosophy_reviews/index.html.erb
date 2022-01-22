@@ -3,9 +3,13 @@
 <%= link_to 'New Philosophy Review', new_philosophy_review_path %>
 <hr>
 
-<%= render "philosophy_reviews/table", philosophy_reviews: @philosophy_reviews %>
+<%= render "philosophy_reviews/table_edit", philosophy_reviews: @philosophy_reviews %>
 
 <br>
+<hr />
+<div class="bg-light bordered rounded p-1">
+  <%= "#{render "philosophy_reviews/table", philosophy_reviews: @philosophy_reviews}" %>
+</div>
 
 
 </div>
