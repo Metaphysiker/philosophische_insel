@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :philosophy_reviews do
     collection do
       get 'iframe'
-      get 'current_table'
+      #get 'current_table'
     end
   end
   resources :donation_projects do
