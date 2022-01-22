@@ -21,6 +21,7 @@ gem "pundit"
 gem 'meta-tags'
 gem 'rest-client'
 
+
 gem "aws-sdk-s3", require: false
 gem 'friendly_id', '~> 5.4.0'
 gem 'redcarpet'
@@ -62,6 +63,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rmagick'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.

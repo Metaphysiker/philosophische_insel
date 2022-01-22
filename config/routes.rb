@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'chat', to: 'chat#chat', as: "chat"
   root 'static_pages#welcome'
   get 'static_pages/welcome'
+  get 'static_pages/rmagick'
 
   get 'static_pages/pferdefutter'
   get 'stinah/wizard', to: 'static_pages#pferdefutter', as: "pferdefutter"

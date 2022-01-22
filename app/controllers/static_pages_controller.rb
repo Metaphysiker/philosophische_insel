@@ -1,8 +1,21 @@
 class StaticPagesController < ApplicationController
   after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets]
 
+  if Rails.env.development?
+    require 'rmagick'
+    include Magick
+
+    def rmagick
+      source_image = Image.read("#{Rails.root}/app/assets/images/philosophie/184_philo.jpg").first
+      thumbnail_image = thumb(source_image, '300x300', 8)
+      thumbnail_image.write("#{Rails.root}/app/assets/images/philosophie/bagsyx.png")
+    end
+  end
+
   def welcome
   end
+
+
 
   def about
   end
@@ -69,5 +82,34 @@ class StaticPagesController < ApplicationController
   def google_sheets
     render layout: "application_empty"
   end
+
+  private
+
+  def thumb(source_image, geometry_string, radius = 10)
+    source_image.change_geometry(geometry_string) do |cols, rows, img|
+
+      # Make a resized copy of the image
+      thumb = img.resize(cols, rows)
+
+      # Set a transparent background: pixels that are transparent will be
+      # discarded from the source image.
+      mask = Image.new(cols, rows) {self.background_color = 'transparent'}
+
+      # Create a white rectangle with rounded corners. This will become the
+      # mask for the area you want to retain in the original image.
+      Draw.new.stroke('none').stroke_width(0).fill('white').
+          circle(cols/2, rows/2, cols/2, 1).
+          draw(mask)
+
+      #Draw.new.stroke('none').stroke_width(0).fill('white').
+      #    roundrectangle(0, 0, cols, rows, radius, radius).
+      #    draw(mask)
+
+      # Apply the mask and write it out
+      thumb.composite!(mask, 0, 0, Magick::CopyAlphaCompositeOp)
+      thumb
+    end
+  end
+
 
 end
