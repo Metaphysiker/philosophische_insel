@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <% philosophy_reviews.each do |review| %>
+    <% philosophy_reviews.order(:date).reverse_order.each do |review| %>
     <tr>
       <td class="text-center">
         <%= review.date.strftime("%d.%m.%Y") %>
