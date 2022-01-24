@@ -20,7 +20,7 @@ gem 'maxminddb'
 gem "pundit"
 gem 'meta-tags'
 gem 'rest-client'
-
+gem 'seed_dump'
 
 gem "aws-sdk-s3", require: false
 gem 'friendly_id', '~> 5.4.0'
