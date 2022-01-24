@@ -14,7 +14,6 @@ import "packs/animate_css"
 //import "font-awesome/css/font-awesome.min.css"
 import "font-awesome/scss/font-awesome.scss"
 //import { Personyxz } from "packs/d3_objects"
-import * as d3Charts from "packs/d3-charts";
 
 
 import CodeMirror from 'codemirror/lib/codemirror.js'
@@ -53,11 +52,17 @@ ActiveStorage.start()
 window.jQuery = $;
 window.$ = $;
 window.CodeMirror = CodeMirror;
-//window.Personyxz = Personyxz;
-window.d3Charts = d3Charts;
 
-import * as veganCockpit from "packs/vegan_cockpit";
-window.veganCockpit = veganCockpit;
+//import * as d3Charts from "packs/d3-charts";
+//window.d3Charts = d3Charts;
+
+import("packs/d3-charts").then(d3Charts => {
+  window.d3Charts = d3Charts;
+})
+
+import("packs/vegan_cockpit").then(veganCockpit => {
+  window.veganCockpit = veganCockpit;
+})
 
 
 
