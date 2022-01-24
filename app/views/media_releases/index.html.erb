@@ -1,14 +1,36 @@
-<div class="container">
-  <% @media_releases.order(:date).reverse_order.each do |media_release| %>
-<div class="medien-mitteilung">
-  <%= media_release.date.strftime("%d.%m.%Y") %> - <%= "Medienmitteilungen".upcase %>
-  <h3><%= link_to media_release.title, media_release.hyperlink %></h3>
-  <p>
-    <%= media_release.content %>
-  </p>
-  <%#= link_to "Zur Medienmitteilung", media_release.hyperlink %>
-  </div>
-  <hr>
-  <br>
+<% how_many_items_before_show_more_button = 5 %>
+<% collapsible_id = "media_releases_collapsible" %>
+
+
+<% @media_releases.order(:date).reverse_order.limit(how_many_items_before_show_more_button).each do |media_release| %>
+  <%= render "media_releases/item", item: media_release %>
+<% end %>
+
+<div class="collapse" id="<%= collapsible_id %>">
+
+
+
+  <% @media_releases.order(:date).reverse_order.offset(how_many_items_before_show_more_button).each do |media_release| %>
+    <%= render "media_releases/item", item: media_release %>
   <% end %>
+
 </div>
+<p class="text-center">
+
+  <button class="btn btn-primary" id="<%= collapsible_id %>_button" type="button" data-bs-toggle="collapse" data-bs-target="#<%= collapsible_id %>" aria-expanded="false" aria-controls="<%= collapsible_id %>">
+    Mehr anzeigen
+  </button>
+</p>
+
+<script>
+
+    var myCollapsible = document.getElementById('<%= collapsible_id %>')
+    myCollapsible.addEventListener('show.bs.collapse', function () {
+      $("#<%= collapsible_id %>_button").text("Weniger anzeigen");
+    });
+
+    myCollapsible.addEventListener('hide.bs.collapse', function () {
+      $("#<%= collapsible_id %>_button").text("Mehr anzeigen");
+    });
+
+</script>
