@@ -1,0 +1,10 @@
+<%= item.date.strftime("%d.%m.%Y") %> - <%= item.paper.upcase %>
+<h3><%= link_to item.title, item.hyperlink %></h3>
+<p>
+  <%= item.content %>
+</p>
+<%= link_to "Zum Original-Artikel", item.hyperlink %>
+<br>
+<br>
+<hr>
+<br>
