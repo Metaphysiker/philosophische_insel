@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Media</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Paper</th>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Hyperlink</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @media.each do |medium| %>
+      <tr>
+        <td><%= medium.paper %></td>
+        <td><%= medium.title %></td>
+        <td><%= medium.content %></td>
+        <td><%= medium.hyperlink %></td>
+        <td><%= medium.date %></td>
+        <td><%= link_to 'Show', medium %></td>
+        <td><%= link_to 'Edit', edit_medium_path(medium) %></td>
+        <td><%= link_to 'Destroy', medium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Medium', new_medium_path %>
+
+<div class="container">
+  <div class="in-den-medien">
+  <% @media.order(:date).reverse_order.each do |medium| %>
+  <%= medium.date.strftime("%d.%m.%Y") %> - <%= medium.paper.upcase %>
+  <h3><%= link_to medium.title, medium.hyperlink %></h3>
+  <p>
+    <%= medium.content %>
+  </p>
+  <%= link_to "Zum Original-Artikel", medium.hyperlink %>
+  <br>
+  <br>
+  <hr>
+  <br>
+  <% end %>
+  </div>
+</div>

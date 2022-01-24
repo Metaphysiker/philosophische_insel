@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Paper:</strong>
+  <%= @medium.paper %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @medium.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @medium.content %>
+</p>
+
+<p>
+  <strong>Hyperlink:</strong>
+  <%= @medium.hyperlink %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @medium.date %>
+</p>
+
+<%= link_to 'Edit', edit_medium_path(@medium) %> |
+<%= link_to 'Back', media_path %>
