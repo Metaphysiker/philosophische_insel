@@ -11,6 +11,8 @@ import "jquery"
 import "chosen-js/chosen.jquery.min.js"
 import "packs/chat"
 import "packs/animate_css"
+//import "font-awesome/css/font-awesome.min.css"
+import "font-awesome/scss/font-awesome.scss"
 //import { Personyxz } from "packs/d3_objects"
 import * as d3Charts from "packs/d3-charts";
 
