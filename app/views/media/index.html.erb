@@ -1,5 +1,5 @@
 <% how_many_items_before_show_more_button = 5 %>
-<% collapsible_id = "media_releases_collapsible" %>
+<% collapsible_id = "media_collapsible" %>
 
 
 <% @media.order(:date).reverse_order.limit(how_many_items_before_show_more_button).each do |medium| %>
