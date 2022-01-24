@@ -1,61 +1,65 @@
 {
-  "animate_css.js": "/packs/js/animate_css-0a1b39fba4c247f98efd.js",
-  "animate_css.js.map": "/packs/js/animate_css-0a1b39fba4c247f98efd.js.map",
-  "application.js": "/packs/js/application-75d7623bfe1fe1ee996c.js",
-  "application.js.map": "/packs/js/application-75d7623bfe1fe1ee996c.js.map",
-  "chat.js": "/packs/js/chat-c74c50c87c214e5453dc.js",
-  "chat.js.map": "/packs/js/chat-c74c50c87c214e5453dc.js.map",
-  "d3-charts.js": "/packs/js/d3-charts-0fce39977f0f921a2da9.js",
-  "d3-charts.js.map": "/packs/js/d3-charts-0fce39977f0f921a2da9.js.map",
-  "d3_objects.js": "/packs/js/d3_objects-601f2abb7cb0165f0b4b.js",
-  "d3_objects.js.map": "/packs/js/d3_objects-601f2abb7cb0165f0b4b.js.map",
+  "animate_css.js": "/packs/js/animate_css-848dfa3e032e2e31db70.js",
+  "animate_css.js.map": "/packs/js/animate_css-848dfa3e032e2e31db70.js.map",
+  "application.css": "/packs/css/application-76ad7b02.css",
+  "application.js": "/packs/js/application-c9d3bdd8896c0f8ab8ab.js",
+  "application.js.map": "/packs/js/application-c9d3bdd8896c0f8ab8ab.js.map",
+  "chat.js": "/packs/js/chat-1edb5ee6a62aa10fba69.js",
+  "chat.js.map": "/packs/js/chat-1edb5ee6a62aa10fba69.js.map",
+  "d3-charts.js": "/packs/js/d3-charts-0e7d4b4459332fb2c7bb.js",
+  "d3-charts.js.map": "/packs/js/d3-charts-0e7d4b4459332fb2c7bb.js.map",
+  "d3_objects.js": "/packs/js/d3_objects-78fdcd716fbdda9a8e08.js",
+  "d3_objects.js.map": "/packs/js/d3_objects-78fdcd716fbdda9a8e08.js.map",
   "entrypoints": {
     "animate_css": {
       "js": [
-        "/packs/js/animate_css-0a1b39fba4c247f98efd.js"
+        "/packs/js/animate_css-848dfa3e032e2e31db70.js"
       ],
       "js.map": [
-        "/packs/js/animate_css-0a1b39fba4c247f98efd.js.map"
+        "/packs/js/animate_css-848dfa3e032e2e31db70.js.map"
       ]
     },
     "application": {
+      "css": [
+        "/packs/css/application-76ad7b02.css"
+      ],
       "js": [
-        "/packs/js/application-75d7623bfe1fe1ee996c.js"
+        "/packs/js/application-c9d3bdd8896c0f8ab8ab.js"
       ],
       "js.map": [
-        "/packs/js/application-75d7623bfe1fe1ee996c.js.map"
+        "/packs/js/application-c9d3bdd8896c0f8ab8ab.js.map"
       ]
     },
     "chat": {
       "js": [
-        "/packs/js/chat-c74c50c87c214e5453dc.js"
+        "/packs/js/chat-1edb5ee6a62aa10fba69.js"
       ],
       "js.map": [
-        "/packs/js/chat-c74c50c87c214e5453dc.js.map"
+        "/packs/js/chat-1edb5ee6a62aa10fba69.js.map"
       ]
     },
     "d3_objects": {
       "js": [
-        "/packs/js/d3_objects-601f2abb7cb0165f0b4b.js"
+        "/packs/js/d3_objects-78fdcd716fbdda9a8e08.js"
       ],
       "js.map": [
-        "/packs/js/d3_objects-601f2abb7cb0165f0b4b.js.map"
+        "/packs/js/d3_objects-78fdcd716fbdda9a8e08.js.map"
       ]
     },
     "d3-charts": {
       "js": [
-        "/packs/js/d3-charts-0fce39977f0f921a2da9.js"
+        "/packs/js/d3-charts-0e7d4b4459332fb2c7bb.js"
       ],
       "js.map": [
-        "/packs/js/d3-charts-0fce39977f0f921a2da9.js.map"
+        "/packs/js/d3-charts-0e7d4b4459332fb2c7bb.js.map"
       ]
     },
     "vegan_cockpit": {
       "js": [
-        "/packs/js/vegan_cockpit-5f4109c677c8dc9a46bd.js"
+        "/packs/js/vegan_cockpit-758e30fe3b0c5315527b.js"
       ],
       "js.map": [
-        "/packs/js/vegan_cockpit-5f4109c677c8dc9a46bd.js.map"
+        "/packs/js/vegan_cockpit-758e30fe3b0c5315527b.js.map"
       ]
     }
   },
@@ -74,6 +78,6 @@
   "media/images/ui-icons_777777_256x240.png": "/packs/media/images/ui-icons_777777_256x240-f5d5fce2.png",
   "media/images/ui-icons_cc0000_256x240.png": "/packs/media/images/ui-icons_cc0000_256x240-5cbbd560.png",
   "media/images/ui-icons_ffffff_256x240.png": "/packs/media/images/ui-icons_ffffff_256x240-92bef7e4.png",
-  "vegan_cockpit.js": "/packs/js/vegan_cockpit-5f4109c677c8dc9a46bd.js",
-  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-5f4109c677c8dc9a46bd.js.map"
+  "vegan_cockpit.js": "/packs/js/vegan_cockpit-758e30fe3b0c5315527b.js",
+  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-758e30fe3b0c5315527b.js.map"
 }
