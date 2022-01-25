@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{8:function(n,e){window.ANIMATECSS=function(n,e){var t=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"animate__";return new Promise((function(a,i){var o="".concat(t).concat(e),c=document.querySelector(n);c.classList.add("".concat(t,"animated"),o),c.addEventListener("animationend",(function n(){c.classList.remove("".concat(t,"animated"),o),c.removeEventListener("animationend",n),a("Animation ended")}))}))}}},[[8,11]]]);
+//# sourceMappingURL=animate_css-b56d9f54b49218bb14fb.chunk.js.map
