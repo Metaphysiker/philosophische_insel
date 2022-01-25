@@ -15,7 +15,9 @@
 
     -->
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+    <%#= javascript_pack_tag 'application' %>
+    <%= javascript_packs_with_chunks_tag 'basic' %>
+
     <%= favicon_link_tag('philosophische-insel-logo-ohne-hintergrund.png') %>
   </head>
   <body class="d-flex flex-column h-100">

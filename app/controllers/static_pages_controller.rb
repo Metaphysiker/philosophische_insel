@@ -80,7 +80,7 @@ class StaticPagesController < ApplicationController
   end
 
   def google_sheets
-    render layout: "application_empty"
+    render layout: "application_blank"
   end
 
   private

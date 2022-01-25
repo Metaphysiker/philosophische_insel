@@ -1,44 +1,44 @@
 {
-  "animate_css.js": "/packs/js/animate_css-6fc82b5eff1ac0e21275.chunk.js",
-  "animate_css.js.map": "/packs/js/animate_css-6fc82b5eff1ac0e21275.chunk.js.map",
+  "animate_css.js": "/packs/js/animate_css-dbff7d34313fbd2469a7.chunk.js",
+  "animate_css.js.map": "/packs/js/animate_css-dbff7d34313fbd2469a7.chunk.js.map",
   "application.css": "/packs/css/application-f8ece048.chunk.css",
-  "application.js": "/packs/js/application-f736d12e9676e1a3e4c1.chunk.js",
-  "application.js.map": "/packs/js/application-f736d12e9676e1a3e4c1.chunk.js.map",
+  "application.js": "/packs/js/application-ceafd3c2993c8c285622.chunk.js",
+  "application.js.map": "/packs/js/application-ceafd3c2993c8c285622.chunk.js.map",
   "application_old.css": "/packs/css/application_old-f8ece048.chunk.css",
-  "application_old.js": "/packs/js/application_old-52eb82bc3f248e10bcfd.chunk.js",
-  "application_old.js.map": "/packs/js/application_old-52eb82bc3f248e10bcfd.chunk.js.map",
-  "basic.css": "/packs/css/basic-d1a4abee.chunk.css",
-  "basic.js": "/packs/js/basic-c7799476860fc31caa29.chunk.js",
-  "basic.js.map": "/packs/js/basic-c7799476860fc31caa29.chunk.js.map",
-  "chat.js": "/packs/js/chat-caa5fd6e71ea1446391e.chunk.js",
-  "chat.js.map": "/packs/js/chat-caa5fd6e71ea1446391e.chunk.js.map",
-  "d3-charts.js": "/packs/js/d3-charts-6358422f6ebc7a34b508.chunk.js",
-  "d3-charts.js.map": "/packs/js/d3-charts-6358422f6ebc7a34b508.chunk.js.map",
+  "application_old.js": "/packs/js/application_old-3b24dc90ec350ea3e6fa.chunk.js",
+  "application_old.js.map": "/packs/js/application_old-3b24dc90ec350ea3e6fa.chunk.js.map",
+  "basic.css": "/packs/css/basic-eb29e589.chunk.css",
+  "basic.js": "/packs/js/basic-73414dd54972b4423a7a.chunk.js",
+  "basic.js.map": "/packs/js/basic-73414dd54972b4423a7a.chunk.js.map",
+  "chat.js": "/packs/js/chat-f3ca04fbb597334060fb.chunk.js",
+  "chat.js.map": "/packs/js/chat-f3ca04fbb597334060fb.chunk.js.map",
+  "d3-charts.js": "/packs/js/d3-charts-a33b8f3c884aaa78d93e.chunk.js",
+  "d3-charts.js.map": "/packs/js/d3-charts-a33b8f3c884aaa78d93e.chunk.js.map",
   "d3_objects.js": "/packs/js/d3_objects-b319e14467c9623b2478.chunk.js",
   "d3_objects.js.map": "/packs/js/d3_objects-b319e14467c9623b2478.chunk.js.map",
   "entrypoints": {
     "animate_css": {
       "js": [
         "/packs/js/runtime~animate_css-9728b0e40fe695ada5d1.js",
-        "/packs/js/animate_css-6fc82b5eff1ac0e21275.chunk.js"
+        "/packs/js/animate_css-dbff7d34313fbd2469a7.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~animate_css-9728b0e40fe695ada5d1.js.map",
-        "/packs/js/animate_css-6fc82b5eff1ac0e21275.chunk.js.map"
+        "/packs/js/animate_css-dbff7d34313fbd2469a7.chunk.js.map"
       ]
     },
     "application_old": {
       "js": [
-        "/packs/js/runtime~application_old-26eeb653458bb842efd6.js",
+        "/packs/js/runtime~application_old-032a57a28eb5bbae0811.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js",
-        "/packs/js/application_old-52eb82bc3f248e10bcfd.chunk.js"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js",
+        "/packs/js/application_old-3b24dc90ec350ea3e6fa.chunk.js"
       ],
       "js.map": [
-        "/packs/js/runtime~application_old-26eeb653458bb842efd6.js.map",
+        "/packs/js/runtime~application_old-032a57a28eb5bbae0811.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js.map",
-        "/packs/js/application_old-52eb82bc3f248e10bcfd.chunk.js.map"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js.map",
+        "/packs/js/application_old-3b24dc90ec350ea3e6fa.chunk.js.map"
       ],
       "css": [
         "/packs/css/application_old-f8ece048.chunk.css"
@@ -46,16 +46,16 @@
     },
     "application": {
       "js": [
-        "/packs/js/runtime~application-64ae4347710b69f28d66.js",
+        "/packs/js/runtime~application-c90ca36dd58bf84b63fb.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js",
-        "/packs/js/application-f736d12e9676e1a3e4c1.chunk.js"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js",
+        "/packs/js/application-ceafd3c2993c8c285622.chunk.js"
       ],
       "js.map": [
-        "/packs/js/runtime~application-64ae4347710b69f28d66.js.map",
+        "/packs/js/runtime~application-c90ca36dd58bf84b63fb.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js.map",
-        "/packs/js/application-f736d12e9676e1a3e4c1.chunk.js.map"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js.map",
+        "/packs/js/application-ceafd3c2993c8c285622.chunk.js.map"
       ],
       "css": [
         "/packs/css/application-f8ece048.chunk.css"
@@ -65,29 +65,29 @@
       "js": [
         "/packs/js/runtime~basic-523fe152b0c0a7d514c7.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js",
-        "/packs/js/basic-c7799476860fc31caa29.chunk.js"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js",
+        "/packs/js/basic-73414dd54972b4423a7a.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~basic-523fe152b0c0a7d514c7.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js.map",
-        "/packs/js/basic-c7799476860fc31caa29.chunk.js.map"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js.map",
+        "/packs/js/basic-73414dd54972b4423a7a.chunk.js.map"
       ],
       "css": [
-        "/packs/css/basic-d1a4abee.chunk.css"
+        "/packs/css/basic-eb29e589.chunk.css"
       ]
     },
     "chat": {
       "js": [
         "/packs/js/runtime~chat-f3ce0097d2b368dfb5fe.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
-        "/packs/js/chat-caa5fd6e71ea1446391e.chunk.js"
+        "/packs/js/chat-f3ca04fbb597334060fb.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~chat-f3ce0097d2b368dfb5fe.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-        "/packs/js/chat-caa5fd6e71ea1446391e.chunk.js.map"
+        "/packs/js/chat-f3ca04fbb597334060fb.chunk.js.map"
       ]
     },
     "d3_objects": {
@@ -104,52 +104,55 @@
       "js": [
         "/packs/js/runtime~d3-charts-0a000fe244f88cf7b22d.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
-        "/packs/js/d3-charts-6358422f6ebc7a34b508.chunk.js"
+        "/packs/js/d3-charts-a33b8f3c884aaa78d93e.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~d3-charts-0a000fe244f88cf7b22d.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-        "/packs/js/d3-charts-6358422f6ebc7a34b508.chunk.js.map"
+        "/packs/js/d3-charts-a33b8f3c884aaa78d93e.chunk.js.map"
       ]
     },
     "pferdefutter": {
       "js": [
         "/packs/js/runtime~pferdefutter-4d563becf1f50dcfaedc.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js",
-        "/packs/js/pferdefutter-6f39ab8a51ffb95acf7b.chunk.js"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js",
+        "/packs/js/pferdefutter-314da5c262232c5c785c.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~pferdefutter-4d563becf1f50dcfaedc.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js.map",
-        "/packs/js/pferdefutter-6f39ab8a51ffb95acf7b.chunk.js.map"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js.map",
+        "/packs/js/pferdefutter-314da5c262232c5c785c.chunk.js.map"
+      ],
+      "css": [
+        "/packs/css/pferdefutter-baee9c83.chunk.css"
       ]
     },
     "vegan_cockpit": {
       "js": [
         "/packs/js/runtime~vegan_cockpit-59682c81414813d74232.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
-        "/packs/js/vegan_cockpit-e25b9479b5873dbfc08d.chunk.js"
+        "/packs/js/vegan_cockpit-466375c18048b4e58c13.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~vegan_cockpit-59682c81414813d74232.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-        "/packs/js/vegan_cockpit-e25b9479b5873dbfc08d.chunk.js.map"
+        "/packs/js/vegan_cockpit-466375c18048b4e58c13.chunk.js.map"
       ]
     },
     "welcome": {
       "js": [
         "/packs/js/runtime~welcome-531c9d8fe40dc67e04f8.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js",
-        "/packs/js/welcome-96ec33baa29127d6b802.chunk.js"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js",
+        "/packs/js/welcome-29a2db8ca010757a153c.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~welcome-531c9d8fe40dc67e04f8.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js.map",
-        "/packs/js/welcome-96ec33baa29127d6b802.chunk.js.map"
+        "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js.map",
+        "/packs/js/welcome-29a2db8ca010757a153c.chunk.js.map"
       ],
       "css": [
         "/packs/css/welcome-d1a4abee.chunk.css"
@@ -171,14 +174,15 @@
   "media/images/ui-icons_777777_256x240.png": "/packs/media/images/ui-icons_777777_256x240-f5d5fce2.png",
   "media/images/ui-icons_cc0000_256x240.png": "/packs/media/images/ui-icons_cc0000_256x240-5cbbd560.png",
   "media/images/ui-icons_ffffff_256x240.png": "/packs/media/images/ui-icons_ffffff_256x240-92bef7e4.png",
-  "pferdefutter.js": "/packs/js/pferdefutter-6f39ab8a51ffb95acf7b.chunk.js",
-  "pferdefutter.js.map": "/packs/js/pferdefutter-6f39ab8a51ffb95acf7b.chunk.js.map",
+  "pferdefutter.css": "/packs/css/pferdefutter-baee9c83.chunk.css",
+  "pferdefutter.js": "/packs/js/pferdefutter-314da5c262232c5c785c.chunk.js",
+  "pferdefutter.js.map": "/packs/js/pferdefutter-314da5c262232c5c785c.chunk.js.map",
   "runtime~animate_css.js": "/packs/js/runtime~animate_css-9728b0e40fe695ada5d1.js",
   "runtime~animate_css.js.map": "/packs/js/runtime~animate_css-9728b0e40fe695ada5d1.js.map",
-  "runtime~application.js": "/packs/js/runtime~application-64ae4347710b69f28d66.js",
-  "runtime~application.js.map": "/packs/js/runtime~application-64ae4347710b69f28d66.js.map",
-  "runtime~application_old.js": "/packs/js/runtime~application_old-26eeb653458bb842efd6.js",
-  "runtime~application_old.js.map": "/packs/js/runtime~application_old-26eeb653458bb842efd6.js.map",
+  "runtime~application.js": "/packs/js/runtime~application-c90ca36dd58bf84b63fb.js",
+  "runtime~application.js.map": "/packs/js/runtime~application-c90ca36dd58bf84b63fb.js.map",
+  "runtime~application_old.js": "/packs/js/runtime~application_old-032a57a28eb5bbae0811.js",
+  "runtime~application_old.js.map": "/packs/js/runtime~application_old-032a57a28eb5bbae0811.js.map",
   "runtime~basic.js": "/packs/js/runtime~basic-523fe152b0c0a7d514c7.js",
   "runtime~basic.js.map": "/packs/js/runtime~basic-523fe152b0c0a7d514c7.js.map",
   "runtime~chat.js": "/packs/js/runtime~chat-f3ce0097d2b368dfb5fe.js",
@@ -193,13 +197,13 @@
   "runtime~vegan_cockpit.js.map": "/packs/js/runtime~vegan_cockpit-59682c81414813d74232.js.map",
   "runtime~welcome.js": "/packs/js/runtime~welcome-531c9d8fe40dc67e04f8.js",
   "runtime~welcome.js.map": "/packs/js/runtime~welcome-531c9d8fe40dc67e04f8.js.map",
-  "vegan_cockpit.js": "/packs/js/vegan_cockpit-e25b9479b5873dbfc08d.chunk.js",
-  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-e25b9479b5873dbfc08d.chunk.js.map",
+  "vegan_cockpit.js": "/packs/js/vegan_cockpit-466375c18048b4e58c13.chunk.js",
+  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-466375c18048b4e58c13.chunk.js.map",
   "vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome.js": "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js",
   "vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome.js.map": "/packs/js/vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome-3cb025c428dfd80b6b14.chunk.js.map",
-  "vendors~application~application_old~basic~pferdefutter~welcome.js": "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js",
-  "vendors~application~application_old~basic~pferdefutter~welcome.js.map": "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-0752dc310d417c5e09e7.chunk.js.map",
+  "vendors~application~application_old~basic~pferdefutter~welcome.js": "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js",
+  "vendors~application~application_old~basic~pferdefutter~welcome.js.map": "/packs/js/vendors~application~application_old~basic~pferdefutter~welcome-3f5698337e1ad365ca8c.chunk.js.map",
   "welcome.css": "/packs/css/welcome-d1a4abee.chunk.css",
-  "welcome.js": "/packs/js/welcome-96ec33baa29127d6b802.chunk.js",
-  "welcome.js.map": "/packs/js/welcome-96ec33baa29127d6b802.chunk.js.map"
+  "welcome.js": "/packs/js/welcome-29a2db8ca010757a153c.chunk.js",
+  "welcome.js.map": "/packs/js/welcome-29a2db8ca010757a153c.chunk.js.map"
 }
