@@ -1,2 +1,0 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vegan_cockpit"],[],[["./app/javascript/packs/vegan_cockpit.js","runtime~vegan_cockpit","vendors~application~chat~d3-charts~vegan_cockpit",1]]]);
-//# sourceMappingURL=vegan_cockpit-209dbf4d83e54c83c2d0.chunk.js.map
