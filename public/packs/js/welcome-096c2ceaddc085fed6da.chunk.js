@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[28],{38:function(n,o,t){"use strict";t.r(o),function(n){var o=t(4),r=t.n(o),i=t(5);t(6),t(19),t(9);r.a.start(),i.start(),window.jQuery=n,window.$=n}.call(this,t(1))},6:function(n,o,t){var r=t(7);r.keys().forEach(r)},7:function(n,o){function t(n){var o=new Error("Cannot find module '"+n+"'");throw o.code="MODULE_NOT_FOUND",o}t.keys=function(){return[]},t.resolve=t,n.exports=t,t.id=7},9:function(n,o,t){}},[[38,24,0,1]]]);
-//# sourceMappingURL=welcome-096c2ceaddc085fed6da.chunk.js.map

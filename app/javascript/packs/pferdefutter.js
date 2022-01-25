@@ -5,6 +5,7 @@ import "bootstrap"
 import "jquery"
 import "d3/dist/d3.js"
 import "bootstrap-icons/font/bootstrap-icons.css"
+import "font-awesome/scss/font-awesome.scss"
 
 
 Rails.start()
