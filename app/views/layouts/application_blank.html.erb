@@ -15,7 +15,8 @@
     -->
     <%#= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+    <%#= javascript_pack_tag 'application' %>
+    <%= javascript_packs_with_chunks_tag 'application' %>
     <%= favicon_link_tag('philosophische-insel-logo-ohne-hintergrund.png') %>
   </head>
   <body class="d-flex flex-column h-100">

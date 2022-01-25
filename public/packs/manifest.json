@@ -1,65 +1,87 @@
 {
-  "animate_css.js": "/packs/js/animate_css-ec090eb0a91f156681e7.js",
-  "animate_css.js.map": "/packs/js/animate_css-ec090eb0a91f156681e7.js.map",
-  "application.css": "/packs/css/application-f8ece048.css",
-  "application.js": "/packs/js/application-f442f768897f81c3e218.js",
-  "application.js.map": "/packs/js/application-f442f768897f81c3e218.js.map",
-  "chat.js": "/packs/js/chat-6dfc2d4da4eff5870658.js",
-  "chat.js.map": "/packs/js/chat-6dfc2d4da4eff5870658.js.map",
-  "d3-charts.js": "/packs/js/d3-charts-c294daf785591dd42707.js",
-  "d3-charts.js.map": "/packs/js/d3-charts-c294daf785591dd42707.js.map",
-  "d3_objects.js": "/packs/js/d3_objects-78fdcd716fbdda9a8e08.js",
-  "d3_objects.js.map": "/packs/js/d3_objects-78fdcd716fbdda9a8e08.js.map",
+  "animate_css.js": "/packs/js/animate_css-da574270cfc25583d5f7.chunk.js",
+  "animate_css.js.map": "/packs/js/animate_css-da574270cfc25583d5f7.chunk.js.map",
+  "application.js": "/packs/js/application-1eafea48c333076facd8.chunk.js",
+  "application.js.map": "/packs/js/application-1eafea48c333076facd8.chunk.js.map",
+  "chat.js": "/packs/js/chat-d4e9863d5a7ca450d2d3.chunk.js",
+  "chat.js.map": "/packs/js/chat-d4e9863d5a7ca450d2d3.chunk.js.map",
+  "d3-charts.js": "/packs/js/d3-charts-04d59b4404a18d7f130a.chunk.js",
+  "d3-charts.js.map": "/packs/js/d3-charts-04d59b4404a18d7f130a.chunk.js.map",
+  "d3_objects.js": "/packs/js/d3_objects-f6bdd94e18d40028a4ab.chunk.js",
+  "d3_objects.js.map": "/packs/js/d3_objects-f6bdd94e18d40028a4ab.chunk.js.map",
   "entrypoints": {
     "animate_css": {
       "js": [
-        "/packs/js/animate_css-ec090eb0a91f156681e7.js"
+        "/packs/js/runtime~animate_css-df27d011ec1e4dad9d50.js",
+        "/packs/js/animate_css-da574270cfc25583d5f7.chunk.js"
       ],
       "js.map": [
-        "/packs/js/animate_css-ec090eb0a91f156681e7.js.map"
+        "/packs/js/runtime~animate_css-df27d011ec1e4dad9d50.js.map",
+        "/packs/js/animate_css-da574270cfc25583d5f7.chunk.js.map"
       ]
     },
     "application": {
-      "css": [
-        "/packs/css/application-f8ece048.css"
-      ],
       "js": [
-        "/packs/js/application-f442f768897f81c3e218.js"
+        "/packs/js/runtime~application-f3fef7dbe6a2a2f531a8.js",
+        "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js",
+        "/packs/js/vendors~application-eb25fa4f147dd6e5fef2.chunk.js",
+        "/packs/js/application-1eafea48c333076facd8.chunk.js"
       ],
       "js.map": [
-        "/packs/js/application-f442f768897f81c3e218.js.map"
+        "/packs/js/runtime~application-f3fef7dbe6a2a2f531a8.js.map",
+        "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js.map",
+        "/packs/js/vendors~application-eb25fa4f147dd6e5fef2.chunk.js.map",
+        "/packs/js/application-1eafea48c333076facd8.chunk.js.map"
       ]
     },
     "chat": {
       "js": [
-        "/packs/js/chat-6dfc2d4da4eff5870658.js"
+        "/packs/js/runtime~chat-f0b92afc9921244bbc71.js",
+        "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js",
+        "/packs/js/chat-d4e9863d5a7ca450d2d3.chunk.js"
       ],
       "js.map": [
-        "/packs/js/chat-6dfc2d4da4eff5870658.js.map"
+        "/packs/js/runtime~chat-f0b92afc9921244bbc71.js.map",
+        "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js.map",
+        "/packs/js/chat-d4e9863d5a7ca450d2d3.chunk.js.map"
       ]
     },
     "d3_objects": {
       "js": [
-        "/packs/js/d3_objects-78fdcd716fbdda9a8e08.js"
+        "/packs/js/runtime~d3_objects-1eeaf95e7d7ba400a979.js",
+        "/packs/js/d3_objects-f6bdd94e18d40028a4ab.chunk.js"
       ],
       "js.map": [
-        "/packs/js/d3_objects-78fdcd716fbdda9a8e08.js.map"
+        "/packs/js/runtime~d3_objects-1eeaf95e7d7ba400a979.js.map",
+        "/packs/js/d3_objects-f6bdd94e18d40028a4ab.chunk.js.map"
       ]
     },
     "d3-charts": {
       "js": [
-        "/packs/js/d3-charts-c294daf785591dd42707.js"
+        "/packs/js/runtime~d3-charts-b4dd11cabd3be164f4fa.js",
+        "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js",
+        "/packs/js/0-3e9de4fd98ff026e6716.chunk.js",
+        "/packs/js/d3-charts-04d59b4404a18d7f130a.chunk.js"
       ],
       "js.map": [
-        "/packs/js/d3-charts-c294daf785591dd42707.js.map"
+        "/packs/js/runtime~d3-charts-b4dd11cabd3be164f4fa.js.map",
+        "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js.map",
+        "/packs/js/0-3e9de4fd98ff026e6716.chunk.js.map",
+        "/packs/js/d3-charts-04d59b4404a18d7f130a.chunk.js.map"
       ]
     },
     "vegan_cockpit": {
       "js": [
-        "/packs/js/vegan_cockpit-633fce4807e2bc02b208.js"
+        "/packs/js/runtime~vegan_cockpit-1809db9aa620dac6742c.js",
+        "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js",
+        "/packs/js/1-e64736576058aa2887d3.chunk.js",
+        "/packs/js/vegan_cockpit-209dbf4d83e54c83c2d0.chunk.js"
       ],
       "js.map": [
-        "/packs/js/vegan_cockpit-633fce4807e2bc02b208.js.map"
+        "/packs/js/runtime~vegan_cockpit-1809db9aa620dac6742c.js.map",
+        "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js.map",
+        "/packs/js/1-e64736576058aa2887d3.chunk.js.map",
+        "/packs/js/vegan_cockpit-209dbf4d83e54c83c2d0.chunk.js.map"
       ]
     }
   },
@@ -78,6 +100,22 @@
   "media/images/ui-icons_777777_256x240.png": "/packs/media/images/ui-icons_777777_256x240-f5d5fce2.png",
   "media/images/ui-icons_cc0000_256x240.png": "/packs/media/images/ui-icons_cc0000_256x240-5cbbd560.png",
   "media/images/ui-icons_ffffff_256x240.png": "/packs/media/images/ui-icons_ffffff_256x240-92bef7e4.png",
-  "vegan_cockpit.js": "/packs/js/vegan_cockpit-633fce4807e2bc02b208.js",
-  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-633fce4807e2bc02b208.js.map"
+  "runtime~animate_css.js": "/packs/js/runtime~animate_css-df27d011ec1e4dad9d50.js",
+  "runtime~animate_css.js.map": "/packs/js/runtime~animate_css-df27d011ec1e4dad9d50.js.map",
+  "runtime~application.js": "/packs/js/runtime~application-f3fef7dbe6a2a2f531a8.js",
+  "runtime~application.js.map": "/packs/js/runtime~application-f3fef7dbe6a2a2f531a8.js.map",
+  "runtime~chat.js": "/packs/js/runtime~chat-f0b92afc9921244bbc71.js",
+  "runtime~chat.js.map": "/packs/js/runtime~chat-f0b92afc9921244bbc71.js.map",
+  "runtime~d3-charts.js": "/packs/js/runtime~d3-charts-b4dd11cabd3be164f4fa.js",
+  "runtime~d3-charts.js.map": "/packs/js/runtime~d3-charts-b4dd11cabd3be164f4fa.js.map",
+  "runtime~d3_objects.js": "/packs/js/runtime~d3_objects-1eeaf95e7d7ba400a979.js",
+  "runtime~d3_objects.js.map": "/packs/js/runtime~d3_objects-1eeaf95e7d7ba400a979.js.map",
+  "runtime~vegan_cockpit.js": "/packs/js/runtime~vegan_cockpit-1809db9aa620dac6742c.js",
+  "runtime~vegan_cockpit.js.map": "/packs/js/runtime~vegan_cockpit-1809db9aa620dac6742c.js.map",
+  "vegan_cockpit.js": "/packs/js/vegan_cockpit-209dbf4d83e54c83c2d0.chunk.js",
+  "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-209dbf4d83e54c83c2d0.chunk.js.map",
+  "vendors~application.js": "/packs/js/vendors~application-eb25fa4f147dd6e5fef2.chunk.js",
+  "vendors~application.js.map": "/packs/js/vendors~application-eb25fa4f147dd6e5fef2.chunk.js.map",
+  "vendors~application~chat~d3-charts~vegan_cockpit.js": "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js",
+  "vendors~application~chat~d3-charts~vegan_cockpit.js.map": "/packs/js/vendors~application~chat~d3-charts~vegan_cockpit-a692d390ed7cfec0c0d6.chunk.js.map"
 }
