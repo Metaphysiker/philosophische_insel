@@ -1,0 +1,31 @@
+/*!
+  * Bootstrap v5.0.2 (https://getbootstrap.com/)
+  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/*!
+ * Chartkick.js
+ * Create beautiful charts with one line of JavaScript
+ * https://github.com/ankane/chartkick.js
+ * v4.0.5
+ * MIT License
+ */
+
+/*!
+ * jQuery UI Datepicker 1.13.0
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+/*!
+ * jQuery UI Keycode 1.13.0
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
