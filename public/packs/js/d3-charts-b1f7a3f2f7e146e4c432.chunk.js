@@ -1,0 +1,2 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["d3-charts"],[],[["./app/javascript/packs/d3-charts.js","runtime~d3-charts","vendors~application~application_old~basic~chat~d3-charts~pferdefutter~vegan_cockpit~welcome",0]]]);
+//# sourceMappingURL=d3-charts-b1f7a3f2f7e146e4c432.chunk.js.map
