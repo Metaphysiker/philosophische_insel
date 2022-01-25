@@ -25,3 +25,4 @@
   <%= bar_chart event_query.where_props(action: "welcome").group_by_week(:time).count %>
 
 </div>
+<%= javascript_packs_with_chunks_tag 'visits' %>
