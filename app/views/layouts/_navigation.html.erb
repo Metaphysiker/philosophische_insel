@@ -14,14 +14,15 @@
               <%= link_to page.title, page, class: "nav-link" %>
             </li>
           <% end %>
-          <li class="nav-item">
-            <%= link_to "Vegan-Chat", chat_path, class: "nav-link" %>
-          </li>
-          <% if false %>
+          <% if true %>
           <li class="nav-item">
             <%= link_to "Über mich", about_path, class: "nav-link" %>
           </li>
           <% end %>
+          <li class="nav-item">
+            <%= link_to "Vegan-Chat", chat_path, class: "nav-link" %>
+          </li>
+
           <% if false %>
             <li class="nav-item">
               <%= link_to "Spenden", donation_projects_path, class: "nav-link" %>
