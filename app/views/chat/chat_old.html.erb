@@ -83,6 +83,12 @@
 
 <script>
   $( document ).ready(function() {
-      Chat.start();
+      $.ajax({
+        url: "<%= get_next_chat_message_path(ChatMessage.find_by_starting_point("slavery")) %>",
+        method: 'GET',
+        headers: {
+          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+        }
+      });
     });
 </script>

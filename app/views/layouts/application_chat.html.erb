@@ -16,7 +16,8 @@
     -->
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+    <%= javascript_packs_with_chunks_tag 'vegan_chat' %>
+
   </head>
   <body class="chat-bg-color d-flex flex-column" style="margin-bottom: 80px;">
     <%#= render "layouts/navigation" %>
