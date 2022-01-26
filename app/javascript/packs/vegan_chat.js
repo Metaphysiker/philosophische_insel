@@ -4,7 +4,7 @@ import "channels"
 import "bootstrap"
 import "jquery"
 import "chosen-js/chosen.jquery.min.js"
-import "packs/chat"
+import * as Chat from "packs/chat"
 import "packs/animate_css"
 import "font-awesome/scss/font-awesome.scss"
 import "bootstrap-icons/font/bootstrap-icons.css"
@@ -14,7 +14,4 @@ ActiveStorage.start()
 
 window.jQuery = $;
 window.$ = $;
-
-import("packs/chat").then(Chat => {
-  window.Chat = Chat;
-})
+window.Chat = Chat;

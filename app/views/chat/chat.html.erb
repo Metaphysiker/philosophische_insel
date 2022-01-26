@@ -14,6 +14,10 @@
 
     <div class="container">
 
+      <div class="chat-container">
+
+      </div>
+
       <div id="chat-field">
         <% if false %>
           <div class="chat-argument-field chat-section-field text-center animate__animated animate__bounceIn">
@@ -83,6 +87,9 @@
 
 <script>
   $( document ).ready(function() {
-      Chat.start();
+      var chat = new Chat.Chat("chat-container");
+      chat.start();
+      chat.append_loading_box();
+      chat.remove_loading_box();
     });
 </script>
