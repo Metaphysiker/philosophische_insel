@@ -5,7 +5,21 @@ export function Chat(container) {
   this.loading_box_class = "." + this.loading_box,
   this.waiting_time_for_next_message = 1000,
   this.start = function() {
-    $(this.container_class).append("start");
+    this.get_chat_message(1).then(
+      (data) => this.append_message_left(data)
+    );
+  },
+  this.get_chat_message = function(id){
+    return new Promise(function(resolve, reject)
+    {
+    $.ajax({
+      method: "GET",
+      url: "/chat_messages/" + id + "/json"
+        })
+      .done(function( data ) {
+        resolve(data);
+      });
+    })
   },
   this.append_loading_box = function(){
     $(this.container_class).append(`
@@ -20,7 +34,7 @@ export function Chat(container) {
       $(loading_box_class).remove();
     }, 5000);
   },
-  this.append_message_left = function(){
+  this.append_message_left = function(data){
     $(this.container_class).append(`
       <div class="chat-section-field">
         <div class="row">
@@ -29,7 +43,7 @@ export function Chat(container) {
                 <%= image_tag "portrait_frau.png", class: "rounded-circle border-white white-border-for-rounded-circle bg-white", width: "50px", height: "50px" %>
               </div>
               <div class="chat-bg-computer chat-text chat-argument-field <%= dom_id(chat_message) %>">
-                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                ${data.content}
               </div>
             </div>
         </div>

@@ -50,7 +50,11 @@ Rails.application.routes.draw do
   resources :roles
   resources :pages
   devise_for :users
-  resources :chat_messages
+  resources :chat_messages do
+    member do
+      get 'json'
+    end
+  end
 
   if Rails.env.development?
     get 'test/generate_json_of_translation'

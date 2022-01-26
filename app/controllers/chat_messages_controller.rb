@@ -1,11 +1,15 @@
 class ChatMessagesController < ApplicationController
-  before_action :set_chat_message, only: %i[ show edit update destroy ]
-  after_action :verify_authorized
+  before_action :set_chat_message, only: %i[ show edit update destroy json ]
+  after_action :verify_authorized, except: %i[ json ]
 
   # GET /chat_messages or /chat_messages.json
   def index
     authorize ChatMessage
     @chat_messages = ChatMessage.all
+  end
+
+  def json
+    render json: @chat_message
   end
 
   # GET /chat_messages/1 or /chat_messages/1.json
