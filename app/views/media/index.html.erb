@@ -26,11 +26,11 @@
 
     var myCollapsible = document.getElementById('<%= collapsible_id %>')
     myCollapsible.addEventListener('show.bs.collapse', function () {
-      $("#<%= collapsible_id %>_button").text("Weniger anzeigen");
+      document.getElementById("<%= collapsible_id %>_button").innerHTML = "Weniger anzeigen";
     });
 
     myCollapsible.addEventListener('hide.bs.collapse', function () {
-      $("#<%= collapsible_id %>_button").text("Mehr anzeigen");
+      document.getElementById("<%= collapsible_id %>_button").innerHTML = "Mehr anzeigen";
     });
 
 </script>
