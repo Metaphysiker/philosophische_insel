@@ -33,8 +33,8 @@ class StaticPagesController < ApplicationController
 
   def pferdefutter
 
-    set_meta_tags title: 'Wizard braucht Seniorenfutter',
-              description: 'Mit seinen bald 34 Jahren ist Wizard auf Spezialfutter angewiesen. Magst du Futtersackpate werden?',
+    set_meta_tags title: 'Wizard braucht Seniorenfutter. Magst du helfen?',
+              description: 'Mit seinen bald 34 Jahren ist Wizard auf Spezialfutter angewiesen. Magst du Futtersackpate werden? Mach eine Spende und ermögliche Wizard ein glückliches Leben!',
               keywords: 'Wizard, Wallach, Stinah, Stiftung Tiere in Not Animal Help, Spezialfutter, Futtersack, Spende'
 
     set_meta_tags og: {
