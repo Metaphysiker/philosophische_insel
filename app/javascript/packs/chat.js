@@ -5,9 +5,13 @@ export function Chat(container) {
   this.loading_box_class = "." + this.loading_box,
   this.waiting_time_for_next_message = 1000,
   this.start = function() {
-    this.get_chat_message(1).then(
-      (data) => this.append_message_left(data)
-    );
+    var self = this;
+    self.append_loading_box();
+
+    this.get_chat_message(1).then(function(data){
+      self.append_message_left(data);
+      self.remove_loading_box();
+    });
   },
   this.get_chat_message = function(id){
     return new Promise(function(resolve, reject)
@@ -29,10 +33,7 @@ export function Chat(container) {
     `);
   },
   this.remove_loading_box = function(){
-    let loading_box_class = this.loading_box_class;
-    setTimeout(function(){
-      $(loading_box_class).remove();
-    }, 5000);
+    $(this.loading_box_class).remove();
   },
   this.append_message_left = function(data){
     $(this.container_class).append(`

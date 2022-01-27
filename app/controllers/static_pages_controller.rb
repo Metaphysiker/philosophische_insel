@@ -41,7 +41,7 @@ class StaticPagesController < ApplicationController
       title: :title,
       description: :description,
       type: "website",
-      #image: image_url("wizard3.jpeg"),
+      image: ActionController::Base.helpers.image_url("wizard3.jpeg"),
       url: pferdefutter_url
     }
 
@@ -50,8 +50,8 @@ class StaticPagesController < ApplicationController
 
   end
 
-  def image_url(source)
-    URI.join(root_url, ActionController::Base.helpers.image_url("wizard3.jpeg"))
+  def image_url(name)
+    URI.join(root_url, ActionController::Base.helpers.image_url(name))
   end
 
   def iframer
