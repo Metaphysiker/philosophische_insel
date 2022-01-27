@@ -40,7 +40,7 @@ export function Chat(container) {
         <div class="row">
             <div class="col-12 d-flex align-items-end">
               <div class="" style="padding-right: 0.5rem;">
-                <%= image_tag "portrait_frau.png", class: "rounded-circle border-white white-border-for-rounded-circle bg-white", width: "50px", height: "50px" %>
+                <img src="${data.image_url}" class="rounded-circle border-white white-border-for-rounded-circle bg-white" width="50px" height="50px">
               </div>
               <div class="chat-bg-computer chat-text chat-argument-field <%= dom_id(chat_message) %>">
                 ${data.content}

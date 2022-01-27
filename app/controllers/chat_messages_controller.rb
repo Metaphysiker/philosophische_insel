@@ -9,7 +9,11 @@ class ChatMessagesController < ApplicationController
   end
 
   def json
-    render json: @chat_message
+    chat_message_hash = {
+      content: @chat_message.content,
+      image_url: "https://via.placeholder.com/150"
+    }
+    render json: chat_message_hash
   end
 
   # GET /chat_messages/1 or /chat_messages/1.json
