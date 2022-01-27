@@ -10,6 +10,7 @@ class ChatMessagesController < ApplicationController
 
   def json
     chat_message_hash = {
+      id: @chat_message.id,
       content: @chat_message.content,
       image_url: ActionController::Base.helpers.image_url("portrait_frau.png")
     }
