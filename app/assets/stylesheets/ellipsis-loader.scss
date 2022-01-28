@@ -2,14 +2,14 @@
   display: inline-block;
   position: relative;
   width: 80px;
-  height: 65px;
+  height: 36px;
 }
 
 .lds-ellipsis div {
   position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
+  top: 18px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #D3D3D3;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);

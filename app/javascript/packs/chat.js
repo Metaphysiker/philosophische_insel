@@ -4,12 +4,15 @@ export function Chat(container) {
   this.loading_box = this.container + "_loading_box",
   this.loading_box_class = "." + this.loading_box,
   this.waiting_time_for_next_message = 1000,
+  this.loading_time = 1000,
   this.start = function() {
     var self = this;
 
     this.get_chat_message(1)
     .then(data => self.append_message_left(data))
-    .then(data => $(".chat_message_" + data.id).html(data.content));
+    .then(data => setTimeout(function(){
+      $(".chat_message_" + data.id).html(data.content);
+    }, self.loading_time))
   },
   this.get_chat_message = function(id){
     return new Promise(function(resolve, reject)
