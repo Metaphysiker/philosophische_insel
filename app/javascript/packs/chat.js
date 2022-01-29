@@ -6,10 +6,10 @@ export function Chat(container) {
   this.waiting_time_for_next_message = 1000,
   this.loading_time = 1000,
   this.calculate_reading_time = function(string){
-    return 2000 + string.length * 25
+    return 2000 + string.length * 50
   },
   this.calculate_loading_time = function(string){
-    return 1000 + string.length * 10
+    return 1000 + string.length * 25
   },
   this.add_left_chat_message = function(id) {
     var self = this;
