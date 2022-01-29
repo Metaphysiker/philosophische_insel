@@ -5,12 +5,22 @@ export function Chat(container) {
   this.loading_box_class = "." + this.loading_box,
   this.waiting_time_for_next_message = 1000,
   this.loading_time = 1000,
+  this.calculate_reading_time = function(string){
+    return 2000 + string.length * 25
+  },
+  this.calculate_loading_time = function(string){
+    return 1000 + string.length * 10
+  },
   this.add_left_chat_message = function(id) {
     var self = this;
     self.get_chat_message(id)
     .then(data => self.append_loading_box_left(data))
     .then(data => self.append_message_to_box(data))
-    .then(data => self.chat_messages_controller(data))
+    .then(data =>
+      setTimeout(function(){
+        self.chat_messages_controller(data)
+      }, self.calculate_reading_time(data.content))
+    )
   },
   this.chat_messages_controller = function(data){
     var self = this;
@@ -20,16 +30,18 @@ export function Chat(container) {
     if (first_child["chatter"] === "computer"){
       self.add_left_chat_message(first_child.id)
     } else {
-      console.log(children);
       self.add_buttons(children);
     }
+  },
+  this.log = function(){
+    console.log("OOOOGOGOGIJAOGAG")
   },
   this.add_buttons = function(children){
     var self = this;
     var html_buttons = "";
 
     for (let i = 0; i < children.length; i++) {
-      html_buttons += `<button class="btn btn-light" data-chat-message-id="${children[i].id}" type="button">${children[i].content}</button>`;
+      html_buttons += `<button class="btn btn-light chat-buttons" data-chat-message-id="${children[i].id}" type="button">${children[i].content}</button>`;
     }
 
     return new Promise(function(resolve, reject)
@@ -39,16 +51,12 @@ export function Chat(container) {
         ${html_buttons}
       </div>
       `)
+
+      $(".chat-buttons").click(function(){
+        console.log($(this).data("chat-message-id"));
+      });
+
       resolve(children)
-    })
-  },
-  this.get_next_chat_message = function(data){
-    var self = this;
-    return new Promise(function(resolve, reject)
-    {
-      console.log(data.children[0].id);
-      self.add_left_chat_message(data.children[0].id)
-      resolve(data.children[0])
     })
   },
   this.append_loading_box_left = function(data){
@@ -79,7 +87,7 @@ export function Chat(container) {
       setTimeout(function(){
         $(".chat_message_" + data.id).html(data.content);
         resolve(data)
-      }, self.loading_time)
+      }, self.calculate_loading_time(data.content))
 
     })
   },
