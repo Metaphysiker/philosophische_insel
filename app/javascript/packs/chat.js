@@ -5,14 +5,17 @@ export function Chat(container) {
   this.loading_box_class = "." + this.loading_box,
   this.waiting_time_for_next_message = 1000,
   this.loading_time = 1000,
-  this.start = function() {
+  this.add_left_chat_message = function(id) {
     var self = this;
-
-    this.get_chat_message(1)
+    self.get_chat_message(id)
     .then(data => self.append_message_left(data))
     .then(data => setTimeout(function(){
       $(".chat_message_" + data.id).html(data.content);
     }, self.loading_time))
+  },
+  this.start = function() {
+    var self = this;
+    this.add_left_chat_message(1)
   },
   this.get_chat_message = function(id){
     return new Promise(function(resolve, reject)
