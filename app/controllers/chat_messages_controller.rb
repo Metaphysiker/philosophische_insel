@@ -9,12 +9,19 @@ class ChatMessagesController < ApplicationController
   end
 
   def json
+    image_url = ActionController::Base.helpers.image_url("portrait_frau.png")
+
+    if @chat_message.chatter == "user"
+      image_url = ActionController::Base.helpers.image_url("portrait_mann.png")
+    end
+
     chat_message_hash = {
       id: @chat_message.id,
       content: @chat_message.content,
       chatter: @chat_message.chatter,
       children: @chat_message.children,
-      image_url: ActionController::Base.helpers.image_url("portrait_frau.png")
+      siblings: @chat_message.siblings,
+      image_url: image_url
     }
     render json: chat_message_hash
   end

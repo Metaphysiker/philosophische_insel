@@ -9,32 +9,54 @@ export function Chat(container) {
     return 2000 + string.length * 50
   },
   this.calculate_loading_time = function(string){
-    return 1000 + string.length * 25
+    return 1000 //+ string.length * 25
   },
-  this.add_left_chat_message = function(id) {
+  this.add_left_chat_message = function(data) {
     var self = this;
-    self.get_chat_message(id)
-    .then(data => self.append_loading_box_left(data))
+
+    self.append_loading_box_left(data)
     .then(data => self.append_message_to_box(data))
     .then(data =>
       setTimeout(function(){
-        self.chat_messages_controller(data)
+        self.chat_messages_controller(data.children[0].id)
       }, self.calculate_reading_time(data.content))
     )
   },
-  this.chat_messages_controller = function(data){
+  this.add_right_chat_message = function(id) {
     var self = this;
-    var first_child = data.children[0];
-    var children = data.children;
+    self.get_chat_message(id)
+    .then(data => self.append_loading_box_right(data))
+    .then(data => self.append_message_to_box(data))
+    .then(data =>
+      setTimeout(function(){
+        self.chat_messages_controller(data.children[0].id)
+      }, self.calculate_reading_time(data.content))
+    )
+  },
+  this.chat_messages_controller = function(id){
 
-    if (first_child["chatter"] === "computer"){
-      self.add_left_chat_message(first_child.id)
-    } else {
-      self.add_buttons(children);
-    }
+    var self = this;
+    self.get_chat_message(id)
+    .then(function(data){
+      self.append_message_to_box(data);
+
+        if (data["chatter"] === "computer"){
+          self.add_left_chat_message(data)
+        } else {
+          self.add_buttons(data["siblings"]);
+        }
+      }
+    )
   },
   this.log = function(){
     console.log("OOOOGOGOGIJAOGAG")
+  },
+  this.remove_buttons = function(){
+    return new Promise(function(resolve, reject)
+    {
+      $(".chat-buttons-parent").empty();
+      resolve();
+    });
   },
   this.add_buttons = function(children){
     var self = this;
@@ -47,13 +69,15 @@ export function Chat(container) {
     return new Promise(function(resolve, reject)
     {
     $(self.container_class).append(`
-      <div class="d-grid gap-4 col-6 mx-auto">
+      <div class="d-grid gap-4 col-6 mx-auto chat-buttons-parent">
         ${html_buttons}
       </div>
       `)
 
       $(".chat-buttons").click(function(){
         console.log($(this).data("chat-message-id"));
+        self.remove_buttons()
+        .then(data => self.add_right_chat_message($(this).data("chat-message-id")));
       });
 
       resolve(children)
@@ -80,6 +104,27 @@ export function Chat(container) {
       resolve(data)
     })
   },
+  this.append_loading_box_right = function(data){
+    var self = this;
+    return new Promise(function(resolve, reject)
+    {
+    $(self.container_class).append(`
+      <div class="chat-section-field">
+        <div class="row">
+            <div class="col-12 d-flex align-items-end justify-content-end">
+              <div class="chat-bg-computer chat-text chat-argument-field chat_message_${data.id}">
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+              </div>
+              <div class="" style="padding-left: 0.5rem;">
+                <img src="${data.image_url}" class="rounded-circle border-white white-border-for-rounded-circle bg-white" width="50px" height="50px">
+              </div>
+            </div>
+        </div>
+      </div>
+      `)
+      resolve(data)
+    })
+  },
   this.append_message_to_box = function(data){
     var self = this;
     return new Promise(function(resolve, reject)
@@ -93,7 +138,7 @@ export function Chat(container) {
   },
   this.start = function() {
     var self = this;
-    this.add_left_chat_message(1)
+    self.chat_messages_controller(1)
   },
   this.get_chat_message = function(id){
     return new Promise(function(resolve, reject)
