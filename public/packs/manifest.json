@@ -1,14 +1,14 @@
 {
   "animate_css.js": "/packs/js/animate_css-da574270cfc25583d5f7.chunk.js",
   "animate_css.js.map": "/packs/js/animate_css-da574270cfc25583d5f7.chunk.js.map",
-  "application.js": "/packs/js/application-de775f3ccbcabd736579.chunk.js",
-  "application.js.map": "/packs/js/application-de775f3ccbcabd736579.chunk.js.map",
-  "application_old.js": "/packs/js/application_old-cb00131482af48027c1d.chunk.js",
-  "application_old.js.map": "/packs/js/application_old-cb00131482af48027c1d.chunk.js.map",
+  "application.js": "/packs/js/application-b7bf0be38bc9b9a2db1d.chunk.js",
+  "application.js.map": "/packs/js/application-b7bf0be38bc9b9a2db1d.chunk.js.map",
+  "application_old.js": "/packs/js/application_old-fd5f9e6ddb64ccce79e9.chunk.js",
+  "application_old.js.map": "/packs/js/application_old-fd5f9e6ddb64ccce79e9.chunk.js.map",
   "basic.js": "/packs/js/basic-b5a6a0c77d722e2336a1.chunk.js",
   "basic.js.map": "/packs/js/basic-b5a6a0c77d722e2336a1.chunk.js.map",
-  "chat.js": "/packs/js/chat-5daa3e5151de7cd0f0c8.chunk.js",
-  "chat.js.map": "/packs/js/chat-5daa3e5151de7cd0f0c8.chunk.js.map",
+  "chat.js": "/packs/js/chat-21243288d7cda28fb0f5.chunk.js",
+  "chat.js.map": "/packs/js/chat-21243288d7cda28fb0f5.chunk.js.map",
   "d3-charts.js": "/packs/js/d3-charts-715fcb5fd5531043cb53.chunk.js",
   "d3-charts.js.map": "/packs/js/d3-charts-715fcb5fd5531043cb53.chunk.js.map",
   "d3_objects.js": "/packs/js/d3_objects-f6bdd94e18d40028a4ab.chunk.js",
@@ -28,63 +28,63 @@
       "js": [
         "/packs/js/runtime~application_old-068b01f951fc71c17297.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js",
-        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js",
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js",
         "/packs/js/vendors~application~application_old~visits-eb3ac2809f7e2b1ecb4d.chunk.js",
         "/packs/js/vendors~application~application_old~vegan_chat-1803fd1c1d96e62dd750.chunk.js",
         "/packs/js/vendors~application~application_old~google_analytics-ca5c299620451dafe6df.chunk.js",
         "/packs/js/vendors~application~application_old-499e357953ce3fc8948c.chunk.js",
-        "/packs/js/application_old-cb00131482af48027c1d.chunk.js"
+        "/packs/js/application_old-fd5f9e6ddb64ccce79e9.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~application_old-068b01f951fc71c17297.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js.map",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js.map",
-        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js.map",
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js.map",
         "/packs/js/vendors~application~application_old~visits-eb3ac2809f7e2b1ecb4d.chunk.js.map",
         "/packs/js/vendors~application~application_old~vegan_chat-1803fd1c1d96e62dd750.chunk.js.map",
         "/packs/js/vendors~application~application_old~google_analytics-ca5c299620451dafe6df.chunk.js.map",
         "/packs/js/vendors~application~application_old-499e357953ce3fc8948c.chunk.js.map",
-        "/packs/js/application_old-cb00131482af48027c1d.chunk.js.map"
+        "/packs/js/application_old-fd5f9e6ddb64ccce79e9.chunk.js.map"
       ]
     },
     "application": {
       "js": [
         "/packs/js/runtime~application-f3fef7dbe6a2a2f531a8.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js",
-        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js",
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js",
         "/packs/js/vendors~application~application_old~visits-eb3ac2809f7e2b1ecb4d.chunk.js",
         "/packs/js/vendors~application~application_old~vegan_chat-1803fd1c1d96e62dd750.chunk.js",
         "/packs/js/vendors~application~application_old~google_analytics-ca5c299620451dafe6df.chunk.js",
         "/packs/js/vendors~application~application_old-499e357953ce3fc8948c.chunk.js",
-        "/packs/js/application-de775f3ccbcabd736579.chunk.js"
+        "/packs/js/application-b7bf0be38bc9b9a2db1d.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~application-f3fef7dbe6a2a2f531a8.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js.map",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js.map",
-        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js.map",
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js.map",
         "/packs/js/vendors~application~application_old~visits-eb3ac2809f7e2b1ecb4d.chunk.js.map",
         "/packs/js/vendors~application~application_old~vegan_chat-1803fd1c1d96e62dd750.chunk.js.map",
         "/packs/js/vendors~application~application_old~google_analytics-ca5c299620451dafe6df.chunk.js.map",
         "/packs/js/vendors~application~application_old-499e357953ce3fc8948c.chunk.js.map",
-        "/packs/js/application-de775f3ccbcabd736579.chunk.js.map"
+        "/packs/js/application-b7bf0be38bc9b9a2db1d.chunk.js.map"
       ]
     },
     "basic": {
       "js": [
         "/packs/js/runtime~basic-55152d8293441aa5210e.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js",
         "/packs/js/basic-b5a6a0c77d722e2336a1.chunk.js"
@@ -92,7 +92,7 @@
       "js.map": [
         "/packs/js/runtime~basic-55152d8293441aa5210e.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js.map",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js.map",
         "/packs/js/basic-b5a6a0c77d722e2336a1.chunk.js.map"
@@ -102,12 +102,12 @@
       "js": [
         "/packs/js/runtime~chat-f0b92afc9921244bbc71.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js",
-        "/packs/js/chat-5daa3e5151de7cd0f0c8.chunk.js"
+        "/packs/js/chat-21243288d7cda28fb0f5.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~chat-f0b92afc9921244bbc71.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js.map",
-        "/packs/js/chat-5daa3e5151de7cd0f0c8.chunk.js.map"
+        "/packs/js/chat-21243288d7cda28fb0f5.chunk.js.map"
       ]
     },
     "d3_objects": {
@@ -138,22 +138,22 @@
       "js": [
         "/packs/js/runtime~google_analytics-f135c2264cdeaf895d67.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js",
-        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js",
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js",
         "/packs/js/vendors~application~application_old~google_analytics-ca5c299620451dafe6df.chunk.js",
-        "/packs/js/google_analytics-ee362e0cc1e0db07d40c.chunk.js"
+        "/packs/js/google_analytics-3459d5e12c71ae0fef4f.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~google_analytics-f135c2264cdeaf895d67.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js.map",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js.map",
-        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js.map",
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js.map",
         "/packs/js/vendors~application~application_old~google_analytics-ca5c299620451dafe6df.chunk.js.map",
-        "/packs/js/google_analytics-ee362e0cc1e0db07d40c.chunk.js.map"
+        "/packs/js/google_analytics-3459d5e12c71ae0fef4f.chunk.js.map"
       ]
     },
     "old_chat": {
@@ -172,36 +172,38 @@
       "js": [
         "/packs/js/runtime~pferdefutter-f9c5e035c21bd4ccce46.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js",
-        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js",
-        "/packs/js/pferdefutter-b6f968b9f4ceff1a3820.chunk.js"
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js",
+        "/packs/js/pferdefutter-8ed99dc1899469cff4b6.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~pferdefutter-f9c5e035c21bd4ccce46.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js.map",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js.map",
-        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js.map",
-        "/packs/js/pferdefutter-b6f968b9f4ceff1a3820.chunk.js.map"
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js.map",
+        "/packs/js/pferdefutter-8ed99dc1899469cff4b6.chunk.js.map"
       ]
     },
     "vegan_chat": {
       "js": [
         "/packs/js/runtime~vegan_chat-86e8e677f76e6bd443b7.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js",
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js",
         "/packs/js/vendors~application~application_old~vegan_chat-1803fd1c1d96e62dd750.chunk.js",
-        "/packs/js/vegan_chat-80172e60e8065aaacc11.chunk.js"
+        "/packs/js/vegan_chat-cbf8abc09329e076c27f.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~vegan_chat-86e8e677f76e6bd443b7.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js.map",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js.map",
         "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js.map",
+        "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js.map",
         "/packs/js/vendors~application~application_old~vegan_chat-1803fd1c1d96e62dd750.chunk.js.map",
-        "/packs/js/vegan_chat-80172e60e8065aaacc11.chunk.js.map"
+        "/packs/js/vegan_chat-cbf8abc09329e076c27f.chunk.js.map"
       ]
     },
     "vegan_cockpit": {
@@ -234,19 +236,19 @@
       "js": [
         "/packs/js/runtime~welcome-be78a4323c2ab56719a0.js",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js",
         "/packs/js/welcome-d19dbc7770a2e65ea7a5.chunk.js"
       ],
       "js.map": [
         "/packs/js/runtime~welcome-be78a4323c2ab56719a0.js.map",
         "/packs/js/vendors~application~application_old~basic~chat~d3-charts~google_analytics~old_chat~pferdefutter~vega~6725d034-31779a16a80a442ca581.chunk.js.map",
-        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js.map",
+        "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js.map",
         "/packs/js/welcome-d19dbc7770a2e65ea7a5.chunk.js.map"
       ]
     }
   },
-  "google_analytics.js": "/packs/js/google_analytics-ee362e0cc1e0db07d40c.chunk.js",
-  "google_analytics.js.map": "/packs/js/google_analytics-ee362e0cc1e0db07d40c.chunk.js.map",
+  "google_analytics.js": "/packs/js/google_analytics-3459d5e12c71ae0fef4f.chunk.js",
+  "google_analytics.js.map": "/packs/js/google_analytics-3459d5e12c71ae0fef4f.chunk.js.map",
   "media/chosen-js/chosen-sprite.png": "/packs/media/chosen-js/chosen-sprite-6768c197.png",
   "media/chosen-js/chosen-sprite@2x.png": "/packs/media/chosen-js/chosen-sprite@2x-a0b7f3f1.png",
   "media/fonts/bootstrap-icons.woff2?a97b3594ad416896e15824f6787370e0": "/packs/media/fonts/bootstrap-icons-4a6d3edd.woff2",
@@ -264,8 +266,8 @@
   "media/images/ui-icons_ffffff_256x240.png": "/packs/media/images/ui-icons_ffffff_256x240-92bef7e4.png",
   "old_chat.js": "/packs/js/old_chat-ba772c174c2ed823ca63.chunk.js",
   "old_chat.js.map": "/packs/js/old_chat-ba772c174c2ed823ca63.chunk.js.map",
-  "pferdefutter.js": "/packs/js/pferdefutter-b6f968b9f4ceff1a3820.chunk.js",
-  "pferdefutter.js.map": "/packs/js/pferdefutter-b6f968b9f4ceff1a3820.chunk.js.map",
+  "pferdefutter.js": "/packs/js/pferdefutter-8ed99dc1899469cff4b6.chunk.js",
+  "pferdefutter.js.map": "/packs/js/pferdefutter-8ed99dc1899469cff4b6.chunk.js.map",
   "runtime~animate_css.js": "/packs/js/runtime~animate_css-df27d011ec1e4dad9d50.js",
   "runtime~animate_css.js.map": "/packs/js/runtime~animate_css-df27d011ec1e4dad9d50.js.map",
   "runtime~application.js": "/packs/js/runtime~application-f3fef7dbe6a2a2f531a8.js",
@@ -294,8 +296,8 @@
   "runtime~visits.js.map": "/packs/js/runtime~visits-2ee8536f71d937f1eb13.js.map",
   "runtime~welcome.js": "/packs/js/runtime~welcome-be78a4323c2ab56719a0.js",
   "runtime~welcome.js.map": "/packs/js/runtime~welcome-be78a4323c2ab56719a0.js.map",
-  "vegan_chat.js": "/packs/js/vegan_chat-80172e60e8065aaacc11.chunk.js",
-  "vegan_chat.js.map": "/packs/js/vegan_chat-80172e60e8065aaacc11.chunk.js.map",
+  "vegan_chat.js": "/packs/js/vegan_chat-cbf8abc09329e076c27f.chunk.js",
+  "vegan_chat.js.map": "/packs/js/vegan_chat-cbf8abc09329e076c27f.chunk.js.map",
   "vegan_cockpit.js": "/packs/js/vegan_cockpit-c51b32248ab7bf99b1df.chunk.js",
   "vegan_cockpit.js.map": "/packs/js/vegan_cockpit-c51b32248ab7bf99b1df.chunk.js.map",
   "vendors~application~application_old.js": "/packs/js/vendors~application~application_old-499e357953ce3fc8948c.chunk.js",
@@ -306,12 +308,12 @@
   "vendors~application~application_old~basic~google_analytics.js.map": "/packs/js/vendors~application~application_old~basic~google_analytics-914e4aaa47a4135a33e3.chunk.js.map",
   "vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat.js": "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js",
   "vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat.js.map": "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat-145bc27a8d47589736ba.chunk.js.map",
-  "vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome.js": "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js",
-  "vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome.js.map": "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-eb38c53a2f01fef110d4.chunk.js.map",
+  "vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome.js": "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js",
+  "vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome.js.map": "/packs/js/vendors~application~application_old~basic~google_analytics~pferdefutter~vegan_chat~welcome-6ab5f92881620ab22581.chunk.js.map",
   "vendors~application~application_old~google_analytics.js": "/packs/js/vendors~application~application_old~google_analytics-ca5c299620451dafe6df.chunk.js",
   "vendors~application~application_old~google_analytics.js.map": "/packs/js/vendors~application~application_old~google_analytics-ca5c299620451dafe6df.chunk.js.map",
-  "vendors~application~application_old~google_analytics~pferdefutter.js": "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js",
-  "vendors~application~application_old~google_analytics~pferdefutter.js.map": "/packs/js/vendors~application~application_old~google_analytics~pferdefutter-aa772f4f2a84e9e1ad8c.chunk.js.map",
+  "vendors~application~application_old~google_analytics~pferdefutter~vegan_chat.js": "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js",
+  "vendors~application~application_old~google_analytics~pferdefutter~vegan_chat.js.map": "/packs/js/vendors~application~application_old~google_analytics~pferdefutter~vegan_chat-7d84b876bfa19f0eddf7.chunk.js.map",
   "vendors~application~application_old~vegan_chat.js": "/packs/js/vendors~application~application_old~vegan_chat-1803fd1c1d96e62dd750.chunk.js",
   "vendors~application~application_old~vegan_chat.js.map": "/packs/js/vendors~application~application_old~vegan_chat-1803fd1c1d96e62dd750.chunk.js.map",
   "vendors~application~application_old~visits.js": "/packs/js/vendors~application~application_old~visits-eb3ac2809f7e2b1ecb4d.chunk.js",

@@ -12,6 +12,8 @@ class ChatMessagesController < ApplicationController
     chat_message_hash = {
       id: @chat_message.id,
       content: @chat_message.content,
+      chatter: @chat_message.chatter,
+      children: @chat_message.children,
       image_url: ActionController::Base.helpers.image_url("portrait_frau.png")
     }
     render json: chat_message_hash

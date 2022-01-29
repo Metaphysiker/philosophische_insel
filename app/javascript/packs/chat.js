@@ -8,10 +8,80 @@ export function Chat(container) {
   this.add_left_chat_message = function(id) {
     var self = this;
     self.get_chat_message(id)
-    .then(data => self.append_message_left(data))
-    .then(data => setTimeout(function(){
-      $(".chat_message_" + data.id).html(data.content);
-    }, self.loading_time))
+    .then(data => self.append_loading_box_left(data))
+    .then(data => self.append_message_to_box(data))
+    .then(data => self.chat_messages_controller(data))
+  },
+  this.chat_messages_controller = function(data){
+    var self = this;
+    var first_child = data.children[0];
+    var children = data.children;
+
+    if (first_child["chatter"] === "computer"){
+      self.add_left_chat_message(first_child.id)
+    } else {
+      console.log(children);
+      self.add_buttons(children);
+    }
+  },
+  this.add_buttons = function(children){
+    var self = this;
+    var html_buttons = "";
+
+    for (let i = 0; i < children.length; i++) {
+      html_buttons += `<button class="btn btn-light" data-chat-message-id="${children[i].id}" type="button">${children[i].content}</button>`;
+    }
+
+    return new Promise(function(resolve, reject)
+    {
+    $(self.container_class).append(`
+      <div class="d-grid gap-4 col-6 mx-auto">
+        ${html_buttons}
+      </div>
+      `)
+      resolve(children)
+    })
+  },
+  this.get_next_chat_message = function(data){
+    var self = this;
+    return new Promise(function(resolve, reject)
+    {
+      console.log(data.children[0].id);
+      self.add_left_chat_message(data.children[0].id)
+      resolve(data.children[0])
+    })
+  },
+  this.append_loading_box_left = function(data){
+    var self = this;
+    return new Promise(function(resolve, reject)
+    {
+    $(self.container_class).append(`
+      <div class="chat-section-field">
+        <div class="row">
+            <div class="col-12 d-flex align-items-end">
+              <div class="" style="padding-right: 0.5rem;">
+                <img src="${data.image_url}" class="rounded-circle border-white white-border-for-rounded-circle bg-white" width="50px" height="50px">
+              </div>
+              <div class="chat-bg-computer chat-text chat-argument-field chat_message_${data.id}">
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+              </div>
+            </div>
+        </div>
+      </div>
+      `)
+      resolve(data)
+    })
+  },
+  this.append_message_to_box = function(data){
+    var self = this;
+    return new Promise(function(resolve, reject)
+    {
+      setTimeout(function(){
+        $(".chat_message_" + data.id).html(data.content);
+        resolve(data)
+      }, self.loading_time)
+
+    })
   },
   this.start = function() {
     var self = this;
