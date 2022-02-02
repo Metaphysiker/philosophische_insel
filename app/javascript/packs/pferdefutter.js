@@ -4,7 +4,7 @@ import "channels"
 import "bootstrap"
 import "jquery"
 import "d3/dist/d3.js"
-import "bootstrap-icons/font/bootstrap-icons.scss"
+//import "bootstrap-icons/font/bootstrap-icons.scss"
 
 Rails.start()
 ActiveStorage.start()

@@ -8,7 +8,7 @@ import "jquery"
 //import "bootstrap-icons/font/bootstrap-icons.scss"
 //import "bootstrap-icons/icons/check-circle-fill.svg"
 //import "@fortawesome/fontawesome-free/scss/fontawesome.scss"
-//import "@fortawesome/fontawesome-free/js/all.js"
+import "@fortawesome/fontawesome-free/js/all.js"
 
 
 Rails.start()
