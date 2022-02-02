@@ -9,7 +9,7 @@ import "channels"
 import "bootstrap"
 import "jquery"
 //import "font-awesome/css/font-awesome.min.css"
-import "font-awesome/scss/font-awesome.scss"
+//import "font-awesome/scss/font-awesome.scss"
 //import { Personyxz } from "packs/d3_objects"
 
 import "d3/dist/d3.js"
