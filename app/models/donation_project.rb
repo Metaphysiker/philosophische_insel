@@ -112,7 +112,7 @@ class DonationProject < ApplicationRecord
     str = <<-HEREDOC
     <div class="border border-3 card text-dark bg-light mb-3">
       <div class="card-header">
-        #{month_name}  <span class="text-success"><i class="bi bi-check-circle-fill"></i></span>
+        #{month_name}  <span class="text-success">#{ActionController::Base.helpers.inline_svg_tag "check-circle-fill.svg"}</span>
       </div>
       <div class="card-body">
         <p class="card-text text-0-75em">#{bags_needed_per_month} Futtersäcke erhalten.</p>
@@ -129,7 +129,7 @@ class DonationProject < ApplicationRecord
     str = <<-HEREDOC
 <div class="card text-dark bg-light mb-3">
   <div class="card-header">
-    #{month_name} <i class="bi bi-circle"></i>
+    #{month_name} #{ActionController::Base.helpers.inline_svg_tag "circle.svg"}
   </div>
   <div class="card-body">
     <p class="card-text text-0-75em">#{bags_received} Futtersäcke erhalten.</p>
