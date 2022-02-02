@@ -5,7 +5,7 @@ import "bootstrap"
 import "jquery"
 import "jquery-ui/ui/widgets/datepicker.js"
 import "jquery-ui/themes/base/all.css"
-import "bootstrap-icons/font/bootstrap-icons.css"
+import "bootstrap-icons/font/bootstrap-icons.scss"
 import "@fortawesome/fontawesome-free/scss/fontawesome.scss"
 import "@fortawesome/fontawesome-free/js/all.js"
 
