@@ -5,8 +5,6 @@ import "bootstrap"
 import "jquery"
 import "d3/dist/d3.js"
 import "bootstrap-icons/font/bootstrap-icons.css"
-import "@fortawesome/fontawesome-free/scss/fontawesome.scss"
-import "@fortawesome/fontawesome-free/js/all.js"
 
 Rails.start()
 ActiveStorage.start()
