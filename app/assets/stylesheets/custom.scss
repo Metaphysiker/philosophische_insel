@@ -161,6 +161,11 @@ $main-colors: (
   }
 }
 
+.button-svg {
+  stroke: white;
+  stroke-width: 2;
+}
+
 // functions
 
 @function invert($color, $amount: 100%) {

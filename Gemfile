@@ -20,6 +20,7 @@ gem 'maxminddb'
 gem "pundit"
 gem 'meta-tags'
 gem 'rest-client'
+gem 'inline_svg'
 
 
 gem "aws-sdk-s3", require: false
