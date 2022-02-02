@@ -1,1 +1,0 @@
-{"version":3,"file":"js/chat-8c6f19fd502afba98dfd.chunk.js","sources":["webpack:///./app/javascript/packs/chat.js"],"sourcesContent":["export function Chat() {\n  this.start = function() {\n    console.log(\"start\");\n  }\n}\n"],"mappings":";;;;;;;;;;AAAA;AAAA;AAAA;AACA;AACA;AACA;AACA;;;;A","sourceRoot":""}
