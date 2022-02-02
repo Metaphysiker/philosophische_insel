@@ -13,11 +13,33 @@ class StaticPagesController < ApplicationController
   end
 
   def welcome
+    set_meta_tags title: 'Die philosophische Insel',
+              description: 'Auf der philosophischen Insel findest du Inhalte, Spiele und Werkzeuge, die Philosophie und Ethik vermitteln.',
+              keywords: 'Philosophie, Ethik, Veganismus'
+
+    set_meta_tags og: {
+      title: :title,
+      description: :description,
+      type: "website",
+      image: ActionController::Base.helpers.image_url("philosophische-insel-logo-cut.webp"),
+      url: root_url
+    }
   end
 
 
 
   def about
+    set_meta_tags title: 'Sandro Räss',
+              description: 'Sandro Räss ist ein Frontend-Entwickler, Philosoph und Aktivist.',
+              keywords: 'Sandro Räss'
+
+    set_meta_tags og: {
+      title: :title,
+      description: :description,
+      type: "website",
+      image: ActionController::Base.helpers.image_url("raess-sandro-standing1.webp"),
+      url: root_url
+    }
   end
 
   def essays

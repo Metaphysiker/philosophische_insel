@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
-    <%= display_meta_tags site: application_name %>
+    <%= display_meta_tags site: application_name, reverse: true, separator: "-" %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="bUYclo8VOwfO6-L9oPh67t8Q0kvBUm7HftioGEjGoRI" />
     <%= csrf_meta_tags %>
