@@ -1,12 +1,12 @@
 <div class="container">
-		<h1>Visual</h1>
+		<h1 class="text-center">Visual</h1>
 
 		<div class="tree-container">
 
 		</div>
 </div>
 
-<div id="kantian" style="width: 10px;">
+<div id="kantian" style="width: 100px; visibility: hidden;">
 		Epicness und so weiter
 </div>
 
@@ -28,6 +28,7 @@
 			top: 10,
 			bottom: 10,
 		}
+
 		var circle_radius = 10;
 
 		// append the svg object to the body of the page
@@ -41,32 +42,23 @@
 			 //append node
 			 var node = svg.append("g");
 
-		 //append circle
-		 node.append('circle')
-		  .attr('cx', 1)
-		  .attr('cy', circle_radius)
-		  .attr('r', circle_radius)
-		  .attr('stroke', 'black')
-		  .attr('fill', 'green');
+			 //append circle
+			 node.append('circle')
+			  .attr('cx', 1)
+			  .attr('cy', circle_radius)
+			  .attr('r', circle_radius)
+			  .attr('stroke', 'black')
+			  .attr('fill', 'green');
 
 			var foreignObject = node.append("foreignObject")
 			    .attr("width", 100)
 			    .attr("height", document.getElementById("kantian").getBoundingClientRect().height);
 				   var div = foreignObject.append("xhtml:div")
-				    .style("font", "14px 'Helvetica Neue'")
+				    .style("font", "20px 'Helvetica Neue'")
 				    .style("color", "black")
 						.style("text-align","center")
 						.style("margin", "0px auto")
 				    .html("this is line1<br>this is line2<br>this is line3");
-						console.log(document.getElementById("kantian").getBoundingClientRect().height);
-						console.log(document.getElementById("kantian").getBoundingClientRect());
-						 var foHeight = div._groups[0][0].getBoundingClientRect().height;
-						 foreignObject.attr({
-									"height": 300
-							});
-							console.log(foHeight);
-
-
 			resolve();
 		}) // end of Promise
 	} // end drawTree
