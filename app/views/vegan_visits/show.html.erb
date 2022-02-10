@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @vegan_visit.url %>
+</p>
+
+<p>
+  <strong>Fullpath:</strong>
+  <%= @vegan_visit.fullpath %>
+</p>
+
+<%= link_to 'Edit', edit_vegan_visit_path(@vegan_visit) %> |
+<%= link_to 'Back', vegan_visits_path %>

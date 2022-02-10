@@ -1,0 +1,2 @@
+module VeganVisitsHelper
+end

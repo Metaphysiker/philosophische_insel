@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  fullpath: MyString
+
+two:
+  url: MyString
+  fullpath: MyString

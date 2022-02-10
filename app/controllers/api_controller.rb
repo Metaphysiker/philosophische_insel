@@ -34,4 +34,16 @@ class ApiController < ApplicationController
     render file: "#{Rails.root}/app/javascript/packs/d3-charts.js", layout: false
   end
 
+  def vegan_visit
+    #response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
+
+    if request.referer.include?("vegan.ch")
+      VeganVisit.create(url: request.referer)
+    else
+      VeganVisit.create(url: request.referer)
+    end
+
+    head :no_content
+  end
+
 end

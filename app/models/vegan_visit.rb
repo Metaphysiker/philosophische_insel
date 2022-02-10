@@ -1,0 +1,2 @@
+class VeganVisit < ApplicationRecord
+end
