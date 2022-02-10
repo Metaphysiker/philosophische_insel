@@ -35,7 +35,7 @@ class ApiController < ApplicationController
   end
 
   def vegan_visit
-    #response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
+    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
     url = "nothing"
 
     url = params[:value]
