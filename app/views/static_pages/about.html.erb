@@ -48,5 +48,23 @@
 
   </div>
 </div>
+<%= url_string = ".vegan-ch/blog/instagram-code=45" %>
+<%= link_to "test", api_vegan_visit_path(value: url_string), method: :post %>
 
-<%= link_to "test", "http://localhost:3000/api/vegan_visit" %>
+<%= form_with url: api_vegan_visit_url, method: :post do |form| %>
+  <%= form.text_field :value, placeholder: url_string %>
+  <%= form.submit "Do" %>
+<% end %>
+
+<script>
+  let data = {value: "barium"};
+
+  fetch("<%= api_vegan_visit_url %>", {
+    method: "POST",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  }).then(res => {
+    console.log("Request complete! response:", res);
+  });
+
+</script>

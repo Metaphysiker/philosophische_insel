@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'api/google_sheets'
   get 'api/vegan_cockpit_js'
   get 'api/d3_charts_js'
-  get 'api/vegan_visit'
+  post 'api/vegan_visit', to: 'api#vegan_visit', as: "api_vegan_visit"
   resources :philosophy_reviews do
     collection do
       get 'iframe'

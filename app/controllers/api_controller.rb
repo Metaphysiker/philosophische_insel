@@ -36,12 +36,12 @@ class ApiController < ApplicationController
 
   def vegan_visit
     #response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
+    url = "nothing"
 
-    if request.referer.include?("vegan.ch")
-      VeganVisit.create(url: request.referer)
-    else
-      VeganVisit.create(url: request.referer)
-    end
+    url = params[:value]
+
+
+    VeganVisit.create(url: url)
 
     head :no_content
   end
