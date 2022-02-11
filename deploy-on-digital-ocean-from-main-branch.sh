@@ -7,7 +7,6 @@ git push origin main
 
 ssh root@159.65.120.231 << EOF
    cd /home/sandro/philosophische_insel/
-   cd philosophische_insel/
 
    git pull origin main
    bundle config set --local without 'development test'
