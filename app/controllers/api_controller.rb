@@ -41,11 +41,12 @@ class ApiController < ApplicationController
     #response.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token, Auth-Token, Email, X-User-Token, X-User-Email'
 
     url = "nothing"
+    cookie = "nothing"
 
-    url = params[:value]
+    url = params[:url]
+    cookie = params[:cookie]
 
-
-    VeganVisit.create(url: url)
+    VeganVisit.create(url: url, cookie: cookie)
 
     head :no_content
   end

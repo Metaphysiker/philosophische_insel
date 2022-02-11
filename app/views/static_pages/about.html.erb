@@ -57,14 +57,34 @@
 <% end %>
 
 <script>
-  let data = {value: "barium"};
+
+  function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+let data = {
+  cookie: getCookie("_ga"),
+  url: window.location.href
+};
+
+console.log(data);
 
   fetch("<%= api_vegan_visit_url %>", {
     method: "POST",
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
-  }).then(res => {
-    console.log("Request complete! response:", res);
   });
 
 </script>
