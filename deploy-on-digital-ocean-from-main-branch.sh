@@ -6,14 +6,15 @@ git commit -m "precompile"
 git push origin main
 
 ssh sandro@159.65.120.231 << EOF
-   cd /home/sandro/philosophische_insel/
-
-   git pull origin main
-   bundle config set --local without 'development test'
-   bundle install
-   RAILS_ENV=production rails db:migrate
+  cd philosophische_insel
+  git pull origin main
+  bundle config set --local without 'development test'
+  bundle install
+  RAILS_ENV=production rails db:migrate
+  sudo service nginx restart
 EOF
 
 ssh root@159.65.120.231 << EOF
-   sudo service nginx restart
+  cd /home/sandro/philosophische_insel/
+  sudo service nginx restart
 EOF
