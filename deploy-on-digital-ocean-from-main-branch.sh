@@ -11,7 +11,6 @@ ssh sandro@159.65.120.231 << EOF
   bundle config set --local without 'development test'
   bundle install
   RAILS_ENV=production rails db:migrate
-  sudo service nginx restart
 EOF
 
 ssh root@159.65.120.231 << EOF
