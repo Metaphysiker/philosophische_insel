@@ -3,13 +3,30 @@
 <h1>Vegan Visits</h1>
 <hr>
 
-<% unique_cookies = VeganVisit.last(20).pluck(:cookie).uniq %>
+<% unique_cookies = VeganVisit.last(30).pluck(:cookie).uniq %>
 
 <% unique_cookies.each do |unique_cookie| %>
   <h2><%= unique_cookie %></h2>
-  <% VeganVisit.where(cookie: unique_cookie).order(:created_at).each do |single_visit| %>
-    <%= single_visit.url %> | <%= single_visit.created_at %><br>
-  <% end %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Url</th>
+        <th scope="col">Cookie</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% VeganVisit.where(cookie: unique_cookie).order(:created_at).each do |single_visit| %>
+        <tr>
+          <td><%= single_visit.url %></td>
+          <td><%= l(single_visit.created_at) %></td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
   <hr>
 <% end %>
 
