@@ -2,6 +2,16 @@
 
 <h1>Vegan Visits</h1>
 
+<% @vegan_visits.last(20).each do |vegan_visit| %>
+  <h2><%= vegan_visit.cookie %></h2>
+  <% VeganVisit.where(cookie: vegan_visit.cookie).order(:created_at).each do |single_visit| %>
+    <%= single_visit.url %><%= single_visit.created_at %><br>
+  <% end %>
+  <hr>
+<% end %>
+
+<hr>
+
 <table>
   <thead>
     <tr>
@@ -13,7 +23,7 @@
   </thead>
 
   <tbody>
-    <% @vegan_visits.each do |vegan_visit| %>
+    <% @vegan_visits.last(20).each do |vegan_visit| %>
       <tr>
         <td><%= vegan_visit.url %></td>
         <td><%= vegan_visit.cookie %></td>
