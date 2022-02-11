@@ -1,11 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Vegan Visits</h1>
+<hr>
 
-<% @vegan_visits.last(20).each do |vegan_visit| %>
-  <h2><%= vegan_visit.cookie %></h2>
-  <% VeganVisit.where(cookie: vegan_visit.cookie).order(:created_at).each do |single_visit| %>
-    <%= single_visit.url %><%= single_visit.created_at %><br>
+<% unique_cookies = VeganVisit.last(20).pluck(:cookie).uniq %>
+
+<% unique_cookies.each do |unique_cookie| %>
+  <h2><%= unique_cookie %></h2>
+  <% VeganVisit.where(cookie: unique_cookie).order(:created_at).each do |single_visit| %>
+    <%= single_visit.url %> | <%= single_visit.created_at %><br>
   <% end %>
   <hr>
 <% end %>
