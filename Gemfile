@@ -21,7 +21,7 @@ gem "pundit"
 gem 'meta-tags'
 gem 'rest-client'
 gem 'inline_svg'
-gem 'rack-cors'
+#gem 'rack-cors'
 
 gem "aws-sdk-s3", require: false
 gem 'friendly_id', '~> 5.4.0'
