@@ -9,8 +9,13 @@
 
 <h1>Vegan Visits</h1>
 <hr>
-
 <% unique_cookies = @vegan_visits.pluck(:cookie).uniq %>
+<% unique_cookies.delete("") %>
+<% unique_cookies.delete("634957")%>
+<p>
+  Count: <%= @vegan_visits.count %>
+</p>
+
 
 <% unique_cookies.each do |unique_cookie| %>
   <h2><%= unique_cookie %></h2>
@@ -50,7 +55,7 @@
   </thead>
 
   <tbody>
-    <% @vegan_visits.last(20).each do |vegan_visit| %>
+    <% @vegan_visits.each do |vegan_visit| %>
       <tr>
         <td><%= vegan_visit.url %></td>
         <td><%= vegan_visit.cookie %></td>
