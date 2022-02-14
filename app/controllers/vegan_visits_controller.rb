@@ -9,6 +9,9 @@ class VeganVisitsController < ApplicationController
     @query = params[:query]
     if params[:query].present?
       @vegan_visits = VeganVisit.where("url ~* ?", params[:query])
+      if params[:query2].present?
+        @vegan_visits = VeganVisit.where("url ~* ?", params[:query]).where("url ~* ?", params[:query2])
+      end
     else
       @vegan_visits = VeganVisit.last(10)
     end
