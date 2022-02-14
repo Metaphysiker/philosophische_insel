@@ -6,16 +6,18 @@ class VeganVisitsController < ApplicationController
   # GET /vegan_visits or /vegan_visits.json
   def index
     authorize VeganVisit
-    @query = params[:query]
     if params[:query].present?
+      @query = params[:query]
       @unique_cookies = VeganVisit.where("url ~* ?", params[:query]).pluck(:cookie).uniq
       #@vegan_visits = VeganVisit.where("url ~* ?", params[:query])
       if params[:query2].present?
+        @query2 = params[:query2]
+
         @unique_cookies2 = VeganVisit.where("url ~* ?", params[:query2]).pluck(:cookie).uniq
 
         @unique_cookies.each do |cookie|
           unless @unique_cookies2.include?(cookie)
-            @unique_cookie.delete(cookie)
+            @unique_cookies.delete(cookie)
           end
         end
 
