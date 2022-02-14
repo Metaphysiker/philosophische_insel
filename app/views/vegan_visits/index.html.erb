@@ -1,9 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<%= form_with url: vegan_visits_path, method: :get do |form| %>
+  <%= form.label :query, "Must include:" %>
+  <%= form.text_field :query, placeholder: @query %>
+  <%= form.submit "Search" %>
+<% end %>
+
+
 <h1>Vegan Visits</h1>
 <hr>
 
-<% unique_cookies = VeganVisit.last(30).pluck(:cookie).uniq %>
+<% unique_cookies = @vegan_visits.pluck(:cookie).uniq %>
 
 <% unique_cookies.each do |unique_cookie| %>
   <h2><%= unique_cookie %></h2>

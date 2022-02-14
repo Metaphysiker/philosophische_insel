@@ -6,7 +6,12 @@ class VeganVisitsController < ApplicationController
   # GET /vegan_visits or /vegan_visits.json
   def index
     authorize VeganVisit
-    @vegan_visits = VeganVisit.all
+    @query = params[:query]
+    if params[:query].present?
+      @vegan_visits = VeganVisit.where("url ~* ?", params[:query])
+    else
+      @vegan_visits = VeganVisit.last(10)
+    end
   end
 
   # GET /vegan_visits/1 or /vegan_visits/1.json
