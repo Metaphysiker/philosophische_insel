@@ -15,12 +15,13 @@ class VeganVisitsController < ApplicationController
 
         @unique_cookies2 = VeganVisit.where("url ~* ?", params[:query2]).pluck(:cookie).uniq
 
+        new_unique_cookies = []
         @unique_cookies.each do |cookie|
-          unless @unique_cookies2.include?(cookie)
-            @unique_cookies.delete(cookie)
-            puts @unique_cookies
+          if @unique_cookies2.include?(cookie)
+            new_unique_cookies.push(cookie)
           end
         end
+        @unique_cookies = new_unique_cookies
 
       end
     else
