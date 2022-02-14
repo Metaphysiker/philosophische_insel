@@ -1,9 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <%= form_with url: vegan_visits_path, method: :get do |form| %>
+<p>
   <%= form.label :query, "Must include:" %><br />
+</p>
+<p>
   <%= form.text_field :query, placeholder: @query %><br />
+</p>
+<p>
   <%= form.text_field :query2, placeholder: @query2 %><br />
+</p>
   <%= form.submit "Search" %>
 <% end %>
 
@@ -13,7 +19,6 @@
 <p>
   Count: <%= @unique_cookies.count %>
 </p>
-
 
 <% @unique_cookies.each do |unique_cookie| %>
   <% next if VeganVisit.where(cookie: unique_cookie).count > 30 %>
