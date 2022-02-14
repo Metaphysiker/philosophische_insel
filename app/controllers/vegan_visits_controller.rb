@@ -21,7 +21,7 @@ class VeganVisitsController < ApplicationController
             new_unique_cookies.push(cookie)
           end
         end
-        @unique_cookies = new_unique_cookies
+        @unique_cookies = new_unique_cookies.uniq
 
       end
     else
