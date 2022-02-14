@@ -1,24 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <%= form_with url: vegan_visits_path, method: :get do |form| %>
-  <%= form.label :query, "Must include:" %>
-  <%= form.text_field :query, placeholder: @query %>
-  <%= form.text_field :query2, placeholder: @query2 %>
+  <%= form.label :query, "Must include:" %><br />
+  <%= form.text_field :query, placeholder: @query %><br />
+  <%= form.text_field :query2, placeholder: @query2 %><br />
   <%= form.submit "Search" %>
 <% end %>
 
 
 <h1>Vegan Visits</h1>
 <hr>
-<% unique_cookies = @vegan_visits.pluck(:cookie).uniq %>
-<% unique_cookies.delete("") %>
-<% unique_cookies.delete("634957")%>
 <p>
-  Count: <%= @vegan_visits.count %>
+  Count: <%= @unique_cookies.count %>
 </p>
 
 
-<% unique_cookies.each do |unique_cookie| %>
+<% @unique_cookies.each do |unique_cookie| %>
   <% next if VeganVisit.where(cookie: unique_cookie).count > 30 %>
   <h2><%= unique_cookie %></h2>
 
@@ -43,33 +40,3 @@
 
   <hr>
 <% end %>
-
-<hr>
-
-<table>
-  <thead>
-    <tr>
-      <th>Url</th>
-      <th>Cookie</th>
-      <th>Fullpath</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @vegan_visits.each do |vegan_visit| %>
-      <tr>
-        <td><%= vegan_visit.url %></td>
-        <td><%= vegan_visit.cookie %></td>
-        <td><%= vegan_visit.fullpath %></td>
-        <td><%= link_to 'Show', vegan_visit %></td>
-        <td><%= link_to 'Edit', edit_vegan_visit_path(vegan_visit) %></td>
-        <td><%= link_to 'Destroy', vegan_visit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Vegan Visit', new_vegan_visit_path %>

@@ -8,12 +8,20 @@ class VeganVisitsController < ApplicationController
     authorize VeganVisit
     @query = params[:query]
     if params[:query].present?
-      @vegan_visits = VeganVisit.where("url ~* ?", params[:query])
+      @unique_cookies = VeganVisit.where("url ~* ?", params[:query]).pluck(:cookie).uniq
+      #@vegan_visits = VeganVisit.where("url ~* ?", params[:query])
       if params[:query2].present?
-        @vegan_visits = VeganVisit.where("url ~* ?", params[:query]).or(VeganVisit.where("url ~* ?", params[:query2]))
+        @unique_cookies2 = VeganVisit.where("url ~* ?", params[:query2]).pluck(:cookie).uniq
+
+        @unique_cookies.each do |cookie|
+          unless @unique_cookies2.include?(cookie)
+            @unique_cookie.delete(cookie)
+          end
+        end
+
       end
     else
-      @vegan_visits = VeganVisit.last(10)
+      @unique_cookies = VeganVisit.last(10).pluck(:cookie).uniq
     end
   end
 
