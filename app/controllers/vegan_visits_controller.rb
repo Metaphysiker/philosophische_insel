@@ -18,6 +18,7 @@ class VeganVisitsController < ApplicationController
         @unique_cookies.each do |cookie|
           unless @unique_cookies2.include?(cookie)
             @unique_cookies.delete(cookie)
+            puts @unique_cookies
           end
         end
 
