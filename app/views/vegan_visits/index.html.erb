@@ -35,7 +35,9 @@
 
       <% VeganVisit.where(cookie: unique_cookie).order(:created_at).each do |single_visit| %>
         <tr>
-          <td><%= single_visit.url %></td>
+          <td>
+            <%= highlight(single_visit.url, [@query, @query2]) -%>
+          </td>
           <td><%= l(single_visit.created_at) %></td>
         </tr>
       <% end %>

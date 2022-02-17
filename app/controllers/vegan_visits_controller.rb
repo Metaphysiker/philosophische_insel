@@ -6,6 +6,8 @@ class VeganVisitsController < ApplicationController
   # GET /vegan_visits or /vegan_visits.json
   def index
     authorize VeganVisit
+    @query = "ultramegalongwordlolroflxd"
+    @query2 = "ultramegalongwordlolroflxd"
     if params[:query].present?
       @query = params[:query]
       @unique_cookies = VeganVisit.where("url ~* ?", params[:query]).pluck(:cookie).uniq
@@ -25,7 +27,7 @@ class VeganVisitsController < ApplicationController
 
       end
     else
-      @unique_cookies = VeganVisit.last(10).pluck(:cookie).uniq
+      @unique_cookies = VeganVisit.last(100).pluck(:cookie).uniq
     end
   end
 
