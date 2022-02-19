@@ -186,7 +186,7 @@
   //raiseNow payment complete
   window.rnw.tamaro.events["paymentComplete"].subscribe(function(event) {
     //paymentComplete
-    console.log("payment complete");
+    //console.log("payment complete");
 
      var amount_just_paid = event.data.api.transactionInfo.amount;
      var transaction_id = event.data.api.transactionInfo.epp_transaction_id;
@@ -218,6 +218,12 @@
        }).always(function( ) {
            getDataAndDraw('#diagram');
        });
+
+       gtag('event', 'conversion', {
+           'send_to': 'AW-10825069590/rEa-CIPVuqIDEJbo5ako',
+           'transaction_id': ''
+       });
+
      } else {
        getDataAndDraw('#diagram');
      }
