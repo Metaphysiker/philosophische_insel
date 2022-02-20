@@ -221,8 +221,13 @@
 
        gtag('event', 'conversion', {
            'send_to': 'AW-10825069590/rEa-CIPVuqIDEJbo5ako',
-           'transaction_id': ''
+           'transaction_id': transaction_id
        });
+
+       gtag('event', 'payment_successful', {
+        'event_category' : 'bbb',
+        'event_label' : 'ccc'
+      });
 
      } else {
        getDataAndDraw('#diagram');
