@@ -26,9 +26,34 @@ class StaticPagesController < ApplicationController
     }
   end
 
-
-
   def about
+    require 'uri'
+    require 'net/http'
+    require 'openssl'
+    require "open3"
+
+    body = "filterDatetimeUtcGreaterThan=2022-01-01%2000%3A00%3A00&filterDatetimeUtcLessThan=2022-02-28%2023%3A59%3A59"
+    apiSignature_shell_command = "echo -n \"#{body}\" | openssl dgst -sha256 -hmac \"\" -binary | openssl enc -base64"
+
+    @apiSignature_shell_command = apiSignature_shell_command
+
+    stdin, stdout, stderr = Open3.popen3(apiSignature_shell_command)
+
+    @api_signature = stdout.read
+
+    url = URI("https://api.payrexx.com/v1.0/Transaction/?instance=veganegesellschaftschweiz&ApiSignature=#{@api_signature}")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Get.new(url)
+    request["Accept"] = 'application/json'
+    request["Content-Type"] = 'application/x-www-form-urlencoded'
+    request.body = body
+
+    response = http.request(request)
+    @payrexx = response.read_body
+        @request_body = @api_signature
 
     set_meta_tags title: 'Sandro Räss',
               description: 'Sandro Räss ist ein Frontend-Entwickler, Philosoph und Aktivist.',

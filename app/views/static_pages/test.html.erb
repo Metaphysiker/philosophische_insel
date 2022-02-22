@@ -1,0 +1,20 @@
+<script>
+  console.log("start");
+  const options = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: new URLSearchParams({
+      filterDatetimeUtcGreaterThan: '2022-01-01 00:00:00',
+      filterDatetimeUtcLessThan: '2022-02-28 23:59:59'
+    })
+  };
+
+  fetch('https://api.payrexx.com/v1.0/Transaction/?instance=veganegesellschaftschweiz', options)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
+
+</script>
