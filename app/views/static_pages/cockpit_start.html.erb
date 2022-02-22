@@ -144,7 +144,7 @@
         for (i = 0; i < range.values.length; i++) {
           var row = range.values[i];
           if(typeof row[2] != "undefined" ){
-            if((row[2].includes("Voller Mitgliedschaftsbeitrag")) || (row[2].includes("Reduzierter Mitgliedschaftsbeitrag"))){
+            if((row[2].includes("Mitglied")) || (row[2].includes("mitglied"))){
               //console.log(row[2]);
               appendPre(row[0] + ', ' + row[1] + ', ' + row[2]);
               //registrations[row[0]] = row[1];
