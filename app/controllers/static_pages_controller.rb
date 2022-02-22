@@ -30,25 +30,6 @@ class StaticPagesController < ApplicationController
 
   def about
 
-    require 'uri'
-require 'net/http'
-require 'openssl'
-
-url = URI("https://api.payrexx.com/v1.0/Transaction/?instance=veganegesellschaftschweiz&api-secret=UtHq3p0TYZEQCOnBN2bsft5gEeWpTj")
-
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-
-request = Net::HTTP::Get.new(url)
-request["Accept"] = 'application/json'
-request["Content-Type"] = 'application/x-www-form-urlencoded'
-request.body = "filterDatetimeUtcGreaterThan=2022-01-01%2000-00-00&filterDatetimeUtcLessThan=2022-02-28-23-59-59"
-
-response = http.request(request)
-puts response.read_body
-
-@response = response.read_body
-
     set_meta_tags title: 'Sandro Räss',
               description: 'Sandro Räss ist ein Frontend-Entwickler, Philosoph und Aktivist.',
               keywords: 'Sandro Räss'
