@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons]
 
   if Rails.env.development?
     require 'rmagick'
@@ -104,6 +104,22 @@ class StaticPagesController < ApplicationController
 
   def google_sheets
     render layout: "application_blank"
+  end
+
+  def donation_buttons
+    if params[:pitch].present?
+      @pitch = params[:pitch]
+    else
+      @pitch = "Hat dir dieser Beitrag gefallen? Möchtest du mehr über die vegane Lebensweise erfahren? Dann bist du bei der Veganen Gesellschaft Schweiz goldrichtig! Denn die Vegane Gesellschaft Schweiz hat es sich zum Ziel gesetzt, die vegane Lebensweise im Alltag zu erleichtern."
+    end
+
+    if params[:cta].present?
+      @cta = params[:cta]
+    else
+      @cta = "Werde Mitglied und erhalte unser begehrtes Willkommens-Paket mit vielen leckeren veganen Goodies! Greif zu!"
+    end
+    render layout: "application_empty"
+
   end
 
   private
