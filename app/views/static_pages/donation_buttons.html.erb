@@ -1,12 +1,72 @@
-<div class="container">
+<div class="container blogger_sans">
   <h1>Call-to-Actions</h1>
 
-  <div class="border rounded">
+  <%= simple_form_for :donation_buttons, url: "donation_buttons", method: :get do |form| %>
+    <%= form.input :pitch, as: :text, input_html: { value: @pitch } %>
+    <br>
+    <%= form.input :cta, as: :text, input_html: { value: @cta } %>
+    <br>
+    <%= form.submit "Anwenden" %>
+  <% end %>
+  <hr>
+
+
+  <div class="rounded_borders">
     <p>
-      <%= @pitch %>
+      <%= simple_format(@pitch) %>
     </p>
 
-    <button class="btn btn-primary" type="submit"><%= @cta %></button>
-
+    <div class="text-center">
+      <button type="button" class="button1"><%= simple_format(@cta) %></button>
+    </div>
   </div>
+
+  <hr>
+
+  <div class="rounded_borders">
+    <p>
+      <%= simple_format(@pitch) %>
+    </p>
+
+    <div class="text-center">
+      <button type="button" class="button2"><%= simple_format(@cta) %></button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="rounded_borders">
+    <p>
+      <%= simple_format(@pitch) %>
+    </p>
+
+    <div class="text-center">
+      <button type="button" class="button3"><%= simple_format(@cta) %></button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="rounded_borders">
+    <p>
+      <%= simple_format(@pitch) %>
+    </p>
+
+    <div class="text-center">
+      <button type="button" class="button4"><%= simple_format(@cta) %></button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="rounded_borders">
+    <p>
+      <%= simple_format(@pitch) %>
+    </p>
+
+    <div class="text-center">
+      <button type="button" class="button5"><%= simple_format(@cta) %></button>
+    </div>
+  </div>
+
 </div>

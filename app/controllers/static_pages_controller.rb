@@ -107,14 +107,14 @@ class StaticPagesController < ApplicationController
   end
 
   def donation_buttons
-    if params[:pitch].present?
-      @pitch = params[:pitch]
+    if params.dig(:donation_buttons, :pitch).present?
+      @pitch = params.dig(:donation_buttons, :pitch)
     else
       @pitch = "Hat dir dieser Beitrag gefallen? Möchtest du mehr über die vegane Lebensweise erfahren? Dann bist du bei der Veganen Gesellschaft Schweiz goldrichtig! Denn die Vegane Gesellschaft Schweiz hat es sich zum Ziel gesetzt, die vegane Lebensweise im Alltag zu erleichtern."
     end
 
-    if params[:cta].present?
-      @cta = params[:cta]
+    if params.dig(:donation_buttons, :cta).present?.present?
+      @cta = params.dig(:donation_buttons, :cta)
     else
       @cta = "Werde Mitglied und erhalte unser begehrtes Willkommens-Paket mit vielen leckeren veganen Goodies! Greif zu!"
     end
