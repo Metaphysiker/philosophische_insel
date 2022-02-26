@@ -205,7 +205,7 @@ input{
                 transition: left .3s 0s,top .3s .1s,opacity .3s .1s;
             }
         }
-        &:hover .button_spots{
+         .button_spots{
             @for $i from 1 through 19{
                 &:nth-of-type(#{$i}){
                     animation: spot-#{$i} .7s .4/random(10) + random(10)/10 + s linear infinite;
