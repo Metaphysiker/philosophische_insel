@@ -1,3 +1,5 @@
+<%= javascript_packs_with_chunks_tag 'd3' %>
+
 <div class="container blogger_sans">
   <h1>Call-to-Actions</h1>
 
@@ -236,4 +238,30 @@
 
   <hr>
 
+<div class="funky_button1">
+
 </div>
+
+
+
+<div id="funky_button1_pitch" style="width: 80%; visibility: hidden;" class="text-center">
+  <p>
+    <%= simple_format(@pitch) %>
+  </p>
+</div>
+
+<div id="funky_button1_cta" style="width: 50%; visibility: hidden;" class="text-center">
+  <button type="button" class="button2"><%= simple_format(@pitch) %></button>
+</div>
+
+  <hr>
+
+</div>
+
+<script>
+  $( document ).ready(function() {
+    var funky_button = new d3Funky.funkyButton("funky_button1", {pitch: "<%= @pitch %>", cta: "<%= @cta %>"});
+    funky_button.draw_chart();
+  });
+
+</script>
