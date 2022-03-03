@@ -4,8 +4,11 @@ import "channels"
 import "bootstrap"
 import "jquery"
 import "d3/dist/d3.js"
+<<<<<<< HEAD
 import "packs/animate_css"
 
+=======
+>>>>>>> e688089a1583066495ddb6ac049dc8f795bc883c
 //import "bootstrap-icons/font/bootstrap-icons.scss"
 
 Rails.start()
@@ -24,3 +27,10 @@ $.fn.isInViewport = function() {
 
     return elementBottom > viewportTop && elementTop < viewportBottom;
 };
+<<<<<<< HEAD
+=======
+
+import("packs/d3-funky").then(d3Funky => {
+  window.d3Funky = d3Funky;
+})
+>>>>>>> e688089a1583066495ddb6ac049dc8f795bc883c

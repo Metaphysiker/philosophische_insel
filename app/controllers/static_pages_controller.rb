@@ -118,7 +118,7 @@ class StaticPagesController < ApplicationController
     else
       @cta = "Werde Mitglied und erhalte unser begehrtes Willkommens-Paket mit vielen leckeren veganen Goodies! Greif zu!"
     end
-    render layout: "application_empty"
+    render layout: "application_blank"
 
   end
 
