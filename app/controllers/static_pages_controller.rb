@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons hypatia]
 
   if Rails.env.development?
     require 'rmagick'
@@ -119,6 +119,10 @@ class StaticPagesController < ApplicationController
       @cta = "Werde Mitglied und erhalte unser begehrtes Willkommens-Paket mit vielen leckeren veganen Goodies! Greif zu!"
     end
     render layout: "application_blank"
+
+  end
+
+  def hypatia
 
   end
 
