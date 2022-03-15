@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons hypatia compare_lists]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons compare_lists]
 
   if Rails.env.development?
     require 'rmagick'
@@ -126,9 +126,6 @@ class StaticPagesController < ApplicationController
 
   end
 
-  def hypatia
-
-  end
 
   private
 
