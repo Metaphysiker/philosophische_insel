@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{34:function(n,o,s){"use strict";function t(n){this.firstName=n,this.name=function(){console.log(this.firstName)}}s.r(o),s.d(o,"Personyxz",(function(){return t})),console.log("d3_objects")}},[[34,22]]]);
-//# sourceMappingURL=d3_objects-3246208d190defaaef26.chunk.js.map
