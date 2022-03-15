@@ -1,0 +1,49 @@
+<div class="container mt-2">
+  <h1>Hufbeschlagung</h1>
+
+  <p>
+    <%= link_to 'Neues Pferd eintragen', new_horse_path %>
+  </p>
+
+<hr>
+
+<h2> Diese Pferde sind diese Woche dran</h2>
+
+<%= render "horses/table", horses: Horse.where(next_shoeing_date: Date.today.beginning_of_week..Date.today.end_of_week) %>
+
+<hr>
+
+<h2> Die nächsten Wochen</h2>
+
+
+<% array_with_weeks = [Date.today.next_week, Date.today.next_week.next_week, Date.today.next_week.next_week.next_week, Date.today.next_week.next_week.next_week.next_week] %>
+
+<% array_with_weeks.each do |week| %>
+
+    <i>Woche <%= week.strftime("%U").to_i %> | <%= week.beginning_of_week.strftime("%d.%m") %> -<%= week.end_of_week.strftime("%d.%m") %></i>
+    <br>
+
+<% horses_in_this_week = Horse.where(next_shoeing_date: week.beginning_of_week..week.end_of_week).order(:next_shoeing_date) %>
+
+<% if horses_in_this_week.empty? %>
+  Noch keine Pferde für diese Woche eingetragen
+<% else %>
+  <%= render "horses/table_with_date", horses: Horse.where(next_shoeing_date: week.beginning_of_week..week.end_of_week).order(:next_shoeing_date) %>
+<% end %>
+<hr>
+
+<% end %>
+
+
+    <h2> Diese Pferde brauchen einen neuen Termin.</h2>
+
+    <%= render "horses/table_with_date", horses: Horse.where('next_shoeing_date < ?', Date.today.yesterday).order(:next_shoeing_date) %>
+
+
+    <hr>
+
+        <h2>Alle Pferde</h2>
+
+        <%= render "horses/table_with_date", horses: Horse.all.order(:next_shoeing_date) %>
+
+</div>

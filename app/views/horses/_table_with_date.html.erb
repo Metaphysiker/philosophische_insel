@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Nächster Termin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% horses.each do |horse| %>
+      <tr>
+        <td>
+          <%= link_to horse.name, edit_horse_path(horse) %>
+        </td>
+        <td><%= l(horse.next_shoeing_date) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

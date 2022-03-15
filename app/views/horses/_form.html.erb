@@ -1,0 +1,18 @@
+
+<%= simple_form_for(@horse) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <br>
+    <%= f.input :next_shoeing_date %>
+        <br>
+    <%= f.input :comment %>
+        <br>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary my-2" %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+de:
+  activerecord:
+    models:
+      horse:
+        one: "Pferd"
+        other: "Pferde"
+    attributes:
+      horse:
+        name: "Name"
+        next_shoeing_date: "Nächster Termin"
+        comment: "Kommentar"

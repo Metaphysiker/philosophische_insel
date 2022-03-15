@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Kommentar</th>
+      <th scope="col">Datum für nächste Beschlagung</th>
+      <th scope="col">Aktion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% horses.each do |horse| %>
+      <tr>
+        <td><%= horse.name %></td>
+        <td><%= horse.comment %></td>
+        <td><%= l(horse.next_shoeing_date) %></td>
+        <td>
+          <%= link_to 'Bearbeiten', edit_horse_path(horse) %>
+          <br>
+          <%= link_to 'Entfernen', horse, method: :delete, data: { confirm: 'Bist du sicher?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

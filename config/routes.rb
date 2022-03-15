@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :horses
   resources :vegan_visits
   resources :media
   resources :media_releases
