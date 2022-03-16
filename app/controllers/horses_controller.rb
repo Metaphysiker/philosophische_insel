@@ -15,6 +15,7 @@ class HorsesController < ApplicationController
   # GET /horses/new
   def new
     @horse = Horse.new
+    @horse.shoeing_interval = 10
     render layout: "application_empty"
   end
 
@@ -68,6 +69,6 @@ class HorsesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def horse_params
-      params.require(:horse).permit(:name, :next_shoeing_date, :comment)
+      params.require(:horse).permit(:name, :next_shoeing_date, :comment, :shoeing_interval)
     end
 end

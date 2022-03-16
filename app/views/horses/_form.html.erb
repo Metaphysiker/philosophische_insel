@@ -7,9 +7,19 @@
     <%= f.input :name %>
     <br>
     <%= f.input :next_shoeing_date %>
-        <br>
+    <br>
     <%= f.input :comment %>
-        <br>
+    <br>
+    <%#= f.input :shoeing_interval %>
+    <p>
+      Beschlagungsfrist
+    </p>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Alle</span>
+      <%= f.input :shoeing_interval, class: "form-control", label: false %>
+      <span class="input-group-text">Wochen</span>
+    </div>
+    <br>
   </div>
 
   <div class="form-actions">
