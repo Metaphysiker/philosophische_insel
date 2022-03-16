@@ -13,6 +13,12 @@
 
 <hr>
 
+<h2> Diese Pferde müssen bald beschlagen werden</h2>
+
+<%#= render "horses/table", horses: Horse.where(next_shoeing_date: Date.today.beginning_of_week..Date.today.end_of_week) %>
+
+<hr>
+
 <h2> Die nächsten Wochen</h2>
 
 
