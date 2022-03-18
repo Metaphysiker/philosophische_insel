@@ -1,10 +1,16 @@
 class HorsesController < ApplicationController
-  before_action :set_horse, only: %i[ show edit update destroy ]
+  before_action :set_horse, only: %i[ show edit update destroy shoeing_happened_today]
+
+  def shoeing_happened_today
+    @horse.update(last_shoeing_date: Date.today)
+    redirect_to horses_path, notice: "Datum wurde aktualisiert!" 
+  end
 
   # GET /horses or /horses.json
   def index
     @horses = Horse.all
     render layout: "application_empty"
+
   end
 
   # GET /horses/1 or /horses/1.json

@@ -1,6 +1,5 @@
 <div class="container mt-2">
   <h1>Hufbeschlagung</h1>
-
   <p>
     <%= link_to 'Neues Pferd eintragen', new_horse_path %>
   </p>
@@ -50,6 +49,6 @@
 
         <h2>Alle Pferde</h2>
 
-        <%= render "horses/table_with_date", horses: Horse.all.order(:next_shoeing_date) %>
+        <%= render "horses/table", horses: Horse.all.order(:next_shoeing_date) %>
 
 </div>

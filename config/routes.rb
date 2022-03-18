@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :horses
+  resources :horses do
+    member do
+      post 'shoeing_happened_today'
+    end
+  end
   resources :vegan_visits
   resources :media
   resources :media_releases

@@ -1,0 +1,54 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <td>
+        <%= link_to horse.name, edit_horse_path(horse) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Nächster Termin:
+      </td>
+      <td>
+        <% if horse.next_shoeing_date.blank? %>
+          Kein Termin geplant
+        <% else %>
+          <strong><%= l(horse.next_shoeing_date) %></strong>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Nächste Hufschlagfrist:
+      </td>
+      <td>
+         <strong><%= l(horse.last_shoeing_date + horse.shoeing_interval.weeks) %></strong>
+         <br />
+         <% future_date = horse.last_shoeing_date.to_datetime + horse.shoeing_interval.weeks %>
+
+         in <strong><%= ((future_date - Date.today).to_f / 7).truncate(1) %> Wochen</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Letzte Beschlagung:
+      </td>
+      <td>
+         <strong><%= l(horse.last_shoeing_date) %></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Kommentar:
+        </td>
+        <td>
+          <%= horse.comment %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <%= link_to "#{horse.name} wurde heute beschlagen", shoeing_happened_today_horse_path(horse), method: :post, class: "btn btn-primary" %>
+        </td>
+      </tr>
+  </tbody>
+</table>
