@@ -1,26 +1,7 @@
 <div class="container">
 
-<p id="notice"><%= notice %></p>
+  <%= render "horses/table_element", horse: @horse %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @horse.name %>
-</p>
-
-<p>
-  <strong>Next shoeing date:</strong>
-  <%= @horse.next_shoeing_date %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
-  <%= @horse.comment %>
-</p>
-
-<p>
-  <strong>Beschlagungsfrist:</strong>
-  <%= @horse.shoeing_interval %>
-</p>
 
 <%= link_to 'Bearbeiten', edit_horse_path(@horse) %> |
 <%= link_to 'Zurück', horses_path %>
