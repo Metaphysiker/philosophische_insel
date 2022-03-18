@@ -22,11 +22,9 @@
         Nächste Hufschlagfrist:
       </td>
       <td>
-         <strong><%= l(horse.last_shoeing_date + horse.shoeing_interval.weeks) %></strong>
+         <strong><%= l(horse.shoeing_deadline) %></strong>
          <br />
-         <% future_date = horse.last_shoeing_date.to_datetime + horse.shoeing_interval.weeks %>
-
-         in <strong><%= ((future_date - Date.today).to_f / 7).truncate(1) %> Wochen</strong>
+         in <strong><%= ((horse.shoeing_deadline - Date.today).to_f / 7).truncate(1) %> Wochen</strong>
       </td>
     </tr>
     <tr>

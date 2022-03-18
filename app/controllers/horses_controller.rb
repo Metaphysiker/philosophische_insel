@@ -2,8 +2,8 @@ class HorsesController < ApplicationController
   before_action :set_horse, only: %i[ show edit update destroy shoeing_happened_today]
 
   def shoeing_happened_today
-    @horse.update(last_shoeing_date: Date.today)
-    redirect_to horses_path, notice: "Datum wurde aktualisiert!" 
+    @horse.update(last_shoeing_date: Date.today, next_shoeing_date: nil)
+    redirect_to horses_path, notice: "Datum wurde aktualisiert!"
   end
 
   # GET /horses or /horses.json
@@ -75,6 +75,6 @@ class HorsesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def horse_params
-      params.require(:horse).permit(:name, :next_shoeing_date, :comment, :shoeing_interval, :last_shoeing_date)
+      params.require(:horse).permit(:name, :next_shoeing_date, :comment, :shoeing_interval, :last_shoeing_date, :shoeing_deadline)
     end
 end

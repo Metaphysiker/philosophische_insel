@@ -9,3 +9,5 @@ de:
         name: "Name"
         next_shoeing_date: "Nächster Termin"
         comment: "Kommentar"
+        last_shoeing_date: "Letzte Beschlagung"
+        shoeing_interval: "Beschlagungsfrist"
