@@ -1,20 +1,8 @@
-<table class="table">
+<table class="table table-bordered">
   <tbody>
     <tr>
       <td>
         <%= link_to horse.name, edit_horse_path(horse) %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Nächster Termin:
-      </td>
-      <td>
-        <% if horse.next_shoeing_date.blank? %>
-          Kein Termin geplant
-        <% else %>
-          <strong><%= l(horse.next_shoeing_date) %></strong>
-        <% end %>
       </td>
     </tr>
     <tr>
@@ -43,10 +31,8 @@
           <%= horse.comment %>
         </td>
       </tr>
-      <tr>
-        <td>
-            <%= link_to "#{horse.name} wurde heute beschlagen", shoeing_happened_today_horse_path(horse), method: :post, class: "btn btn-primary" %>
-        </td>
-      </tr>
   </tbody>
 </table>
+<div class="text-center">
+  <%= link_to "#{horse.name} wurde heute beschlagen", shoeing_happened_today_horse_path(horse), method: :post, class: "btn btn-primary my-1" %>
+</div>
