@@ -122,6 +122,8 @@ GEM
       devise (>= 4.8.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    doorkeeper (5.5.4)
+      railties (>= 5)
     errbase (0.2.2)
     erubi (1.10.0)
     ffi (1.15.5)
@@ -322,6 +324,7 @@ DEPENDENCIES
   chartkick
   devise
   devise-i18n
+  doorkeeper
   faker!
   friendly_id (~> 5.4.0)
   geocoder

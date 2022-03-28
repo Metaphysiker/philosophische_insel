@@ -23,6 +23,8 @@ gem 'rest-client'
 gem 'inline_svg'
 gem 'rack-cors'
 
+gem 'doorkeeper'
+
 gem "aws-sdk-s3", require: false
 gem 'friendly_id', '~> 5.4.0'
 gem 'redcarpet'
