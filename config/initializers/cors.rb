@@ -8,4 +8,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins '*'
     resource '/api/vegipass_offers', headers: :any, methods: [:get]
   end
+
+  allow do
+    origins '*'
+    resource '/api/horses', headers: :any, methods: [:get]
+  end
 end
