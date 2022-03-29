@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  use_doorkeeper do
+    skip_controllers :authorizations, :applications, :authorized_applications
+  end
+
+  namespace :api do
+    resources :horses, only: %i[index]
+  end
+
   resources :horses do
     member do
       post 'shoeing_happened_today'
