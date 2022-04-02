@@ -54,3 +54,5 @@ Ahoy::Event.create!([
   {visit_id: 1, user_id: nil, name: "Ran action", properties: {"action"=>"index", "controller"=>"media"}, time: "2022-02-24 08:16:10"},
   {visit_id: 1, user_id: nil, name: "Ran action", properties: {"action"=>"index", "controller"=>"media"}, time: "2022-02-24 08:16:14"}
 ])
+
+doorkeeper = Doorkeeper::Application.create(name: "ionic", redirect_uri: "", scopes: "")
