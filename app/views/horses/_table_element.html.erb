@@ -2,7 +2,10 @@
   <tbody>
     <tr>
       <td>
-        <%= link_to horse.name, edit_horse_path(horse) %>
+        <%= link_to horse.name, edit_horse_path(horse), class: "btn btn-success my-1" %>
+      </td>
+      <td>
+        <%= link_to 'Entfernen', horse, method: :delete, class: "btn btn-danger my-1", data: { confirm: 'Bist du sicher?' } %>
       </td>
     </tr>
     <tr>

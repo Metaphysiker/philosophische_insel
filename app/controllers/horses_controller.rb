@@ -62,7 +62,7 @@ class HorsesController < ApplicationController
   def destroy
     @horse.destroy
     respond_to do |format|
-      format.html { redirect_to horses_url, notice: "Horse was successfully destroyed." }
+      format.html { redirect_to horses_url, notice: "Pferd wurde entfernt." }
       format.json { head :no_content }
     end
   end

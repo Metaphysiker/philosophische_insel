@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   get 'cockpit', to: 'static_pages#cockpit', as: "cockpit"
   get 'cockpit_start', to: 'static_pages#cockpit_start', as: "cockpit_start"
   get 'google_sheets', to: 'static_pages#google_sheets', as: "google_sheets"
+  get 'swiss_vegan_awards_jury_query', to: 'static_pages#swiss_vegan_awards_jury_query', as: "swiss_vegan_awards_jury_query"
 
 
   get 'sandro-raess', to: 'static_pages#about', as: "about"
