@@ -110,6 +110,10 @@ class HorsesController < ApplicationController
       file.close
 
       Libreconv.convert(Rails.root.join('odts', 'saved', "horses.odt"), Rails.root.join('odts', 'pdfs', "horses.pdf"))
+      #Libreconv.convert(Rails.root.join('odts', 'saved', "horses.odt").to_s, Rails.root.join('odts', 'pdfs', "horses.pdf"))
+      #Libreconv.convert("/home/sandro/philosophische_insel/odts/saved/horses.odt", Rails.root.join('odts', 'pdfs', "horses.pdf"))
+      #Libreconv.convert(Rails.root.join('public', "horses.odt"), Rails.root.join('public', "horses.pdf"))
+
 
 
         send_file Rails.root.join('odts', 'pdfs', "horses.pdf"),
