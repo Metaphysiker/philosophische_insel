@@ -8,6 +8,10 @@
 
 <h2>Alle Pferde, sortiert nach Dringlichkeit</h2>
 
+<p class="">
+   <%= link_to 'ODT herunterladen', get_odt_of_horses_horses_path %>
+</p>
+
 <%= render "horses/table", horses: Horse.all.order(:shoeing_deadline) %>
 
 

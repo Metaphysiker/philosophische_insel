@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   end
 
   resources :horses do
+    collection do
+     get 'get_odt_of_horses'
+    end
     member do
       post 'shoeing_happened_today'
     end

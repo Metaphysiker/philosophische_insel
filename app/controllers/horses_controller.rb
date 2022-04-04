@@ -67,6 +67,28 @@ class HorsesController < ApplicationController
     end
   end
 
+  def get_odt_of_horses
+    report = ODFReport::Report.new("odts/horses.odt") do |r|
+
+      @horses = Horse.all
+
+        r.add_section("HORSES", @horses) do |horse|
+          horse.add_field :name, :name
+          horse.add_field (:shoeing_deadline) { |horse| horse.shoeing_deadline.strftime("%d.%m.%Y")}
+          horse.add_field (:shoeing_deadline_in_weeks) { |horse| ((horse.shoeing_deadline - Date.today).to_f / 7).truncate(1) }
+          horse.add_field (:last_shoeing_date) { |horse| horse.last_shoeing_date.strftime("%d.%m.%Y") }
+          horse.add_field :comment, :comment
+        end
+
+    end
+
+      send_data report.generate,
+                type: 'application/vnd.oasis.opendocument.text',
+                disposition: 'attachment',
+                filename: 'report.odt'
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_horse
