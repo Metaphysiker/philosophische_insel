@@ -146,6 +146,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.1)
+    libreconv (0.9.5)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -331,6 +332,7 @@ DEPENDENCIES
   groupdate
   inline_svg
   jbuilder (~> 2.7)
+  libreconv
   listen (~> 3.3)
   maxminddb
   meta-tags

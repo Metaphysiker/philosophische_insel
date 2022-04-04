@@ -70,7 +70,7 @@ class HorsesController < ApplicationController
   def get_odt_of_horses
     report = ODFReport::Report.new("odts/horses.odt") do |r|
 
-      @horses = Horse.all
+      @horses = Horse.all.order(:shoeing_deadline)
 
         r.add_section("HORSES", @horses) do |horse|
           horse.add_field :name, :name
@@ -88,6 +88,36 @@ class HorsesController < ApplicationController
                 filename: 'report.odt'
 
   end
+
+    def get_pdf_of_horses
+      report = ODFReport::Report.new("odts/horses.odt") do |r|
+
+        @horses = Horse.all.order(:shoeing_deadline)
+
+          r.add_section("HORSES", @horses) do |horse|
+            horse.add_field :name, :name
+            horse.add_field (:shoeing_deadline) { |horse| horse.shoeing_deadline.strftime("%d.%m.%Y")}
+            horse.add_field (:shoeing_deadline_in_weeks) { |horse| ((horse.shoeing_deadline - Date.today).to_f / 7).truncate(1) }
+            horse.add_field (:last_shoeing_date) { |horse| horse.last_shoeing_date.strftime("%d.%m.%Y") }
+            horse.add_field :comment, :comment
+          end
+
+      end
+
+      file = File.new(Rails.root.join('odts', 'saved', "horses.odt"), "w+", encoding: 'ascii-8bit')
+      file.write(report.generate)
+      file.rewind
+      file.close
+
+      Libreconv.convert(Rails.root.join('odts', 'saved', "horses.odt"), Rails.root.join('odts', 'pdfs', "horses.pdf"))
+
+
+        send_file Rails.root.join('odts', 'pdfs', "horses.pdf"),
+                  type: 'application/pdf',
+                  disposition: 'attachment',
+                  filename: 'report.pdf'
+
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.

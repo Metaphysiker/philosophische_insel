@@ -10,6 +10,9 @@
 
 <p class="">
    <%= link_to 'ODT herunterladen', get_odt_of_horses_horses_path %>
+   <br>
+  <%= link_to 'PDF herunterladen', get_pdf_of_horses_horses_path %>
+
 </p>
 
 <%= render "horses/table", horses: Horse.all.order(:shoeing_deadline) %>
