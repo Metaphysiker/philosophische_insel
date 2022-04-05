@@ -8,12 +8,11 @@
 
 <h2>Alle Pferde, sortiert nach Dringlichkeit</h2>
 
-<p class="">
-   <%= link_to 'ODT herunterladen', get_odt_of_horses_horses_path %>
-   <br>
-  <%= link_to 'PDF herunterladen', get_pdf_of_horses_horses_path %>
-
-</p>
+<div class="d-grid gap-2 mb-3">
+     <%= link_to 'ODT herunterladen', get_odt_of_horses_horses_path, class: "btn btn-secondary" %>
+     <%= link_to 'PDF herunterladen', get_pdf_of_horses_horses_path, class: "btn btn-secondary" %>
+     <%= link_to 'WORD herunterladen', get_word_of_horses_horses_path, class: "btn btn-secondary" %>
+</div>
 
 <%= render "horses/table", horses: Horse.all.order(:shoeing_deadline) %>
 
