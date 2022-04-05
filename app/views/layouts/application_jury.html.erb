@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Ads: 10825069590 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10825069590"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-10825069590');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6YBWMQG8L7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6YBWMQG8L7');
+    </script>
+    <%= display_meta_tags site: application_name, reverse: true, separator: "-" %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="bUYclo8VOwfO6-L9oPh67t8Q0kvBUm7HftioGEjGoRI" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%#= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+    <!--
+    <script src="https://kit.fontawesome.com/9e87a26e49.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    -->
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%#= javascript_pack_tag 'application' %>
+    <%= javascript_packs_with_chunks_tag 'jury' %>
+
+    <%= favicon_link_tag('philosophische-insel-logo-ohne-hintergrund.png') %>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <%= render "layouts/flash_messages" if flash %>
+    <%= yield %>
+  </body>
+</html>

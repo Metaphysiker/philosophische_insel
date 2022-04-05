@@ -1,3 +1,4 @@
+<script src="https://kit.fontawesome.com/9e87a26e49.js" crossorigin="anonymous"></script>
 <div class="container mt-3">
 
     <h1>Swiss Vegan Awards Jury Query</h1>
@@ -6,12 +7,130 @@
 
     </div>
 
-    <div class="card">
+    <div class="card my-2">
     <%= image_tag("green-mountain-burger.jpg", class: "card-img-top") %>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">The Green Mountain Burger</h5>
+        <a href="https://www.thegreenmountain.ch/en/products/burger/" class="btn btn-success my-2">Produkt anschauen</a>
+        <hr>
+          <div class="row">
+              <div class="col-12 col-md-12" style="font-size: 2em;">
+                  <h5>Optik & Auftritt</h5>
+                  <div id="review1"></div>
+              </div>
+
+          </div>
+          <div class="row">
+              <div class="col-12 col-md-12" style="font-size: 2em;">
+                  <h5>Innovation & Mehrwert Veganerinnen</h5>
+                  <div id="review2"></div>
+              </div>
+
+          </div>
+          <div class="row">
+              <div class="col-12 col-md-12" style="font-size: 2em;">
+                  <h5>Attraktivität für Nicht-Veganerinnen</h5>
+                  <div id="review3"></div>
+              </div>
+
+          </div>
+
+          <hr>
+        <a href="#" class="btn btn-primary my-2">Bewertung speichern</a>
       </div>
     </div>
+
+    <div class="card my-2">
+    <%= image_tag("yolo.jpg", class: "card-img-top") %>
+      <div class="card-body">
+        <h5 class="card-title">Yolo Chicken Filets</h5>
+        <a href="https://www.thegreenmountain.ch/en/products/burger/" class="btn btn-success my-2">Produkt anschauen</a>
+        <hr>
+          <div class="row">
+              <div class="col-12 col-md-12" style="font-size: 2em;">
+                  <h5>Optik & Auftritt</h5>
+                  <div id="review4"></div>
+              </div>
+
+          </div>
+          <div class="row">
+              <div class="col-12 col-md-12" style="font-size: 2em;">
+                  <h5>Innovation & Mehrwert Veganerinnen</h5>
+                  <div id="review5"></div>
+              </div>
+
+          </div>
+          <div class="row">
+              <div class="col-12 col-md-12" style="font-size: 2em;">
+                  <h5>Attraktivität für Nicht-Veganerinnen</h5>
+                  <div id="review6"></div>
+              </div>
+
+          </div>
+
+          <hr>
+        <a href="#" class="btn btn-primary my-2">Bewertung speichern</a>
+      </div>
+    </div>
+
 </div>
+
+
+<script>
+
+  $( document ).ready(function() {
+    console.log( "ready!" );
+
+    $("#review1").rating({
+        "value": 0,
+        "click": function (e) {
+            console.log(e);
+            $("#starsInput").val(e.stars);
+        }
+    });
+
+    $("#review2").rating({
+        "value": 0,
+        "click": function (e) {
+            console.log(e);
+            $("#starsInput").val(e.stars);
+        }
+    });
+
+    $("#review3").rating({
+        "value": 0,
+        "click": function (e) {
+            console.log(e);
+            $("#starsInput").val(e.stars);
+        }
+    });
+
+    $("#review4").rating({
+        "value": 0,
+        "click": function (e) {
+            console.log(e);
+            $("#starsInput").val(e.stars);
+        }
+    });
+
+    $("#review5").rating({
+        "value": 0,
+        "click": function (e) {
+            console.log(e);
+            $("#starsInput").val(e.stars);
+        }
+    });
+
+
+    $("#review6").rating({
+        "value": 0,
+        "click": function (e) {
+            console.log(e);
+            $("#starsInput").val(e.stars);
+        }
+    });
+
+});
+
+
+</script>

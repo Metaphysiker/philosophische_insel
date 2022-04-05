@@ -24,6 +24,9 @@ gem 'rest-client'
 gem 'inline_svg'
 gem 'rack-cors'
 
+#gem "font-awesome-rails"
+
+
 gem 'doorkeeper'
 
 gem "aws-sdk-s3", require: false

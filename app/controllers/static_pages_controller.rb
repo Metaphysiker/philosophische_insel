@@ -55,7 +55,7 @@ class StaticPagesController < ApplicationController
   end
 
   def swiss_vegan_awards_jury_query
-    render layout: "application_empty"
+    render layout: "application_jury"
   end
 
   def visits
