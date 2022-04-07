@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     resources :horses, only: %i[index]
   end
 
+  namespace :api do
+    resources :vegipass do
+      collection do
+        get 'am_i_logged_in'
+      end
+    end
+  end
+
   resources :horses do
     collection do
      get 'get_odt_of_horses'
