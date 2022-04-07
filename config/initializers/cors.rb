@@ -19,4 +19,10 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource '/oauth/token', headers: :any, methods: [:get, :post]
     resource '/oauth/revoke', headers: :any, methods: [:get, :post]
   end
+
+  allow do
+    origins '*'
+    resource '/api/vegipass/am_i_logged_in', headers: :any, methods: [:get]
+  end
+
 end
