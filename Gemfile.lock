@@ -127,8 +127,6 @@ GEM
     errbase (0.2.2)
     erubi (1.10.0)
     ffi (1.15.5)
-    font-awesome-rails (4.7.0.8)
-      railties (>= 3.2, < 8.0)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
     geocoder (1.7.5)
@@ -329,7 +327,6 @@ DEPENDENCIES
   devise-i18n
   doorkeeper
   faker!
-  font-awesome-rails
   friendly_id (~> 5.4.0)
   geocoder
   groupdate

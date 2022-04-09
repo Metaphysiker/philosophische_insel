@@ -85,7 +85,7 @@ class HorsesController < ApplicationController
       send_data report.generate,
                 type: 'application/vnd.oasis.opendocument.text',
                 disposition: 'attachment',
-                filename: 'hufbeschlagung.odt'
+                filename: "hufbeschlagung-#{I18n.l(DateTime.now).parameterize}.odt"
 
   end
 
@@ -114,7 +114,7 @@ class HorsesController < ApplicationController
         send_file Rails.root.join('odts', 'pdfs', "horses.pdf"),
                   type: 'application/pdf',
                   disposition: 'attachment',
-                  filename: 'hufbeschlagung.pdf'
+                  filename: "hufbeschlagung-#{I18n.l(DateTime.now).parameterize}.pdf"
 
     end
 
@@ -144,7 +144,7 @@ class HorsesController < ApplicationController
       send_file Rails.root.join('odts', 'words', "horses.docx"),
                 type: 'application/ vnd.openxmlformats-officedocument. wordprocessingml.document',
                 disposition: 'attachment',
-                filename: 'hufbeschlagung.docx'
+                filename: "hufbeschlagung-#{I18n.l(DateTime.now).parameterize}.docx"
 
     end
 
