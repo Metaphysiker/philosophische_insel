@@ -25,4 +25,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource '/api/vegipass/am_i_logged_in', headers: :any, methods: [:get]
   end
 
+  allow do
+    origins 'https://www.philosophie.ch'
+    resource '/philosophy_reviews/get_html_of_all_philosophy_reviews', headers: :any, methods: [:get]
+  end
+
 end

@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <thead>
+    <tr class="text-center">
+      <th scope="col">Date</th>
+      <th scope="col">Name of Newspaper</th>
+      <th scope="col">Title</th>
+      <th scope="col">Abstract</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @philosophy_reviews.order(:date).reverse_order.each do |review| %>
+    <tr>
+      <td class="text-center">
+        <%= review.date.strftime("%d.%m.%Y") %>
+      </td>
+      <td class="text-center"><%= review.name_of_paper %></td>
+      <td class="text-center"><%= link_to review.title, review.hyperlink %></td>
+      <td><%= review.abstract %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

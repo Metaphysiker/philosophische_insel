@@ -6,6 +6,15 @@ class PhilosophyReviewsController < ApplicationController
     @philosophy_reviews = PhilosophyReview.all
   end
 
+  def get_all_philosophy_reviews
+    render json: PhilosophyReview.all
+  end
+
+  def get_html_of_all_philosophy_reviews
+    @philosophy_reviews = PhilosophyReview.all
+    render "philosophy_reviews/table2", philosophy_reviews: @philosophy_reviews, layout: false
+  end
+
   # GET /philosophy_reviews/1 or /philosophy_reviews/1.json
   def show
   end

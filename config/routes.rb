@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   resources :philosophy_reviews do
     collection do
       get 'iframe'
+      get 'get_all_philosophy_reviews'
+      get 'get_html_of_all_philosophy_reviews'
       #get 'current_table'
     end
   end
