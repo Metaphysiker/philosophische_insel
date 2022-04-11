@@ -33,7 +33,7 @@
     </thead>
     <tbody>
 
-      <% VeganVisit.where(cookie: unique_cookie).last(30).order(:created_at).each do |single_visit| %>
+      <% VeganVisit.where(cookie: unique_cookie).order(:created_at).last(30).each do |single_visit| %>
         <tr>
           <td>
             <%= highlight(single_visit.url, [@query, @query2]) -%>
