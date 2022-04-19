@@ -1,13 +1,16 @@
 class HorsesController < ApplicationController
   before_action :set_horse, only: %i[ show edit update destroy shoeing_happened_today]
+  after_action :verify_authorized
 
   def shoeing_happened_today
+    authorize @horse
     @horse.update(last_shoeing_date: Date.today, next_shoeing_date: nil)
     redirect_to horses_path, notice: "Datum wurde aktualisiert!"
   end
 
   # GET /horses or /horses.json
   def index
+    authorize Horse
     @horses = Horse.all
     render layout: "application_empty"
 
@@ -15,24 +18,28 @@ class HorsesController < ApplicationController
 
   # GET /horses/1 or /horses/1.json
   def show
+    authorize @horse
     render layout: "application_empty"
   end
 
   # GET /horses/new
   def new
     @horse = Horse.new
+    authorize @horse
     @horse.shoeing_interval = 10
     render layout: "application_empty"
   end
 
   # GET /horses/1/edit
   def edit
+    authorize @horse
     render layout: "application_empty"
   end
 
   # POST /horses or /horses.json
   def create
     @horse = Horse.new(horse_params)
+    authorize @horse
 
     respond_to do |format|
       if @horse.save
@@ -47,6 +54,7 @@ class HorsesController < ApplicationController
 
   # PATCH/PUT /horses/1 or /horses/1.json
   def update
+    authorize @horse
     respond_to do |format|
       if @horse.update(horse_params)
         format.html { redirect_to horses_url, notice: "Pferd wurde aktualisiert." }
@@ -60,6 +68,7 @@ class HorsesController < ApplicationController
 
   # DELETE /horses/1 or /horses/1.json
   def destroy
+    authorize @horse
     @horse.destroy
     respond_to do |format|
       format.html { redirect_to horses_url, notice: "Pferd wurde entfernt." }
@@ -68,6 +77,7 @@ class HorsesController < ApplicationController
   end
 
   def get_odt_of_horses
+    authorize Horse
     report = ODFReport::Report.new("odts/horses.odt") do |r|
 
       @horses = Horse.all.order(:shoeing_deadline)
@@ -90,6 +100,7 @@ class HorsesController < ApplicationController
   end
 
     def get_pdf_of_horses
+      authorize Horse
       report = ODFReport::Report.new("odts/horses.odt") do |r|
 
         @horses = Horse.all.order(:shoeing_deadline)
@@ -120,6 +131,7 @@ class HorsesController < ApplicationController
 
 
     def get_word_of_horses
+      authorize Horse
       report = ODFReport::Report.new("odts/horses.odt") do |r|
 
         @horses = Horse.all.order(:shoeing_deadline)
