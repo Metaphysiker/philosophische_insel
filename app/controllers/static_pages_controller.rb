@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons compare_lists swiss_vegan_awards_jury_query]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons compare_lists swiss_vegan_awards_jury_query claudia_login]
 
   if Rails.env.development?
     require 'rmagick'
@@ -44,6 +44,10 @@ class StaticPagesController < ApplicationController
   end
 
   def essays
+  end
+
+  def claudia_login
+    render layout: "application_empty"
   end
 
   def compare_lists

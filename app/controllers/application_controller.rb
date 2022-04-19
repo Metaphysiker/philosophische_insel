@@ -17,4 +17,13 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path)
   end
 
+  def after_sign_in_path_for(resource)
+      #if resource.is_a?(User) && resource.can_publish?
+      if resource.claudia?
+        horses_path
+      else
+        root_path
+      end
+  end
+
 end

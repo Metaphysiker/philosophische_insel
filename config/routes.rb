@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   get 'static_pages/rmagick'
   get 'static_pages/donation_buttons'
   get 'static_pages/compare_lists'
+  get 'claudia_login', to: "static_pages#claudia_login"
 
   get 'static_pages/pferdefutter'
   get 'stinah/wizard', to: 'static_pages#pferdefutter', as: "pferdefutter"
@@ -83,7 +84,11 @@ Rails.application.routes.draw do
   resources :user_roles
   resources :roles
   resources :pages
-  devise_for :users
+  #devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
   resources :chat_messages do
     member do
       get 'json'
