@@ -1,5 +1,6 @@
 class Horse < ApplicationRecord
   before_save :set_shoeing_deadline
+  has_many :horse_comments
 
   validates :shoeing_interval, presence: true
   validates :last_shoeing_date, presence: true

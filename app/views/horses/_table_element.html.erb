@@ -27,15 +27,18 @@
       </td>
     </tr>
     <tr>
-      <td>
-        Kommentar:
-        </td>
-        <td>
-          <%= horse.comment %>
-        </td>
-      </tr>
+      <td colspan="2" class="text-center">
+        <%= link_to "#{horse.name} wurde heute beschlagen", shoeing_happened_today_horse_path(horse), method: :post, class: "btn btn-primary my-1" %>
+      </td>
+    </tr>
+    <tbody>
+  </table>
+  <p><strong>Kommentare zu <%= horse.name %></strong></p>
+  <%= render 'horse_comments/form_remote', horse_comment: HorseComment.new, horse: horse %>
+  <table class="table table-bordered">
+    <tbody class="<%= dom_id(horse) %>_horse_comments">
+      <% horse.horse_comments.order(:created_at).reverse_order.each do |horse_comment| %>
+        <%= render 'horse_comments/table_element', horse_comment: horse_comment %>
+      <% end %>
   </tbody>
 </table>
-<div class="text-center">
-  <%= link_to "#{horse.name} wurde heute beschlagen", shoeing_happened_today_horse_path(horse), method: :post, class: "btn btn-primary my-1" %>
-</div>

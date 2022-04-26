@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Horse Comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horse_comments.each do |horse_comment| %>
+      <tr>
+        <td><%= horse_comment.content %></td>
+        <td><%= link_to 'Show', horse_comment %></td>
+        <td><%= link_to 'Edit', edit_horse_comment_path(horse_comment) %></td>
+        <td><%= link_to 'Destroy', horse_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Horse Comment', new_horse_comment_path %>

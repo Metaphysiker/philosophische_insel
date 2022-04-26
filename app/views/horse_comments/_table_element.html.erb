@@ -1,0 +1,12 @@
+<tr class="<%= dom_id(horse_comment) %>">
+  <td>
+    <%= l(horse_comment.created_at, format: :short) %>
+    <br>
+    <%= link_to 'Bearbeiten', edit_horse_comment_path(horse_comment) %>
+     <br>
+     <%= link_to 'Entfernen', horse_comment, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true %>
+  </td>
+  <td>
+    <%= simple_format(horse_comment.content) %>
+  </td>
+</tr>

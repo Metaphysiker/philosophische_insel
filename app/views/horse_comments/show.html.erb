@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @horse_comment.content %>
+</p>
+
+<%= link_to 'Edit', edit_horse_comment_path(@horse_comment) %> |
+<%= link_to 'Back', horse_comments_path %>

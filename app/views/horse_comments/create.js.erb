@@ -1,0 +1,6 @@
+var field_id_name = ".<%= dom_id(@horse_comment.horse) %>_horse_comments";
+
+content = $("<%= escape_javascript( render "horse_comments/table_element", horse_comment: @horse_comment) %>")
+
+$(field_id_name).prepend(content);
+$("#horse_comment_content").val('');

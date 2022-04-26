@@ -1,4 +1,3 @@
-
 <%= simple_form_for(@horse) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -8,8 +7,7 @@
     <br>
     <%= f.input :last_shoeing_date, start_year: Date.today.year - 1, end_year: Date.today.year + 2 %>
     <br>
-    <%= f.input :comment %>
-    <br>
+    <%#= f.input :comment %>
     <%#= f.input :shoeing_interval %>
     <p>
       Beschlagungsfrist
