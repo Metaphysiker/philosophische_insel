@@ -88,6 +88,11 @@ class HorsesController < ApplicationController
           horse.add_field (:shoeing_deadline_in_weeks) { |horse| ((horse.shoeing_deadline - Date.today).to_f / 7).truncate(1) }
           horse.add_field (:last_shoeing_date) { |horse| horse.last_shoeing_date.strftime("%d.%m.%Y") }
           horse.add_field :comment, :comment
+
+          horse.add_section("HORSE_COMMENTS", :horse_comments_reverse_order) do |horse_comment|
+            horse_comment.add_field(:created_at) { |n| n.created_at.strftime("%d.%m.%Y")}
+            horse_comment.add_field(:content) { |n| n.content }
+          end
         end
 
     end
@@ -111,6 +116,11 @@ class HorsesController < ApplicationController
             horse.add_field (:shoeing_deadline_in_weeks) { |horse| ((horse.shoeing_deadline - Date.today).to_f / 7).truncate(1) }
             horse.add_field (:last_shoeing_date) { |horse| horse.last_shoeing_date.strftime("%d.%m.%Y") }
             horse.add_field :comment, :comment
+
+            horse.add_section("HORSE_COMMENTS", :horse_comments_reverse_order) do |horse_comment|
+              horse_comment.add_field(:created_at) { |n| n.created_at.strftime("%d.%m.%Y")}
+              horse_comment.add_field(:content) { |n| n.content }
+            end
           end
 
       end
@@ -142,6 +152,11 @@ class HorsesController < ApplicationController
             horse.add_field (:shoeing_deadline_in_weeks) { |horse| ((horse.shoeing_deadline - Date.today).to_f / 7).truncate(1) }
             horse.add_field (:last_shoeing_date) { |horse| horse.last_shoeing_date.strftime("%d.%m.%Y") }
             horse.add_field :comment, :comment
+
+            horse.add_section("HORSE_COMMENTS", :horse_comments_reverse_order) do |horse_comment|
+              horse_comment.add_field(:created_at) { |n| n.created_at.strftime("%d.%m.%Y")}
+              horse_comment.add_field(:content) { |n| n.content }
+            end
           end
 
       end

@@ -6,6 +6,10 @@ class Horse < ApplicationRecord
   validates :last_shoeing_date, presence: true
   validates :name, presence: true
 
+  def horse_comments_reverse_order
+    horse_comments.order(:created_at).reverse_order
+  end
+
   private
 
   def set_shoeing_deadline
