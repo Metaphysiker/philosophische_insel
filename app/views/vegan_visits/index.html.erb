@@ -21,7 +21,7 @@
 </p>
 
 <% @unique_cookies.each do |unique_cookie| %>
-  <% next if VeganVisit.where(cookie: unique_cookie).count > 30 %>
+  <%# next if VeganVisit.where(cookie: unique_cookie).count > 30 %>
   <h2><%= unique_cookie %></h2>
 
   <table class="table table-striped">
