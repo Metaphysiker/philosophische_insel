@@ -41,6 +41,7 @@ class StaticPagesController < ApplicationController
       image: ActionController::Base.helpers.image_url("raess-sandro-standing1.webp"),
       url: root_url
     }
+
   end
 
   def essays
