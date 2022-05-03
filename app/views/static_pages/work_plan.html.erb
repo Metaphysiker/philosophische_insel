@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>Arbeitsplan</h1>
+
+  <% workers = ["Peter", "Thomas", "Henniek"] %>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><%= l(Date.today) %></th>
+      <% workers.each do |worker| %>
+        <th scope="col"><%= worker %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% (1..31).each do |day| %>
+      <tr>
+        <th scope="row"><%= day %></th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+
+
+  <div class="row row-cols-<%= workers.count %>">
+
+
+    <% workers.each do |worker| %>
+      <div class="col border">
+        <%= worker %>
+      </div>
+    <% end %>
+
+    <% (1..31).each do |day| %>
+      <div class="col border">
+        <%= day %>
+      </div>
+    <% end %>
+
+
+
+  </div>

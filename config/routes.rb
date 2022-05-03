@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get 'chat', to: 'chat#chat', as: "chat"
   root 'static_pages#welcome'
   get 'static_pages/welcome'
+  get 'static_pages/work_plan'
   get 'static_pages/rmagick'
   get 'static_pages/donation_buttons'
   get 'static_pages/compare_lists'
