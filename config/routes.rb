@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :workers
   resources :horse_comments
   use_doorkeeper do
     skip_controllers :authorizations, :applications, :authorized_applications

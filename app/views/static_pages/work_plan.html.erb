@@ -1,48 +1,42 @@
 <div class="container">
-  <h1>Arbeitsplan</h1>
+  <h1>Arbeitsplan-Generator</h1>
 
-  <% workers = ["Peter", "Thomas", "Henniek"] %>
+  <% workers = Worker.all %>
+
+  <p>
+    Worker: <%= workers.count %>
+  </p>
+<% workers.each do |worker| %>
+
+  <h2><%= worker.first_name %></h2>
+  <p>
+    Stunden per Woche: <%= worker.hours_per_week %>
+  </p>
+
 
   <table class="table">
   <thead>
     <tr>
-      <th scope="col"><%= l(Date.today) %></th>
-      <% workers.each do |worker| %>
-        <th scope="col"><%= worker %></th>
-      <% end %>
+      <th scope="col"><%= I18n.t("date.month_names")[Date.today.month] %></th>
+      <td>von</td>
+      <td>bis</td>
+      <td>von</td>
+      <td>bis</td>
     </tr>
   </thead>
   <tbody>
 
     <% (1..31).each do |day| %>
       <tr>
-        <th scope="row"><%= day %></th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td><%= day %></td>
+        <td>6:00</td>
+        <td>10:00</td>
+        <td>12:00</td>
+        <td>18:00</td>
       </tr>
     <% end %>
 
   </tbody>
 </table>
 
-
-
-  <div class="row row-cols-<%= workers.count %>">
-
-
-    <% workers.each do |worker| %>
-      <div class="col border">
-        <%= worker %>
-      </div>
-    <% end %>
-
-    <% (1..31).each do |day| %>
-      <div class="col border">
-        <%= day %>
-      </div>
-    <% end %>
-
-
-
-  </div>
+<% end %>

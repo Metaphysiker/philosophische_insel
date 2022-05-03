@@ -56,3 +56,8 @@ Ahoy::Event.create!([
 ])
 
 doorkeeper = Doorkeeper::Application.create(name: "ionic", redirect_uri: "", scopes: "")
+
+
+Worker.create(first_name: "Thomas")
+Worker.create(first_name: "Peter")
+Worker.create(first_name: "Joachim")
