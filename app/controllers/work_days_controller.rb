@@ -1,6 +1,32 @@
 class WorkDaysController < ApplicationController
   before_action :set_work_day, only: %i[ show edit update destroy ]
 
+  def generate_work_plan
+    date_range = Date.today.beginning_of_month..Date.today.end_of_month
+
+    WorkDay.delete_all
+
+    date_range.each do |day|
+      work_day =  WorkDay.create(date: day)
+
+      work_day.workers << Worker.find(Worker.pluck(:id).sample)
+      work_day.workers << Worker.find(Worker.pluck(:id).sample)
+    end
+
+    redirect_to "http://localhost:3000/static_pages/work_plan"
+
+  end
+
+  def check_if_worker_is_on_weekend(worker, date)
+
+  end
+
+  def check_if_worker_has_hours(worker, date)
+    #date_range = date
+    #worker.work_days.where(date: )
+    #WorkDay.where()
+  end
+
   # GET /work_days or /work_days.json
   def index
     @work_days = WorkDay.all

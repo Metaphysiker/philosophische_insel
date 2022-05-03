@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Arbeitsplan-Generator</h1>
   <p>
-    <%= link_to 'Arbeitsplan generieren', get_odt_of_horses_horses_path, class: "btn btn-secondary" %>
+    <%= link_to 'Arbeitsplan generieren', generate_work_plan_work_days_path, method: :post, class: "btn btn-secondary" %>
   </p>
 
   <% workers = Worker.all %>
@@ -30,9 +30,11 @@
   </thead>
   <tbody>
 
-    <% (1..31).each do |day| %>
+    <% (Date.today.beginning_of_month..Date.today.end_of_month).each do |day| %>
+      <% work_day = WorkDay.where(date: day).first %>
       <tr>
         <td><%= day %></td>
+        <td><%= work_day.workers.map { |worker| worker.first_name }.join( ", ") %></td>
         <td>6:00</td>
         <td>10:00</td>
         <td>12:00</td>

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   resources :worker_workdays
-  resources :work_days
+  resources :work_days do
+    collection do
+      post 'generate_work_plan'
+    end
+  end
   resources :workers
   resources :horse_comments
   use_doorkeeper do
