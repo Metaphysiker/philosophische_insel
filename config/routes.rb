@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :worker_workdays
+  resources :work_days
   resources :workers
   resources :horse_comments
   use_doorkeeper do

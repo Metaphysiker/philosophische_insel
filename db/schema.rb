@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_03_185730) do
+ActiveRecord::Schema.define(version: 2022_05_03_195416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -276,6 +276,21 @@ ActiveRecord::Schema.define(version: 2022_05_03_185730) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "cookie", default: ""
+  end
+
+  create_table "work_days", force: :cascade do |t|
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "worker_workdays", force: :cascade do |t|
+    t.bigint "work_day_id"
+    t.bigint "worker_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["work_day_id"], name: "index_worker_workdays_on_work_day_id"
+    t.index ["worker_id"], name: "index_worker_workdays_on_worker_id"
   end
 
   create_table "workers", force: :cascade do |t|

@@ -1,12 +1,15 @@
 <div class="container">
   <h1>Arbeitsplan-Generator</h1>
+  <p>
+    <%= link_to 'Arbeitsplan generieren', get_odt_of_horses_horses_path, class: "btn btn-secondary" %>
+  </p>
 
   <% workers = Worker.all %>
 
   <p>
     Worker: <%= workers.count %>
   </p>
-  
+
 <% workers.each do |worker| %>
 
   <h2><%= worker.first_name %></h2>
