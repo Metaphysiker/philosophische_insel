@@ -34,7 +34,7 @@ class VeganVisitsController < ApplicationController
   def analytics
     authorize VeganVisit
 
-    antrag_mitgliedschaft_cookies = VeganVisit.where("url ~* ?", "https://vegan.ch/vielen-dank-fuer-deine-unterstuetzung/?").pluck(:cookie).uniq
+    antrag_mitgliedschaft_cookies = VeganVisit.where("url ~* ?", "https://vegan.ch/vielen-dank-fuer-deine-unterstuetzung/?").where(created_at: Date.parse("2022-03-01")..Date.today).pluck(:cookie).uniq
 
     url_visit_count_hash = {}
 
@@ -44,10 +44,12 @@ class VeganVisitsController < ApplicationController
 
       all_urls_of_this_cookie.each do |url|
 
-        if url_visit_count_hash.key?(url)
-          url_visit_count_hash[url] = url_visit_count_hash[url] + 1
+        url_chomped = url.chomp("/")
+
+        if url_visit_count_hash.key?(url_chomped)
+          url_visit_count_hash[url_chomped] = url_visit_count_hash[url_chomped] + 1
         else
-          url_visit_count_hash.store(url, 1)
+          url_visit_count_hash.store(url_chomped, 1)
         end
 
       end
