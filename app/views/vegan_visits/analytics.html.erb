@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Value</th>
+      <th scope="col">Url</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <% @url_visit_count_hash.each do |key, value| %>
+
+  <tr>
+
+    <td>
+      <%= value %>
+    </td>
+
+    <td>
+      <%= key %>
+    </td>
+
+
+  <tr>
+
+    <% end %>
+
+</tbody>
+</table>

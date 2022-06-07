@@ -32,6 +32,10 @@ class VeganVisitPolicy < ApplicationPolicy
     is_user_admin?(@user)
   end
 
+  def analytics?
+    is_user_admin?(@user)
+  end
+
 
   class Scope < Scope
     def resolve

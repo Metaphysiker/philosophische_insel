@@ -34,7 +34,11 @@ Rails.application.routes.draw do
       post 'shoeing_happened_today'
     end
   end
-  resources :vegan_visits
+  resources :vegan_visits do
+    collection do
+      get 'analytics'
+    end
+  end
   resources :media
   resources :media_releases
   get 'api/vegipass_offers'
