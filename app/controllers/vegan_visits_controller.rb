@@ -57,6 +57,31 @@ class VeganVisitsController < ApplicationController
     end
 
     @url_visit_count_hash = url_visit_count_hash.sort_by{|k,v| v}.reverse_each.to_h
+
+
+    mitgliedschaf_verlaengern_cookies = VeganVisit.where("url ~* ?", "https://vegan.ch/vielen-dank-fuer-deine-weitere-unterstuetzung/?").where(created_at: Date.parse("2022-03-01")..Date.today).pluck(:cookie).uniq
+
+    url_visit_count_hash2 = {}
+
+    mitgliedschaf_verlaengern_cookies.each do |cookie|
+
+      all_urls_of_this_cookie = VeganVisit.where(cookie: cookie).pluck(:url).uniq
+
+      all_urls_of_this_cookie.each do |url|
+
+        url_chomped = url.chomp("/")
+
+        if url_visit_count_hash2.key?(url_chomped)
+          url_visit_count_hash2[url_chomped] = url_visit_count_hash2[url_chomped] + 1
+        else
+          url_visit_count_hash2.store(url_chomped, 1)
+        end
+
+      end
+
+    end
+
+    @url_visit_count_hash2 = url_visit_count_hash2.sort_by{|k,v| v}.reverse_each.to_h
   end
 
   # GET /vegan_visits/1 or /vegan_visits/1.json

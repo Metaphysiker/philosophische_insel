@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<h2>Antrag Mitgliedschaft</h2>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -9,6 +10,39 @@
   <tbody>
 
   <% @url_visit_count_hash.each do |key, value| %>
+
+  <tr>
+
+    <td>
+      <%= value %>
+    </td>
+
+    <td>
+      <%= key %>
+    </td>
+
+
+  <tr>
+
+    <% end %>
+
+</tbody>
+</table>
+
+<hr>
+
+<h2>Mitgliedschaft verlängern</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Value</th>
+      <th scope="col">Url</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <% @url_visit_count_hash2.each do |key, value| %>
 
   <tr>
 
