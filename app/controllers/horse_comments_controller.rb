@@ -73,6 +73,6 @@ class HorseCommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def horse_comment_params
-      params.require(:horse_comment).permit(:content, :horse_id)
+      params.require(:horse_comment).permit(:content, :horse_id, :created_at)
     end
 end

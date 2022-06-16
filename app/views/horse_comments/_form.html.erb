@@ -7,6 +7,12 @@
     <%= f.input :content, label: false %>
   </div>
 
+  <hr>
+
+  <div class="form-inputs">
+    <%= f.input :created_at, label: "Datum", discard_hour: true %>
+  </div>
+
   <%= f.hidden_field :horse_id, value: horse.id %>
 
   <div class="form-actions">
