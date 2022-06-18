@@ -11,8 +11,3 @@ rails db:create
 rails db:migrate
 
 psql philosophische_insel_development < latest.sql
-
-ssh sandro@159.65.120.231 << EOF
-  cd philosophische_insel
-  pg_dump philosophische_insel_production > latest.sql
-EOF
