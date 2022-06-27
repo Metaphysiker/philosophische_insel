@@ -4,24 +4,35 @@
     <%= link_to 'Arbeitsplan generieren', generate_work_plan_work_days_path, method: :post, class: "btn btn-secondary" %>
   </p>
 
+  <p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Arbeiter hinzufügen
+    </a>
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <%= render 'workers/form', worker: Worker.new %>
+    </div>
+  </div>
+
   <% workers = Worker.all %>
+
+  <% workers.each do |worker| %>
+    <%= render "workers/card", worker: worker %>
+  <% end %>
 
   <p>
     Worker: <%= workers.count %>
-  </p>
-
-<% workers.each do |worker| %>
-
-  <h2><%= worker.first_name %></h2>
-  <p>
-    Stunden per Woche: <%= worker.hours_per_week %>
   </p>
 
 
   <table class="table">
   <thead>
     <tr>
-      <th scope="col"><%= I18n.t("date.month_names")[Date.today.month] %></th>
+      <th scope="col"><%= I18n.t("date.month_names")[Date.today.month] %> <%= Date.today.year %></th>
+      <td>
+        Arbeitende
+      </td>
       <td>von</td>
       <td>bis</td>
       <td>von</td>
@@ -33,8 +44,8 @@
     <% (Date.today.beginning_of_month..Date.today.end_of_month).each do |day| %>
       <% work_day = WorkDay.where(date: day).first %>
       <tr>
-        <td><%= day %></td>
-        <td><%= work_day.workers.map { |worker| worker.first_name }.join( ", ") %></td>
+        <td><%= I18n.t('date.day_names')[day.wday] %> <%= day.strftime("%d.%m.%Y") %></td>
+        <td><%= work_day.workers.map { |worker| worker.first_name }.join( ", ") unless work_day.blank? %></td>
         <td>6:00</td>
         <td>10:00</td>
         <td>12:00</td>
@@ -44,5 +55,3 @@
 
   </tbody>
 </table>
-
-<% end %>
