@@ -4,6 +4,14 @@ class StaticPagesPolicy < ApplicationPolicy
     is_user_admin?(@user)
   end
 
+  def serial_letter?
+    is_user_admin?(@user) || is_user_claudia?(@user)
+  end
+
+  def claudia_dashboard?
+    is_user_admin?(@user) || is_user_claudia?(@user)
+  end
+
   def iframer?
     true
   end

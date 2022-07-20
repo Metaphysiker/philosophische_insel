@@ -26,7 +26,16 @@ class StaticPagesController < ApplicationController
     }
   end
 
+  def claudia_dashboard
+    authorize :static_pages
+    render layout: "application_empty"
+  end
 
+  def serial_letter
+    authorize :static_pages
+    render layout: "application_empty"
+
+  end
 
   def about
 

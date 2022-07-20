@@ -68,7 +68,12 @@ Rails.application.routes.draw do
   get 'static_pages/rmagick'
   get 'static_pages/donation_buttons'
   get 'static_pages/compare_lists'
+
+  get 'serial_letter', to: "static_pages#serial_letter"
+
   get 'claudia_login', to: "static_pages#claudia_login"
+  get 'claudia_dashboard', to: "static_pages#claudia_dashboard"
+
 
   get 'static_pages/pferdefutter'
   get 'stinah/wizard', to: 'static_pages#pferdefutter', as: "pferdefutter"
