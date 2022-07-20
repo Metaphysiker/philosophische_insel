@@ -8,6 +8,10 @@ class StaticPagesPolicy < ApplicationPolicy
     is_user_admin?(@user) || is_user_claudia?(@user)
   end
 
+  def serial_letter_upload_csv?
+    is_user_admin?(@user) || is_user_claudia?(@user)
+  end
+
   def claudia_dashboard?
     is_user_admin?(@user) || is_user_claudia?(@user)
   end

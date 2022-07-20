@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
       #if resource.is_a?(User) && resource.can_publish?
       if resource.claudia?
-        horses_path
+        #horses_path
+        claudia_dashboard_path
       else
         root_path
       end

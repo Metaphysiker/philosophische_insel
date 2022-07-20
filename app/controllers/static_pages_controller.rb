@@ -1,5 +1,7 @@
+require 'csv'
+
 class StaticPagesController < ApplicationController
-  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons compare_lists swiss_vegan_awards_jury_query claudia_login work_plan]
+  after_action :verify_authorized, except: %i[welcome about essays stinah pferdefutter impressum iframer cockpit cockpit_start google_sheets donation_buttons compare_lists swiss_vegan_awards_jury_query claudia_login work_plan download_public_file]
 
   if Rails.env.development?
     require 'rmagick'
@@ -31,9 +33,56 @@ class StaticPagesController < ApplicationController
     render layout: "application_empty"
   end
 
+  def download_public_file
+    send_file("#{Rails.root}/public/#{params[:location]}")
+  end
+
   def serial_letter
     authorize :static_pages
     render layout: "application_empty"
+
+  end
+
+  def serial_letter_upload_csv
+
+    authorize :static_pages
+
+    file = params[:csv]
+    template = params[:template]
+
+    csv = CSV.new(File.read(file), :headers => true, :header_converters => :symbol, :converters => :all)
+    #csv = csv.encode("UTF-8")
+    csv = csv.to_a.map {|row| row.to_hash }
+    puts "INSPECT!"
+    puts csv.inspect
+
+    report = ODFReport::Report.new("odts/" + template + ".odt") do |r|
+
+        r.add_section("ROW", csv) do |row|
+          #row.add_field (:first_name) { |row| row[:first_name]}
+          row.add_field (:first_name) { |row| row[:first_name]}
+          row.add_field (:last_name) { |row| row[:last_name]}
+          row.add_field (:street) { |row| row[:street]}
+          row.add_field (:plz) { |row| row[:plz]}
+          row.add_field (:location) { |row| row[:location]}
+          row.add_field (:donation) { |row| sprintf('%.2f', row[:donation]) }
+
+        end
+
+    end
+
+    file = File.new(Rails.root.join('odts', 'saved', template + ".odt"), "w+", encoding: 'ascii-8bit')
+    file.write(report.generate)
+    file.rewind
+    file.close
+
+    Libreconv.convert(Rails.root.join('odts', 'saved', template + ".odt"), Rails.root.join('odts', 'pdfs', template + ".pdf"))
+
+      send_file Rails.root.join('odts', 'pdfs', template + ".pdf"),
+                type: 'application/pdf',
+                disposition: 'attachment',
+                filename: "#{template}-#{I18n.l(DateTime.now).parameterize}.pdf"
+
 
   end
 

@@ -2,27 +2,39 @@
   <h1>Serienbriefe erstellen</h1>
 
   <div class="card">
-  <div class="card-body">
+    <div class="card-body">
 
-    <%= form_with url: "/search", method: :get do |form| %>
-    <div class="mb-3">
-      <%= form.label :csv, "CSV hochladen" %>
-      <br />
-      <%= form.file_field :csv %>
-    </div>
-    <div class="mb-3">
-      <%= form.label :template, "Vorlage auswählen" %>
-      <br />
-      <%= form.select :template, [["Spendenbestätigung", "spendenbestaetigung"], ["Einladung", "einladung"]], {}, {class: "form-select"} %>
-    </div>
-    <div class="mb-3">
-      <%= form.submit "Serienbrief erstellen", class: "btn btn-primary" %>
-    </div>
+      <%= form_with url: serial_letter_upload_csv_path, method: :post do |form| %>
+      <div class="mb-3">
+        <%= form.label :csv, "CSV hochladen" %>
+        <br />
+        <%= form.file_field :csv %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :template, "Vorlage auswählen" %>
+        <br />
+        <%= form.select :template, [["Spendenbestätigung", "spendenbestaetigung"], ["Einladung", "einladung"]], {}, {class: "form-select"} %>
+      </div>
+      <div class="mb-3">
+        <%= form.submit "Serienbrief erstellen", class: "btn btn-primary" %>
+      </div>
 
-    <% end %>
+      <% end %>
 
+    </div>
   </div>
-</div>
+
+  <div class="card my-3">
+    <div class="card-body">
+      <%= link_to "Leeres CSV zum Ausfüllen herunterladen", download_public_file_path(location: "files/csv-fuer-serienbrief.csv"), class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <div class="card my-3">
+    <div class="card-body">
+      <%= link_to "Beispiel für CSV herunterladen", download_public_file_path(location: "files/test-fuer-serienbrief.csv"), class: "btn btn-primary" %>
+    </div>
+  </div>
 
 
 

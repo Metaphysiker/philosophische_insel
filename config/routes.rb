@@ -69,7 +69,11 @@ Rails.application.routes.draw do
   get 'static_pages/donation_buttons'
   get 'static_pages/compare_lists'
 
-  get 'serial_letter', to: "static_pages#serial_letter"
+  get 'static_pages/download_public_file', as: "download_public_file"
+
+  get 'serial_letter', to: "static_pages#serial_letter", as: "serial_latter"
+  post 'serial_letter', to: "static_pages#serial_letter_upload_csv", as: "serial_letter_upload_csv"
+
 
   get 'claudia_login', to: "static_pages#claudia_login"
   get 'claudia_dashboard', to: "static_pages#claudia_dashboard"
