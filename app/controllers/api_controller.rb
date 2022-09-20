@@ -76,4 +76,10 @@ class ApiController < ApplicationController
     head :no_content
   end
 
+  def search_game_embed
+    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
+
+    render layout: "application_empty"
+  end
+
 end
