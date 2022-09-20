@@ -79,7 +79,36 @@ class ApiController < ApplicationController
   def search_game_embed
     #response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
     response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
+    if params[:text].present?
+      @text = params[:text]
+    else
+      @text = "Klick mich!"
+    end
+
+    if params[:identifier].present?
+      @identifier = params[:identifier]
+    else
+      @identifier = "1"
+    end
+
+    if params[:cookie].present?
+      @cookie = params[:cookie]
+    else
+      @cookie = "No Cookie!"
+    end
+
     render layout: "application_empty"
+  end
+
+  def search_game_find
+
+    answer = {
+      answer1: "Du hast mich gefunden!",
+      answer2: "Finde noch die anderen x Weihnachtsmänner!"
+    }
+
+    render json: answer
   end
 
 end

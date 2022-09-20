@@ -1,12 +1,34 @@
-<div class="search_game_main_div">
-  <%= image_tag "philosophische-insel-logo-cut.webp", id: "search_game_button" %>
-  <p>
-    Klick mich!
-  </p>
-</div>
+<div class="container">
+  <div class="search_game_main_div text-center">
+    <%= image_tag "philosophische-insel-logo-cut.webp", id: "search_game_button" %>
+    <p id="search_game_text" class="text-center">
+      <%= @text %>
+    </p>
+    <p id="search_game_answer2" class="text-center">
 
+    </p>
+    <p class="text-center">
+      <%= @identifier %>
+    </p>
+    <p class="text-center">
+      <%= @cookie %>
+    </p>
+  </div>
+</div>
 <script>
   $( "#search_game_button" ).click(function() {
-    alert( "Handler for .click() called." );
+    console.log("You found me!");
+
+    $.ajax({
+      method: "POST",
+      url: "search_game_find",
+      data: { identifier: "<%= raw @identifier %>" }
+    })
+      .done(function( answer ) {
+        $("#search_game_text").text(answer["answer1"]);
+        $("#search_game_answer2").text(answer["answer2"]);
+
+      });
+
   });
 </script>
