@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :horses, only: %i[index]
+    get 'search_game_embed'
   end
 
   namespace :api do
