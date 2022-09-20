@@ -109,7 +109,13 @@ class ApiController < ApplicationController
 
   def search_game_find
 
-    SearchGame.create(cookie: params[:cookie], identifier: params[:identifier])
+    if SearchGame.where(cookie: params[:cookie]).where(identifier: params[:identifier]).empty?
+      SearchGame.create(cookie: params[:cookie], identifier: params[:identifier])
+    else
+      @text = "Du hast mich schon gefunden!"
+    end
+
+
 
     answer = {
       answer1: "Du hast mich gefunden!",

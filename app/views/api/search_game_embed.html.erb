@@ -4,6 +4,9 @@
     <p id="search_game_text" class="text-center">
       <%= @text %>
     </p>
+    <p id="search_game_answer1" class="text-center">
+
+    </p>
     <p id="search_game_answer2" class="text-center">
 
     </p>
@@ -25,7 +28,8 @@
       data: { identifier: "<%= raw @identifier %>", cookie: "<%= raw @cookie %>" }
     })
       .done(function( answer ) {
-        $("#search_game_text").text(answer["answer1"]);
+        $("#search_game_text").text("");
+        $("#search_game_answer1").text(answer["answer1"]);
         $("#search_game_answer2").text(answer["answer2"]);
 
       });
