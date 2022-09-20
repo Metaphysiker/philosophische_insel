@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cookie:</strong>
+  <%= @search_game.cookie %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @search_game.category %>
+</p>
+
+<p>
+  <strong>Identifier:</strong>
+  <%= @search_game.identifier %>
+</p>
+
+<%= link_to 'Edit', edit_search_game_path(@search_game) %> |
+<%= link_to 'Back', search_games_path %>

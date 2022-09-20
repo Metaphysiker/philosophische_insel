@@ -22,7 +22,7 @@
     $.ajax({
       method: "POST",
       url: "search_game_find",
-      data: { identifier: "<%= raw @identifier %>" }
+      data: { identifier: "<%= raw @identifier %>", cookie: "<%= raw @cookie %>" }
     })
       .done(function( answer ) {
         $("#search_game_text").text(answer["answer1"]);

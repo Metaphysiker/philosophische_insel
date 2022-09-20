@@ -80,6 +80,12 @@ class ApiController < ApplicationController
     #response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
     response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
 
+    if params[:cookie].present?
+      @cookie = params[:cookie]
+    else
+      @cookie = ""
+    end
+
     if params[:text].present?
       @text = params[:text]
     else
@@ -92,16 +98,18 @@ class ApiController < ApplicationController
       @identifier = "1"
     end
 
-    if params[:cookie].present?
-      @cookie = params[:cookie]
+    if SearchGame.where(cookie: @cookie).where(identifier: @identifier).empty?
+
     else
-      @cookie = "No Cookie!"
+      @text = "Du hast mich schon gefunden!"
     end
 
     render layout: "application_empty"
   end
 
   def search_game_find
+
+    SearchGame.create(cookie: params[:cookie], identifier: params[:identifier])
 
     answer = {
       answer1: "Du hast mich gefunden!",

@@ -1,0 +1,2 @@
+class SearchGame < ApplicationRecord
+end
