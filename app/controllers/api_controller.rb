@@ -115,11 +115,11 @@ class ApiController < ApplicationController
       @text = "Du hast mich schon gefunden!"
     end
 
-
+    answer2 = SearchGame.count_of_findables - SearchGame.where(cookie: params[:cookie]).where(identifier: params[:identifier]).distinct.count
 
     answer = {
       answer1: "Du hast mich gefunden!",
-      answer2: "Finde noch die anderen x Weihnachtsmänner!"
+      answer2: answer2
     }
 
     render json: answer
