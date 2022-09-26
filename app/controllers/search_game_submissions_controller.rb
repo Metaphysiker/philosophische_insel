@@ -21,6 +21,8 @@ class SearchGameSubmissionsController < ApplicationController
 
   # POST /search_game_submissions or /search_game_submissions.json
   def create
+    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || 'https://vegan.ch/' # the domain you're making the request from
+
     @search_game_submission = SearchGameSubmission.new(search_game_submission_params)
 
     respond_to do |format|
