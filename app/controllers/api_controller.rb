@@ -98,6 +98,8 @@ class ApiController < ApplicationController
       @identifier = "1"
     end
 
+    @count_of_findables = SearchGame.count_of_findables - SearchGame.where(cookie: @cookie).where(identifier: @identifier).distinct.count
+
     if SearchGame.where(cookie: @cookie).where(identifier: @identifier).empty?
 
     else
@@ -117,9 +119,9 @@ class ApiController < ApplicationController
       @text = "Du hast mich schon gefunden!"
     end
 
-    count_of_findables = SearchGame.count_of_findables - SearchGame.where(cookie: params[:cookie]).where(identifier: params[:identifier]).distinct.count
+    @count_of_findables = SearchGame.count_of_findables - SearchGame.where(cookie: params[:cookie]).where(identifier: params[:identifier]).distinct.count
 
-    if count_of_findables == 0
+    if @count_of_findables == 0
       answer3 = "Wow! Du hast alle gefunden!"
     end
 
