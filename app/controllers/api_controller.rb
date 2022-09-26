@@ -109,6 +109,8 @@ class ApiController < ApplicationController
 
   def search_game_find
 
+    answer3 = ""
+
     if SearchGame.where(cookie: params[:cookie]).where(identifier: params[:identifier]).empty?
       SearchGame.create(cookie: params[:cookie], identifier: params[:identifier])
     else
@@ -117,9 +119,14 @@ class ApiController < ApplicationController
 
     count_of_findables = SearchGame.count_of_findables - SearchGame.where(cookie: params[:cookie]).where(identifier: params[:identifier]).distinct.count
 
+    if count_of_findables == 0
+      answer3 = "Wow! Du hast alle gefunden!"
+    end
+
     answer = {
       answer1: "Du hast mich gefunden!",
-      answer2: "Finde noch die anderen #{count_of_findables} Weihnachtsmänner!"
+      answer2: "Finde noch die anderen #{count_of_findables} Weihnachtsmänner!",
+      answer3: answer3
     }
 
     render json: answer

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @search_game_submission.email %>
+</p>
+
+<p>
+  <strong>Subscribe to newsletter:</strong>
+  <%= @search_game_submission.subscribe_to_newsletter %>
+</p>
+
+<%= link_to 'Edit', edit_search_game_submission_path(@search_game_submission) %> |
+<%= link_to 'Back', search_game_submissions_path %>

@@ -1,0 +1,2 @@
+class SearchGameSubmission < ApplicationRecord
+end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :search_game_submissions
   resources :search_games
   resources :worker_workdays
   resources :work_days do

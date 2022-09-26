@@ -1,5 +1,7 @@
 <div class="container">
-  <div class="search_game_main_div text-center">
+  <div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+  <div class="search_game_main_div">
     <%= image_tag "santas_sleigh.png", class: "img-fluid", id: "search_game_button" %>
     <p id="search_game_text" class="text-center">
       <%= @text %>
@@ -10,6 +12,12 @@
     <p id="search_game_answer2" class="text-center">
 
     </p>
+    <p id="search_game_answer3" class="text-center">
+
+    </p>
+    <p>
+      <%= render "api/search_game_form" %>
+    </p>
     <p class="text-center">
       <%#= @identifier %>
     </p>
@@ -17,6 +25,8 @@
       <%#= @cookie %>
     </p>
   </div>
+</div>
+</div>
 </div>
 <script>
   $( "#search_game_button" ).click(function() {
@@ -31,6 +41,7 @@
         $("#search_game_text").text("");
         $("#search_game_answer1").text(answer["answer1"]);
         $("#search_game_answer2").text(answer["answer2"]);
+        $("#search_game_answer2").text(answer["answer3"]);
 
       });
 

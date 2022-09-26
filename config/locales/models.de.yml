@@ -1,6 +1,9 @@
 de:
   activerecord:
     models:
+      search_game_submission:
+        one: "Einreichung"
+        other: "Einreichungen"
       horse:
         one: "Pferd"
         other: "Pferde"
@@ -8,6 +11,10 @@ de:
         one: "Kommentar"
         other: "Kommentare"
     attributes:
+      search_game_submission:
+        first_name: "Vorname"
+        email: "e-Mail"
+        subscribe_to_newsletter: "Ich möchte den Newsletter der Veganen Gesellschaft Schweiz abonnieren."
       horse:
         name: "Name"
         next_shoeing_date: "Nächster Termin"

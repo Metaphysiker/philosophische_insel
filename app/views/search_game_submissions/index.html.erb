@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Search Game Submissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Subscribe to newsletter</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @search_game_submissions.each do |search_game_submission| %>
+      <tr>
+        <td><%= search_game_submission.email %></td>
+        <td><%= search_game_submission.subscribe_to_newsletter %></td>
+        <td><%= link_to 'Show', search_game_submission %></td>
+        <td><%= link_to 'Edit', edit_search_game_submission_path(search_game_submission) %></td>
+        <td><%= link_to 'Destroy', search_game_submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Search Game Submission', new_search_game_submission_path %>
