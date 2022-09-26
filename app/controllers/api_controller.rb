@@ -127,7 +127,7 @@ class ApiController < ApplicationController
 
     answer = {
       answer1: "Du hast mich gefunden!",
-      answer2: "Finde noch die anderen #{count_of_findables} Weihnachtsmänner!",
+      answer2: "Finde noch die anderen #{@count_of_findables} Weihnachtsmänner!",
       answer3: answer3
     }
 
