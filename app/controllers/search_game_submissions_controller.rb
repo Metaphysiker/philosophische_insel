@@ -1,6 +1,6 @@
 class SearchGameSubmissionsController < ApplicationController
   before_action :set_search_game_submission, only: %i[ show edit update destroy ]
-
+  skip_before_action :verify_authenticity_token, only: [:create]
   # GET /search_game_submissions or /search_game_submissions.json
   def index
     @search_game_submissions = SearchGameSubmission.all
