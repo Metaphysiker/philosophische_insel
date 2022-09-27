@@ -68,6 +68,6 @@ class SearchGameSubmissionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def search_game_submission_params
-      params.require(:search_game_submission).permit(:email, :subscribe_to_newsletter, :first_name)
+      params.require(:search_game_submission).permit(:email, :subscribe_to_newsletter, :first_name, :cookie)
     end
 end

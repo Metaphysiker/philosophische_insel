@@ -3,6 +3,34 @@
     <div class="col-12 col-md-6 offset-md-3">
   <div class="search_game_main_div">
     <%= image_tag "santas_sleigh.png", class: "img-fluid", id: "search_game_button" %>
+
+    <p class="text-center <%= "d-none" if @you_already_found_me %>" id="click_on_me">
+      Klick mich!
+    </p>
+
+
+    <p class="text-center d-none" id="you_found_me">
+      Du hast mich gefunden!
+    </p>
+
+
+      <p class="text-center <%= "d-none" unless @you_already_found_me && !@you_found_all %>" id="you_already_found_me">
+        Du hast mich bereits gefunden, such weiter!
+      </p>
+
+
+
+    <div class="text-center <%= "d-none" unless @you_found_all && !@already_submitted %>" id="you_found_all">
+      <p>
+          Wow, du hast alle gefunden! Gratulation!
+      </p>
+      <div class="border rounded p-4" id="search_game_submission_div_for_form">
+        <%= render 'search_game_submissions/form', search_game_submission: SearchGameSubmission.new(cookie: @cookie) %>
+      </div>
+    </div>
+
+    <hr>
+
     <p id="search_game_text" class="text-center">
       <%= @text %>
     </p>
@@ -37,14 +65,20 @@
 
     $.ajax({
       method: "POST",
-      url: "search_game_find",
+      url: "/api/search_game_find",
       data: { identifier: "<%= raw @identifier %>", cookie: "<%= raw @cookie %>" }
     })
       .done(function( answer ) {
-        $("#search_game_text").text("");
-        $("#search_game_answer1").text(answer["answer1"]);
-        $("#search_game_answer2").text(answer["answer2"]);
-        $("#search_game_answer2").text(answer["answer3"]);
+        $("#click_on_me").addClass('d-none');
+        $("#you_found_me").removeClass('d-none');
+
+
+
+        console.log(answer);
+        //$("#search_game_text").text("");
+        //$("#search_game_answer1").text(answer["answer1"]);
+        //$("#search_game_answer2").text(answer["answer2"]);
+        //$("#search_game_answer2").text(answer["answer3"]);
 
       });
 
