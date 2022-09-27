@@ -4,10 +4,12 @@ ssh sandro@159.65.120.231 << EOF
   pg_dump philosophische_insel_production > latest.sql
 EOF
 
-scp sandro@159.65.120.231:/home/sandro/philosophische_insel/latest.sql latest.sql
+scp sandro@159.65.120.231:/home/sandro/philosophische_insel/latest.sql "$(pwd)"/latest.sql
 
 rails db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 rails db:create
 rails db:migrate
 
 psql philosophische_insel_development < latest.sql
+mkdir -p ~/backups/philosophische_insel 
+cp latest.sql ~/backups/philosophische_insel/"$(date +"%y-%m-%d")".sql
