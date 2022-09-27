@@ -13,6 +13,10 @@
       Du hast mich gefunden!
     </p>
 
+    <p class="text-center d-none" id="how_many_left_to_find">
+
+    </p>
+
 
       <p class="text-center <%= "d-none" unless @you_already_found_me && !@you_found_all %>" id="you_already_found_me">
         Du hast mich bereits gefunden, such weiter!
@@ -52,16 +56,18 @@
       data: { identifier: "<%= raw @identifier %>", cookie: "<%= raw @cookie %>" }
     })
       .done(function( answer ) {
-        $("#click_on_me").addClass('d-none');
-        $("#you_found_me").removeClass('d-none');
 
-
+        if(answer.how_many_left_to_find > 0){
+          $("#click_on_me").addClass('d-none');
+          $("#you_found_me").removeClass('d-none');
+          $("#how_many_left_to_find").text(answer.how_many_left_to_find_text).removeClass('d-none');
+        } else if (answer.how_many_left_to_find <= 0) {
+          $("#click_on_me").addClass('d-none');
+          $("#you_found_all").removeClass('d-none');
+        }
 
         console.log(answer);
-        //$("#search_game_text").text("");
-        //$("#search_game_answer1").text(answer["answer1"]);
-        //$("#search_game_answer2").text(answer["answer2"]);
-        //$("#search_game_answer2").text(answer["answer3"]);
+
 
       });
 
