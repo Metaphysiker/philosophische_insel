@@ -1,6 +1,6 @@
 class SearchGame < ApplicationRecord
   def self.count_of_findables
-    1
+    2
   end
 
   def you_already_found_me
