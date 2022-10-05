@@ -1,7 +1,26 @@
 
 class ApiController < ApplicationController
-  protect_from_forgery except: [:vegan_cockpit_js, :d3_charts_js, :vegipass_offers]
+  protect_from_forgery except: [:vegan_cockpit_js, :d3_charts_js, :vegipass_offers, :random_dates_from_this_month]
   require 'rest-client'
+
+  def random_dates_from_this_month
+    free_slots = []
+
+    start_date = Date.today.beginning_of_month
+    end_date = Date.today.end_of_month
+
+      (start_date..end_date).each do |day|
+        rand(7..10)
+        free_slots.push(
+          {
+            start_time: DateTime.parse(day.to_s + "T" + "0#{rand(7..9)}:00"),
+            end_time: DateTime.parse(day.to_s + "T" + "#{rand(17..19)}:00")
+          }
+        )
+      end
+
+    render json: free_slots
+  end
 
   def google_sheets
 

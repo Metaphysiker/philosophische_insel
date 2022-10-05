@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
 
   resources :search_game_submissions
@@ -49,6 +50,7 @@ Rails.application.routes.draw do
   get 'api/google_sheets'
   get 'api/vegan_cockpit_js'
   get 'api/d3_charts_js'
+  get 'api/random_dates_from_this_month'
   post 'api/vegan_visit', to: 'api#vegan_visit', as: "api_vegan_visit"
   resources :philosophy_reviews do
     collection do
