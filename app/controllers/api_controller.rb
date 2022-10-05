@@ -4,6 +4,7 @@ class ApiController < ApplicationController
   require 'rest-client'
 
   def random_dates_from_this_month
+    
     free_slots = []
 
     start_date = Date.today.beginning_of_month

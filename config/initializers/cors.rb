@@ -11,6 +11,11 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 
   allow do
     origins '*'
+    resource '/api/random_dates_from_this_month', headers: :any, methods: [:get]
+  end
+
+  allow do
+    origins '*'
     resource '/api/horses', headers: :any, methods: [:get]
   end
 
