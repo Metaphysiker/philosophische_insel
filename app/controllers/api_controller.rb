@@ -4,6 +4,8 @@ class ApiController < ApplicationController
   require 'rest-client'
 
   def random_dates_from_this_month
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    
     free_slots = []
 
     start_date = Date.today.beginning_of_month
