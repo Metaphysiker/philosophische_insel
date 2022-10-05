@@ -4,7 +4,7 @@ class ApiController < ApplicationController
   require 'rest-client'
 
   def random_dates_from_this_month
-    
+
     free_slots = []
 
     start_date = Date.today.beginning_of_month
@@ -14,6 +14,7 @@ class ApiController < ApplicationController
         rand(7..10)
         free_slots.push(
           {
+            booking_status: ["fully_booked", "partially_booked", "free"].sample,
             start_time: DateTime.parse(day.to_s + "T" + "0#{rand(7..9)}:00"),
             end_time: DateTime.parse(day.to_s + "T" + "#{rand(17..19)}:00")
           }
