@@ -7,11 +7,11 @@ class ApiController < ApplicationController
 
     free_slots = []
 
-    start_date = Date.today.beginning_of_month
-    end_date = Date.today.end_of_month
+    start_date = Date.today.beginning_of_month.beginning_of_week
+    end_date = Date.today.end_of_month.end_of_week
 
       (start_date..end_date).each do |day|
-        rand(7..10)
+      
         free_slots.push(
           {
             booking_status: ["fully_booked", "partially_booked", "free"].sample,
