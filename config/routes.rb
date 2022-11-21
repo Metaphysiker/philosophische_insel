@@ -98,7 +98,8 @@ Rails.application.routes.draw do
   get 'swiss_vegan_awards_jury_query', to: 'static_pages#swiss_vegan_awards_jury_query', as: "swiss_vegan_awards_jury_query"
 
 
-  get 'sandro-raess', to: 'static_pages#about', as: "about"
+  #get 'sandro-raess', to: 'static_pages#about', as: "about"
+  get 'sandro-raess', to: redirect("https://sandro-raess.ch/")
   get 'stinah/:id', to: 'donation_projects#show', as: "stinah"
   get 'visits', to: 'static_pages#visits', as: "visits"
   get 'sandro-raess/essays', to: 'static_pages#essays', as: "sandro_raess_essays"
