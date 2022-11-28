@@ -1,6 +1,7 @@
 
 Rails.application.routes.draw do
 
+  resources :veganuary_items
   resources :search_game_submissions
   resources :search_games
   resources :worker_workdays

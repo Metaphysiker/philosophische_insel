@@ -1,0 +1,52 @@
+<div class="container">
+<div id="<%= dom_id veganuary_item %>">
+
+  <% if veganuary_item.company_logo.representable? %>
+    <%= image_tag veganuary_item.company_logo, class: "img-fluid "%>
+  <% end %>
+
+  <h1> <%= veganuary_item.company_name %></h1>
+  <p class="small">
+    <%= veganuary_item.category %>
+  </p>
+
+  <p>
+    <%= veganuary_item.company_description %>
+  </p>
+
+  <p>
+    <strong>Url:</strong>
+    <%= veganuary_item.url %>
+  </p>
+
+  <p>
+    <strong>Unser Veganuary-Angebot:</strong><br />
+    <%= veganuary_item.offer %>
+  </p>
+
+  <% veganuary_item.offer_images.each do |image| %>
+    <%= image_tag image, class: "img-fluid "%>
+  <% end %>
+
+  <% veganuary_item.addresses.split("\n").each do |line| %>
+    <% unless line.blank? %>
+    <p>
+      <%= line %>
+    </p>
+    <iframe
+    width="600"
+    height="450"
+    style="border:0"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyADpUPkgW9zvI1NstN5U1hfBICUKg9dne0
+      &q=<%= CGI.escape line %>">
+  </iframe>
+    <% end %>
+  <% end %>
+
+
+
+</div>
+</div>

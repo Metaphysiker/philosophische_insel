@@ -1,0 +1,25 @@
+
+<%= simple_form_for(@veganuary_item) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%#= f.input :category %>
+    <%= f.input :category, collection: VeganuaryItem.category_options.map {|option| [option, option]} %>
+
+
+    <%= f.input :company_name %>
+    <%= f.file_field :company_logo %>
+
+    <%= f.input :company_description %>
+    <%= f.input :url %>
+    <%= f.input :offer %>
+    <%= f.file_field :offer_images, multiple: true %>
+
+    <%= f.input :addresses %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
