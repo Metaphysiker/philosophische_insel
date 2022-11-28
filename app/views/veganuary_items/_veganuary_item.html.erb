@@ -1,7 +1,7 @@
 <div class="container">
 <div id="<%= dom_id veganuary_item %>">
 
-  <% if veganuary_item.company_logo.representable? %>
+  <% if veganuary_item.company_logo.attached? %>
     <%= image_tag veganuary_item.company_logo, class: "img-fluid "%>
   <% end %>
 
@@ -15,13 +15,12 @@
   </p>
 
   <p>
-    <strong>Url:</strong>
-    <%= veganuary_item.url %>
+    <strong>Unser Veganuary-Angebot:</strong><br />
+    <%= veganuary_item.offer %>
   </p>
 
   <p>
-    <strong>Unser Veganuary-Angebot:</strong><br />
-    <%= veganuary_item.offer %>
+    <%= link_to veganuary_item.url, veganuary_item.url %>
   </p>
 
   <% veganuary_item.offer_images.each do |image| %>
