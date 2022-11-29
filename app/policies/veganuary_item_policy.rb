@@ -12,6 +12,12 @@ class VeganuaryItemPolicy < ApplicationPolicy
   def new?
     #is_user_admin?(@user)
     true
+
+  end
+
+  def new_veganuary_item?
+    #is_user_admin?(@user)
+    true
   end
 
   def edit?

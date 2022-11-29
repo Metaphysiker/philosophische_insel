@@ -1,7 +1,11 @@
 
 Rails.application.routes.draw do
 
-  resources :veganuary_items
+  resources :veganuary_items do
+    collection do
+      get 'new_veganuary_item'
+    end
+  end
   resources :search_game_submissions
   resources :search_games
   resources :worker_workdays

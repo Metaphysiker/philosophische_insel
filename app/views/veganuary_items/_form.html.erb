@@ -1,25 +1,77 @@
-
+<%= tinymce_assets %>
+<%= tinymce %>
 <%= simple_form_for(@veganuary_item) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
     <%#= f.input :category %>
+    <div class="mb-4">
     <%= f.input :category, collection: VeganuaryItem.category_options.map {|option| [t(option), option]} %>
+    </div>
 
-
+    <div class="mb-4">
     <%= f.input :company_name %>
-    <%= f.file_field :company_logo %>
+    </div>
 
-    <%= f.input :company_description %>
-    <%= f.input :url %>
-    <%= f.input :offer %>
-    <%= f.file_field :offer_images, multiple: true %>
+    <div class="mb-4">
+      <p>
+        Logo des Unternehmens<br>
+        <%= f.file_field :company_logo %>
+      </p>
+    </div>
 
-    <%= f.input :addresses %>
+    <div class="mb-4">
+      <%= f.text_area :company_description, :class => "tinymce", :rows => 5 %>
+
+    </div>
+
+    <div class="mb-4">
+      <%= f.input :url %>
+
+    </div>
+
+    <div class="mb-4">
+      <%= f.text_area :offer, :class => "tinymce", :rows => 5 %>
+    </div>
+    <hr>
+    <p>
+      <strong>Falls vorhanden: </strong> 1-3 Bilder vom Angebot hochladen
+    </p>
+    <div class="mb-4">
+      <p>
+        Bild vom Angebot (1)<br>
+        <%= f.file_field :offer_images1 %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p>
+        Bild vom Angebot (2)<br>
+        <%= f.file_field :offer_images2 %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p>
+        Bild vom Angebot (3)<br>
+        <%= f.file_field :offer_images3 %>
+      </p>
+    </div>
+    <hr>
+
+    <div class="mb-4">
+      <%= f.input :addresses %>
+
+    </div>
+
+
   </div>
 
   <div class="form-actions">
     <%= f.button :submit, "Vorschau aktualisieren", class: "btn btn-primary my-4" %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, "Speichern und verlassen", class: "btn btn-primary my-4" %>
   </div>
 <% end %>

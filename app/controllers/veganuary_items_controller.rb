@@ -17,16 +17,40 @@ class VeganuaryItemsController < ApplicationController
   # GET /veganuary_items/new
   def new
     @veganuary_item = VeganuaryItem.new(
-      company_name: "Name des Unternehmens",
+      company_name: "Lorem Ipsum",
       category: "restaurant",
-      company_description: "Kurze Beschreibung des Unternehmens",
+      company_description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum...",
       url: "https://www.unternehmen-webseite.ch",
-      offer: "Im Veganuary bieten wir folgendes Angebot an...",
-      addresses: "Diessenhofen, 8253, Fohrenbühlstr. 4"
+      offer: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum...",
+      addresses: "Marktküche, Feldstrasse 98, 8004 Zürich"
     )
     authorize @veganuary_item
     render layout: "application_empty"
+  end
 
+  def new_veganuary_item
+
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
+
+    random_id = rand(10000000000...100000000000)
+
+    while VeganuaryItem.where(id: random_id).present?
+      random_id = rand(10000000000...100000000000)
+    end
+
+    @veganuary_item = VeganuaryItem.create(
+      id: random_id,
+      company_name: "Lorem Ipsum",
+      category: "restaurant",
+      company_description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum...",
+      url: "https://www.unternehmen-webseite.ch",
+      offer: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum...",
+      addresses: "Marktküche, Feldstrasse 98, 8004 Zürich"
+    )
+    authorize @veganuary_item
+
+    redirect_to veganuary_item_path(@veganuary_item)
   end
 
   # GET /veganuary_items/1/edit
@@ -86,6 +110,6 @@ class VeganuaryItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def veganuary_item_params
-      params.require(:veganuary_item).permit(:company_name, :company_description, :url, :offer, :addresses, :company_logo, :category, :offer_images => [])
+      params.require(:veganuary_item).permit(:company_name, :company_description, :url, :offer, :addresses, :company_logo, :category, :offer_images1, :offer_images2, :offer_images3)
     end
 end
