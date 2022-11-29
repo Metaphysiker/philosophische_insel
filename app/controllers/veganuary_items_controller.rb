@@ -9,6 +9,8 @@ class VeganuaryItemsController < ApplicationController
 
   # GET /veganuary_items/1 or /veganuary_items/1.json
   def show
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
     authorize @veganuary_item
     render layout: "application_empty"
 
