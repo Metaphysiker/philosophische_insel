@@ -1,5 +1,12 @@
 <div class="container my-4">
 <div id="<%= dom_id veganuary_item %>">
+  <h1>Neuer Eintrag</h1>
+  <%= render 'form', veganuary_item: veganuary_item %>
+
+  <hr />
+
+  <h2>Vorschau</h2>
+  <hr />
   <div class="row">
 
     <div class="col-12 col-md-6 bg-light">
@@ -15,7 +22,7 @@
       </div>
 
       <p class="small text-muted">
-        <%= veganuary_item.category %>
+        <%= t(veganuary_item.category) %>
       </p>
 
       <p>
@@ -65,4 +72,5 @@
 
 
 </div>
+
 </div>

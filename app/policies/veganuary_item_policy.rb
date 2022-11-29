@@ -15,7 +15,8 @@ class VeganuaryItemPolicy < ApplicationPolicy
   end
 
   def edit?
-    is_user_admin?(@user)
+    #is_user_admin?(@user)
+    true
   end
 
   def create?
@@ -24,7 +25,8 @@ class VeganuaryItemPolicy < ApplicationPolicy
   end
 
   def update?
-    is_user_admin?(@user)
+    #is_user_admin?(@user)
+    true
   end
 
   def destroy?

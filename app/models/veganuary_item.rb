@@ -3,7 +3,7 @@ class VeganuaryItem < ApplicationRecord
   has_many_attached :offer_images
 
   def self.category_options
-    ["cafe", "foodtruck", "service", "online_shop", "restaurant", "take_away", "shop"]
+    ["cafe", "foodtruck", "service", "online_shop", "restaurant", "take_away", "shop", "chain_of_stores", "else"]
   end
 
 end

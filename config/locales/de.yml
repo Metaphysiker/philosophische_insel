@@ -1,5 +1,14 @@
 de:
   hello: "Hello world"
+  restaurant: "Restaurant"
+  cafe: "Café"
+  foodtruck: "Food-Truck"
+  service: "Service"
+  online_shop: "Online-Shop"
+  take_away: "Take-Away"
+  shop: "Laden"
+  chain_of_stores: "Ladenkette"
+  else: "Sonstiges"
   date:
     day_names: [Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag]
   time:

@@ -1,6 +1,9 @@
 de:
   activerecord:
     models:
+      veganuary_item:
+        one: "Eintrag"
+        other: "Einträge"
       search_game_submission:
         one: "Einreichung"
         other: "Einreichungen"
@@ -11,6 +14,13 @@ de:
         one: "Kommentar"
         other: "Kommentare"
     attributes:
+      veganuary_item:
+        category: "Kategorie (falls keine Kategorie passt, \"Sonstiges\" auswählen)"
+        company_name: "Name des Unternehmens"
+        company_description: "Kurze Beschreibung des Unternehmens"
+        url: "Webseite"
+        offer: "Beschreibung des Angebots"
+        addresses: "Standorte (pro Linie eine Adresse)"
       search_game_submission:
         first_name: "Vorname"
         email: "e-Mail"

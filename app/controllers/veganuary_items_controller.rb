@@ -16,8 +16,16 @@ class VeganuaryItemsController < ApplicationController
 
   # GET /veganuary_items/new
   def new
-    @veganuary_item = VeganuaryItem.new
+    @veganuary_item = VeganuaryItem.new(
+      company_name: "Name des Unternehmens",
+      category: "restaurant",
+      company_description: "Kurze Beschreibung des Unternehmens",
+      url: "https://www.unternehmen-webseite.ch",
+      offer: "Im Veganuary bieten wir folgendes Angebot an...",
+      addresses: "Diessenhofen, 8253, Fohrenbühlstr. 4"
+    )
     authorize @veganuary_item
+    render layout: "application_empty"
 
   end
 
