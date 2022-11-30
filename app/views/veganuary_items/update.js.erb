@@ -1,0 +1,22 @@
+var element_id = "#<%= dom_id @veganuary_item %>";
+$( element_id ).each(function( index ) {
+  //console.log( index + ": " + $( this ).text() );
+
+  $( this ).fadeOut( "slow", function() {
+
+      content = $("<%= escape_javascript(render "veganuary_items/veganuary_item", veganuary_item: @veganuary_item) %>")
+      $( this ).replaceWith(function(){
+        return $(content).hide().fadeIn("slow", function(){
+        //  $("#vorschau").scrollIntoView();
+        var vorschau = document.getElementById('vorschau');
+        vorschau.scrollIntoView();
+
+        });
+
+      });
+
+      //$( "#vorschau" ).scrollTop( 300 );
+
+
+  });
+});

@@ -68,7 +68,7 @@ class VeganuaryItemsController < ApplicationController
 
     respond_to do |format|
       if @veganuary_item.save
-        format.html { redirect_to veganuary_item_url(@veganuary_item), notice: "Veganuary item was successfully created." }
+        format.html { redirect_to veganuary_item_url(@veganuary_item), notice: "Eintrag wurde erstellt" }
         format.json { render :show, status: :created, location: @veganuary_item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -83,8 +83,9 @@ class VeganuaryItemsController < ApplicationController
 
     respond_to do |format|
       if @veganuary_item.update(veganuary_item_params)
-        format.html { redirect_to veganuary_item_url(@veganuary_item), notice: "Veganuary item was successfully updated." }
+        format.html { redirect_to veganuary_item_url(@veganuary_item), notice: "Eintrag wurde aktualisiert." }
         format.json { render :show, status: :ok, location: @veganuary_item }
+        format.js 
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @veganuary_item.errors, status: :unprocessable_entity }
