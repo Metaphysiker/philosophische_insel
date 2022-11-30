@@ -7,5 +7,12 @@
     <p class="card-text">
       <%= raw veganuary_item.offer %>
     </p>
+    <p>
+      <%= veganuary_item.cantons %>
+    </p>
+
+    <% if user_signed_in? %>
+      <%= link_to "edit", edit_veganuary_item_path(veganuary_item) %>
+    <% end %>
   </div>
 </div>
