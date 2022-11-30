@@ -79,13 +79,15 @@ class VeganuaryItemsController < ApplicationController
 
   # PATCH/PUT /veganuary_items/1 or /veganuary_items/1.json
   def update
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
     authorize @veganuary_item
 
     respond_to do |format|
       if @veganuary_item.update(veganuary_item_params)
         format.html { redirect_to veganuary_item_url(@veganuary_item), notice: "Eintrag wurde aktualisiert." }
         format.json { render :show, status: :ok, location: @veganuary_item }
-        format.js 
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @veganuary_item.errors, status: :unprocessable_entity }
