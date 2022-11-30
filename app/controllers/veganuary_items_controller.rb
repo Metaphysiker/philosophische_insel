@@ -5,8 +5,12 @@ class VeganuaryItemsController < ApplicationController
 
   # GET /veganuary_items or /veganuary_items.json
   def index
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
     authorize(VeganuaryItem)
     @veganuary_items = VeganuaryItem.all
+    render layout: "application_empty"
+
   end
 
   # GET /veganuary_items/1 or /veganuary_items/1.json
@@ -59,12 +63,16 @@ class VeganuaryItemsController < ApplicationController
 
   # GET /veganuary_items/1/edit
   def edit
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
     authorize @veganuary_item
 
   end
 
   # POST /veganuary_items or /veganuary_items.json
   def create
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
     @veganuary_item = VeganuaryItem.new(veganuary_item_params)
     authorize @veganuary_item
 
@@ -106,6 +114,27 @@ class VeganuaryItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to veganuary_items_url, notice: "Veganuary item was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def search_veganuary_items
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
+    authorize VeganuaryItem
+
+    @veganuary_items = VeganuaryItem.all
+
+    if params[:search_input][:category].present?
+      @veganuary_items = @veganuary_items.where(category: params[:search_input][:category])
+    end
+
+    if params[:search_input][:category].present?
+      @veganuary_items = @veganuary_items.where(category: params[:search_input][:category])
+    end
+
+
+    respond_to do |format|
+      format.js
     end
   end
 

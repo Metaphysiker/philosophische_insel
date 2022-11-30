@@ -1,0 +1,22 @@
+<div class="my-4">
+
+<%= simple_form_for :search_input, url: search_veganuary_items_veganuary_items_path, method: :get, remote: true do |f| %>
+
+<div class="row">
+  <div class="col-4">
+
+    <%= f.input :category, prompt: 'Kategorie: Alle', collection: VeganuaryItem.category_options.map {|option| [t(option), option]}, label: false %>
+
+  </div>
+  <div class="col-4">
+    <%= f.input :kanton, prompt: "Ort: Alle", collection: VeganuaryItem.category_options.map {|option| [t(option), option]}, label: false %>
+  </div>
+  <div class="col-4">
+    <%= f.button :submit, "Anwenden", class: "btn btn-outline-secondary" %>
+
+  </div>
+
+</div>
+
+<% end %>
+</div>

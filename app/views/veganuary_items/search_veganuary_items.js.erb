@@ -1,0 +1,20 @@
+var element_id = ".veganuary_items";
+$( element_id ).each(function( index ) {
+  //console.log( index + ": " + $( this ).text() );
+
+  $( this ).fadeOut( "fast", function() {
+
+      content = $("<%= escape_javascript(render "veganuary_items/veganuary_items", veganuary_items: @veganuary_items) %>")
+      $( this ).replaceWith(function(){
+        return $(content).hide().fadeIn("fast", function(){
+        //  $("#vorschau").scrollIntoView();
+
+        });
+
+      });
+
+      //$( "#vorschau" ).scrollTop( 300 );
+
+
+  });
+});

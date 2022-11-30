@@ -1,0 +1,11 @@
+<div class="card">
+  <% if veganuary_item.company_logo.attached? %>
+    <%= image_tag veganuary_item.company_logo, class: "card-img-top" %>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= veganuary_item.company_name %></h5>
+    <p class="card-text">
+      <%= raw veganuary_item.offer %>
+    </p>
+  </div>
+</div>

@@ -39,6 +39,10 @@ class VeganuaryItemPolicy < ApplicationPolicy
     is_user_admin?(@user)
   end
 
+  def search_veganuary_items?
+    true
+  end
+
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve
