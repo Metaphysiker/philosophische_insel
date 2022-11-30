@@ -1,8 +1,8 @@
 <div class="card h-100">
   <% if veganuary_item.offer_images1.attached? %>
-      <%= image_tag veganuary_item.offer_images1, class: "card-img-top" %>
+      <%= image_tag veganuary_item.offer_images1, class: "card-img-top", style: "height: 200px;" %>
     <% else %>
-      <%= image_tag "landscape-placeholder.jpg", class: "card-img-top" %>
+      <%= image_tag "landscape-placeholder.jpg", class: "card-img-top", style: "height: 200px;" %>
   <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= veganuary_item.company_name %></h5>
@@ -29,7 +29,7 @@
   <div class="card-footer text-center">
     <% if veganuary_item.company_logo.attached? %>
       <%= link_to veganuary_item.url do %>
-        <%= image_tag veganuary_item.company_logo, class: "img-fluid "%>
+        <%= image_tag veganuary_item.company_logo, class: "img-fluid", style: "height: 200px;" %>
       <% end %>
     <% end %>
   </div>
