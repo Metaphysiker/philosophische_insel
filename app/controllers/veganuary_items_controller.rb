@@ -126,7 +126,7 @@ class VeganuaryItemsController < ApplicationController
 
     authorize VeganuaryItem
 
-    @veganuary_items = VeganuaryItem.all
+    @veganuary_items = VeganuaryItem.where(published: "true")
 
     if params[:search_input][:category].present?
       @veganuary_items = @veganuary_items.where(category: params[:search_input][:category])
