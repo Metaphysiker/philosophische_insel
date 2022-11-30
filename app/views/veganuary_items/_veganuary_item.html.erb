@@ -1,11 +1,15 @@
 <div id="<%= dom_id veganuary_item %>" class="container my-4">
+
+  <% unless veganuary_item.published == "true" %>
   <%= render 'form', veganuary_item: veganuary_item %>
 
   <hr />
 
-  <h2 id="vorschau">Vorschau</h2>
+  <h2>Vorschau</h2>
 
   <hr />
+  <% end %>
+    <h2 id="vorschau"></h2>
   <div class="row">
 
     <div class="col-12 col-md-6 bg-light my-2">
@@ -22,7 +26,7 @@
         </div>
       </div>
 
-      <h5 class="my-4">
+      <h5 class="my-4"><%#= veganuary_item.published %>
         <span class="badge bg-secondary"><%= t(veganuary_item.category) unless veganuary_item.category.blank? %></span>
       </h5>
 

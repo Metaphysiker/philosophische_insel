@@ -1,18 +1,36 @@
-<div class="card">
-  <% if veganuary_item.company_logo.attached? %>
-    <%= image_tag veganuary_item.company_logo, class: "card-img-top" %>
+<div class="card h-100">
+  <% if veganuary_item.offer_images1.attached? %>
+      <%= image_tag veganuary_item.offer_images1, class: "card-img-top" %>
+    <% else %>
+      <%= image_tag "landscape-placeholder.jpg", class: "card-img-top" %>
   <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= veganuary_item.company_name %></h5>
+    <h5 class="my-4">
+      <span class="badge bg-secondary"><%= t(veganuary_item.category) unless veganuary_item.category.blank? %></span>
+    </h5>
     <p class="card-text">
+      <%= raw veganuary_item.company_description %>
+    </p>
+
+    <p class="card-text">
+      <strong>Unser Veganuary-Angebot:</strong><br />
       <%= raw veganuary_item.offer %>
     </p>
-    <p>
-      <%= veganuary_item.cantons %>
-    </p>
+
+
+
 
     <% if user_signed_in? %>
       <%= link_to "edit", edit_veganuary_item_path(veganuary_item) %>
+    <% end %>
+  </div>
+
+  <div class="card-footer text-center">
+    <% if veganuary_item.company_logo.attached? %>
+      <%= link_to veganuary_item.url do %>
+        <%= image_tag veganuary_item.company_logo, class: "img-fluid "%>
+      <% end %>
     <% end %>
   </div>
 </div>

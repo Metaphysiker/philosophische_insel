@@ -107,7 +107,10 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Speichern und Vorschau aktualisieren", class: "btn btn-success my-4" %>
+    <%= f.button :submit, "Vorschau aktualisieren", class: "btn btn-success my-4" %>
+
+    <%= f.submit "Speichern und Abschliessen", name: 'save_and_close', class: "btn btn-warning my-4", data: {confirm: 'Speichern und Verlassen?'}  %>
+
   </div>
 
   <% if false %>

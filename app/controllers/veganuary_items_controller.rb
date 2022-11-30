@@ -8,7 +8,7 @@ class VeganuaryItemsController < ApplicationController
     response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
 
     authorize(VeganuaryItem)
-    @veganuary_items = VeganuaryItem.all
+    @veganuary_items = VeganuaryItem.where(published: "true")
     render layout: "application_empty"
 
   end
@@ -92,6 +92,10 @@ class VeganuaryItemsController < ApplicationController
     response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
 
     authorize @veganuary_item
+
+    if params[:save_and_close].present?
+      @veganuary_item.published = "true"
+    end
 
     respond_to do |format|
       if @veganuary_item.update(veganuary_item_params)

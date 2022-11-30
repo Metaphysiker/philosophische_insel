@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_30_143832) do
+ActiveRecord::Schema.define(version: 2022_11_30_182214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -306,6 +306,7 @@ ActiveRecord::Schema.define(version: 2022_11_30_143832) do
     t.string "category", default: ""
     t.text "comment", default: ""
     t.string "cantons", default: ""
+    t.string "published", default: "false"
   end
 
   create_table "work_days", force: :cascade do |t|

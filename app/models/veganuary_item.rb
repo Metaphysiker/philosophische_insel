@@ -15,6 +15,10 @@ class VeganuaryItem < ApplicationRecord
     ["cafe", "foodtruck", "service", "online_shop", "restaurant", "take_away", "shop", "chain_of_stores", "else"]
   end
 
+  def self.published_options
+    ["false", "true"]
+  end
+
   before_save :add_cantons
 
   def add_cantons
