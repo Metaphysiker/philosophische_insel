@@ -1,5 +1,7 @@
 class VeganuaryItemsController < ApplicationController
   before_action :set_veganuary_item, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token, only: [:create]
+
 
   # GET /veganuary_items or /veganuary_items.json
   def index
