@@ -128,8 +128,8 @@ class VeganuaryItemsController < ApplicationController
       @veganuary_items = @veganuary_items.where(category: params[:search_input][:category])
     end
 
-    if params[:search_input][:location].present?
-      #@veganuary_items = @veganuary_items.where(category: params[:search_input][:location])
+    if params[:search_input][:canton].present?
+      @veganuary_items = @veganuary_items.ilike_cantons(params[:search_input][:canton])
     end
 
 
