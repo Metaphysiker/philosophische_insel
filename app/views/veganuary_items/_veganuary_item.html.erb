@@ -1,4 +1,4 @@
-<div id="<%= dom_id veganuary_item %>" class="container my-4">
+<div id="<%= dom_id veganuary_item %>" class="container my-4 blogger-sans">
 
   <% unless veganuary_item.published == "true" %>
   <%= render 'form', veganuary_item: veganuary_item %>
@@ -41,7 +41,7 @@
       </p>
 
       <p class="text-center">
-        <%= link_to "Zur Webseite", veganuary_item.url, target: "_blank", class: "btn btn-success" %>
+        <%= link_to "Zur Webseite", veganuary_item.url, target: "_blank", class: "btn bg-teal text-white" %>
       </p>
     </div>
 

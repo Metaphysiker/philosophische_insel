@@ -8,6 +8,13 @@ class VeganuaryItem < ApplicationRecord
   has_one_attached :offer_images3
   has_many_attached :offer_images
 
+  validates :company_name, presence: true
+  validates :company_logo, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/jpeg'], size_range: 1..(2.megabytes) }
+  validates :offer_images1, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/jpeg'], size_range: 1..(2.megabytes) }
+  validates :offer_images2, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/jpeg'], size_range: 1..(2.megabytes) }
+  validates :offer_images3, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/jpeg'], size_range: 1..(2.megabytes) }
+
+
   scope :ilike_cantons, ->(canton) { where("cantons ILIKE ?", "%#{canton}%") }
 
 

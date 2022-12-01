@@ -1,8 +1,21 @@
 <%= tinymce_assets %>
 <%= tinymce %>
 <%= simple_form_for(@veganuary_item, remote: true) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%#= f.error_notification %>
+  <%#= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <h2 id="veganuary_item_errors"></h2>
+  <% if @veganuary_item.errors.present? %>
+  <div class="alert alert-danger">
+    <% @veganuary_item.errors.full_messages.each do |msg| %>
+      <li>
+             <%= msg %>
+      </li>
+
+    <% end %>
+  </div>
+  <% end %>
+
 
   <div class="form-inputs">
     <%#= f.input :category %>
@@ -17,7 +30,7 @@
     <div class="mb-4">
       <p>
         <strong>
-          Logo des Unternehmens
+          Logo des Unternehmens (maxmial 1MB)
           </strong>
         <br>
         <%= f.file_field :company_logo, label_html: { class: 'fw-bold' } %>
@@ -55,21 +68,21 @@
     </p>
     <div class="mb-4">
       <p>
-        Bild vom Angebot (1)<br>
+        Bild vom Angebot (1) (maxmial 1MB)<br>
         <%= f.file_field :offer_images1, label_html: { class: 'fw-bold' } %>
       </p>
     </div>
 
     <div class="mb-4">
       <p>
-        Bild vom Angebot (2)<br>
+        Bild vom Angebot (2) (maxmial 1MB)<br>
         <%= f.file_field :offer_images2, label_html: { class: 'fw-bold' } %>
       </p>
     </div>
 
     <div class="mb-4">
       <p>
-        Bild vom Angebot (3)<br>
+        Bild vom Angebot (3) (maxmial 1MB)<br>
         <%= f.file_field :offer_images3, label_html: { class: 'fw-bold' } %>
       </p>
     </div>

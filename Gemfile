@@ -9,6 +9,9 @@ ruby '3.0.0'
 #gem 'execjs'
 #gem 'terser'
 #gem "image_processing", ">= 1.2"
+gem 'activestorage-validator'
+
+
 gem 'schema_dot_org'
 
 gem 'rails-i18n', '~> 6.0.0' # For 6.0.0 or higher

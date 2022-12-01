@@ -1,22 +1,49 @@
-var element_id = "#<%= dom_id @veganuary_item %>";
-$( element_id ).each(function( index ) {
-  //console.log( index + ": " + $( this ).text() );
+var form_id = "#edit_veganuary_item_<%= @veganuary_item.id %>";
+var errors = <%= raw @veganuary_item.errors.full_messages %>;
 
-  $( this ).fadeOut( "slow", function() {
 
-      content = $("<%= escape_javascript(render "veganuary_items/veganuary_item", veganuary_item: @veganuary_item) %>")
-      $( this ).replaceWith(function(){
-        return $(content).hide().fadeIn("slow", function(){
-        //  $("#vorschau").scrollIntoView();
-        var vorschau = document.getElementById('vorschau');
-        vorschau.scrollIntoView();
+if (jQuery.isEmptyObject(errors)) {
+  console.log("keine Fehler");
+
+  var element_id = "#<%= dom_id @veganuary_item %>";
+  $( element_id ).each(function( index ) {
+    //console.log( index + ": " + $( this ).text() );
+
+    $( this ).fadeOut( "slow", function() {
+
+        content = $("<%= escape_javascript(render "veganuary_items/veganuary_item", veganuary_item: @veganuary_item) %>")
+        $( this ).replaceWith(function(){
+          return $(content).hide().fadeIn("slow", function(){
+          //  $("#vorschau").scrollIntoView();
+          var vorschau = document.getElementById('vorschau');
+          vorschau.scrollIntoView();
+
+          });
 
         });
 
-      });
-
-      //$( "#vorschau" ).scrollTop( 300 );
-
-
+    });
   });
-});
+
+} else {
+  var element_id = "#<%= dom_id @veganuary_item %>";
+  $( element_id ).each(function( index ) {
+    //console.log( index + ": " + $( this ).text() );
+
+    $( this ).fadeOut( "slow", function() {
+
+        content = $("<%= escape_javascript(render "veganuary_items/veganuary_item", veganuary_item: @veganuary_item) %>")
+        $( this ).replaceWith(function(){
+          return $(content).hide().fadeIn("slow", function(){
+          //  $("#vorschau").scrollIntoView();
+          var vorschau = document.getElementById('veganuary_item_errors');
+          vorschau.scrollIntoView();
+
+          });
+
+        });
+
+    });
+  });
+
+}

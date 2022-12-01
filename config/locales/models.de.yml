@@ -21,6 +21,10 @@ de:
         url: "Webseite"
         offer: "Beschreibung des Angebots"
         addresses: "Standorte (pro Linie eine Adresse)"
+        company_logo: "Logo des Unternehmens"
+        offer_images1: "Bild vom Angebot (1)"
+        offer_images2: "Bild vom Angebot (2)"
+        offer_images3: "Bild vom Angebot (3)"
       search_game_submission:
         first_name: "Vorname"
         email: "e-Mail"

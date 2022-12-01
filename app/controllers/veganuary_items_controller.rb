@@ -105,6 +105,7 @@ class VeganuaryItemsController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @veganuary_item.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
