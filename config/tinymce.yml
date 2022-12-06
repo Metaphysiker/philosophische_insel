@@ -5,3 +5,5 @@ plugins:
   - link
   - table
   - code
+  - wordcount
+  - visualchars

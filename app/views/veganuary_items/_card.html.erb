@@ -26,11 +26,14 @@
     <% end %>
   </div>
 
-  <div class="card-footer text-center">
     <% if veganuary_item.offer_images1.attached? %>
+    <div class="card-footer text-center">
+
       <%= link_to veganuary_item.url do %>
         <%= image_tag veganuary_item.offer_images1, class: "img-fluid", style: "height: 200px;" %>
       <% end %>
+
+    </div>
+
     <% end %>
-  </div>
 </div>
