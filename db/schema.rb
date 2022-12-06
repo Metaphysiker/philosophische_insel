@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_06_071730) do
+ActiveRecord::Schema.define(version: 2022_12_06_130551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,6 +308,7 @@ ActiveRecord::Schema.define(version: 2022_12_06_071730) do
     t.string "cantons", default: ""
     t.string "published", default: "false"
     t.string "checked", default: ""
+    t.string "disclaimer1", default: "false"
   end
 
   create_table "work_days", force: :cascade do |t|

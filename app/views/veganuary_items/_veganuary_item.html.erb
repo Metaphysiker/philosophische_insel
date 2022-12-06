@@ -1,116 +1,16 @@
 <div id="<%= dom_id veganuary_item %>" class="container my-4 blogger-sans">
 
   <% unless veganuary_item.published == "true" %>
-  <%= render 'form', veganuary_item: veganuary_item %>
+    <%= render 'form', veganuary_item: veganuary_item %>
 
-  <hr />
+    <hr />
+  <% end %>
 
   <h2>Vorschau</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
 
-  <hr />
-  <% end %>
-    <h2 id="vorschau"></h2>
-  <div class="row">
-
-    <div class="col-12 col-md-6 bg-light my-2">
-      <div class="row">
-        <div class="col-3">
-          <% if veganuary_item.company_logo.attached? %>
-            <%= image_tag veganuary_item.company_logo, class: "img-fluid "%>
-          <% else %>
-          <%= image_tag "placeholder-logo.png", class: "img-fluid "%>
-          <% end %>
-        </div>
-        <div class="col-9">
-          <h1> <%= veganuary_item.company_name %></h1>
-        </div>
-      </div>
-      <%#= veganuary_item.published %>
-      <h5 class="my-4">
-        <span class="badge bg-secondary"><%= t(veganuary_item.category) unless veganuary_item.category.blank? %></span>
-      </h5>
-
-
-      <p>
-        <%= raw veganuary_item.company_description %>
-      </p>
-
-      <p>
-        <strong>Unser Veganuary-Angebot:</strong><br />
-        <%= raw veganuary_item.offer %>
-      </p>
-
-      <p class="text-center">
-        <%= link_to "Zur Webseite", veganuary_item.url, target: "_blank", class: "btn bg-teal text-white" %>
-      </p>
-    </div>
-
-    <div class="col-12 col-md-6">
-
-      <% if veganuary_item.offer_images1.attached? %>
-        <div class="m-3 text-center">
-          <%= image_tag veganuary_item.offer_images1, class: "img-fluid", style: "height: 200px;"%>
-        </div>
-        <% else %>
-        <div class="m-3 text-center">
-          <%= image_tag "landscape-placeholder.jpg", class: "img-fluid", style: "height: 200px;"%>
-        </div>
-      <% end %>
-
-      <% if veganuary_item.offer_images2.attached? %>
-      <div class="m-3 text-center">
-        <%= image_tag veganuary_item.offer_images2, class: "img-fluid", style: "height: 200px;"%>
-      </div>
-      <% else %>
-      <div class="m-3 text-center">
-        <%= image_tag "landscape-placeholder.jpg", class: "img-fluid", style: "height: 200px;"%>
-      </div>
-      <% end %>
-
-      <% if veganuary_item.offer_images3.attached? %>
-      <div class="m-3 text-center">
-        <%= image_tag veganuary_item.offer_images3, class: "img-fluid", style: "height: 200px;"%>
-      </div>
-      <% else %>
-      <div class="m-3 text-center">
-        <%= image_tag "landscape-placeholder.jpg", class: "img-fluid", style: "height: 200px;"%>
-      </div>
-      <% end %>
-
-    </div>
-
+  <%= render "veganuary_items/card", veganuary_item: veganuary_item %>
   </div>
-
-  <% if veganuary_item.addresses.split("\n").count == 1 %>
-    <p>
-      <strong>Unser Standort</strong>
-    </p>
-  <% elsif veganuary_item.addresses.split("\n").count > 1 %>
-    <p>
-      <strong>Unsere Standorte</strong>
-    </p>
-  <% end %>
-  <% veganuary_item.addresses.split("\n").each do |line| %>
-    <% unless line.blank? %>
-    <div class="my-2">
-    <p>
-      <strong>
-        Adresse:
-      </strong> <%= line %>
-    </p>
-    <iframe
-    width="100%"
-    height="250"
-    style="border:0"
-    loading="lazy"
-    allowfullscreen
-    referrerpolicy="no-referrer-when-downgrade"
-    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyADpUPkgW9zvI1NstN5U1hfBICUKg9dne0
-      &q=<%= CGI.escape line %>">
-  </iframe>
-    <% end %>
-    </div>
-  <% end %>
 
 
 </div>
