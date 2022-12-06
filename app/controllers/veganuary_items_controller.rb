@@ -151,6 +151,6 @@ class VeganuaryItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def veganuary_item_params
-      params.require(:veganuary_item).permit(:company_name, :company_description, :url, :offer, :addresses, :company_logo, :category, :offer_images1, :offer_images2, :offer_images3, :comment)
+      params.require(:veganuary_item).permit(:company_name, :company_description, :url, :offer, :addresses, :company_logo, :category, :offer_images1, :offer_images2, :offer_images3, :comment, :checked)
     end
 end
