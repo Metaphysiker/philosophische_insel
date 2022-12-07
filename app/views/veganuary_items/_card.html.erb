@@ -1,8 +1,8 @@
 <div class="card h-100 blogger-sans">
   <% if veganuary_item.company_logo.attached? %>
-      <%= image_tag veganuary_item.company_logo, class: "card-img-top", style: "height: 200px;" %>
+      <%= image_tag veganuary_item.company_logo, class: "card-img-top" %>
     <% else %>
-      <%= image_tag "landscape-placeholder.jpg", class: "card-img-top", style: "height: 200px;" %>
+      <%= image_tag "landscape-placeholder.jpg", class: "card-img-top" %>
   <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= veganuary_item.company_name %></h5>
