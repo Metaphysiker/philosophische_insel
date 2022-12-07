@@ -23,6 +23,8 @@
 
     <% if user_signed_in? %>
       <%= link_to "edit", edit_veganuary_item_path(veganuary_item) %>
+      <br>
+      <%= link_to 'destroy', veganuary_item, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
   </div>
 
