@@ -1,5 +1,26 @@
+<script>       function characterCount() {}</script>;
 <%= tinymce_assets %>
-<%= tinymce %>
+<%#= tinymce %>
+<script>
+  tinymce.init({
+  selector: '.tinymce',  // change this value according to your HTML
+  plugins: 'wordcount link',
+  menubar: false,
+  toolbar: "styleselect | bold italic | undo redo | link | table | code | alignleft | aligncenter | alignjustify",
+  setup: function(editor) {
+        var max = 500;
+  	    editor.on('keyup', function(event) {
+  		  var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
+  		  if (numChars > max) {
+  			alert("Maximum von " + max + " Charaktern erreicht");
+  			event.preventDefault();
+  			return false;
+  		  }
+  		});
+    }
+});
+
+</script>
 <%= simple_form_for(@veganuary_item, remote: true) do |f| %>
   <%#= f.error_notification %>
   <%#= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -37,6 +58,7 @@
       </p>
     </div>
 
+    <% if false %>
     <div class="mb-4">
 
       <p>
@@ -47,6 +69,7 @@
       <%= f.text_area :company_description, :class => "tinymce", :rows => 5, label_html: { class: 'fw-bold' } %>
 
     </div>
+    <% end %>
 
     <div class="mb-4">
       <%= f.input :url, label_html: { class: 'fw-bold' } %>
@@ -58,10 +81,14 @@
         <strong>
           Beschreibung des Angebots
           </strong>
+          (maximal 500 Zeichen)
       </p>
 
       <%= f.text_area :offer, :class => "tinymce", :rows => 5, label_html: { class: 'fw-bold' } %>
     </div>
+
+    <% if false %>
+
     <hr>
     <p>
       <strong>Falls vorhanden: </strong> 1 Bild vom Angebot hochladen
@@ -73,7 +100,6 @@
       </p>
     </div>
 
-    <% if false %>
     <div class="mb-4">
       <p>
         Bild vom Angebot (2) (maxmial 1MB)<br>
