@@ -26,6 +26,10 @@ class VeganuaryItem < ApplicationRecord
     ["false", "true"]
   end
 
+  def self.checked_options
+    ["false", "true"]
+  end
+
   before_save :add_cantons
 
   def add_cantons

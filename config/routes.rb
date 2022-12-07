@@ -2,9 +2,17 @@
 Rails.application.routes.draw do
 
   resources :veganuary_items do
+    member do
+      get 'edit_for_user'
+      patch 'update_for_user'
+    end
     collection do
       get 'new_veganuary_item'
       get 'search_veganuary_items'
+      get 'all_items'
+      get 'published_items'
+      get 'checked_items'
+
     end
   end
   resources :search_game_submissions
@@ -88,6 +96,8 @@ Rails.application.routes.draw do
 
 
   get 'claudia_login', to: "static_pages#claudia_login"
+  get 'marina_login', to: "static_pages#marina_login"
+
   get 'claudia_dashboard', to: "static_pages#claudia_dashboard"
 
 

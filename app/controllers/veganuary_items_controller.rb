@@ -1,5 +1,5 @@
 class VeganuaryItemsController < ApplicationController
-  before_action :set_veganuary_item, only: %i[ show edit update destroy ]
+  before_action :set_veganuary_item, only: %i[ show edit update destroy edit_for_user update_for_user]
   skip_before_action :verify_authenticity_token
 
 
@@ -8,7 +8,7 @@ class VeganuaryItemsController < ApplicationController
     response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
 
     authorize(VeganuaryItem)
-    @veganuary_items = VeganuaryItem.where(published: "true")
+    @veganuary_items = VeganuaryItem.where(published: "true", checked: "true")
     render layout: "application_empty"
 
   end
@@ -18,6 +18,24 @@ class VeganuaryItemsController < ApplicationController
     response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
 
     authorize @veganuary_item
+    render layout: "application_empty"
+
+  end
+
+  def all_items
+    @veganuary_items = VeganuaryItem.all
+    render layout: "application_empty"
+
+  end
+
+  def published_items
+    @veganuary_items = VeganuaryItem.where(published: "true")
+    render layout: "application_empty"
+
+  end
+
+  def checked_items
+    @veganuary_items = VeganuaryItem.where(published: "true", checked: "true")
     render layout: "application_empty"
 
   end
@@ -69,6 +87,12 @@ class VeganuaryItemsController < ApplicationController
 
   end
 
+  def edit_for_user
+
+    authorize @veganuary_item
+
+  end
+
   # POST /veganuary_items or /veganuary_items.json
   def create
     response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
@@ -110,6 +134,34 @@ class VeganuaryItemsController < ApplicationController
     end
   end
 
+  def update_for_user
+
+    authorize @veganuary_item
+
+    respond_to do |format|
+      if @veganuary_item.update(veganuary_item_params)
+        format.html {
+
+          if @veganuary_item.checked == "true"
+            redirect_to checked_items_veganuary_items_path and return
+          elsif @veganuary_item.published == "true"
+            redirect_to published_items_veganuary_items_path and return
+          else
+            redirect_to all_items_veganuary_items_path and return
+          end
+
+
+
+          redirect_to (:back), notice: "Eintrag wurde aktualisiert."
+        }
+        format.json { render :show, status: :ok, location: @veganuary_item }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @veganuary_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /veganuary_items/1 or /veganuary_items/1.json
   def destroy
     authorize @veganuary_item
@@ -138,7 +190,7 @@ class VeganuaryItemsController < ApplicationController
     end
 
 
-    respond_to do |format|
+    respond_to do |format|965819080
       format.js
     end
   end

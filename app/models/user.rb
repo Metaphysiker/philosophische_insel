@@ -14,6 +14,10 @@ class User < ApplicationRecord
      roles.where(name: "claudia").exists?
    end
 
+   def marina?
+     roles.where(name: "marina").exists?
+   end
+
    # the authenticate method from devise documentation
     def self.authenticate(email, password)
       user = User.find_for_authentication(email: email)

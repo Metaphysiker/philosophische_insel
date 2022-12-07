@@ -25,12 +25,22 @@ class VeganuaryItemPolicy < ApplicationPolicy
     true
   end
 
+  def edit_for_user?
+    #is_user_admin?(@user)
+    true
+  end
+
   def create?
     #is_user_admin?(@user)
     true
   end
 
   def update?
+    #is_user_admin?(@user)
+    true
+  end
+
+  def update_for_user?
     #is_user_admin?(@user)
     true
   end

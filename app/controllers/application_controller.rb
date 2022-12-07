@@ -22,6 +22,8 @@ class ApplicationController < ActionController::Base
       if resource.claudia?
         #horses_path
         claudia_dashboard_path
+      elsif resource.marina?
+        published_items_veganuary_items_path
       else
         root_path
       end
