@@ -35,4 +35,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource '/philosophy_reviews/get_html_of_all_philosophy_reviews', headers: :any, methods: [:get]
   end
 
+  allow do
+    origins '*'
+    resource '/veganuary_items/', headers: :any, methods: [:get, :post]
+  end
+
 end
