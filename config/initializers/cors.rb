@@ -37,7 +37,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 
   allow do
     origins '*'
-    resource '/veganuary_items/', headers: :any, methods: [:get, :post]
+    resource '/veganuary_items/checked_items_html', headers: :any, methods: [:get, :post]
   end
 
 end

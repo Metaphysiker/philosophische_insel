@@ -25,20 +25,23 @@ class VeganuaryItemsController < ApplicationController
   def all_items
     @veganuary_items = VeganuaryItem.all
     render layout: "application_empty"
-
   end
 
   def published_items
     @veganuary_items = VeganuaryItem.where(published: "true")
     render layout: "application_empty"
-
   end
 
   def checked_items
     @veganuary_items = VeganuaryItem.where(published: "true", checked: "true")
     render layout: "application_empty"
-
   end
+
+  def checked_items_html
+    @veganuary_items = VeganuaryItem.where(published: "true", checked: "true")
+    render layout: false
+  end
+
 
   # GET /veganuary_items/new
   def new
