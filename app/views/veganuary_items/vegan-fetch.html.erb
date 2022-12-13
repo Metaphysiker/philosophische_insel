@@ -1,0 +1,99 @@
+<div class="mb-4">
+    <div class="row">
+  <div class="col-4">
+
+    <div class="form-group select required search_input_category"><select class="form-control select required" name="search_input[category]" id="category_select"><option value="">Kategorie: Alle</option>
+<option value="cafe">Café</option>
+<option value="foodtruck">Food-Truck</option>
+<option value="service">Service</option>
+<option value="online_shop">Online-Shop</option>
+<option value="restaurant">Restaurant</option>
+<option value="take_away">Take-Away</option>
+<option value="shop">Laden</option>
+<option value="chain_of_stores">Ladenkette</option>
+<option value="else">Sonstiges</option></select></div>
+
+  </div>
+  <div class="col-4">
+    <div class="form-group select required search_input_canton"><select class="form-control select required" name="search_input[canton]" id="canton_select"><option value="">Ort: Alle</option>
+<option value="AG">AG</option>
+<option value="AI">AI</option>
+<option value="AR">AR</option>
+<option value="BE">BE</option>
+<option value="BL">BL</option>
+<option value="BS">BS</option>
+<option value="FR">FR</option>
+<option value="GE">GE</option>
+<option value="GL">GL</option>
+<option value="GR">GR</option>
+<option value="JU">JU</option>
+<option value="LU">LU</option>
+<option value="NE">NE</option>
+<option value="NW">NW</option>
+<option value="OW">OW</option>
+<option value="SG">SG</option>
+<option value="SH">SH</option>
+<option value="SO">SO</option>
+<option value="SZ">SZ</option>
+<option value="TG">TG</option>
+<option value="TI">TI</option>
+<option value="UR">UR</option>
+<option value="VD">VD</option>
+<option value="VS">VS</option>
+<option value="ZG">ZG</option>
+<option value="ZH">ZH</option></select></div>
+  </div>
+  <div class="col-4">
+
+      <button id="filter_button">Filter anwenden</button>
+
+  </div>
+
+</div>
+</div>
+
+<div id="veganuary-items">
+    Veganuary Items
+</div>
+
+
+<script>
+
+    getVeganuaryItems();
+
+      const filter_button = document.getElementById('filter_button');
+
+        filter_button.addEventListener('click', (event) => {
+
+            getVeganuaryItems()
+
+        });
+
+
+    function getVeganuaryItems() {
+
+        var category = document.getElementById("category_select").value;
+
+
+        var canton = document.getElementById("canton_select").value;
+
+
+            fetch('http://localhost:3000/veganuary_items/checked_items_html',
+            {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({canton: canton, category: category})
+            })
+      .then((response) => response.text())
+      .then((data) => {
+
+      var element_veganuary_items = document.getElementById('veganuary-items');
+      element_veganuary_items.innerHTML = data;
+
+      });
+    }
+
+</script>
