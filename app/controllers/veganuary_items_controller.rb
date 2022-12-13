@@ -40,16 +40,12 @@ class VeganuaryItemsController < ApplicationController
   def checked_items_html
     @veganuary_items = VeganuaryItem.where(published: "true", checked: "true")
 
-    if params[:search_input].present?
+    if params[:category].present?
+      @veganuary_items = @veganuary_items.where(category: params[:category])
+    end
 
-      if params[:search_input][:category].present?
-        @veganuary_items = @veganuary_items.where(category: params[:search_input][:category])
-      end
-
-      if params[:search_input][:canton].present?
-        @veganuary_items = @veganuary_items.ilike_cantons(params[:search_input][:canton])
-      end
-
+    if params[:canton].present?
+      @veganuary_items = @veganuary_items.ilike_cantons(params[:canton])
     end
 
     render layout: false

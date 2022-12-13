@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get 'published_items'
       get 'checked_items'
       get 'checked_items_html'
+      post 'checked_items_html'
     end
   end
   resources :search_game_submissions
