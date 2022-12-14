@@ -42,18 +42,18 @@ class VeganuaryItemsController < ApplicationController
 
     @special_category_items = nil
 
-    if params[:search_input][:category].present?
-      @veganuary_items = @veganuary_items.where(category: params[:search_input][:category])
+    if params[:category].present?
+      @veganuary_items = @veganuary_items.where(category: params[:category])
     else
       #always show brand and chain_of_stores unless a category is selected
       @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
 
     end
 
-    if params[:search_input][:canton].present?
-      @veganuary_items = @veganuary_items.ilike_cantons(params[:search_input][:canton])
+    if params[:canton].present?
+      @veganuary_items = @veganuary_items.ilike_cantons(params[:canton])
 
-      if params[:search_input][:canton] == "brand" || params[:search_input][:canton] == "chain_of_stores"
+      if params[:canton] == "brand" || params[:canton] == "chain_of_stores"
         @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
       end
     end
