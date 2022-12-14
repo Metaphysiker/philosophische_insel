@@ -59,6 +59,7 @@ class VeganuaryItemsController < ApplicationController
     end
 
     unless @special_category_items.nil?
+      @special_category_items = @special_category_items.where(published: "true", checked: "true")
       @veganuary_items = @veganuary_items.or(@special_category_items)
     end
 
