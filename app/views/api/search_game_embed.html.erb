@@ -12,6 +12,10 @@
         <%= image_tag "v-heart-orange.png", class: "img-fluid", id: "search_game_button" %>
       <% elsif @identifier == "v-heart-red" %>
         <%= image_tag "v-heart-red.png", class: "img-fluid", id: "search_game_button" %>
+      <% elsif @identifier == "v-heart-black-orange" %>
+        <%= image_tag "v-heart-black-orange.png", class: "img-fluid", id: "search_game_button" %>
+      <% elsif @identifier == "v-heart-black-red" %>
+        <%= image_tag "v-heart-black-red.png", class: "img-fluid", id: "search_game_button" %>
     <% end %>
     <p class="text-center <%= "d-none" if @you_already_found_me %>" id="click_on_me">
       Klick mich!
