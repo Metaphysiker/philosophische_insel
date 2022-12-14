@@ -1,0 +1,60 @@
+<div id="div_for_search_game">
+
+</div>
+
+<script>
+
+loadIFrame();
+
+function loadIFrame(){
+    var cookie = getCookie("search_game_cookie");
+
+    if (cookie == ""){
+
+      new_cookie = Math.floor(Math.random() * 1000000000);
+
+      setCookie("search_game_cookie", new_cookie, 365);
+
+      document.getElementById("div_for_search_game").innerHTML = '<iframe id="idIframe" style="height: 800px;" src="https://www.philosophische-insel.ch/api/search_game_embed?identifier=santas_sleigh&cookie=' + new_cookie + '"></iframe>';
+
+
+    } else {
+        document.getElementById("div_for_search_game").innerHTML = '<iframe id="idIframe" style="height: 800px;" src="https://www.philosophische-insel.ch/api/search_game_embed?identifier=santas_sleigh&cookie=' + cookie + '"></iframe>';
+    }
+}
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie() {
+  let user = getCookie("username");
+  if (user != "") {
+    alert("Welcome again " + user);
+  } else {
+    user = prompt("Please enter your name:", "");
+    if (user != "" && user != null) {
+      setCookie("username", user, 365);
+    }
+  }
+}
+
+</script>

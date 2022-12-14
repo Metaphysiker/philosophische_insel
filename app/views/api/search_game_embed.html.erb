@@ -6,6 +6,12 @@
       <%= image_tag "santas_sleigh.png", class: "img-fluid", id: "search_game_button" %>
       <% elsif @identifier == "christmas_tree" %>
       <%= image_tag "christmas-tree.png", class: "img-fluid", id: "search_game_button" %>
+      <% elsif @identifier == "v-heart-green" %>
+        <%= image_tag "v-heart-green.png", class: "img-fluid", id: "search_game_button" %>
+      <% elsif @identifier == "v-heart-orange" %>
+        <%= image_tag "v-heart-orange.png", class: "img-fluid", id: "search_game_button" %>
+      <% elsif @identifier == "v-heart-red" %>
+        <%= image_tag "v-heart-red.png", class: "img-fluid", id: "search_game_button" %>
     <% end %>
     <p class="text-center <%= "d-none" if @you_already_found_me %>" id="click_on_me">
       Klick mich!
