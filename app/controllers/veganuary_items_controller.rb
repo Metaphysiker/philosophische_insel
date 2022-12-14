@@ -40,12 +40,26 @@ class VeganuaryItemsController < ApplicationController
   def checked_items_html
     @veganuary_items = VeganuaryItem.where(published: "true", checked: "true")
 
-    if params[:category].present?
-      @veganuary_items = @veganuary_items.where(category: params[:category])
+    @special_category_items = nil
+
+    if params[:search_input][:category].present?
+      @veganuary_items = @veganuary_items.where(category: params[:search_input][:category])
+    else
+      #always show brand and chain_of_stores unless a category is selected
+      @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
+
     end
 
-    if params[:canton].present?
-      @veganuary_items = @veganuary_items.ilike_cantons(params[:canton])
+    if params[:search_input][:canton].present?
+      @veganuary_items = @veganuary_items.ilike_cantons(params[:search_input][:canton])
+
+      if params[:search_input][:canton] == "brand" || params[:search_input][:canton] == "chain_of_stores"
+        @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
+      end
+    end
+
+    unless @special_category_items.nil?
+      @veganuary_items = @veganuary_items.or(@special_category_items)
     end
 
     render layout: false
