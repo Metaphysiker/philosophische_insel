@@ -205,6 +205,10 @@ class VeganuaryItemsController < ApplicationController
 
     if params[:search_input][:canton].present?
       @veganuary_items = @veganuary_items.ilike_cantons(params[:search_input][:canton])
+
+      if params[:search_input][:canton] == "brand" || params[:search_input][:canton] == "chain_of_stores"
+        @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
+      end
     end
 
     unless @special_category_items.nil?
