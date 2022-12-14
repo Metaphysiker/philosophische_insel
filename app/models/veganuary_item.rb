@@ -19,7 +19,7 @@ class VeganuaryItem < ApplicationRecord
 
 
   def self.category_options
-    ["cafe", "foodtruck", "service", "online_shop", "restaurant", "take_away", "shop", "chain_of_stores", "else"]
+    ["cafe", "foodtruck", "service", "online_shop", "restaurant", "take_away", "shop", "chain_of_stores", "brand", "else"]
   end
 
   def self.published_options
