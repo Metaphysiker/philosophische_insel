@@ -175,7 +175,7 @@ class ApiController < ApplicationController
       status = "untouched"
     end
 
-    how_many_left_to_find = SearchGame.count_of_findables - SearchGame.where(cookie: params[:cookie]).where(identifier: params[:identifier]).distinct.count
+    how_many_left_to_find = SearchGame.count_of_findables - SearchGame.where(cookie: params[:cookie]).pluck(:identifier).uniq.count
 
     answer = {
       status: status,
