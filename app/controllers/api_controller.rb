@@ -11,7 +11,7 @@ class ApiController < ApplicationController
     end_date = Date.today.end_of_month.end_of_week
 
       (start_date..end_date).each do |day|
-      
+
         free_slots.push(
           {
             booking_status: ["fully_booked", "partially_booked", "free"].sample,
@@ -180,7 +180,7 @@ class ApiController < ApplicationController
     answer = {
       status: status,
       how_many_left_to_find: how_many_left_to_find,
-      how_many_left_to_find_text: "Finde noch die anderen #{how_many_left_to_find} Weihnachtsmänner!"
+      how_many_left_to_find_text: "Finde noch die anderen #{how_many_left_to_find} Herzchen!"
     }
 
     render json: answer
