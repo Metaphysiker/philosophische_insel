@@ -30,7 +30,41 @@ class VeganuaryItem < ApplicationRecord
     ["false", "true"]
   end
 
+  def self.get_coordinates(items)
+    coordinates = []
+    items.each do |item|
+
+      item.coordinates.split("\n").each do |single_coordinates|
+
+        coordinates.push(
+          {
+            lat: single_coordinates.split(",").first.to_f,
+            lng: single_coordinates.split(",").second.to_f,
+            title: item.company_name
+          }
+        )
+      end
+
+    end
+
+    coordinates.to_json
+  end
+
   before_save :add_cantons
+  before_save :add_coordinates
+
+  def add_coordinates
+
+    coordinates_string = ""
+
+    self.addresses.split("\n").each do |address|
+      results = Geocoder.search(address)
+      results.first.coordinates
+      coordinates_string = coordinates_string + results.first.coordinates.join(", ") + "\n"
+    end
+
+    self.coordinates = coordinates_string
+  end
 
   def add_cantons
 

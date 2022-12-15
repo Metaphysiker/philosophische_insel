@@ -28,6 +28,7 @@ gem 'meta-tags'
 gem 'rest-client'
 gem 'inline_svg'
 gem 'rack-cors'
+gem 'geocoder'
 
 #gem "font-awesome-rails"
 
