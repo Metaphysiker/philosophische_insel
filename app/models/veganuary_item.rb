@@ -59,8 +59,12 @@ class VeganuaryItem < ApplicationRecord
 
     self.addresses.split("\n").each do |address|
       results = Geocoder.search(address)
-      results.first.coordinates
-      coordinates_string = coordinates_string + results.first.coordinates.join(", ") + "\n"
+
+      unless results.nil? || results.first.nil?
+        results.first.coordinates
+        coordinates_string = coordinates_string + results.first.coordinates.join(", ") + "\n"
+      end
+
     end
 
     self.coordinates = coordinates_string
