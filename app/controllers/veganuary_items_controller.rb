@@ -38,7 +38,15 @@ class VeganuaryItemsController < ApplicationController
   end
 
   def random_item_html
-    
+
+    ids = VeganuaryItem.where(published: "true", checked: "true").pluck(:id)
+    @veganuary_item = VeganuaryItem.find(ids.sample)
+
+    render layout: false
+  end
+
+  def random_item_horizontal_html
+
     ids = VeganuaryItem.where(published: "true", checked: "true").pluck(:id)
     @veganuary_item = VeganuaryItem.find(ids.sample)
 

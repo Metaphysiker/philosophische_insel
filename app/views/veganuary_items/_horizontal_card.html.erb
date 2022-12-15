@@ -1,0 +1,24 @@
+<div class="card mb-3 blogger-sans">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <% if veganuary_item.company_logo.attached? %>
+        <%= image_tag veganuary_item.company_logo, class: "img-fluid rounded-start" %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= veganuary_item.company_name %></h5>
+        <h5 class="my-4">
+          <span class="badge bg-secondary"><%= t(veganuary_item.category) unless veganuary_item.category.blank? %></span>
+        </h5>
+        <p class="card-text">
+          <%= raw veganuary_item.offer %>
+        </p>
+
+        <p>
+          <%= link_to "⟶ Mehr", veganuary_item.url %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
