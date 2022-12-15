@@ -53,31 +53,21 @@ class VeganuaryItemsController < ApplicationController
     render layout: false
   end
 
+  def get_coordinates
+    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://vegan.ch/"
+
+    authorize VeganuaryItem
+
+    @veganuary_items = SearchVeganuaryItem.new(category: params[:category], canton: params[:canton]).search
+
+
+    render json: VeganuaryItem.get_coordinates(@veganuary_items)
+
+  end
+
   def checked_items_html
-    @veganuary_items = VeganuaryItem.where(published: "true", checked: "true")
 
-    @special_category_items = nil
-
-    if params[:category].present?
-      @veganuary_items = @veganuary_items.where(category: params[:category])
-    else
-      #always show brand and chain_of_stores unless a category is selected
-      @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
-
-    end
-
-    if params[:canton].present?
-      @veganuary_items = @veganuary_items.ilike_cantons(params[:canton])
-
-      if params[:canton] == "brand" || params[:canton] == "chain_of_stores"
-        @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
-      end
-    end
-
-    unless @special_category_items.nil?
-      @special_category_items = @special_category_items.where(published: "true", checked: "true")
-      @veganuary_items = @veganuary_items.or(@special_category_items)
-    end
+    @veganuary_items = SearchVeganuaryItem.new(category: params[:category], canton: params[:canton]).search
 
     render layout: false
   end
@@ -222,30 +212,7 @@ class VeganuaryItemsController < ApplicationController
 
     authorize VeganuaryItem
 
-    @veganuary_items = VeganuaryItem.where(published: "true", checked: "true")
-
-    @special_category_items = nil
-
-    if params[:search_input][:category].present?
-      @veganuary_items = @veganuary_items.where(category: params[:search_input][:category])
-    else
-      #always show brand and chain_of_stores unless a category is selected
-      @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
-
-    end
-
-    if params[:search_input][:canton].present?
-      @veganuary_items = @veganuary_items.ilike_cantons(params[:search_input][:canton])
-
-      if params[:search_input][:canton] == "brand" || params[:search_input][:canton] == "chain_of_stores"
-        @special_category_items = VeganuaryItem.where(category: "brand").or(VeganuaryItem.where(category: "chain_of_stores"))
-      end
-    end
-
-    unless @special_category_items.nil?
-      @veganuary_items = @veganuary_items.or(@special_category_items)
-    end
-
+    @veganuary_items = SearchVeganuaryItem.new(category: params[:search_input][:category], canton: params[:search_input][:canton]).search
 
     respond_to do |format|
       format.js

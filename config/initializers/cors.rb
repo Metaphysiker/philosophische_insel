@@ -50,6 +50,11 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource '/veganuary_items/random_item_horizontal_html', headers: :any, methods: [:get, :post]
   end
 
+  allow do
+    origins '*'
+    resource '/veganuary_items/get_coordinates', headers: :any, methods: [:get, :post]
+  end
+
 
 
 

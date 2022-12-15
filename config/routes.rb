@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get 'checked_items_html'
       get 'random_item_html'
       get 'random_item_horizontal_html'
+      get 'get_coordinates'
       post 'checked_items_html'
     end
   end

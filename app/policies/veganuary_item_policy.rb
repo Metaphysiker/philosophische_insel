@@ -1,5 +1,9 @@
 class VeganuaryItemPolicy < ApplicationPolicy
 
+  def get_coordinates?
+    true
+  end
+
   def index?
     true
   end
