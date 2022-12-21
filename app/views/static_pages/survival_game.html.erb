@@ -1,9 +1,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.0/d3.min.js" integrity="sha512-jXsLjbg/Pr8F5U2evjFaEci7mImlUix865lbvnNmp5TzS86+VTTFVDz7FFTS6VHdhSn7UJ4tjZdvpp0GgT0fZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div class="container">
   <h1>Vegan Survival Game</h1>
-  <div id="roadmap">
 
-  </div>
   <div id="start_text">
     <p>
       Hey du, heute gehen wir gemeinsam Wandern. Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack, Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erhalten.
@@ -12,7 +10,7 @@
 
   </div>
 
-  <div id="question">
+  <div id="question" >
 
   </div>
 
@@ -24,6 +22,16 @@
 
   </div>
 
+  <div id="try_again">
+    <!--
+    <button id="try_again_button" type="button" class="btn btn-primary">Erneut versuchen</button>
+    -->
+  </div>
+
+  <div id="roadmap">
+
+  </div>
+
 
 
 
@@ -31,7 +39,7 @@
 
 <script>
   var current_question_index = 0;
-  var width = 1000;
+  var width = $("#roadmap").width();
   var height = 500;
   var circle_radius = 10;
   var margin = {
@@ -43,9 +51,9 @@
 
   var coordinates_of_circles_on_path = [];
 
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 8; i++) {
     coordinates_of_circles_on_path.push({
-      x: i * width/7,
+      x: i * width/8,
       y: getRandomInt(100)
     })
   }
@@ -54,10 +62,14 @@
 
   var svg_element_id = "#roadmap";
 
+  var all_correct_text = "Mit vielen neuen Infos und einem schönen Abenteuer gehst du glücklich, aber ganz schön müde nach Hause. Zu Hause merkst du, wie einfach eine vegane Lebensweise doch sein kann und wie schön es ist, Rücksicht auf die Natur und die Tiere zu nehmen.";
+
   var questions = [
     {
       question: "Du stellst deine Wanderausrüstung zusammen, dabei fragst du dich, welche Marke wohl vegane Wanderschuhe anbietet …",
       solution_index: 1,
+      wrong_text: "Bist du dir sicher, dass du für eine Wanderung mit der Veganen Gesellschaft Schweiz gewappnet bist? Auf vegan.ch/blog findest du alle Informationen rund um den veganen Lebensstil.",
+      last_question: "false",
       answers: [
         "Sherpa",
         "Lowa",
@@ -67,13 +79,79 @@
     {
       question: "Die Wanderausrüstung ist ready, welche Snacks packst du in deinen Rucksack?",
       solution_index: 1,
+      wrong_text: "Du schaust dir die Produkte etwas genauer an und merkst Milch Farmer, Hüttenkäse und Bio-Choco Cookies von der Migros sind leider nicht vegan. Und stellst dir vor, wie schön es wäre, wenn es die Bio-Choco Cookies von V-Love gäbe.",
+      last_question: "false",
       answers: [
         "Milch Farmer, Brot, Hüttenkäse und Cherrytomaten",
         "Hummus, Brot, Blevitas und eine Packung Oreos",
         "Sojaaufstich, Brot, Blevitas, ein veganer Landjäger und die Bio-Choco Cookies von der Migros"
       ]
     },
+    {
+      question: "Yeah, alles ready, es kann losgehen. Am Bahnhof merkst du, du hast deine Sonnencreme zu Hause vergessen. Zum Glück reicht die Zeit, um eine Neue zu kaufen. Aber sind Sonnencremes immer vegan?",
+      solution_index: 1,
+      wrong_text: "Du fragst in der Apotheke nach und erfährst, das es wichtig ist, einen Blick auf die Inhaltsstoffe zu werfen, besonders bei der Herstellung von synthetischen Stoffen können nicht-vegane Mittel zum Einsatz kommen. Auch ist es wichtig, auf die Labels: Veganeblume, Leaping Bunny oder PETA cruelty-free zu schauen, damit wirklich kein Tier für dieses Produkt leiden musste.",
+      last_question: "false",
+      answers: [
+        "Na klar, was soll denn daran tierischen Ursprungs sein?",
+        "Nein, nicht jede Sonnencreme ist automatisch vegan.",
+        "Hää, reicht es nicht wenn ich auf tierische Produkte beim Essen verzichte?"
+      ]
+    },
+    {
+      question: "Geschafft auf gehts in die Berge. Das Wetter ist perfekt und die Natur strahlt in schönster Pracht. Du erfährst, dass es viele Pflanzen und Kräuter gibt, die geniessbar sind. Aber welche Pflanze ist den nun essbar?",
+      solution_index: 1,
+      wrong_text: "Die Sonne, die seit Stunden auf dein Kopf scheint, macht dich langsam, aber sicher etwas schwammig im Schedel. Du siehst all die schönen Pflanzen und hörst nur «essbar» du greifst zu, gönnst dir einen guten Bissen, schluckst in herunter und starrst in schockierte Gesichter. Bevor deine Augen zufallen, siehst du wie in der Ferne ein Rega-Helikopter in euere Richtung fliegt und hoffst, dass sie dich noch rechtzeitig abholen.",
+      last_question: "false",
+      answers: [
+        "Eibe",
+        "Rotklee",
+        "Bilsenkraut"
+      ]
+    },
+    {
+      question: "Eine Handvoll Rotklee packst du für später ein, damit kannst du leckeres Knäckebrot backen, wie dir Erzählt wurde. Ihr geht den Weg weiter und kommt in den Wald, links und rechts vom Pfad seht ihr viele Pilze, die ihren Weg an die Oberfläche gefunden haben. Doch welcher dieser Pilze könntest du essen?",
+      solution_index: 0,
+      wrong_text: "So schöne Farben hast du selten bei Pilzen gesehen. Von der Sonne schon leicht matsche im Kopf, läufst du schnurstracks auf die bunten Pilze zu, schneidest einen ab und beisst rein. «Hmm.. etwa komisch schmeckt er schon», denkst du dir, schluckst den Mundinhalt dennoch runter und läufst mit dem abgebissenen Pilz zurück zu den anderen. «Hast du nicht zu gehört, dieser Pilz ist giftig!» Du merkst, wie sich alles anfängt zu drehen und kippst im Stehen zusammen.",
+      last_question: "false",
+      answers: [
+        "Kräuterseitling",
+        "Fliegenpilz",
+        "Grüner Knollenblätterpilz"
+      ]
+    },
+    {
+      question: "Uff, bei so vielen neuen Infos knurrt der Magen. Alle packen ihren Proviant aus, ein riesen Buffet. Alle greifen zu und schlagen sich den Bauch voll. Du fragst dich, was Protein enthalten hat.",
+      solution_index: 1,
+      wrong_text: "Sorry, aber Süssigkeiten und Snacks sind wirklich nicht die beste Wahl, wenn es um Proteinreiches essen geht.",
+      last_question: "false",
+      answers: [
+        "Oreos, Gummibärli und Manner Waffeln",
+        "Nüsse, Kichererbsen und Vollkornbrot",
+        "Chips, Salzstängeli und Zwieback"
+      ]
+    },
+    {
+      question: "Gestärkt gehts weiter, ihr kommt an einem Berg Restaurant vorbei – Zeit für eine Abkühlung. Ihr schaut euch die Glacékarte an. Welches Glacé ist vegan?",
+      solution_index: 1,
+      wrong_text: "Einen ganzen Tag bist du schon mit der Veganen Gesellschaft Schweiz unterwegs und dennoch hast du nichts gelernt. WASSERGLACÉ greif zum WASSERGLACÉ...",
+      last_question: "true",
+      answers: [
+        "Cournet",
+        "Rakete",
+        "Maxibon"
+      ]
+    }
   ];
+
+  const svg = d3.select(svg_element_id)
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  const road = svg.append("g");
 
 
     $( document ).ready(function() {
@@ -85,14 +163,7 @@
 
       });
 
-      const svg = d3.select(svg_element_id)
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-      const road = svg.append("g");
 
 
         for (let i = 0; i < coordinates_of_circles_on_path.length; i++) {
@@ -174,10 +245,50 @@
     function answerAttempt(index){
 
       if(questions[current_question_index].solution_index == index){
-        console.log("correct answer");
         current_question_index += 1;
-        loadQuestion(current_question_index);
+
+        if(questions[current_question_index-1].last_question === "true"){
+
+          $("#answers").empty();
+          $("#question").empty();
+
+          $("#result").append(all_correct_text);
+
+          drawLineFromAToB(coordinates_of_circles_on_path[current_question_index - 1], coordinates_of_circles_on_path[current_question_index]);
+
+
+        } else {
+          loadQuestion(current_question_index);
+
+          drawLineFromAToB(coordinates_of_circles_on_path[current_question_index - 1], coordinates_of_circles_on_path[current_question_index]);
+        }
+
+
+
+      } else {
+        $("#answers").empty();
+        $("#question").empty();
+
+        $("#result").append(questions[current_question_index].wrong_text);
       }
+    }
+
+    function drawLineFromAToB(a,b){
+      road.append('line')
+      .style("stroke", "lightgreen")
+      .style("stroke-width", 2)
+      .attr("x1", a.x)
+      .attr("y1", a.y)
+      .attr("x2", a.x)
+      .attr("y2", a.y)
+      .transition()
+      .duration(1500)
+      .attr("x2", b.x)
+      .attr("y2", b.y)
+    }
+
+    function drawRoadMap(){
+      
     }
 
 </script>
