@@ -93,6 +93,8 @@ Rails.application.routes.draw do
   get 'static_pages/donation_buttons'
   get 'static_pages/compare_lists'
 
+  get 'static_pages/survival_game'
+
   get 'static_pages/download_public_file', as: "download_public_file"
 
   get 'serial_letter', to: "static_pages#serial_letter", as: "serial_latter"

@@ -1,0 +1,119 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.0/d3.min.js" integrity="sha512-jXsLjbg/Pr8F5U2evjFaEci7mImlUix865lbvnNmp5TzS86+VTTFVDz7FFTS6VHdhSn7UJ4tjZdvpp0GgT0fZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div class="container">
+  <h1>Vegan Survival Game</h1>
+  <p>
+    Hey du, heute gehen wir gemeinsam Wandern. Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack, Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erhalten.
+  </p>
+  <button id="start_game" type="button" class="btn btn-primary">Let's go!</button>
+
+  <div id="roadmap">
+
+  </div>
+
+</div>
+
+<script>
+  var width = 500;
+  var height = 500;
+  var circle_radius = 10;
+  var margin = {
+    top: 15,
+    bottom: 15,
+    left: 15,
+    right: 15
+  };
+
+  var coordinates_of_circles_on_path = [];
+
+  for (let i = 0; i < 7; i++) {
+    coordinates_of_circles_on_path.push({
+      x: i * width/7,
+      y: getRandomInt(50)
+    })
+  }
+
+  var human_svg_url = "<%= image_url "peep-standing.svg" %>";
+  console.log(human_svg_url);
+
+  var svg_element_id = "#roadmap";
+
+  var questions = [
+    {
+      question: "Du stellst deine Wanderausrüstung zusammen, dabei fragst du dich, welche Marke wohl vegane Wanderschuhe anbietet …",
+      solution_index: 1,
+      answers: [
+        "Sherpa",
+        "Lowa",
+        "Mammut"
+      ]
+    }
+  ];
+
+
+
+    $( document ).ready(function() {
+      console.log("ready");
+
+      $("#start_game").click(function(){
+        alert("The paragraph was clicked.");
+      });
+
+      const svg = d3.select(svg_element_id)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+      const road = svg.append("g");
+
+
+        for (let i = 0; i < coordinates_of_circles_on_path.length; i++) {
+          road.append('circle')
+           .attr('cx', coordinates_of_circles_on_path[i].x)
+           .attr('cy', coordinates_of_circles_on_path[i].y)
+           .attr('r', circle_radius)
+           .attr('stroke', 'black')
+           .attr('fill', 'green');
+        }
+
+        drawLinesBetweenCircles(road, coordinates_of_circles_on_path)
+
+
+
+
+    })
+
+
+    //functions
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    function drawLinesBetweenCircles(parent_node, coordinates_of_circles_on_path) {
+
+      for (let i = 0; i < coordinates_of_circles_on_path.length; i++) {
+
+        if(typeof coordinates_of_circles_on_path[i + 1] === 'undefined') {
+
+        } else {
+          parent_node.append('line')
+          .style("stroke", "lightgreen")
+          .style("stroke-width", 2)
+          .attr("x1", coordinates_of_circles_on_path[i].x)
+          .attr("y1", coordinates_of_circles_on_path[i].y)
+          .attr("x2", coordinates_of_circles_on_path[i].x)
+          .attr("y2", coordinates_of_circles_on_path[i].y)
+          .transition()
+          .duration(1500)
+          .attr("x2", coordinates_of_circles_on_path[i + 1].x)
+          .attr("y2", coordinates_of_circles_on_path[i + 1].y)
+
+        }
+
+
+      }
+
+    }
+
+</script>
