@@ -144,23 +144,30 @@
     }
 
     function loadQuestion(index){
-      $("#question").empty().append(
-        questions[index].question
-      );
-      $("#answers").empty();
+
+      $("#question").fadeOut("slow", function(){
+        $("#question").empty().append(
+          questions[index].question
+        ).fadeIn("slow");
+      });
 
 
-      for (let i = 0; i < questions[index].answers.length; i++) {
-        $("#answers").append(
-        `<button type="button" id="answer_${i}" data-index="${i}" class="btn btn-primary my-3">${questions[index].answers[i]}</button> <br>`
-        )
+      $("#answers").fadeOut("slow", function(){
 
-        $("#answer_" + i).unbind().click(function(){
-          answerAttempt($(this).data("index"));
-        })
+        $("#answers").empty().fadeIn("slow");;
 
-      }
+        for (let i = 0; i < questions[index].answers.length; i++) {
+          $("#answers").append(
+          `<button type="button" id="answer_${i}" data-index="${i}" class="btn btn-primary my-3">${questions[index].answers[i]}</button> <br>`
+          )
 
+          $("#answer_" + i).unbind().click(function(){
+            answerAttempt($(this).data("index"));
+          })
+
+        }
+
+      })
 
     }
 
