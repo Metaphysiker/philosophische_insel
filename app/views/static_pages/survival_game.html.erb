@@ -1,6 +1,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.0/d3.min.js" integrity="sha512-jXsLjbg/Pr8F5U2evjFaEci7mImlUix865lbvnNmp5TzS86+VTTFVDz7FFTS6VHdhSn7UJ4tjZdvpp0GgT0fZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div class="container">
   <h1>Vegan Survival Game</h1>
+  <div id="roadmap">
+
+  </div>
   <div id="start_text">
     <p>
       Hey du, heute gehen wir gemeinsam Wandern. Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack, Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erhalten.
@@ -22,9 +25,7 @@
   </div>
 
 
-  <div id="roadmap">
 
-  </div>
 
 </div>
 
@@ -62,7 +63,8 @@
         "Lowa",
         "Mammut"
       ],
-      wrong_text: "Bist du dir sicher, dass du für eine Wanderung mit der Veganen Gesellschaft Schweiz gewappnet bist? Auf vegan.ch/blog findest du alle Informationen rund um den veganen Lebensstil."
+      wrong_text: "Bist du dir sicher, dass du für eine Wanderung mit der Veganen Gesellschaft Schweiz gewappnet bist? Auf vegan.ch/blog findest du alle Informationen rund um den veganen Lebensstil.",
+      last_question: "false"
     },
     {
       question: "Die Wanderausrüstung ist ready, welche Snacks packst du in deinen Rucksack?",
@@ -100,11 +102,11 @@
            .attr('cx', coordinates_of_circles_on_path[i].x)
            .attr('cy', coordinates_of_circles_on_path[i].y)
            .attr('r', circle_radius)
-           .attr('stroke', 'black')
-           .attr('fill', 'green');
+           .attr('stroke', 'gray')
+           .attr('fill', 'gray');
         }
 
-        drawLinesBetweenCircles(road, coordinates_of_circles_on_path)
+        //drawLinesBetweenCircles(road, coordinates_of_circles_on_path)
 
 
 
