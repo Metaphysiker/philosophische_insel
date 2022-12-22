@@ -48,8 +48,8 @@
   var margin = {
     top: 150,
     bottom: 15,
-    left: 15,
-    right: 15
+    left: 30,
+    right: 30
   };
 
   var coordinates_of_circles_on_path = [];
@@ -283,10 +283,12 @@
 
 
       } else {
+
         $("#answers").empty();
         $("#question").empty();
 
         $("#result").append(questions[current_question_index].wrong_text);
+        death_animations()
       }
     }
 
@@ -323,7 +325,8 @@
          .attr('stroke', 'gray')
          .attr('fill', 'gray');
 
-         console.log(road._groups[0]);
+         console.log(road._groups[0][0].childNodes);
+         console.log(road._groups[0].children);
 
 
       }
@@ -332,6 +335,19 @@
 
     function reset(){
 
+    }
+
+    function death_animations(){
+
+      human_node
+      .transition()
+      .duration(1500)
+      .attr("transform", `translate(${0}, ${2000})`);
+
+      d3.selectAll(road._groups[0][0].childNodes)
+      .transition()
+      .duration(1500)
+      .attr("transform", `translate(${0}, ${2000})`);
     }
 
 </script>
