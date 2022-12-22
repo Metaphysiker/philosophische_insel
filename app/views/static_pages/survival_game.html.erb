@@ -159,7 +159,6 @@
   const human_node = svg.append("g")
   .attr("transform", `translate(${width/2}, ${0})`);
 
-
   const human = human_node.append("g").append("svg:image")
     .attr('x', -50)
     .attr('y', -100)
@@ -176,7 +175,6 @@
     .text("Wirst du überleben?")
     .attr("x", 50)
     .attr("y", -25);
-
 
     $( document ).ready(function() {
       console.log("ready");
@@ -317,7 +315,6 @@
 
     function drawRoadMap(){
 
-
       for (let i = 0; i < coordinates_of_circles_on_path.length; i++) {
         road.append('circle')
          .attr('cx', coordinates_of_circles_on_path[i].x)
@@ -325,7 +322,15 @@
          .attr('r', circle_radius)
          .attr('stroke', 'gray')
          .attr('fill', 'gray');
+
+         console.log(road._groups[0]);
+
+
       }
+
+    }
+
+    function reset(){
 
     }
 
