@@ -94,6 +94,8 @@ Rails.application.routes.draw do
   get 'static_pages/compare_lists'
 
   get 'static_pages/survival_game'
+  get 'static_pages/survival_game2'
+
 
   get 'static_pages/download_public_file', as: "download_public_file"
 
