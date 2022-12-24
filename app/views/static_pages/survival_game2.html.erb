@@ -12,6 +12,8 @@
   var answers;
   var playerIcon;
   var flags;
+  var backgroundImage;
+  var actualBackgroundImage;
 
   Stimulus.register("survival-game", class extends Controller {
     static values = {
@@ -26,12 +28,15 @@
       startText: String,
       currentQuestionIndex: Number,
       flagiconUrl: String,
-      flagCoordinates: Array
+      flagCoordinates: Array,
+      backgroundImageBuffer: Number
     }
 
     static targets = [ "name", "output", "game" ]
 
     connect() {
+
+      this.backgroundImageBufferValue = 0;
 
       this.flagCoordinatesValue = [
         {
@@ -219,6 +224,10 @@
           .append("g")
           .attr("transform", `translate(${0}, ${0})`);
 
+        backgroundImage = svg.append("g")
+        .attr("transform", `translate(${0}, ${self.backgroundImageBufferValue})`);
+
+
           final_resolve("svg set");
 
       })
@@ -230,14 +239,14 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        svg.append("svg:image")
-          .attr('x', 0)
-          .attr('y', 0)
+        backgroundImage.append("svg:image")
+          .attr("transform", `translate(${0}, ${0})`)
           .attr('width', self.widthValue)
-          //.attr('height', this.heightValue)
-          .style("cursor", "pointer")
+          .attr('id', "survival_game_background_image")
+          //.attr('height', self.widthValue/1.2)
           .style("opacity", 1)
           .attr("xlink:href", "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg");
+
           final_resolve("backgound set");
 
       })
@@ -297,7 +306,7 @@
 
         console.log("setPlayerIcon");
 
-        playerIcon = svg.append("svg:image")
+        playerIcon = backgroundImage.append("svg:image")
                   //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
                   //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
                   .attr('width', (self.widthValue / 100) * 8)
@@ -456,6 +465,7 @@
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
+        console.log("startbutton")
         startButton = svg.append("foreignObject")
         .attr('x', (self.widthValue/100) * 40)
         .attr('y', (self.heightValue/100) * 40)
@@ -546,12 +556,41 @@
     setFlags(){
       var self = this;
       return new Promise(function(final_resolve, final_reject){
-        flags = svg.append("g");
+        console.log("setFlags");
+
+        var backgroundImageHeight = d3.select("#survival_game_background_image").node().getBoundingClientRect().height;
+        console.log(backgroundImageHeight)
+
+        flags = backgroundImage.append("g");
 
         for (let i = 0; i < self.flagCoordinatesValue.length; i++) {
+
           flags.append("svg:image")
-            .attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[i].x)
-            .attr('y', (self.heightValue/100) * self.flagCoordinatesValue[i].y)
+                .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[i].x}, ${(self.heightValue / 100) * self.flagCoordinatesValue[i].y})`)
+                    //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
+                    //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
+                    .attr('width', (self.widthValue / 100) * 8)
+                    //.attr('height', this.heightValue)
+                    .style("cursor", "pointer")
+                    .style("opacity", 1)
+                    .attr("xlink:href", self.flagiconUrlValue);
+
+          flags.append("svg:image")
+                    .attr("transform", `translate(${100}, ${backgroundImageHeight/100})`)
+                    //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
+                    //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
+                    .attr('width', (self.widthValue / 100) * 8)
+                    //.attr('height', this.heightValue)
+                    .style("cursor", "pointer")
+                    .style("opacity", 1)
+                    .attr("xlink:href", self.flagiconUrlValue);
+
+
+          flags.append("svg")
+            .attr("transform", `translate(
+            ${(self.widthValue/100) * self.flagCoordinatesValue[i].x},
+            ${(self.heightValue / 100) * self.flagCoordinatesValue[i].y}
+            )`)
             .attr('width', (self.widthValue / 100) * 10)
             //.attr('height', this.heightValue)
             .style("cursor", "pointer")
@@ -606,7 +645,7 @@
 </script>
 
 
-  <div class="container-fluid">
+  <div class="container-fluid" style="background-color: #63C3D1;">
   <div data-controller="survival-game"
     data-survival-game-margin-value="{}"
   >
