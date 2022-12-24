@@ -9,6 +9,9 @@
   var svg;
   var topBox;
   var startButton;
+  var answers;
+  var playerIcon;
+  var flags;
 
   Stimulus.register("survival-game", class extends Controller {
     static values = {
@@ -174,17 +177,33 @@
       this.backgroundImageUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg";
 
 
+      this.initiateGame();
+
+    }
+
+    initiateGame(){
       this.setSvg()
       .then((svg) => this.setBackground())
       .then((background) => this.setLogo())
       .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: this.playerIconUrlValue}))
       .then((box) => this.setStartButton())
       .then((button) => this.setFlags());
+    }
 
+    tryAgain(){
+      this.currentQuestionIndexValue = 0;
+
+      d3.select("svg").remove();
+
+      this.setSvg()
+      .then((svg) => this.setBackground())
+      .then((background) => this.setLogo())
+      .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: this.playerIconUrlValue}))
+      .then((box) => this.setStartButton())
+      .then((button) => this.setFlags());
     }
 
     setSvg(){
-
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
@@ -199,7 +218,9 @@
           .attr("height", self.heightValue + self.marginValue.top + self.marginValue.bottom)
           .append("g")
           .attr("transform", `translate(${0}, ${0})`);
+
           final_resolve("svg set");
+
       })
 
     }
@@ -228,10 +249,14 @@
 
       return new Promise(function(final_resolve, final_reject){
 
+        if(topBox){
+          topBox.remove();
+        }
+
         topBox = svg.append("foreignObject")
-        .attr('x', (self.widthValue/100) * 35)
-        .attr('y', (self.heightValue/100) * 5)
-        .attr('width', (self.widthValue/100) * 60)
+        .attr('x', (self.widthValue/100) * 25)
+        .attr('y', (self.heightValue/100) * 2)
+        .attr('width', (self.widthValue/100) * 72)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
         .html(d => `
@@ -248,6 +273,42 @@
         `);
 
         final_resolve("question box set");
+
+      })
+
+    }
+
+    movePlayerIcon(){
+      var self = this;
+      var current_question_index = this.currentQuestionIndex;
+
+      return new Promise(function(final_resolve, final_reject){
+        playerIcon
+        .transition()
+        .duration(1500)
+        .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${(self.heightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y})`);
+      })
+    }
+
+    setPlayerIcon(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        console.log("setPlayerIcon");
+
+        playerIcon = svg.append("svg:image")
+                  //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
+                  //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
+                  .attr('width', (self.widthValue / 100) * 8)
+                  //.attr('height', this.heightValue)
+                  .style("cursor", "pointer")
+                  .style("opacity", 1)
+                  .attr("xlink:href", self.playerIconUrlValue);
+
+        self.movePlayerIcon();
+
+        final_resolve("player icon set");
 
       })
 
@@ -284,34 +345,108 @@
 
     }
 
-    setAnswer(){
+    checkAnswer(event){
+
+      if(this.questionsValue[this.currentQuestionIndexValue].solution_index == event.params.index){
+        console.log(this.questionsValue[this.currentQuestionIndexValue]);
+        if(this.questionsValue[this.currentQuestionIndexValue].last_question == "true"){
+          answers.remove();
+          topBox.remove();
+          this.currentQuestionIndexValue = this.currentQuestionIndexValue + 1;
+          //this.setTopBox({content: this.questionsValue[this.currentQuestionIndexValue].question, imageUrl: this.numberIconsValue[this.currentQuestionIndexValue] })
+          //this.setAnswers();
+          this.movePlayerIcon();
+        } else {
+          answers.remove();
+          this.currentQuestionIndexValue = this.currentQuestionIndexValue + 1;
+          this.setTopBox({content: this.questionsValue[this.currentQuestionIndexValue].question, imageUrl: this.numberIconsValue[this.currentQuestionIndexValue] })
+          this.setAnswers();
+          this.movePlayerIcon();
+        }
+
+      } else {
+        //console.log("wrong answer");
+        this.deathAnimation()
+        answers.remove();
+        this.setTopBox({content: this.questionsValue[this.currentQuestionIndexValue].wrong_text, imageUrl: this.playerIconUrlValue})
+        this.setRestartButton();
+      }
+    }
+
+    setAnswers(){
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
-        svg.append("foreignObject")
+
+        var answers_string = "";
+
+        for (let i = 0; i < self.questionsValue[self.currentQuestionIndexValue].answers.length; i++) {
+          answers_string +=
+          `
+          <div class="p-1 my-3" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#checkAnswer" data-survival-game-index-param="${i}">
+            <div class="row">
+              <div class="col-1">
+                <div style="border-radius: 50%;
+                height: 25px;
+                width: 25px;
+                border: 2px solid #63C3D1;">
+                </div>
+              </div>
+              <div class="col-11">
+                ${self.questionsValue[self.currentQuestionIndexValue].answers[i]}
+              </div>
+            </div>
+          </div>
+          `;
+        }
+
+
+          answers = svg.append("foreignObject")
+          .attr('x', (self.widthValue/100) * 25)
+          .attr('y', (self.heightValue/100) * 35)
+          .attr('width', (self.widthValue/100) * 72)
+          .attr('height', (self.heightValue))
+          .append("xhtml:div")
+          .html(d => `
+                ${answers_string}
+          `);
+
+
+
+        final_resolve("answer set");
+
+      })
+
+    }
+
+    setRestartButton(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        startButton = svg.append("foreignObject")
         .attr('x', (self.widthValue/100) * 40)
         .attr('y', (self.heightValue/100) * 40)
         .attr('width', (self.widthValue/100) * 50)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
         .html(d => `
-        <div class="p-4" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#startGame">
+        <div class="p-4" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#tryAgain">
           <div class="row">
             <div class="col-1">
               <div style="border-radius: 50%;
-          	  height: 25px;
-          	  width: 25px;
-          	  border: 2px solid #63C3D1;">
+              height: 25px;
+              width: 25px;
+              border: 2px solid #63C3D1;">
               </div>
             </div>
             <div class="col-11">
-              LET'S GO
+              Erneut versuchen
             </div>
           </div>
         </div>
         `);
 
-        final_resolve("answer set");
+        final_resolve("restart button set");
 
       })
 
@@ -396,8 +531,8 @@
 
         svg.append("svg:image")
           .attr('x', (self.widthValue / 100) * 5)
-          .attr('y', (self.heightValue/100) * 5)
-          .attr('width', (self.widthValue / 100) * 25)
+          .attr('y', (self.heightValue/100) * 2)
+          .attr('width', (self.widthValue / 100) * 15)
           //.attr('height', this.heightValue)
           .style("cursor", "pointer")
           .style("opacity", 1)
@@ -411,9 +546,10 @@
     setFlags(){
       var self = this;
       return new Promise(function(final_resolve, final_reject){
+        flags = svg.append("g");
 
         for (let i = 0; i < self.flagCoordinatesValue.length; i++) {
-          svg.append("svg:image")
+          flags.append("svg:image")
             .attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[i].x)
             .attr('y', (self.heightValue/100) * self.flagCoordinatesValue[i].y)
             .attr('width', (self.widthValue / 100) * 10)
@@ -426,6 +562,24 @@
           final_resolve("flags set");
       })
 
+    }
+
+    dropFlags(){
+      d3.selectAll(flags._groups[0][0].childNodes)
+      .transition()
+      .duration(1500)
+      .attr("transform", `translate(${0}, ${2000})`);
+    }
+
+    dropPlayerIcon(){
+      playerIcon.transition()
+      .duration(1500)
+      .attr("transform", `translate(${0}, ${2000})`);
+    }
+
+    deathAnimation(){
+      this.dropFlags();
+      this.dropPlayerIcon()
     }
 
     drawGame(){
@@ -442,7 +596,9 @@
 
     startGame() {
       startButton.remove();
-      this.updateTopBox({content: this.questionsValue[this.currentQuestionIndexValue].question, imageUrl: this.numberIconsValue[this.currentQuestionIndexValue] })
+      this.setTopBox({content: this.questionsValue[this.currentQuestionIndexValue].question, imageUrl: this.numberIconsValue[this.currentQuestionIndexValue] })
+      this.setAnswers();
+      this.setPlayerIcon();
 
     }
 
@@ -450,7 +606,7 @@
 </script>
 
 
-  <div class="container">
+  <div class="container-fluid">
   <div data-controller="survival-game"
     data-survival-game-margin-value="{}"
   >
