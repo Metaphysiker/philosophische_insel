@@ -558,8 +558,13 @@
       return new Promise(function(final_resolve, final_reject){
         console.log("setFlags");
 
-        var backgroundImageHeight = d3.select("#survival_game_background_image").node().getBoundingClientRect().height;
-        console.log(backgroundImageHeight)
+
+        setTimeout(() => {
+          console.log("Delayed");
+          var backgroundImageHeight = d3.select("#survival_game_background_image").node().getBoundingClientRect().height;
+          console.log(backgroundImageHeight);
+        }, "100")
+
 
         flags = backgroundImage.append("g");
 
@@ -576,7 +581,7 @@
                     .attr("xlink:href", self.flagiconUrlValue);
 
           flags.append("svg:image")
-                    .attr("transform", `translate(${100}, ${backgroundImageHeight/100})`)
+                    .attr("transform", `translate(${100}, ${100/100})`)
                     //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
                     //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
                     .attr('width', (self.widthValue / 100) * 8)
@@ -585,17 +590,6 @@
                     .style("opacity", 1)
                     .attr("xlink:href", self.flagiconUrlValue);
 
-
-          flags.append("svg")
-            .attr("transform", `translate(
-            ${(self.widthValue/100) * self.flagCoordinatesValue[i].x},
-            ${(self.heightValue / 100) * self.flagCoordinatesValue[i].y}
-            )`)
-            .attr('width', (self.widthValue / 100) * 10)
-            //.attr('height', this.heightValue)
-            .style("cursor", "pointer")
-            .style("opacity", 1)
-            .attr("xlink:href", self.flagiconUrlValue);
         }
 
           final_resolve("flags set");
