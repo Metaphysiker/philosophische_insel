@@ -21,14 +21,53 @@
       playerIconUrl: String,
       questions: Array,
       startText: String,
-      currentQuestionIndex: Number
+      currentQuestionIndex: Number,
+      flagiconUrl: String,
+      flagCoordinates: Array
     }
 
     static targets = [ "name", "output", "game" ]
 
     connect() {
 
-      this.currentQuestionIndex = 0;
+      this.flagCoordinatesValue = [
+        {
+          x: 4,
+          y: 87
+        },
+        {
+          x: 15,
+          y: 91
+        },
+        {
+          x: 28,
+          y: 86
+        },
+        {
+          x: 39,
+          y: 76
+        },
+        {
+          x: 51,
+          y: 73
+        },
+        {
+          x: 62,
+          y: 59
+        },
+        {
+          x: 73,
+          y: 77
+        },
+        {
+          x: 87,
+          y: 89
+        }
+      ];
+
+      this.currentQuestionIndexValue = 0;
+
+      this.flagiconUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_milestone.png";
 
       this.startTextValue = "Hey du, heute gehen wir gemeinsam Wandern. Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack, Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erhalten."
 
@@ -139,7 +178,8 @@
       .then((svg) => this.setBackground())
       .then((background) => this.setLogo())
       .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: this.playerIconUrlValue}))
-      .then((box) => this.setStartButton());
+      .then((box) => this.setStartButton())
+      .then((button) => this.setFlags());
 
     }
 
@@ -197,10 +237,10 @@
         .html(d => `
         <div class="rounded text-white p-4" style="background-color: #415C66;">
           <div class="row">
-            <div class="col-3">
+            <div class="col-2">
               <img src="${parameters["imageUrl"]}" class="img-fluid">
             </div>
-            <div class="col-9">
+            <div class="col-10">
               ${parameters.content}
             </div>
           </div>
@@ -228,10 +268,10 @@
         .html(d => `
         <div class="rounded text-white p-4" style="background-color: #415C66;">
           <div class="row">
-            <div class="col-3">
+            <div class="col-2">
               <img src="${parameters["imageUrl"]}" class="img-fluid">
             </div>
-            <div class="col-9">
+            <div class="col-10">
               ${parameters.content}
             </div>
           </div>
@@ -250,7 +290,7 @@
       return new Promise(function(final_resolve, final_reject){
         svg.append("foreignObject")
         .attr('x', (self.widthValue/100) * 40)
-        .attr('y', (self.heightValue/100) * 50)
+        .attr('y', (self.heightValue/100) * 40)
         .attr('width', (self.widthValue/100) * 50)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
@@ -283,7 +323,7 @@
       return new Promise(function(final_resolve, final_reject){
         startButton = svg.append("foreignObject")
         .attr('x', (self.widthValue/100) * 40)
-        .attr('y', (self.heightValue/100) * 50)
+        .attr('y', (self.heightValue/100) * 40)
         .attr('width', (self.widthValue/100) * 50)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
@@ -364,6 +404,26 @@
           .attr("xlink:href", "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg");
 
           final_resolve("logo set");
+      })
+
+    }
+
+    setFlags(){
+      var self = this;
+      return new Promise(function(final_resolve, final_reject){
+
+        for (let i = 0; i < self.flagCoordinatesValue.length; i++) {
+          svg.append("svg:image")
+            .attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[i].x)
+            .attr('y', (self.heightValue/100) * self.flagCoordinatesValue[i].y)
+            .attr('width', (self.widthValue / 100) * 10)
+            //.attr('height', this.heightValue)
+            .style("cursor", "pointer")
+            .style("opacity", 1)
+            .attr("xlink:href", self.flagiconUrlValue);
+        }
+
+          final_resolve("flags set");
       })
 
     }
