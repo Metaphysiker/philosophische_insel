@@ -266,10 +266,10 @@
         }
 
         topBox = svg.append("foreignObject")
-        .attr('x', (self.widthValue/100) * 25)
+        .attr('x', (self.widthValue/100) * 20)
         .attr('y', (self.heightValue/100) * 2)
         .attr('width', (self.widthValue/100) * 72)
-        .attr('height', (self.heightValue))
+        .attr('height', (self.heightValue/100)* 25)
         .append("xhtml:div")
         .html(d => `
         <div class="rounded text-white p-4" style="background-color: #415C66;">
@@ -421,7 +421,7 @@
 
           answers = svg.append("foreignObject")
           .attr('x', (self.widthValue/100) * 25)
-          .attr('y', (self.heightValue/100) * 35)
+          .attr('y', (self.heightValue/100) * 20)
           .attr('width', (self.widthValue/100) * 72)
           .attr('height', (self.heightValue))
           .append("xhtml:div")
@@ -477,7 +477,7 @@
         console.log("startbutton")
         startButton = svg.append("foreignObject")
         .attr('x', (self.widthValue/100) * 40)
-        .attr('y', (self.heightValue/100) * 40)
+        .attr('y', (self.heightValue/100) * 20)
         .attr('width', (self.widthValue/100) * 50)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
@@ -616,7 +616,6 @@
           .transition()
           .duration(1500)
           .attr("transform", function(d) {
-            console.log(d)
             return `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[i].x}, 2000)`
           })
         });
