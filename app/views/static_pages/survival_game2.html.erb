@@ -22,6 +22,7 @@
       width: Number,
       height: Number,
       backgroundImageUrl: String,
+      backgroundImageHeight: Number,
       numberIcons: Array,
       playerIconUrl: String,
       questions: Array,
@@ -36,40 +37,40 @@
 
     connect() {
 
-      this.backgroundImageBufferValue = 0;
+      this.backgroundImageBufferValue = 200;
 
       this.flagCoordinatesValue = [
         {
-          x: 4,
-          y: 87
+          x: 8,
+          y: 82
         },
         {
-          x: 15,
-          y: 91
-        },
-        {
-          x: 28,
+          x: 21,
           y: 86
         },
         {
-          x: 39,
-          y: 76
+          x: 32,
+          y: 82
         },
         {
-          x: 51,
-          y: 73
+          x: 43,
+          y: 74
         },
         {
-          x: 62,
+          x: 55,
+          y: 72
+        },
+        {
+          x: 67,
           y: 59
         },
         {
-          x: 73,
-          y: 77
+          x: 79,
+          y: 76
         },
         {
-          x: 87,
-          y: 89
+          x: 91,
+          y: 83
         }
       ];
 
@@ -215,7 +216,7 @@
 
         self.widthValue = self.gameTarget.offsetWidth;
 
-        self.heightValue = self.widthValue / 2.2;
+        self.heightValue = self.widthValue / 1;
 
         svg = d3.select("#game")
           .append("svg")
@@ -239,11 +240,13 @@
 
       return new Promise(function(final_resolve, final_reject){
 
+        self.backgroundImageHeightValue = self.widthValue * 0.56585754078;
+
         backgroundImage.append("svg:image")
           .attr("transform", `translate(${0}, ${0})`)
           .attr('width', self.widthValue)
           .attr('id', "survival_game_background_image")
-          //.attr('height', self.widthValue/1.2)
+          .attr('height', self.backgroundImageHeightValue)
           .style("opacity", 1)
           .attr("xlink:href", "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg");
 
@@ -292,10 +295,11 @@
       var current_question_index = this.currentQuestionIndex;
 
       return new Promise(function(final_resolve, final_reject){
+
         playerIcon
         .transition()
         .duration(1500)
-        .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${(self.heightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y})`);
+        .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${(self.backgroundImageHeightValue/ 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y})`);
       })
     }
 
@@ -306,7 +310,12 @@
 
         console.log("setPlayerIcon");
 
-        playerIcon = backgroundImage.append("svg:image")
+        playerIcon = backgroundImage
+                  .append("g");
+
+                  playerIcon
+                  .append("svg:image")
+                  .attr("transform", `translate(${-((self.widthValue / 100) * 8)/2}, ${-((self.widthValue / 100) * 8)/2})`)
                   //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
                   //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
                   .attr('width', (self.widthValue / 100) * 8)
@@ -557,57 +566,76 @@
       var self = this;
       return new Promise(function(final_resolve, final_reject){
         console.log("setFlags");
-
-
-        setTimeout(() => {
-          console.log("Delayed");
-          var backgroundImageHeight = d3.select("#survival_game_background_image").node().getBoundingClientRect().height;
-          console.log(backgroundImageHeight);
-        }, "100")
-
-
         flags = backgroundImage.append("g");
 
         for (let i = 0; i < self.flagCoordinatesValue.length; i++) {
 
-          flags.append("svg:image")
-                .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[i].x}, ${(self.heightValue / 100) * self.flagCoordinatesValue[i].y})`)
-                    //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
-                    //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
-                    .attr('width', (self.widthValue / 100) * 8)
-                    //.attr('height', this.heightValue)
-                    .style("cursor", "pointer")
-                    .style("opacity", 1)
-                    .attr("xlink:href", self.flagiconUrlValue);
+        var flagWidth = (self.widthValue / 100) * 8;
+        var flagHeight = flagWidth;
 
-          flags.append("svg:image")
-                    .attr("transform", `translate(${100}, ${100/100})`)
-                    //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
-                    //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
-                    .attr('width', (self.widthValue / 100) * 8)
-                    //.attr('height', this.heightValue)
-                    .style("cursor", "pointer")
-                    .style("opacity", 1)
-                    .attr("xlink:href", self.flagiconUrlValue);
+      //  flags
+      //        .append('g')
+      //        .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[i].x}, ${(backgroundImageHeight / 100) * self.flagCoordinatesValue[i].y})`)
+      //        .append('circle')
+      //         .attr('r', 10)
+      //         .attr('stroke', 'gray')
+      //         .attr('fill', 'gray')
+
+              flags
+                  .append('g')
+                  .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[i].x}, ${(self.backgroundImageHeightValue / 100) * self.flagCoordinatesValue[i].y})`)
+                  .append("svg:image")
+                  .attr("transform", `translate(${-(flagWidth * 0.48)}, ${-flagHeight * 0.73})`)
+                  //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
+                  //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
+                  .attr('width', (self.widthValue / 100) * 8)
+                  .attr('height', flagHeight)
+                  //.attr('height', this.heightValue)
+                  .style("cursor", "pointer")
+                  .style("opacity", 1)
+                  .attr("xlink:href", self.flagiconUrlValue);
 
         }
 
           final_resolve("flags set");
+
+
+
       })
 
     }
 
     dropFlags(){
+
+      var self = this;
+
       d3.selectAll(flags._groups[0][0].childNodes)
-      .transition()
-      .duration(1500)
-      .attr("transform", `translate(${0}, ${2000})`);
+        .each(function (p, i) {
+
+          d3.select(this)
+          .transition()
+          .duration(1500)
+          .attr("transform", function(d) {
+            console.log(d)
+            return `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[i].x}, 2000)`
+          })
+        });
+
+    //  d3.selectAll(flags._groups[0][0].childNodes)
+    //  .transition()
+    //  .duration(1500)
+    //  .attr("transform", function(d) {
+    //    console.log(d)
+    //    return `translate(${0}, 2000)`
+    //  })
+      //.attr("transform", `translate(${0}, ${2000})`);
     }
 
     dropPlayerIcon(){
+      var self = this;
       playerIcon.transition()
       .duration(1500)
-      .attr("transform", `translate(${0}, ${2000})`);
+      .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${2000})`);
     }
 
     deathAnimation(){
