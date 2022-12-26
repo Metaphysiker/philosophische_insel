@@ -30,14 +30,24 @@
       currentQuestionIndex: Number,
       flagiconUrl: String,
       flagCoordinates: Array,
-      backgroundImageBuffer: Number
+      backgroundImageBuffer: Number,
+      topBoxSize: Object
     }
 
-    static targets = [ "name", "output", "game" ]
+    static targets = [ "name", "output", "game", "baseTopBox" ]
 
     connect() {
 
-      this.backgroundImageBufferValue = 200;
+      console.log(this.baseTopBoxTarget.offsetHeight);
+
+      this.backgroundImageBufferValue = this.baseTopBoxTarget.offsetHeight * 1.5;
+
+      this.topBoxSizeValue = {
+        width_percentage: 95,
+        height: this.baseTopBoxTarget.offsetHeight + 35
+      };
+
+      console.log(this.topBoxSizeValue);
 
       this.flagCoordinatesValue = [
         {
@@ -190,7 +200,7 @@
     initiateGame(){
       this.setSvg()
       .then((svg) => this.setBackground())
-      .then((background) => this.setLogo())
+      //.then((background) => this.setLogo())
       .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: this.playerIconUrlValue}))
       .then((box) => this.setStartButton())
       .then((button) => this.setFlags());
@@ -264,18 +274,20 @@
         if(topBox){
           topBox.remove();
         }
-
+        console.log("topBoxSizeValue");
+        console.log(self.topBoxSizeValue.height);
         topBox = svg.append("foreignObject")
-        .attr('x', (self.widthValue/100) * 20)
-        .attr('y', (self.heightValue/100) * 2)
-        .attr('width', (self.widthValue/100) * 72)
-        .attr('height', (self.heightValue/100)* 25)
+        .attr('x', (self.widthValue/100) * 0)
+        .attr('y', (self.heightValue/100) * 0)
+        .attr('width', (self.widthValue/100) * self.topBoxSizeValue.width_percentage)
+      //  .attr('height', (self.heightValue/100)* 25)
+        .attr('height', self.topBoxSizeValue.height)
         .append("xhtml:div")
         .html(d => `
         <div class="rounded text-white p-4" style="background-color: #415C66;">
           <div class="row">
             <div class="col-2">
-              <img src="${parameters["imageUrl"]}" class="img-fluid">
+              <img src="${parameters["imageUrl"]}" class="" style="max-height: 75px;">
             </div>
             <div class="col-10">
               ${parameters.content}
@@ -476,9 +488,9 @@
       return new Promise(function(final_resolve, final_reject){
         console.log("startbutton")
         startButton = svg.append("foreignObject")
-        .attr('x', (self.widthValue/100) * 40)
-        .attr('y', (self.heightValue/100) * 20)
-        .attr('width', (self.widthValue/100) * 50)
+        .attr('x', (self.widthValue/100) * 0)
+        .attr('y', self.topBoxSizeValue.height)
+        .attr('width', (self.widthValue/100) * 95)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
         .html(d => `
@@ -676,6 +688,16 @@
 
     <div data-survival-game-target="game" id="game">
 
+    </div>
+
+    <div data-survival-game-target="baseTopBox" class="rounded text-white p-4" style="background-color: #415C66;">
+      <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-10">
+          Hey du, heute gehen wir gemeinsam Wandern. Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack, Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erhalten.
+        </div>
+      </div>
     </div>
 
   </div>
