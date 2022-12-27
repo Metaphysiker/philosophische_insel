@@ -31,14 +31,22 @@
       flagiconUrl: String,
       flagCoordinates: Array,
       backgroundImageBuffer: Number,
-      topBoxSize: Object
+      topBoxSize: Object,
+      iconMaxHeight: Number,
+      standardX: Number,
+      standardWidthPercentage: Number
     }
 
     static targets = [ "name", "output", "game", "baseTopBox" ]
 
     connect() {
 
+      this.standardXValue = 0;
+      this.standardWidthPercentageValue = 95;
+
       console.log(this.baseTopBoxTarget.offsetHeight);
+
+      this.iconMaxHeightValue = 100;
 
       this.backgroundImageBufferValue = this.baseTopBoxTarget.offsetHeight * 1.5;
 
@@ -201,7 +209,7 @@
       this.setSvg()
       .then((svg) => this.setBackground())
       //.then((background) => this.setLogo())
-      .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: this.playerIconUrlValue}))
+      .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg"}))
       .then((box) => this.setStartButton())
       .then((button) => this.setFlags());
     }
@@ -226,7 +234,7 @@
 
         self.widthValue = self.gameTarget.offsetWidth;
 
-        self.heightValue = self.widthValue / 1;
+        self.heightValue = 1200;
 
         svg = d3.select("#game")
           .append("svg")
@@ -274,20 +282,18 @@
         if(topBox){
           topBox.remove();
         }
-        console.log("topBoxSizeValue");
-        console.log(self.topBoxSizeValue.height);
         topBox = svg.append("foreignObject")
-        .attr('x', (self.widthValue/100) * 0)
+        .attr('x', (self.widthValue/100) * self.standardXValue)
         .attr('y', (self.heightValue/100) * 0)
-        .attr('width', (self.widthValue/100) * self.topBoxSizeValue.width_percentage)
+        .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
       //  .attr('height', (self.heightValue/100)* 25)
         .attr('height', self.topBoxSizeValue.height)
         .append("xhtml:div")
         .html(d => `
-        <div class="card text-white py-2" style="background-color: #415C66;">
+        <div class="card text-white py-2" style="background-color: #415C66; height: ${self.topBoxSizeValue.height}px">
           <div class="row g-0">
             <div class="col-md-2 text-center">
-              <img src="${parameters["imageUrl"]}" class="img-fluid rounded-start" style="max-height: 100px;">
+              <img src="${parameters["imageUrl"]}" class="img-fluid rounded-start" style="max-height: ${self.iconMaxHeightValue}px;">
             </div>
             <div class="col-md-10">
               <div class="card-body">
@@ -416,13 +422,14 @@
         for (let i = 0; i < self.questionsValue[self.currentQuestionIndexValue].answers.length; i++) {
           answers_string +=
           `
-          <div class="p-1 my-3" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#checkAnswer" data-survival-game-index-param="${i}">
+          <div class="p-1 mb-3 py-3" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#checkAnswer" data-survival-game-index-param="${i}">
             <div class="row">
-              <div class="col-1">
+              <div class="col-1 d-flex align-items-center">
                 <div style="border-radius: 50%;
                 height: 25px;
                 width: 25px;
                 border: 2px solid #63C3D1;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
               </div>
               <div class="col-11">
@@ -435,9 +442,9 @@
 
 
           answers = svg.append("foreignObject")
-          .attr('x', (self.widthValue/100) * 25)
-          .attr('y', (self.heightValue/100) * 20)
-          .attr('width', (self.widthValue/100) * 72)
+          .attr('x', (self.widthValue/100) * self.standardXValue)
+          .attr('y', self.topBoxSizeValue.height + self.topBoxSizeValue.height/10)
+          .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
           .attr('height', (self.heightValue))
           .append("xhtml:div")
           .html(d => `
@@ -457,9 +464,11 @@
 
       return new Promise(function(final_resolve, final_reject){
         startButton = svg.append("foreignObject")
-        .attr('x', (self.widthValue/100) * 40)
-        .attr('y', (self.heightValue/100) * 40)
-        .attr('width', (self.widthValue/100) * 50)
+        .attr('x', (self.widthValue/100) * 0)
+      //  .attr('y', (self.heightValue/100) * 40)
+        .attr('y', self.topBoxSizeValue.height + self.topBoxSizeValue.height/10)
+
+        .attr('width', (self.widthValue/100) * 90)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
         .html(d => `
@@ -491,9 +500,9 @@
       return new Promise(function(final_resolve, final_reject){
         console.log("startbutton")
         startButton = svg.append("foreignObject")
-        .attr('x', (self.widthValue/100) * 0)
-        .attr('y', self.topBoxSizeValue.height)
-        .attr('width', (self.widthValue/100) * 95)
+        .attr('x', (self.widthValue/100) * self.standardXValue)
+        .attr('y', self.topBoxSizeValue.height + self.topBoxSizeValue.height/10)
+        .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
         .html(d => `
@@ -563,9 +572,9 @@
       var self = this;
       return new Promise(function(final_resolve, final_reject){
 
-        svg.append("svg:image")
-          .attr('x', (self.widthValue / 100) * 5)
-          .attr('y', (self.heightValue/100) * 2)
+        backgroundImage.append("svg:image")
+          .attr('x', (self.widthValue / 100) * 0)
+          .attr('y', (self.backgroundImageHeightValue/100) * 20)
           .attr('width', (self.widthValue / 100) * 15)
           //.attr('height', this.heightValue)
           .style("cursor", "pointer")
@@ -693,10 +702,10 @@
 
     </div>
 
-    <div data-survival-game-target="baseTopBox" class="card text-white py-2" style="background-color: #415C66;">
+    <div data-survival-game-target="baseTopBox" class="card text-white py-2 mt-5" style="background-color: #415C66;">
       <div class="row g-0">
         <div class="col-md-2 text-center">
-          <img src="https://vegan.ch/wp-content/uploads/VGS_VSG_player.svg" class="rounded-start text-center" style="max-height: 100px;">
+          <img src="https://vegan.ch/wp-content/uploads/VGS_VSG_player.svg" class="rounded-start text-center" style="max-height: 150px;">
         </div>
         <div class="col-md-10">
           <div class="card-body">
