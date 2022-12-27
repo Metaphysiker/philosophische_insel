@@ -43,6 +43,9 @@
 
     connect() {
 
+      this.calculateHeightOf("<p>swag</p>")
+      .then((result)=> console.log("result: " + result));
+
       this.standardXValue = 0;
       this.standardWidthPercentageValue = 95;
 
