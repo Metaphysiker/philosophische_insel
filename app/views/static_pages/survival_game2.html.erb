@@ -34,28 +34,28 @@
       topBoxSize: Object,
       iconMaxHeight: Number,
       standardX: Number,
-      standardWidthPercentage: Number
+      standardWidthPercentage: Number,
+      currentTopBoxHeight: Number
     }
 
-    static targets = [ "name", "output", "game", "baseTopBox" ]
+    static targets = [ "name", "output", "game", "calculateHeightOf"]
 
     connect() {
+
+      this.calculateHeightOf("<p>swag</p>")
+      .then((result)=> console.log("result: " + result));
 
       this.standardXValue = 0;
       this.standardWidthPercentageValue = 95;
 
-      console.log(this.baseTopBoxTarget.offsetHeight);
+      this.iconMaxHeightValue = 85;
 
-      this.iconMaxHeightValue = 100;
-
-      this.backgroundImageBufferValue = this.baseTopBoxTarget.offsetHeight * 1.5;
+      this.backgroundImageBufferValue = 500;
 
       this.topBoxSizeValue = {
         width_percentage: 95,
-        height: this.baseTopBoxTarget.offsetHeight + 35
+        height: 0
       };
-
-      console.log(this.topBoxSizeValue);
 
       this.flagCoordinatesValue = [
         {
@@ -201,7 +201,10 @@
       this.backgroundImageUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg";
 
 
-      this.initiateGame();
+      setTimeout(() => {
+          this.initiateGame();
+        }, 1000)
+
 
     }
 
@@ -234,7 +237,7 @@
 
         self.widthValue = self.gameTarget.offsetWidth;
 
-        self.heightValue = 1200;
+        self.heightValue = 1500;
 
         svg = d3.select("#game")
           .append("svg")
@@ -282,15 +285,9 @@
         if(topBox){
           topBox.remove();
         }
-        topBox = svg.append("foreignObject")
-        .attr('x', (self.widthValue/100) * self.standardXValue)
-        .attr('y', (self.heightValue/100) * 0)
-        .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
-      //  .attr('height', (self.heightValue/100)* 25)
-        .attr('height', self.topBoxSizeValue.height)
-        .append("xhtml:div")
-        .html(d => `
-        <div class="card text-white py-2" style="background-color: #415C66; height: ${self.topBoxSizeValue.height}px">
+
+        var html_of_top_box = `
+        <div class="card text-white py-2" style="background-color: #415C66;">
           <div class="row g-0">
             <div class="col-md-2 text-center">
               <img src="${parameters["imageUrl"]}" class="img-fluid rounded-start" style="max-height: ${self.iconMaxHeightValue}px;">
@@ -303,9 +300,26 @@
           </div>
         </div>
 
-        `);
+        `;
 
-        final_resolve("question box set");
+        self.calculateHeightOf(html_of_top_box)
+        .then((height_result) => {
+
+          self.currentTopBoxHeightValue = height_result;
+
+          topBox = svg.append("foreignObject")
+          .attr('x', (self.widthValue/100) * self.standardXValue)
+          //.attr('y', 100)
+          .attr('y', (self.heightValue/100) * 0)
+          .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
+        //  .attr('height', (self.heightValue/100)* 25)
+          .attr('height', height_result)
+          .append("xhtml:div")
+          .html(html_of_top_box);
+
+          final_resolve("question box set");
+
+        });
 
       })
 
@@ -387,28 +401,24 @@
     checkAnswer(event){
 
       if(this.questionsValue[this.currentQuestionIndexValue].solution_index == event.params.index){
-        console.log(this.questionsValue[this.currentQuestionIndexValue]);
         if(this.questionsValue[this.currentQuestionIndexValue].last_question == "true"){
           answers.remove();
           topBox.remove();
           this.currentQuestionIndexValue = this.currentQuestionIndexValue + 1;
-          //this.setTopBox({content: this.questionsValue[this.currentQuestionIndexValue].question, imageUrl: this.numberIconsValue[this.currentQuestionIndexValue] })
-          //this.setAnswers();
           this.movePlayerIcon();
         } else {
           answers.remove();
           this.currentQuestionIndexValue = this.currentQuestionIndexValue + 1;
           this.setTopBox({content: this.questionsValue[this.currentQuestionIndexValue].question, imageUrl: this.numberIconsValue[this.currentQuestionIndexValue] })
-          this.setAnswers();
+          .then((topBox) => this.setAnswers());
           this.movePlayerIcon();
         }
 
       } else {
-        //console.log("wrong answer");
         this.deathAnimation()
         answers.remove();
         this.setTopBox({content: this.questionsValue[this.currentQuestionIndexValue].wrong_text, imageUrl: this.playerIconUrlValue})
-        this.setRestartButton();
+        .then((topBox) => this.setRestartButton());
       }
     }
 
@@ -422,20 +432,22 @@
         for (let i = 0; i < self.questionsValue[self.currentQuestionIndexValue].answers.length; i++) {
           answers_string +=
           `
-          <div class="p-1 mb-3 py-3" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#checkAnswer" data-survival-game-index-param="${i}">
-            <div class="row">
-              <div class="col-1 d-flex align-items-center">
-                <div style="border-radius: 50%;
-                height: 25px;
-                width: 25px;
-                border: 2px solid #63C3D1;">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-              </div>
-              <div class="col-11">
-                ${self.questionsValue[self.currentQuestionIndexValue].answers[i]}
-              </div>
-            </div>
+          <div class="p-2 mb-2" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#checkAnswer" data-survival-game-index-param="${i}">
+            <table>
+              <tr>
+                <td style="width: 35px; background: transparent; vertical-align: center !important;">
+                  <div style="padding-left:5px;
+                  border-radius: 50%;
+                  height: 25px;
+                  width: 25px;
+                  background: transparent;
+                  border: 2px solid #63C3D1;">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </div>
+                </td>
+                <td style="padding-left: 15px;">${self.questionsValue[self.currentQuestionIndexValue].answers[i]}</td>
+              </tr>
+            </table>
           </div>
           `;
         }
@@ -443,7 +455,7 @@
 
           answers = svg.append("foreignObject")
           .attr('x', (self.widthValue/100) * self.standardXValue)
-          .attr('y', self.topBoxSizeValue.height + self.topBoxSizeValue.height/10)
+          .attr('y', self.currentTopBoxHeightValue)
           .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
           .attr('height', (self.heightValue))
           .append("xhtml:div")
@@ -466,25 +478,26 @@
         startButton = svg.append("foreignObject")
         .attr('x', (self.widthValue/100) * 0)
       //  .attr('y', (self.heightValue/100) * 40)
-        .attr('y', self.topBoxSizeValue.height + self.topBoxSizeValue.height/10)
+        .attr('y', self.currentTopBoxHeightValue)
 
         .attr('width', (self.widthValue/100) * 90)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
         .html(d => `
         <div class="p-4" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#tryAgain">
-          <div class="row">
-            <div class="col-1">
-              <div style="border-radius: 50%;
-              height: 25px;
-              width: 25px;
-              border: 2px solid #63C3D1;">
-              </div>
-            </div>
-            <div class="col-11">
-              Erneut versuchen
-            </div>
-          </div>
+          <table style="background: transparent;">
+            <tr>
+              <td style="width: 35px;">
+                <div style="border-radius: 50%;
+                height: 25px;
+                width: 25px;
+                border: 2px solid #63C3D1;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+              </td>
+              <td style="padding-left: 15px;">Erneut versuchen</td>
+            </tr>
+          </table>
         </div>
         `);
 
@@ -498,27 +511,28 @@
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
-        console.log("startbutton")
         startButton = svg.append("foreignObject")
         .attr('x', (self.widthValue/100) * self.standardXValue)
-        .attr('y', self.topBoxSizeValue.height + self.topBoxSizeValue.height/10)
+        .attr('y', self.currentTopBoxHeightValue)
         .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
         .attr('height', (self.heightValue))
         .append("xhtml:div")
         .html(d => `
         <div class="p-4" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#startGame">
-          <div class="row">
-            <div class="col-1">
-              <div style="border-radius: 50%;
-              height: 25px;
-              width: 25px;
-              border: 2px solid #63C3D1;">
-              </div>
-            </div>
-            <div class="col-11">
-              Spiel starten
-            </div>
-          </div>
+          <table>
+            <tr>
+              <td style="width: 35px;">
+                <div style="border-radius: 50%;
+                height: 25px;
+                width: 25px;
+                background: transparent;
+                border: 2px solid #63C3D1;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+              </td>
+              <td style="padding-left: 15px;">Spiel starten</td>
+            </tr>
+          </table>
         </div>
         `);
 
@@ -672,6 +686,22 @@
 
     }
 
+    calculateHeightOf(html){
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        self.calculateHeightOfTarget.innerHTML = html;
+        self.calculateHeightOfTarget.style.width = self.topBoxSizeValue.width_percentage + "%";
+
+        setTimeout(() => {
+            //final_resolve(self.calculateHeightOfTarget.getBoundingClientRect().height)
+            final_resolve(self.calculateHeightOfTarget.offsetHeight + 25)
+          }, 200)
+
+      })
+    }
+
     greet() {
       console.log()
       this.outputTarget.textContent =
@@ -681,7 +711,7 @@
     startGame() {
       startButton.remove();
       this.setTopBox({content: this.questionsValue[this.currentQuestionIndexValue].question, imageUrl: this.numberIconsValue[this.currentQuestionIndexValue] })
-      this.setAnswers();
+      .then((topBox)=>this.setAnswers());
       this.setPlayerIcon();
 
     }
@@ -690,9 +720,12 @@
 </script>
 
 
-  <div class="container-fluid" style="background-color: #63C3D1;">
+  <div>
+  </div>
+
   <div data-controller="survival-game"
     data-survival-game-margin-value="{}"
+    class="container-fluid" style="background-color: #63C3D1; font-size: 0.9rem;"
   >
 
     <span data-survival-game-target="output">
@@ -702,28 +735,9 @@
 
     </div>
 
-    <div data-survival-game-target="baseTopBox" class="card text-white py-2 mt-5" style="background-color: #415C66;">
-      <div class="row g-0">
-        <div class="col-md-2 text-center">
-          <img src="https://vegan.ch/wp-content/uploads/VGS_VSG_player.svg" class="rounded-start text-center" style="max-height: 150px;">
-        </div>
-        <div class="col-md-10">
-          <div class="card-body">
-            Hey du, heute gehen wir gemeinsam Wandern. Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack, Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erhalten.
-          </div>
-        </div>
-      </div>
+    <div data-survival-game-target="calculateHeightOf">
+
     </div>
 
-    <div class="rounded text-white p-4" style="background-color: #415C66;">
-      <div class="row">
-        <div class="col-2">
-        </div>
-        <div class="col-10">
-          Hey du, heute gehen wir gemeinsam Wandern. Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack, Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erhalten.
-        </div>
-      </div>
-    </div>
 
   </div>
-</div>
