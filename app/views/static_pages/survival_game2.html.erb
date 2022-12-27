@@ -35,7 +35,8 @@
       iconMaxHeight: Number,
       standardX: Number,
       standardWidthPercentage: Number,
-      currentTopBoxHeight: Number
+      currentTopBoxHeight: Number,
+      currentMidBoxHeight: Number
     }
 
     static targets = [ "name", "output", "game", "calculateHeightOf"]
@@ -211,10 +212,12 @@
     initiateGame(){
       this.setSvg()
       .then((svg) => this.setBackground())
-      //.then((background) => this.setLogo())
+      .then((background) => this.setLogo())
       .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg"}))
       .then((box) => this.setStartButton())
-      .then((button) => this.setFlags());
+      .then((button) => this.setFlags())
+      .then((flags) =>(this.moveBackground()));
+
     }
 
     tryAgain(){
@@ -227,7 +230,8 @@
       .then((background) => this.setLogo())
       .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: this.playerIconUrlValue}))
       .then((box) => this.setStartButton())
-      .then((button) => this.setFlags());
+      .then((button) => this.setFlags())
+      .then((flags) =>(this.moveBackground()));
     }
 
     setSvg(){
@@ -246,12 +250,29 @@
           .append("g")
           .attr("transform", `translate(${0}, ${0})`);
 
-        backgroundImage = svg.append("g")
-        .attr("transform", `translate(${0}, ${self.backgroundImageBufferValue})`);
+        backgroundImage = svg.append("g");
+        //.attr("transform", `translate(${0}, ${self.backgroundImageBufferValue})`);
 
 
           final_resolve("svg set");
 
+      })
+
+    }
+
+    moveBackground(){
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        console.log("movebg");
+        console.log(self.currentTopBoxHeightValue);
+        console.log(self.currentMidBoxHeight);
+        console.log(self.currentTopBoxHeightValue + self.currentMidBoxHeightValue);
+        backgroundImage
+        .attr("transform", `translate(${0}, ${self.currentTopBoxHeightValue + self.currentMidBoxHeightValue})`);
+
+        final_resolve("background moved");
       })
 
     }
@@ -453,17 +474,20 @@
         }
 
 
+        self.calculateHeightOf(answers_string)
+        .then((height_result) => {
+
+          self.currentMidBoxHeightValue = height_result;
+
           answers = svg.append("foreignObject")
           .attr('x', (self.widthValue/100) * self.standardXValue)
           .attr('y', self.currentTopBoxHeightValue)
           .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
-          .attr('height', (self.heightValue))
+          .attr('height', height_result)
           .append("xhtml:div")
-          .html(d => `
-                ${answers_string}
-          `);
+          .html(answers_string);
 
-
+         })
 
         final_resolve("answer set");
 
