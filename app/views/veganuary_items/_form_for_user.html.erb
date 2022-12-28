@@ -3,9 +3,9 @@
 <script>
   tinymce.init({
   selector: '.tinymce',  // change this value according to your HTML
-  plugins: 'wordcount link',
+  plugins: 'wordcount link code',
   menubar: false,
-  toolbar: "styleselect | bold italic | undo redo | link | table | code | alignleft | aligncenter | alignjustify",
+  toolbar: "styleselect | bold italic | undo redo | link | table | code | alignleft | aligncenter | alignjustify | code",
   init_instance_callback: function(){
     var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
 
