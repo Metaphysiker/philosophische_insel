@@ -43,6 +43,10 @@
 
       this.veganSurvivalGameLogoUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg";
 
+      this.flagValue = {
+        height: 50,
+        width: 50
+      };
 
       this.flagIconUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_milestone.png";
 
@@ -93,8 +97,6 @@
       ];
 
       this.playerIconUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_player.svg";
-
-      this.standardWidthPercentageValue = 98;
 
       this.backgroundImageUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg";
 
@@ -220,7 +222,27 @@
       return new Promise(function(final_resolve, final_reject){
 
         self.widthValue = self.gameTarget.offsetWidth;
-        self.iconMaxHeightValue = self.widthValue/6;
+
+        console.log(self.gameTarget.offsetWidth);
+        console.log()
+
+        if(self.gameTarget.offsetWidth < 768){
+
+          self.standardWidthPercentageValue = 98;
+          self.iconMaxHeightValue = 80;
+
+        } else if (self.gameTarget.offsetWidth < 992) {
+
+          self.standardWidthPercentageValue = 75;
+          self.iconMaxHeightValue = 100;
+
+        } else {
+
+          self.standardWidthPercentageValue = 50;
+          self.iconMaxHeightValue = 125;
+
+        }
+
 
 
         svg = d3.select("#game")
@@ -289,7 +311,8 @@
       return new Promise(function(final_resolve, final_reject){
 
         playerIcon = gameBackground.append("g")
-        .attr("transform", `translate(${self.gameBackgroundWidthValue/10}, ${self.gameBackgroundHeightValue/5})`)
+        .attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${((self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y) - (self.flagValue.height * 1.5) })`)
+      //  .attr("transform", `translate(${self.gameBackgroundWidthValue/10}, ${self.gameBackgroundHeightValue/5})`)
         .style("opacity", 0);
 
         final_resolve(playerIcon);
@@ -302,7 +325,8 @@
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
-        self.gameBackgroundWidthValue = (self.widthValue/100) * self.standardWidthPercentageValue;
+        //self.gameBackgroundWidthValue = (self.widthValue/100) * self.standardWidthPercentageValue;
+        self.gameBackgroundWidthValue = (self.widthValue/100) * 98;
 
         self.gameBackgroundHeightValue = self.gameBackgroundWidthValue * 0.56585754078;
 
@@ -347,7 +371,7 @@
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
-        console.log("makePlayerIconVisible");
+
         playerIcon
         .transition()
         .duration(1000)
@@ -514,11 +538,13 @@
 
           d3.selectAll(firstBox._groups[0][0].childNodes).remove();
 
+          var width_of_box = (self.widthValue/100) * self.standardWidthPercentageValue;
+
           firstBox.append("foreignObject")
           //firstBox is at the top
-          .attr('x', 0)
+          .attr('x', (self.widthValue - width_of_box)/2)
           .attr('y', 0)
-          .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
+          .attr('width', width_of_box)
           .attr('height', data.height)
           .append("xhtml:div")
           .html(data.html);
@@ -540,6 +566,7 @@
 
           d3.selectAll(secondBox._groups[0][0].childNodes).remove();
 
+          var width_of_box = (self.widthValue/100) * self.standardWidthPercentageValue;
 
           self.secondBoxValue = {
             html: data.html,
@@ -548,9 +575,9 @@
           }
 
           secondBox.append("foreignObject")
-          .attr('x', 0)
+          .attr('x', (self.widthValue - width_of_box)/2)
           .attr('y', self.firstBoxValue.height)
-          .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
+          .attr('width', width_of_box)
           .attr('height', data.height)
           .append("xhtml:div")
           .html(data.html);
@@ -763,21 +790,21 @@
       return new Promise(function(final_resolve, final_reject){
         var html = `
         <div class="card text-white text-center py-2" style="background-color: #FFFFFF;">
-          <div class="row g-0">
-            <div class="col-md-2 text-center">
-              <img src="https://vegan.ch/wp-content/uploads/VGS_VSG_icon_geschafft.png" class="img-fluid rounded-start" style="max-height: 100px;">
-            </div>
-            <div class="col-md-10">
+
               <div class="card-body">
                 ${parameters.content}
+                <p>
+                  <img src="https://vegan.ch/wp-content/uploads/VGS_VSG_icon_geschafft.png" class="img-fluid rounded-start" style="max-height: 100px;">
+
+                </p>
                 <hr>
-                <img src="https://vegan.ch/wp-content/uploads/veganuary-logo-vector-cut.png" class="img-fluid rounded-start" style="max-height: 100px;">
 
                 <p>
                   <a class="btn btn-primary" href="https://veganuary.com/de-ch/partner/vegan-ch/" role="button">Mehr Tipps gibt es im Veganuary!</a>
                 </p>
-              </div>
-            </div>
+                <img src="https://vegan.ch/wp-content/uploads/veganuary-logo-vector-cut.png" class="img-fluid rounded-start" style="max-height: 100px;">
+
+
           </div>
         </div>
         `;
@@ -885,7 +912,7 @@
   <div data-controller="survival-game"
     data-survival-game-margin-value="{}"
     data-survival-game-start-text-value="<p><strong>Hey du, heute gehen wir gemeinsam Wandern.</strong></p> <p>Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan.</p>"
-    class="container-fluid" style="background-color: #63C3D1; font-size: 0.9rem;"
+    class="container-fluid" style="background-color: #63C3D1;"
   >
 
     <span data-survival-game-target="output">
