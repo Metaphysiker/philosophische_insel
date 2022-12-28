@@ -138,6 +138,12 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def survival_game3
+    authorize :static_pages
+    render layout: "application_empty"
+
+  end
+
   def swiss_vegan_awards_jury_query
     render layout: "application_jury"
   end

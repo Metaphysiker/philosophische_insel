@@ -1,0 +1,317 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.0/d3.min.js" integrity="sha512-jXsLjbg/Pr8F5U2evjFaEci7mImlUix865lbvnNmp5TzS86+VTTFVDz7FFTS6VHdhSn7UJ4tjZdvpp0GgT0fZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+<script type="module">
+  import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+
+  window.Stimulus = Application.start()
+
+  var svg;
+  var firstBox;
+  var secondBox;
+  var gameBackground;
+
+  Stimulus.register("survival-game", class extends Controller {
+    static values = {
+      url: String,
+      width: Number,
+      firstBox: Object,
+      secondBox: Object,
+      startText: String,
+      playerIconUrl: String,
+      standardWidthPercentage: Number,
+      backgroundImageUrl: String,
+      gameBackgroundHeight: Number
+    }
+
+    static targets = [ "name", "output", "game", "calculateHeightOf"]
+
+    connect() {
+      this.playerIconUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_player.svg";
+
+      this.standardWidthPercentageValue = 95;
+
+      this.backgroundImageUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg";
+
+
+      this.initiateGame();
+    }
+
+    initiateGame(){
+      this.setSvg()
+      .then(() => this.setFirstBox())
+      .then(() => this.setSecondBox())
+      .then(() => this.setGameBackground())
+      .then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.playerIconUrlValue}))
+      .then((main_box_html) => this.fillFirstBox(
+      {
+        html: main_box_html,
+        imageUrl: this.playerIconUrlValue
+      }
+      ))
+      .then(() => this.startButtonHtml())
+      .then((start_button_html) => this.fillSecondBox(
+      {
+        html: start_button_html,
+        imageUrl: ""
+      }
+      ))
+      .then(() => this.appendImageToGameBackground());
+    }
+
+    //svg setters
+    setSvg(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        self.widthValue = self.gameTarget.offsetWidth;
+
+        svg = d3.select("#game")
+          .append("svg")
+          .attr("width", self.widthValue)
+          .attr("height", 1000)
+          .append("g")
+          .attr("transform", `translate(${0}, ${0})`);
+
+          final_resolve(svg);
+
+      })
+    }
+
+    setFirstBox(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        firstBox = svg.append("g");
+
+        final_resolve(firstBox);
+
+      })
+    }
+
+    setSecondBox(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        secondBox = svg.append("g");
+
+        final_resolve(secondBox);
+
+      })
+    }
+
+    setGameBackground(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        gameBackground = svg.append("g");
+
+        final_resolve(gameBackground);
+
+      })
+    }
+
+    appendImageToGameBackground(){
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        self.gameBackgroundHeightValue = self.widthValue * 0.56585754078;
+
+        gameBackground.append("svg:image")
+          .attr("transform", `translate(${0}, ${self.firstBoxValue.height + self.secondBoxValue.height})`)
+          .attr('width', self.widthValue)
+          .attr('id', "survival_game_background_image")
+          .attr('height', self.widthValue * 0.56585754078)
+          .style("opacity", 1)
+          .attr("xlink:href", "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg");
+
+          final_resolve(gameBackground);
+
+      })
+
+
+    }
+
+
+    startGame(){
+      console.log("Let's Go!");
+    }
+
+
+    //svg fillers
+    fillFirstBox(parameters){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        console.log(parameters);
+        self.boxDataGatherer(parameters)
+        .then((data) => {
+
+          self.firstBoxValue = {
+            html: data.html,
+            height: data.height,
+            imageUrl: data.imageUrl
+          }
+
+          firstBox.append("foreignObject")
+          //firstBox is at the top
+          .attr('x', 0)
+          .attr('y', 0)
+          .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
+          .attr('height', data.height)
+          .append("xhtml:div")
+          .html(data.html);
+
+          final_resolve(firstBox);
+
+        });
+
+      })
+    }
+
+    fillSecondBox(parameters){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        self.boxDataGatherer(parameters)
+        .then((data) => {
+
+          self.secondBoxValue = {
+            html: data.html,
+            height: data.height,
+            imageUrl: data.imageUrl
+          }
+
+          secondBox.append("foreignObject")
+          .attr('x', 0)
+          .attr('y', self.firstBoxValue.height)
+          .attr('width', (self.widthValue/100) * self.standardWidthPercentageValue)
+          .attr('height', data.height)
+          .append("xhtml:div")
+          .html(data.html);
+
+          final_resolve(secondBox);
+
+        });
+
+      })
+    }
+
+
+    //helpers
+    boxDataGatherer(parameters){
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        self.calculateHeightOf(parameters.html)
+        .then((calculated_height) => {
+              final_resolve({height: calculated_height, html: parameters.html})
+        })
+
+
+      })
+
+    }
+
+    calculateHeightOf(html){
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        self.calculateHeightOfTarget.innerHTML = html;
+        self.calculateHeightOfTarget.style.width = self.standardWidthPercentageValue + "%";
+
+        setTimeout(() => {
+            //final_resolve(self.calculateHeightOfTarget.getBoundingClientRect().height)
+            final_resolve(self.calculateHeightOfTarget.offsetHeight + 25)
+          }, 100)
+
+      })
+    }
+
+    //html-getters
+    mainBoxHtml(parameters){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        var html = `
+        <div class="card text-white py-2" style="background-color: #415C66;">
+          <div class="row g-0">
+            <div class="col-md-2 text-center">
+              <img src="${parameters["imageUrl"]}" class="img-fluid rounded-start" style="max-height: 100px;">
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                ${parameters.content}
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+
+        final_resolve(html);
+      })
+
+    }
+
+    startButtonHtml(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        var html = `
+        <div class="p-4" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#startGame">
+          <table>
+            <tr>
+              <td style="width: 35px;">
+                <div style="border-radius: 50%;
+                height: 25px;
+                width: 25px;
+                background: transparent;
+                border: 2px solid #63C3D1;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+              </td>
+              <td style="padding-left: 15px;">Spiel starten</td>
+            </tr>
+          </table>
+        </div>
+        `;
+
+        final_resolve(html);
+      })
+
+    }
+
+
+  })
+</script>
+
+  <div data-controller="survival-game"
+    data-survival-game-margin-value="{}"
+    data-survival-game-start-text-value="<p><strong>Hey du, heute gehen wir gemeinsam Wandern.</strong></p> <p>Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan.</p>"
+    class="container-fluid" style="background-color: #63C3D1; font-size: 0.9rem;"
+  >
+
+    <span data-survival-game-target="output">
+    </span>
+
+    <div data-survival-game-target="game" id="game">
+
+    </div>
+
+    <div data-survival-game-target="calculateHeightOf">
+
+    </div>
+
+
+  </div>

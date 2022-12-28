@@ -7,6 +7,10 @@
   window.Stimulus = Application.start()
 
   var svg;
+  var firstBox;
+  var secondBox;
+  var thirdBox;
+
   var topBox;
   var startButton;
   var answers;
@@ -208,6 +212,13 @@
 
     initiateGame(){
       this.setSvg()
+      .then((svg) => this.setFirstBox())
+      .then(firstBox => this.draw());
+
+    }
+
+    initiateGamex(){
+      this.setSvg()
       .then((svg) => this.setBackground())
       .then((background) => this.setLogo())
       .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg"}))
@@ -251,11 +262,92 @@
         //.attr("transform", `translate(${0}, ${self.backgroundImageBufferValue})`);
 
 
-          final_resolve("svg set");
+          final_resolve(svg);
 
       })
 
     }
+
+    setFirstBox(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        firstBox = svg.append("g");
+
+        final_resolve(firstBox);
+      })
+
+    }
+
+    setSecondBox(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        secondBox = svg.append("g");
+
+        final_resolve(secondBox);
+      })
+
+    }
+
+    setThirdBox(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        thirdBox = svg.append("g");
+
+        final_resolve(thirdBox);
+      })
+
+    }
+
+    draw(){
+
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){}
+
+      var html_string = `<p>Epicness</p>`;
+
+      firstBox = svg.append("foreignObject")
+      .attr('x', 100)
+      .attr('y', 100)
+      .attr('width', 100)
+    //  .attr('height', (self.heightValue/100)* 25)
+      .attr('height', 100)
+      .append("xhtml:div")
+      .html(html_of_top_box);
+    }
+
+    htmlForBoxType1(parameters){
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        var html = `
+        <div class="card text-white py-2" style="background-color: #415C66;">
+          <div class="row g-0">
+            <div class="col-md-2 text-center">
+              <img src="${parameters["imageUrl"]}" class="img-fluid rounded-start" style="max-height: ${self.iconMaxHeightValue}px;">
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                ${parameters.content}
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+
+        final_resolve(html);
+
+      });
+
+    }
+
+
 
     moveBackground(){
 
