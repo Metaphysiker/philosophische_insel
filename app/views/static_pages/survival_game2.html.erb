@@ -40,12 +40,15 @@
       standardX: Number,
       standardWidthPercentage: Number,
       currentTopBoxHeight: Number,
-      currentMidBoxHeight: Number
+      currentMidBoxHeight: Number,
+      veganSurvivalGameLogoUrl: String,
     }
 
     static targets = [ "name", "output", "game", "calculateHeightOf"]
 
     connect() {
+
+      this.veganSurvivalGameLogoUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg";
 
       this.standardXValue = 0;
       this.standardWidthPercentageValue = 95;
@@ -221,7 +224,7 @@
       this.setSvg()
       .then((svg) => this.setBackground())
       .then((background) => this.setLogo())
-      .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg"}))
+      .then((logo) => this.setTopBox({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
       .then((box) => this.setStartButton())
       .then((button) => this.setFlags())
       .then((flags) =>(this.moveBackground()));

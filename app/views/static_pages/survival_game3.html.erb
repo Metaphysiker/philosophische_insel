@@ -31,12 +31,18 @@
       numberIconsUrls: Array,
       flagCoordinates: Array,
       flagIconUrl: String,
+      flagSize: Object,
+      veganSurvivalGameLogoUrl: String,
+
 
     }
 
     static targets = [ "name", "output", "game", "calculateHeightOf"]
 
     connect() {
+
+      this.veganSurvivalGameLogoUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg";
+
 
       this.flagIconUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_milestone.png";
 
@@ -175,7 +181,11 @@
       ];
 
 
-      this.initiateGame();
+      setTimeout(() => {
+        this.initiateGame();
+        }, 1000);
+
+
     }
 
     initiateGame(){
@@ -183,7 +193,7 @@
       .then(() => this.setFirstBox())
       .then(() => this.setSecondBox())
       .then(() => this.setGameBackground())
-      .then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.playerIconUrlValue}))
+      .then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
       .then((main_box_html) => this.fillFirstBox(
       {
         html: main_box_html,
@@ -277,7 +287,7 @@
       return new Promise(function(final_resolve, final_reject){
 
         playerIcon = gameBackground.append("g")
-        .attr("transform", `translate(${self.gameBackgroundWidthValue/2}, ${50})`)
+        .attr("transform", `translate(${self.gameBackgroundWidthValue/10}, ${self.gameBackgroundHeightValue/5})`)
         .style("opacity", 0);
 
         final_resolve(playerIcon);
@@ -314,12 +324,15 @@
 
       return new Promise(function(final_resolve, final_reject){
 
+        var player_icon_width = (self.gameBackgroundWidthValue / 100) * 15;
+
         playerIcon
         .append("svg:image")
+        .attr("transform", `translate(${-player_icon_width/2}, ${-player_icon_width/2})`)
         //.attr("transform", `translate(${0}, ${0})`)
         //.attr('x', (self.widthValue / 100) * self.flagCoordinatesValue[0].x + 12)
         //.attr('y', (self.heightValue/100) * self.flagCoordinatesValue[0].y + 100)
-        .attr('width', (self.widthValue / 100) * 8)
+        .attr('width', player_icon_width)
         //.attr('height', this.heightValue)
         .style("cursor", "pointer")
         .attr("xlink:href", self.playerIconUrlValue);
@@ -352,7 +365,7 @@
         playerIcon
         .transition()
         .duration(1500)
-        .attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${(self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y})`)
+        .attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${((self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y) - (self.flag.height * 1.5) })`)
         .on("end", final_resolve(playerIcon));
 
         //.attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${(self.backgroundImageHeightValue/ 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y})`);
@@ -370,6 +383,11 @@
 
         var flagWidth = (self.gameBackgroundWidthValue / 100) * 8;
         var flagHeight = flagWidth;
+
+        self.flag = {
+          width: flagWidth,
+          height: flagHeight
+        }
 
         setTimeout(() => {
 
@@ -411,7 +429,7 @@
       return new Promise(function(final_resolve, final_reject){
         gameBackground
         .transition()
-        .duration(1000)
+        .duration(10)
         .attr("transform", `translate(${0}, ${self.firstBoxValue.height + self.secondBoxValue.height})`);
 
         final_resolve(gameBackground);
@@ -531,9 +549,9 @@
 
       if(this.questionsValue[this.currentQuestionIndexValue].solution_index == event.params.index){
         if(this.questionsValue[this.currentQuestionIndexValue].last_question == "true"){
-          console.log("last");
 
           this.currentQuestionIndexValue = this.currentQuestionIndexValue + 1;
+          this.win();
 
         } else {
           this.currentQuestionIndexValue = this.currentQuestionIndexValue + 1;
@@ -541,7 +559,7 @@
         }
 
       } else {
-        console.log("death");
+        this.death();
       }
     }
 
@@ -592,6 +610,145 @@
           <div class="row g-0">
             <div class="col-md-2 text-center">
               <img src="${parameters["imageUrl"]}" class="img-fluid rounded-start" style="max-height: 100px;">
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                ${parameters.content}
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+
+        final_resolve(html);
+      })
+
+    }
+
+  win(){
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        self.winBoxHtml({content: `<h3 style="color: #63C3D1">HERZLICHE GRATULATION</h3><h1 style="color: #63C3D1">Du hast es geschafft!</h1>`, imageUrl: ""})
+        .then((win_box_html) =>self.fillFirstBox(
+        {
+          html: win_box_html,
+          imageUrl: ""
+        }
+        ))
+        //.then(() => self.answersHtml())
+        .then(() => self.fillSecondBox(
+        {
+          html: "",
+          imageUrl: ""
+        }
+        ))
+        .then(() => self.moveGameBackground())
+        .then(() => self.movePlayerIcon())
+        .then(() => final_resolve(""))
+      })
+    }
+
+    death(){
+
+        var self = this;
+
+        return new Promise(function(final_resolve, final_reject){
+
+          self.deathBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].wrong_text, imageUrl: ""})
+          .then((death_box_html) =>self.fillFirstBox(
+          {
+            html: death_box_html,
+            imageUrl: ""
+          }
+          ))
+          //.then(() => self.answersHtml())
+          .then(() => self.fillSecondBox(
+          {
+            html: "",
+            imageUrl: ""
+          }
+          ))
+          .then(() => self.moveGameBackground())
+          .then(() => self.dropPlayerIcon())
+          .then(() => self.dropFlags())
+          //.then(() => self.movePlayerIcon())
+          .then(() => final_resolve(""))
+        })
+      }
+
+      dropFlags(){
+
+        var self = this;
+
+        return new Promise(function(final_resolve, final_reject){
+
+        d3.selectAll(flags._groups[0][0].childNodes)
+          .each(function (p, i) {
+
+            d3.select(this)
+            .transition()
+            .duration(1500)
+            .attr("transform", function(d) {
+              //return `translate(${(self.gameBackgroundWidth / 100) * self.flagCoordinatesValue[i].x}, 2000)`
+              return `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[i].x}, 2000)`
+
+            })
+          });
+
+          final_resolve("");
+        })
+
+      }
+
+      dropPlayerIcon(){
+        var self = this;
+
+        return new Promise(function(final_resolve, final_reject){
+          playerIcon.transition()
+          .duration(1500)
+          .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${2000})`);
+
+          final_resolve("");
+        })
+
+      }
+
+    deathBoxHtml(parameters){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        var html = `
+        <div class="card text-white py-2" style="background-color: #F6A201;">
+          <div class="row g-0">
+            <div class="col-md-2 text-center">
+              <img src="https://vegan.ch/wp-content/uploads/skull-and-bones.svg" class="img-fluid rounded-start" style="max-height: 100px;">
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                ${parameters.content}
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+
+        final_resolve(html);
+      })
+
+    }
+
+    winBoxHtml(parameters){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        var html = `
+        <div class="card text-white py-2" style="background-color: #FFFFFF;">
+          <div class="row g-0">
+            <div class="col-md-2 text-center">
+              <img src="https://vegan.ch/wp-content/uploads/VGS_VSG_icon_geschafft.png" class="img-fluid rounded-start" style="max-height: 100px;">
             </div>
             <div class="col-md-10">
               <div class="card-body">
