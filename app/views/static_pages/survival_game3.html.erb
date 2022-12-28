@@ -453,10 +453,17 @@
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
+
+        var y_coordinate = (self.firstBoxValue.height + self.secondBoxValue.height) - (self.gameBackgroundHeightValue/3.333333);
+
+        if(y_coordinate < 0){
+          y_coordinate = 0;
+        }
+
         gameBackground
         .transition()
         .duration(10)
-        .attr("transform", `translate(${0}, ${self.firstBoxValue.height + self.secondBoxValue.height - (self.gameBackgroundHeightValue/4)})`);
+        .attr("transform", `translate(${0}, ${y_coordinate})`);
 
         final_resolve(gameBackground);
       })
