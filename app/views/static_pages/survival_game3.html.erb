@@ -33,7 +33,7 @@
       flagIconUrl: String,
       flagSize: Object,
       veganSurvivalGameLogoUrl: String,
-
+      iconMaxHeight: Number,
 
     }
 
@@ -94,7 +94,7 @@
 
       this.playerIconUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_player.svg";
 
-      this.standardWidthPercentageValue = 95;
+      this.standardWidthPercentageValue = 98;
 
       this.backgroundImageUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg";
 
@@ -190,9 +190,9 @@
 
     initiateGame(){
       this.setSvg()
+      .then(() => this.setGameBackground())
       .then(() => this.setFirstBox())
       .then(() => this.setSecondBox())
-      .then(() => this.setGameBackground())
       .then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
       .then((main_box_html) => this.fillFirstBox(
       {
@@ -220,6 +220,8 @@
       return new Promise(function(final_resolve, final_reject){
 
         self.widthValue = self.gameTarget.offsetWidth;
+        self.iconMaxHeightValue = self.widthValue/6;
+
 
         svg = d3.select("#game")
           .append("svg")
@@ -430,7 +432,7 @@
         gameBackground
         .transition()
         .duration(10)
-        .attr("transform", `translate(${0}, ${self.firstBoxValue.height + self.secondBoxValue.height})`);
+        .attr("transform", `translate(${0}, ${self.firstBoxValue.height + self.secondBoxValue.height - (self.gameBackgroundHeightValue/4)})`);
 
         final_resolve(gameBackground);
       })
@@ -449,6 +451,21 @@
         .then(() => self.appendFlagsToGameBackground())
         .then(() => self.goToNextQuestion())
         .then(() => final_resolve(""));
+
+      })
+    }
+
+
+    restartGame(){
+
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        d3.select("svg").remove();
+        self.currentQuestionIndexValue = 0;
+
+        self.initiateGame();
 
       })
     }
@@ -594,8 +611,8 @@
 
         setTimeout(() => {
             //final_resolve(self.calculateHeightOfTarget.getBoundingClientRect().height)
-            final_resolve(self.calculateHeightOfTarget.offsetHeight + 25)
-          }, 100);
+            final_resolve(self.calculateHeightOfTarget.offsetHeight + 10)
+          }, 150);
 
       })
     }
@@ -606,10 +623,10 @@
 
       return new Promise(function(final_resolve, final_reject){
         var html = `
-        <div class="card text-white py-2" style="background-color: #415C66;">
+        <div class="card text-white py-2 text-center" style="background-color: #415C66;">
           <div class="row g-0">
             <div class="col-md-2 text-center">
-              <img src="${parameters["imageUrl"]}" class="img-fluid rounded-start" style="max-height: 100px;">
+              <img src="${parameters["imageUrl"]}" class="img-fluid rounded-start" style="max-height: ${self.iconMaxHeightValue}px;">
             </div>
             <div class="col-md-10">
               <div class="card-body">
@@ -664,10 +681,10 @@
             imageUrl: ""
           }
           ))
-          //.then(() => self.answersHtml())
-          .then(() => self.fillSecondBox(
+          .then(() => self.restartButtonHtml())
+          .then((restart_button_html) => self.fillSecondBox(
           {
-            html: "",
+            html: restart_button_html,
             imageUrl: ""
           }
           ))
@@ -745,7 +762,7 @@
 
       return new Promise(function(final_resolve, final_reject){
         var html = `
-        <div class="card text-white py-2" style="background-color: #FFFFFF;">
+        <div class="card text-white text-center py-2" style="background-color: #FFFFFF;">
           <div class="row g-0">
             <div class="col-md-2 text-center">
               <img src="https://vegan.ch/wp-content/uploads/VGS_VSG_icon_geschafft.png" class="img-fluid rounded-start" style="max-height: 100px;">
@@ -753,6 +770,12 @@
             <div class="col-md-10">
               <div class="card-body">
                 ${parameters.content}
+                <hr>
+                <img src="https://vegan.ch/wp-content/uploads/veganuary-logo-vector-cut.png" class="img-fluid rounded-start" style="max-height: 100px;">
+
+                <p>
+                  <a class="btn btn-primary" href="https://veganuary.com/de-ch/partner/vegan-ch/" role="button">Mehr Tipps gibt es im Veganuary!</a>
+                </p>
               </div>
             </div>
           </div>
@@ -782,6 +805,34 @@
                 </div>
               </td>
               <td style="padding-left: 15px;">Spiel starten</td>
+            </tr>
+          </table>
+        </div>
+        `;
+
+        final_resolve(html);
+      })
+
+    }
+
+    restartButtonHtml(){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+        var html = `
+        <div class="p-4" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#restartGame">
+          <table>
+            <tr>
+              <td style="width: 35px;">
+                <div style="border-radius: 50%;
+                height: 25px;
+                width: 25px;
+                background: transparent;
+                border: 2px solid #63C3D1;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+              </td>
+              <td style="padding-left: 15px;">Erneut versuchen</td>
             </tr>
           </table>
         </div>
