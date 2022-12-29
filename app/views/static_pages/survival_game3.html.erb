@@ -37,7 +37,7 @@
 
     }
 
-    static targets = [ "name", "output", "game", "calculateHeightOf"]
+    static targets = [ "name", "output", "game", "calculateHeightOf", "baseDiv"]
 
     connect() {
 
@@ -229,12 +229,15 @@
         if(self.gameTarget.offsetWidth < 768){
 
           self.standardWidthPercentageValue = 98;
-          self.iconMaxHeightValue = 80;
+          self.iconMaxHeightValue = 70;
+          self.baseDivTarget.style.fontSize = "small";
 
         } else if (self.gameTarget.offsetWidth < 992) {
 
           self.standardWidthPercentageValue = 75;
           self.iconMaxHeightValue = 100;
+          //self.baseDivTarget.style.fontSize = "small";
+
 
         } else {
 
@@ -920,6 +923,7 @@
     data-survival-game-margin-value="{}"
     data-survival-game-start-text-value="<p><strong>Hey du, heute gehen wir gemeinsam Wandern.</strong></p> <p>Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan.</p>"
     class="container-fluid" style="background-color: #63C3D1;"
+    data-survival-game-target="baseDiv"
   >
 
     <span data-survival-game-target="output">
