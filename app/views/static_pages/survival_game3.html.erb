@@ -465,7 +465,7 @@
 
         gameBackground
         .transition()
-        .duration(10)
+        .duration(1000)
         .attr("transform", `translate(${0}, ${y_coordinate})`);
 
         final_resolve(gameBackground);
@@ -510,7 +510,9 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        self.mainBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].question, imageUrl: self.numberIconsUrlsValue[self.currentQuestionIndexValue]})
+        self.makeInvisible(firstBox);
+        self.makeInvisible(secondBox)
+        .then(() => self.mainBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].question, imageUrl: self.numberIconsUrlsValue[self.currentQuestionIndexValue]}))
         .then((main_box_html) =>self.fillFirstBox(
         {
           html: main_box_html,
@@ -524,8 +526,10 @@
           imageUrl: ""
         }
         ))
-        .then(() => self.moveGameBackground())
         .then(() => self.movePlayerIcon())
+        .then(() => self.moveGameBackground())
+        .then(() => self.makeVisible(firstBox))
+        .then(() => self.makeVisible(secondBox))
         .then(() => final_resolve(""))
       })
     }
@@ -651,6 +655,36 @@
             final_resolve(self.calculateHeightOfTarget.offsetHeight + 10)
           }, 150);
 
+      })
+    }
+
+    makeVisible(object){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        object
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .on("end", function(){
+          final_resolve(object);
+        });
+      })
+    }
+
+    makeInvisible(object){
+      var self = this;
+
+      return new Promise(function(final_resolve, final_reject){
+
+        object
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .on("end", function(){
+          final_resolve(object);
+        });
       })
     }
 
