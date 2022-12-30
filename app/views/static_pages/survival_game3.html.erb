@@ -480,7 +480,9 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        self.makePlayerIconVisible()
+        self.makeInvisible(firstBox);
+        self.makeInvisible(secondBox)
+        .then(() => self.makePlayerIconVisible())
         .then(() => self.setFlags())
         .then(() => self.appendFlagsToGameBackground())
         .then(() => self.goToNextQuestion())
@@ -718,8 +720,11 @@
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
+        self.makeInvisible(firstBox);
+        self.makeInvisible(secondBox)
+        .then(() => self.movePlayerIcon())
 
-        self.winBoxHtml({content: `<h3 style="color: #63C3D1">HERZLICHE GRATULATION</h3><h1 style="color: #63C3D1">Du hast es geschafft!</h1>`, imageUrl: ""})
+        .then(() => self.winBoxHtml({content: `<h3 style="color: #63C3D1">HERZLICHE GRATULATION</h3><h1 style="color: #63C3D1">Du hast es geschafft!</h1>`, imageUrl: ""}))
         .then((win_box_html) =>self.fillFirstBox(
         {
           html: win_box_html,
@@ -734,7 +739,8 @@
         }
         ))
         .then(() => self.moveGameBackground())
-        .then(() => self.movePlayerIcon())
+        .then(() => self.makeVisible(firstBox))
+        .then(() => self.makeVisible(secondBox))
         .then(() => final_resolve(""))
       })
     }
@@ -745,7 +751,12 @@
 
         return new Promise(function(final_resolve, final_reject){
 
-          self.deathBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].wrong_text, imageUrl: ""})
+
+          self.dropFlags();
+          self.dropPlayerIcon();
+          self.makeInvisible(firstBox);
+          self.makeInvisible(secondBox)
+          .then(() => self.deathBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].wrong_text, imageUrl: ""}))
           .then((death_box_html) =>self.fillFirstBox(
           {
             html: death_box_html,
@@ -760,8 +771,8 @@
           }
           ))
           .then(() => self.moveGameBackground())
-          .then(() => self.dropPlayerIcon())
-          .then(() => self.dropFlags())
+          .then(() => self.makeVisible(firstBox))
+          .then(() => self.makeVisible(secondBox))
           //.then(() => self.movePlayerIcon())
           .then(() => final_resolve(""))
         })
