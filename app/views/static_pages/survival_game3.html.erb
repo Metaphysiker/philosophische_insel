@@ -34,12 +34,18 @@
       flagSize: Object,
       veganSurvivalGameLogoUrl: String,
       iconMaxHeight: Number,
+      baseDivSize: Object
 
     }
 
     static targets = [ "name", "output", "game", "calculateHeightOf", "baseDiv"]
 
     connect() {
+
+      this.baseDivSizeValue = {
+        height: window.innerHeight,
+        width: 0
+      }
 
       this.veganSurvivalGameLogoUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_logo.svg";
 
@@ -185,7 +191,7 @@
 
       setTimeout(() => {
         this.initiateGame();
-        }, 1000);
+      }, 2000);
 
 
     }
@@ -251,7 +257,7 @@
         svg = d3.select("#game")
           .append("svg")
           .attr("width", self.widthValue)
-          .attr("height", 1800)
+          .attr("height", self.baseDivSizeValue.height)
           .append("g")
           .attr("transform", `translate(${0}, ${0})`);
 
@@ -978,7 +984,7 @@
 
     </div>
 
-    <div data-survival-game-target="calculateHeightOf">
+    <div data-survival-game-target="calculateHeightOf" style="visibility: hidden;">
 
     </div>
 
