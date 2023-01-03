@@ -748,6 +748,11 @@
         .then(() => self.makeVisible(firstBox))
         .then(() => self.makeVisible(secondBox))
         .then(() => final_resolve(""))
+        .finally(() => {
+          gtag('event', 'survival_game_finished', {
+            'screen_name': 'homepage'
+          });
+        })
       })
     }
 
