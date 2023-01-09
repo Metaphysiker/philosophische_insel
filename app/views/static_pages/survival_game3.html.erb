@@ -509,7 +509,8 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        self.makeInvisible(startBox);
+        startBox.remove();
+        //self.makeInvisible(startBox);
         self.makeInvisible(firstBox);
         self.makeInvisible(secondBox)
         .then(() => self.makePlayerIconVisible())
