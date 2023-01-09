@@ -202,8 +202,8 @@
     initiateGame(){
       this.setSvg()
       .then(() => this.setGameBackground())
-      .then(() => this.setFirstBox())
       .then(() => this.setStartBox())
+      .then(() => this.setFirstBox())
       .then(() => this.setSecondBox())
       .then(() => this.startBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
       .then((start_box_html) => this.fillStartBox(
@@ -619,9 +619,9 @@
 
           //hotfix
           self.firstBoxValue = {
-            html: data.html,
+            //html: data.html,
             height: data.height,
-            imageUrl: data.imageUrl
+            //imageUrl: data.imageUrl
           }
 
           d3.selectAll(startBox._groups[0][0].childNodes).remove();
@@ -636,8 +636,6 @@
           .attr('height', data.height)
           .append("xhtml:div")
           .html(data.html);
-
-          console.log(data.html);
 
           final_resolve(startBox);
 
