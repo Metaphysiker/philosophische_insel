@@ -548,7 +548,7 @@
         self.makeInvisible(secondBox)
         .then(() => self.makeInvisible(firstBox))
         .then(() => self.mainBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].question, imageUrl: self.numberIconsUrlsValue[self.currentQuestionIndexValue]}))
-        .then((main_box_html) =>self.fillFirstBox(
+        .then((main_box_html) => self.fillFirstBox(
         {
           html: main_box_html,
           imageUrl: self.playerIconUrlValue
