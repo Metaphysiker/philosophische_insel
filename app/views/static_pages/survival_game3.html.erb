@@ -202,23 +202,22 @@
     initiateGame(){
       this.setSvg()
       .then(() => this.setGameBackground())
-      .then(() => this.setStartBox())
       .then(() => this.setFirstBox())
       .then(() => this.setSecondBox())
-      .then(() => this.startBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
-      .then((start_box_html) => this.fillStartBox(
+      //.then(() => this.startBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
+      //.then((start_box_html) => this.fillFirstBox(
+      //{
+      //  html: start_box_html,
+      //  imageUrl: this.veganSurvivalGameLogoUrlValue
+      //}
+      //))
+      .then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
+      .then((main_box_html) => this.fillFirstBox(
       {
-        html: start_box_html,
-        imageUrl: this.veganSurvivalGameLogoUrlValue
+        html: main_box_html,
+        imageUrl: this.playerIconUrlValue
       }
       ))
-      //.then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
-      //.then((main_box_html) => this.fillFirstBox(
-    //  {
-    //    html: main_box_html,
-    //    imageUrl: this.playerIconUrlValue
-    //  }
-    //  ))
       .then(() => this.startButtonHtml())
       .then((start_button_html) => this.fillSecondBox(
       {
@@ -510,9 +509,10 @@
       return new Promise(function(final_resolve, final_reject){
 
         //startBox.remove();
-        self.makeInvisible(startBox);
-        self.makeInvisible(firstBox);
+        //self.makeInvisible(startBox);
         self.makeInvisible(secondBox)
+        //self.makeInvisible(secondBox)
+        .then(() => self.makeInvisible(firstBox))
         .then(() => self.makePlayerIconVisible())
         .then(() => self.setFlags())
         .then(() => self.appendFlagsToGameBackground())
@@ -543,8 +543,10 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        self.makeInvisible(firstBox);
+        //self.makeInvisible(firstBox);
+
         self.makeInvisible(secondBox)
+        .then(() => self.makeInvisible(firstBox))
         .then(() => self.mainBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].question, imageUrl: self.numberIconsUrlsValue[self.currentQuestionIndexValue]}))
         .then((main_box_html) =>self.fillFirstBox(
         {
@@ -727,7 +729,7 @@
         setTimeout(() => {
             //final_resolve(self.calculateHeightOfTarget.getBoundingClientRect().height)
             final_resolve(self.calculateHeightOfTarget.offsetHeight + 10)
-          }, 300);
+          }, 400);
 
       })
     }
