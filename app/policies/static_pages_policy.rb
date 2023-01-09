@@ -32,4 +32,8 @@ class StaticPagesPolicy < ApplicationPolicy
     true
   end
 
+  def survival_game4?
+    true
+  end
+
 end
