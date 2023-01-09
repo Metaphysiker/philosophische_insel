@@ -509,8 +509,8 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        startBox.remove();
-        //self.makeInvisible(startBox);
+        //startBox.remove();
+        self.makeInvisible(startBox);
         self.makeInvisible(firstBox);
         self.makeInvisible(secondBox)
         .then(() => self.makePlayerIconVisible())
@@ -729,7 +729,7 @@
         setTimeout(() => {
             //final_resolve(self.calculateHeightOfTarget.getBoundingClientRect().height)
             final_resolve(self.calculateHeightOfTarget.offsetHeight + 10)
-          }, 150);
+          }, 300);
 
       })
     }
@@ -1071,7 +1071,10 @@
 
     </div>
 
-    <div data-survival-game-target="calculateHeightOf" style="visibility: hidden;">
+    <!--
+      <div data-survival-game-target="calculateHeightOf" style="visibility: hidden;">
+    -->
+    <div data-survival-game-target="calculateHeightOf">
 
     </div>
 
