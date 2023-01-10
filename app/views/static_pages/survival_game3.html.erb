@@ -113,14 +113,14 @@
 
       this.questionsValue = [
         {
-          question: "Du stellst deine Wanderausrüstung zusammen. Dabei fragst du dich: Welche Marke bietet wohl vegane Wanderschuhe an?",
+          question: "Du stellst deine Wanderausrüstung zusammen. Dabei fragst du dich: Welches Material ist nicht vegan?",
           solution_index: 2,
           wrong_text: "Hmm… bist du dir sicher, dass du für eine Wanderung mit der Veganen Gesellschaft Schweiz gewappnet bist? Auf vegan.ch/blog findest du alle Informationen rund um den veganen Lebensstil.",
           last_question: "false",
           answers: [
-            "Sherpa",
-            "Mammut",
-            "Lowa"
+            "Kork",
+            "Leinen",
+            "Leder"
           ]
         },
         {
@@ -185,7 +185,7 @@
           last_question: "true",
           answers: [
             "Rakete",
-            "Cournet",
+            "Cornet",
             "Maxibon"
           ]
         }
@@ -204,14 +204,14 @@
       .then(() => this.setGameBackground())
       .then(() => this.setFirstBox())
       .then(() => this.setSecondBox())
-      //.then(() => this.startBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
+      .then(() => this.startBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
       //.then((start_box_html) => this.fillFirstBox(
       //{
       //  html: start_box_html,
       //  imageUrl: this.veganSurvivalGameLogoUrlValue
       //}
       //))
-      .then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
+      //.then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
       .then((main_box_html) => this.fillFirstBox(
       {
         html: main_box_html,
@@ -1072,9 +1072,10 @@
     </div>
 
     <!--
-      <div data-survival-game-target="calculateHeightOf" style="visibility: hidden;">
+      <div data-survival-game-target="calculateHeightOf">
+
     -->
-    <div data-survival-game-target="calculateHeightOf">
+    <div data-survival-game-target="calculateHeightOf" style="visibility: hidden;">
 
     </div>
 
