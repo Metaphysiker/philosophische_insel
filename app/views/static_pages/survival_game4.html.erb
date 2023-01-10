@@ -14,6 +14,7 @@
   var playerIcon;
   var startBox;
   var trial;
+  var trial2;
 
 
   Stimulus.register("survival-game", class extends Controller {
@@ -294,6 +295,81 @@
         .duration(1000)
         .style("opacity", 1);
 
+      trial2.append('circle')
+        .attr('cx', 100)
+        .attr('cy', 250)
+        .attr('r', 50)
+        .attr('stroke', 'black')
+        .attr('fill', '#69a3b2');
+
+        trial2
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1)
+        .transition()
+        .duration(1000)
+        .style("opacity", 0)
+        .transition()
+        .duration(1000)
+        .style("opacity", 1);
+
 
       }, 2000);
 
@@ -373,6 +449,8 @@
           .attr("transform", `translate(${0}, ${0})`);
 
         trial = svg.append("g");
+
+        trial2 = svg.append("g");
 
 
           final_resolve(svg);
