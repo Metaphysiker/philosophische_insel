@@ -6,16 +6,16 @@
 
   window.Stimulus = Application.start()
 
-  var svg;
-  var firstBox;
-  var secondBox;
-  var gameBackground;
-  var flags;
-  var playerIcon;
-  var startBox;
-
 
   Stimulus.register("survival-game", class extends Controller {
+    svg;
+    firstBox;
+    secondBox;
+    gameBackground;
+    flags;
+    playerIcon;
+    startBox;
+
     static values = {
       url: String,
       width: Number,
@@ -265,14 +265,14 @@
 
 
 
-        svg = d3.select(self.gameTarget)
+        self.svg = d3.select(self.gameTarget)
           .append("svg")
           .attr("width", self.widthValue)
           .attr("height", self.baseDivSizeValue.height)
           .append("g")
           .attr("transform", `translate(${0}, ${0})`);
 
-          final_resolve(svg);
+          final_resolve(self.svg);
 
       })
     }
@@ -282,7 +282,7 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        startBox = svg.append("g");
+        startBox = self.svg.append("g");
 
         final_resolve(startBox);
 
@@ -294,9 +294,9 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        firstBox = svg.append("g");
+        self.firstBox = self.svg.append("g");
 
-        final_resolve(firstBox);
+        final_resolve(self.firstBox);
 
       })
     }
@@ -306,9 +306,9 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        secondBox = svg.append("g");
+        self.secondBox = self.svg.append("g");
 
-        final_resolve(secondBox);
+        final_resolve(self.secondBox);
 
       })
     }
@@ -318,9 +318,9 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        gameBackground = svg.append("g");
+        self.gameBackground = self.svg.append("g");
 
-        final_resolve(gameBackground);
+        final_resolve(self.gameBackground);
 
       })
     }
@@ -330,9 +330,9 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        flags = gameBackground.append("g");
+        self.flags = self.gameBackground.append("g");
 
-        final_resolve(gameBackground);
+        final_resolve(self.flags);
 
       })
     }
@@ -342,12 +342,12 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        playerIcon = gameBackground.append("g")
+        self.playerIcon = self.gameBackground.append("g")
         .attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${((self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y) - (self.flagValue.height * 1.5) })`)
       //  .attr("transform", `translate(${self.gameBackgroundWidthValue/10}, ${self.gameBackgroundHeightValue/5})`)
         .style("opacity", 0);
 
-        final_resolve(playerIcon);
+        final_resolve(self.playerIcon);
 
       })
     }
@@ -362,7 +362,7 @@
 
         self.gameBackgroundHeightValue = self.gameBackgroundWidthValue * 0.56585754078;
 
-        gameBackground.append("svg:image")
+        self.gameBackground.append("svg:image")
           //.attr("transform", `translate(${0}, ${self.firstBoxValue.height + self.secondBoxValue.height})`)
           .attr('width', self.gameBackgroundWidthValue)
           .attr('id', "survival_game_background_image")
@@ -370,7 +370,7 @@
           .style("opacity", 1)
           .attr("xlink:href", self.backgroundImageUrlValue);
 
-          final_resolve(gameBackground);
+          final_resolve(self.gameBackground);
 
       })
 
@@ -384,7 +384,7 @@
 
         var player_icon_width = (self.gameBackgroundWidthValue / 100) * 15;
 
-        playerIcon
+        self.playerIcon
         .append("svg:image")
         .attr("transform", `translate(${-player_icon_width/2}, ${-player_icon_width/2})`)
         //.attr("transform", `translate(${0}, ${0})`)
@@ -395,7 +395,7 @@
         .style("cursor", "pointer")
         .attr("xlink:href", self.playerIconUrlValue);
 
-        final_resolve(playerIcon);
+        final_resolve(self.playerIcon);
       })
     }
 
@@ -404,12 +404,12 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        playerIcon
+        self.playerIcon
         .transition()
         .duration(1000)
         .style("opacity", 1)
         .on("end", function(){
-          final_resolve(playerIcon);
+          final_resolve(self.playerIcon);
         });
       })
     }
@@ -420,11 +420,11 @@
       return new Promise(function(final_resolve, final_reject){
 
 
-        playerIcon
+        self.playerIcon
         .transition()
         .duration(1500)
         .attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${((self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y) - (self.flag.height * 1.05) })`)
-        .on("end", final_resolve(playerIcon));
+        .on("end", final_resolve(self.playerIcon));
 
         //.attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${(self.backgroundImageHeightValue/ 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y})`);
 
@@ -449,7 +449,7 @@
 
         setTimeout(() => {
 
-          var single_flag = flags
+          var single_flag = self.flags
               .append('g')
               .attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[i].x}, ${(self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[i].y})`)
               //.attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[i].x}, ${(self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[i].y})`)
@@ -475,7 +475,7 @@
 
         }
 
-          final_resolve(flags);
+          final_resolve(self.flags);
 
       })
 
@@ -492,12 +492,12 @@
           y_coordinate = 0;
         }
 
-        gameBackground
+        self.gameBackground
         .transition()
         .duration(1000)
         .attr("transform", `translate(${0}, ${y_coordinate})`);
 
-        final_resolve(gameBackground);
+        final_resolve(self.gameBackground);
       })
 
     }
@@ -511,9 +511,9 @@
 
         //startBox.remove();
         //self.makeInvisible(startBox);
-        self.makeInvisible(secondBox)
+        self.makeInvisible(self.secondBox)
         //self.makeInvisible(secondBox)
-        .then(() => self.makeInvisible(firstBox))
+        .then(() => self.makeInvisible(self.firstBox))
         .then(() => self.makePlayerIconVisible())
         .then(() => self.appendFlagsToGameBackground())
         .then(() => self.goToNextQuestion())
@@ -545,8 +545,8 @@
 
         //self.makeInvisible(firstBox);
 
-        self.makeInvisible(secondBox)
-        .then(() => self.makeInvisible(firstBox))
+        self.makeInvisible(self.secondBox)
+        .then(() => self.makeInvisible(self.firstBox))
         .then(() => self.mainBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].question, imageUrl: self.numberIconsUrlsValue[self.currentQuestionIndexValue]}))
         .then((main_box_html) => self.fillFirstBox(
         {
@@ -563,8 +563,8 @@
         ))
         .then(() => self.movePlayerIcon())
         .then(() => self.moveGameBackground())
-        .then(() => self.makeVisible(firstBox))
-        .then(() => self.makeVisible(secondBox))
+        .then(() => self.makeVisible(self.firstBox))
+        .then(() => self.makeVisible(self.secondBox))
         .then(() => final_resolve(""))
       })
     }
@@ -585,11 +585,11 @@
             imageUrl: data.imageUrl
           }
 
-          d3.selectAll(firstBox._groups[0][0].childNodes).remove();
+          d3.selectAll(self.firstBox._groups[0][0].childNodes).remove();
 
           var width_of_box = (self.widthValue/100) * self.standardWidthPercentageValue;
 
-          firstBox.append("foreignObject")
+          self.firstBox.append("foreignObject")
           //firstBox is at the top
           .attr('x', (self.widthValue - width_of_box)/2)
           .attr('y', 0)
@@ -598,7 +598,7 @@
           .append("xhtml:div")
           .html(data.html);
 
-          final_resolve(firstBox);
+          final_resolve(self.firstBox);
 
         });
 
@@ -654,7 +654,7 @@
         self.boxDataGatherer(parameters)
         .then((data) => {
 
-          d3.selectAll(secondBox._groups[0][0].childNodes).remove();
+          d3.selectAll(self.secondBox._groups[0][0].childNodes).remove();
 
           var width_of_box = (self.widthValue/100) * self.standardWidthPercentageValue;
 
@@ -664,7 +664,7 @@
             imageUrl: data.imageUrl
           }
 
-          secondBox.append("foreignObject")
+          self.secondBox.append("foreignObject")
           .attr('x', (self.widthValue - width_of_box)/2)
           .attr('y', self.firstBoxValue.height)
           .attr('width', width_of_box)
@@ -672,7 +672,7 @@
           .append("xhtml:div")
           .html(data.html);
 
-          final_resolve(secondBox);
+          final_resolve(self.secondBox);
 
         });
 
@@ -819,8 +819,8 @@
       var self = this;
 
       return new Promise(function(final_resolve, final_reject){
-        self.makeInvisible(firstBox);
-        self.makeInvisible(secondBox)
+        self.makeInvisible(self.firstBox);
+        self.makeInvisible(self.secondBox)
         .then(() => self.movePlayerIcon())
 
         .then(() => self.winBoxHtml({content: `<h3 style="color: #63C3D1">HERZLICHE GRATULATION</h3><h1 style="color: #63C3D1">Du hast es geschafft!</h1>`, imageUrl: ""}))
@@ -838,8 +838,8 @@
         }
         ))
         .then(() => self.moveGameBackground())
-        .then(() => self.makeVisible(firstBox))
-        .then(() => self.makeVisible(secondBox))
+        .then(() => self.makeVisible(self.firstBox))
+        .then(() => self.makeVisible(self.secondBox))
         .then(() => final_resolve(""))
         .finally(() => {
           gtag('event', 'survival_game_finished', {
@@ -858,8 +858,8 @@
 
           self.dropFlags();
           self.dropPlayerIcon();
-          self.makeInvisible(firstBox);
-          self.makeInvisible(secondBox)
+          self.makeInvisible(self.firstBox);
+          self.makeInvisible(self.secondBox)
           .then(() => self.deathBoxHtml({content: self.questionsValue[self.currentQuestionIndexValue].wrong_text, imageUrl: ""}))
           .then((death_box_html) =>self.fillFirstBox(
           {
@@ -875,8 +875,8 @@
           }
           ))
           .then(() => self.moveGameBackground())
-          .then(() => self.makeVisible(firstBox))
-          .then(() => self.makeVisible(secondBox))
+          .then(() => self.makeVisible(self.firstBox))
+          .then(() => self.makeVisible(self.secondBox))
           //.then(() => self.movePlayerIcon())
           .then(() => final_resolve(""))
         })
@@ -888,7 +888,7 @@
 
         return new Promise(function(final_resolve, final_reject){
 
-        d3.selectAll(flags._groups[0][0].childNodes)
+        d3.selectAll(self.flags._groups[0][0].childNodes)
           .each(function (p, i) {
 
             d3.select(this)
@@ -910,7 +910,7 @@
         var self = this;
 
         return new Promise(function(final_resolve, final_reject){
-          playerIcon.transition()
+          self.playerIcon.transition()
           .duration(1500)
           .attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${2000})`);
 
