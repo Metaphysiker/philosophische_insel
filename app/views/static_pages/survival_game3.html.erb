@@ -6,7 +6,6 @@
 
   window.Stimulus = Application.start()
 
-  var svg;
   var firstBox;
   var secondBox;
   var gameBackground;
@@ -16,6 +15,8 @@
 
 
   Stimulus.register("survival-game", class extends Controller {
+    svg;
+
     static values = {
       url: String,
       width: Number,
@@ -37,7 +38,8 @@
       veganSurvivalGameLogoUrl: String,
       veganSurvivalGameLogoMaxHeight: Number,
       iconMaxHeight: Number,
-      baseDivSize: Object
+      baseDivSize: Object,
+      svgObject: Object
 
     }
 
@@ -265,12 +267,19 @@
 
 
 
-        svg = d3.select(self.gameTarget)
+        self.svg = d3.select(self.gameTarget)
           .append("svg")
           .attr("width", self.widthValue)
           .attr("height", self.baseDivSizeValue.height)
           .append("g")
           .attr("transform", `translate(${0}, ${0})`);
+
+
+          console.log(self.svg);
+          self.svgObjectValue = { selection: self.svg };
+
+          console.log("after assign");
+          console.log(self.svgObjectValue.selection);
 
           final_resolve(svg);
 
@@ -318,7 +327,11 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        gameBackground = svg.append("g");
+        console.log(self.svgObjectValue.selection);
+        console.log(self.svgObjectValue);
+
+
+        gameBackground = this.svg.append("g");
 
         final_resolve(gameBackground);
 
@@ -1057,31 +1070,7 @@
   })
 </script>
 
-  <div data-controller="survival-game"
-    data-survival-game-margin-value="{}"
-    data-survival-game-start-text-value="<p><strong>Hey du, heute gehen wir gemeinsam wandern.</strong><br> Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack einen Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erfahren.</p>"
-    class="container-fluid g-0" style="background-color: #63C3D1;"
-    data-survival-game-target="baseDiv"
-  >
 
-    <span data-survival-game-target="output">
-    </span>
-
-    <div data-survival-game-target="game">
-
-    </div>
-
-    <!--
-      <div data-survival-game-target="calculateHeightOf">
-
-    -->
-    <div data-survival-game-target="calculateHeightOf" style="visibility: hidden;">
-
-    </div>
-
-
-  </div>
-<hr>
   <div data-controller="survival-game"
     data-survival-game-margin-value="{}"
     data-survival-game-start-text-value="<p><strong>Hey du, heute gehen wir gemeinsam wandern.</strong><br> Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack einen Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erfahren.</p>"
