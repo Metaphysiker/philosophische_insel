@@ -107,7 +107,7 @@
 
       this.playerIconUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_player.svg";
 
-      this.backgroundImageUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg";
+      this.backgroundImageUrlValue = "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_berge_wolken.png";//"https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg";
 
       this.currentQuestionIndexValue = 0;
 
@@ -227,6 +227,7 @@
       ))
       .then(() => this.appendImageToGameBackground())
       .then(() => this.moveGameBackground())
+      .then(() => this.setFlags())
       .then(() => this.setPlayerIcon())
       .then(() => this.appendPlayerIconToGameBackground());
     }
@@ -357,7 +358,7 @@
 
       return new Promise(function(final_resolve, final_reject){
         //self.gameBackgroundWidthValue = (self.widthValue/100) * self.standardWidthPercentageValue;
-        self.gameBackgroundWidthValue = (self.widthValue/100) * 98;
+        self.gameBackgroundWidthValue = (self.widthValue/100) * 100;
 
         self.gameBackgroundHeightValue = self.gameBackgroundWidthValue * 0.56585754078;
 
@@ -367,7 +368,7 @@
           .attr('id', "survival_game_background_image")
           .attr('height', self.gameBackgroundHeightValue)
           .style("opacity", 1)
-          .attr("xlink:href", "https://vegan.ch/wp-content/uploads/VGS_VSG_bg_kombiniert.svg");
+          .attr("xlink:href", self.backgroundImageUrlValue);
 
           final_resolve(gameBackground);
 
@@ -422,7 +423,7 @@
         playerIcon
         .transition()
         .duration(1500)
-        .attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${((self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y) - (self.flag.height * 1.5) })`)
+        .attr("transform", `translate(${(self.gameBackgroundWidthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${((self.gameBackgroundHeightValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y) - (self.flag.height * 1.05) })`)
         .on("end", final_resolve(playerIcon));
 
         //.attr("transform", `translate(${(self.widthValue / 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].x}, ${(self.backgroundImageHeightValue/ 100) * self.flagCoordinatesValue[self.currentQuestionIndexValue].y})`);
@@ -514,7 +515,6 @@
         //self.makeInvisible(secondBox)
         .then(() => self.makeInvisible(firstBox))
         .then(() => self.makePlayerIconVisible())
-        .then(() => self.setFlags())
         .then(() => self.appendFlagsToGameBackground())
         .then(() => self.goToNextQuestion())
         .then(() => final_resolve(""));
@@ -1060,7 +1060,7 @@
   <div data-controller="survival-game"
     data-survival-game-margin-value="{}"
     data-survival-game-start-text-value="<p><strong>Hey du, heute gehen wir gemeinsam wandern.</strong><br> Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack einen Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erfahren.</p>"
-    class="container-fluid" style="background-color: #63C3D1;"
+    class="container-fluid g-0" style="background-color: #63C3D1;"
     data-survival-game-target="baseDiv"
   >
 
