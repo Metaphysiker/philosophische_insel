@@ -238,9 +238,11 @@
 
       return new Promise(function(final_resolve, final_reject){
 
-        self.widthValue = self.gameTarget.offsetWidth;
+        //self.widthValue = self.gameTarget.offsetWidth;
 
         if(self.gameTarget.offsetWidth < 768){
+
+          self.widthValue = self.widthValue = self.gameTarget.offsetWidth;
 
           self.standardWidthPercentageValue = 98;
           self.iconMaxHeightValue = 50;
@@ -249,6 +251,7 @@
 
         } else if (self.gameTarget.offsetWidth < 992) {
 
+          self.widthValue = (self.gameTarget.offsetWidth/100) * 75;
           self.standardWidthPercentageValue = 75;
           self.iconMaxHeightValue = 75;
           self.veganSurvivalGameLogoMaxHeightValue = 125;
@@ -257,6 +260,7 @@
 
         } else {
 
+          self.widthValue = (self.gameTarget.offsetWidth/100) * 60;
           self.standardWidthPercentageValue = 50;
           self.iconMaxHeightValue = 100;
           self.veganSurvivalGameLogoMaxHeightValue = 150;
