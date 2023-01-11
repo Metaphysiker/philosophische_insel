@@ -265,7 +265,7 @@
 
 
 
-        svg = d3.select("#game")
+        svg = d3.select(self.gameTarget)
           .append("svg")
           .attr("width", self.widthValue)
           .attr("height", self.baseDivSizeValue.height)
@@ -1067,7 +1067,32 @@
     <span data-survival-game-target="output">
     </span>
 
-    <div data-survival-game-target="game" id="game">
+    <div data-survival-game-target="game">
+
+    </div>
+
+    <!--
+      <div data-survival-game-target="calculateHeightOf">
+
+    -->
+    <div data-survival-game-target="calculateHeightOf" style="visibility: hidden;">
+
+    </div>
+
+
+  </div>
+<hr>
+  <div data-controller="survival-game"
+    data-survival-game-margin-value="{}"
+    data-survival-game-start-text-value="<p><strong>Hey du, heute gehen wir gemeinsam wandern.</strong><br> Da du heute mit der Veganen Gesellschaft Schweiz unterwegs bist, stehen rein pflanzliche Lebensmittel auf dem Speiseplan. Pack einen Block und Stift ein, denn du wirst bestimmt neue Infos rund um den veganen Lebensstil erfahren.</p>"
+    class="container-fluid g-0" style="background-color: #63C3D1;"
+    data-survival-game-target="baseDiv"
+  >
+
+    <span data-survival-game-target="output">
+    </span>
+
+    <div data-survival-game-target="game">
 
     </div>
 
