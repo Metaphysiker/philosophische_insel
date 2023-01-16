@@ -1005,21 +1005,8 @@
 
       return new Promise(function(final_resolve, final_reject){
         var html = `
-        <div class="p-4" style="background-color: #FFFFFF; border-radius: 50px; cursor: pointer" data-action="click->survival-game#restartGame">
-          <table>
-            <tr>
-              <td style="width: 35px;">
-                <div style="border-radius: 50%;
-                height: 25px;
-                width: 25px;
-                background: transparent;
-                border: 2px solid #63C3D1;">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-              </td>
-              <td style="padding-left: 15px;">Erneut versuchen</td>
-            </tr>
-          </table>
+        <div class="p-4 text-center" style="cursor: pointer" data-action="click->survival-game#restartGame">
+          <button type="button" class="btn-lg" style="background-color: #F6A201; font-size: 1.5rem;">Erneut versuchen</button>
         </div>
         `;
 
