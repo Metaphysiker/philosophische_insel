@@ -36,4 +36,8 @@ class StaticPagesPolicy < ApplicationPolicy
     true
   end
 
+  def myfirst2dgame?
+    true
+  end
+
 end

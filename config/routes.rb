@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   get 'static_pages/rmagick'
   get 'static_pages/donation_buttons'
   get 'static_pages/compare_lists'
+  get 'static_pages/myfirst2dgame'
 
   get 'static_pages/survival_game'
   get 'static_pages/survival_game2'

@@ -226,6 +226,12 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def myfirst2dgame
+    authorize :static_pages
+
+    render layout: false
+  end
+
 
   private
 
