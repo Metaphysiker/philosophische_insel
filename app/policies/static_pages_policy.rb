@@ -1,5 +1,9 @@
 class StaticPagesPolicy < ApplicationPolicy
 
+  def test_game?
+    true
+  end
+  
   def visits?
     is_user_admin?(@user)
   end

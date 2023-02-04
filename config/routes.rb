@@ -98,6 +98,7 @@ Rails.application.routes.draw do
   get 'static_pages/survival_game2'
   get 'static_pages/survival_game3'
   get 'static_pages/survival_game4'
+  get 'static_pages/test_game'
 
 
 

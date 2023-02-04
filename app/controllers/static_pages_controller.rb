@@ -232,6 +232,11 @@ class StaticPagesController < ApplicationController
     render layout: false
   end
 
+  def test_game
+    authorize :static_pages
+
+  end
+
 
   private
 
