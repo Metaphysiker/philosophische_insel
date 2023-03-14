@@ -15,6 +15,7 @@
     flags;
     playerIcon;
     startBox;
+    lock = false;
 
     static values = {
       url: String,
@@ -44,6 +45,12 @@
     static targets = [ "name", "output", "game", "calculateHeightOf", "baseDiv"]
 
     connect() {
+
+      addEventListener("resize", (event) => {});
+
+    onresize = (event) => {
+      this.restartGame();
+    };
 
       this.baseDivSizeValue = {
         height: window.innerHeight,
@@ -194,24 +201,20 @@
 
       setTimeout(() => {
         this.initiateGame();
-      }, 2000);
+      }, 3000);
 
 
     }
 
     initiateGame(){
+      if(!this.lock){
+        this.lock = true;
+
       this.setSvg()
       .then(() => this.setGameBackground())
       .then(() => this.setFirstBox())
       .then(() => this.setSecondBox())
       .then(() => this.startBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
-      //.then((start_box_html) => this.fillFirstBox(
-      //{
-      //  html: start_box_html,
-      //  imageUrl: this.veganSurvivalGameLogoUrlValue
-      //}
-      //))
-      //.then(() => this.mainBoxHtml({content: this.startTextValue, imageUrl: this.veganSurvivalGameLogoUrlValue}))
       .then((main_box_html) => this.fillFirstBox(
       {
         html: main_box_html,
@@ -229,7 +232,11 @@
       .then(() => this.moveGameBackground())
       .then(() => this.setFlags())
       .then(() => this.setPlayerIcon())
-      .then(() => this.appendPlayerIconToGameBackground());
+      .then(() => this.appendPlayerIconToGameBackground())
+      .then(() => {
+        this.lock = false
+      });
+      }
     }
 
     //svg setters
@@ -541,7 +548,10 @@
         //self.svg.remove();
         self.currentQuestionIndexValue = 0;
 
-        self.initiateGame();
+        setTimeout(() => {
+          self.initiateGame();
+        }, 2000);
+        //self.initiateGame();
 
       })
     }
